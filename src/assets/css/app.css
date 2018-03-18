@@ -86,6 +86,7 @@ input:-ms-input-placeholder
     text-indent: 10px;
 }
 
+
 .head-ul
 {
     float: left;
@@ -97,6 +98,17 @@ input:-ms-input-placeholder
 {
     width: 40px;
     float: right;
-    margin: -3.6% 15%;
+    margin: -3.2% 15%;
+}
+
+.list-links
+{
+}
+
+#btn-list
+{
+    font-weight: 700;
+    background-color: transparent;
+    color: #dfdfdf;
 }
 
