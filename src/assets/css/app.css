@@ -1,0 +1,102 @@
+*
+{
+    margin: 0;
+}
+
+ul
+{
+    list-style: none;
+}
+
+li
+{
+    display:inline;
+    cursor: pointer;
+    margin-left: 3%;
+}
+
+a
+{
+    text-decoration: none;
+}
+
+.navigation
+{
+    margin-top: .5%;
+}
+
+.head
+{
+    position: fixed;
+    width: 100%;
+    background-color: #181b1e;
+}
+
+header .navigation
+{
+    font-size: 1.2em;
+    font-weight: 550;
+    color: #dfdfdf;
+}
+
+
+
+.logo
+{
+    width: 40px;
+    float: left;
+    margin-left: 14%;
+    margin-top: .5%;
+}
+
+.search
+{
+    border-radius: 1px;
+    display: inline;
+    float: left;
+    padding: 5px 0;
+    margin: .7% 1%;
+    background-color: #353b42;
+    text-indent: 10px;
+    font-weight: 350;
+}
+
+input::-webkit-input-placeholder 
+{ /* WebKit browsers */
+ color: #6a6f75;
+ font-weight: 350;
+ text-indent: 10px;
+}
+input:-moz-placeholder 
+{ /* Mozilla Firefox 4 to 18 */
+    color: #6a6f75;
+    font-weight: 350;
+    text-indent: 10px;
+}
+input::-moz-placeholder 
+{ /* Mozilla Firefox 19+ */
+    color: #6a6f75;
+    font-weight: 350;
+    text-indent: 10px;
+}
+input:-ms-input-placeholder 
+{ /* Internet Explorer 10+ */
+    color: #6a6f75;
+    font-weight: 350;
+    text-indent: 10px;
+}
+
+.head-ul
+{
+    float: left;
+    margin: 1.2% -1%;
+    width: 50%;
+}
+
+.menu-bar
+{
+    width: 40px;
+    float: right;
+    margin: -3.6% 15%;
+}
+
