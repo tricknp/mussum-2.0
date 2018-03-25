@@ -1,27 +1,28 @@
 <template>
   <div id="app">
-    <v-app>
 
-      <mHeader />    
-      <Aside />  
-      
-      <main>
-        <v-container fluid>
-          <router-view></router-view>
-        </v-container>
-      </main>
-    </v-app>
+      <mHeader></mHeader>    
+   
+      <!--<SideNav></SideNav> -->
+
+  <!-- <router-view></router-view> -->
+
   </div>
 </template>
 
 <script>
 
-import mHeader from '@/components/mHeader.vue'
-import Aside from '@/components/Aside.vue'
+import mHeader from '@/components/Header/mHeader.vue'
+import SideNav from '@/components/Aside/SideNav.vue'
+
 export default {
   name: 'App',
 
-  components: { mHeader }, 
+  components: 
+  { 
+    mHeader,
+    SideNav 
+  }, 
  
 }
 </script>

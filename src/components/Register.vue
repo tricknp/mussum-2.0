@@ -1,5 +1,5 @@
 <template>
-<h1>sou o register</h1>
+
 </template>
 
 

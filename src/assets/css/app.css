@@ -138,6 +138,14 @@ input:-ms-input-placeholder
 }
 
 /***************** ASIDE COMPONENT *****************/ 
+.side-bar
+{
+    background-color: red;
+    position: absolute;
+    top: 50%;
+}
+
+
 
 
 
