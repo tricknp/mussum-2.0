@@ -2,7 +2,8 @@
   <div id="app">
     <v-app>
 
-      <mHeader />      
+      <mHeader />    
+      <Aside />  
       
       <main>
         <v-container fluid>
@@ -16,10 +17,11 @@
 <script>
 
 import mHeader from '@/components/mHeader.vue'
-
+import Aside from '@/components/Aside.vue'
 export default {
   name: 'App',
 
-  components: { mHeader },
+  components: { mHeader }, 
+ 
 }
 </script>

@@ -1,6 +1,13 @@
 *
 {
     margin: 0;
+    font-family: 'Calibri', sans-serif;
+}
+
+*:before, *:after {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
 }
 
 ul
@@ -20,6 +27,7 @@ a
     text-decoration: none;
 }
 
+/***************** HEADER COMPONENT *****************/ 
 .navigation
 {
     margin-top: .5%;
@@ -94,15 +102,32 @@ input:-ms-input-placeholder
     width: 50%;
 }
 
-.menu-bar
+#dropdown
 {
-    width: 40px;
-    float: right;
-    margin: -3.2% 15%;
+    background-color: #181b1e;
+    color: #dfdfdf;
 }
 
-.list-links
+.menubar-icon
 {
+    width: 40px;
+    margin-top: -10%;
+}
+
+#as
+{
+    margin: -3.5% 7%;;
+}
+
+#menubar
+{
+    background-color:none;
+}
+
+#menubar-right
+{
+    margin-top: -1.4%;
+    height: 0em;
 }
 
 #btn-list
@@ -111,4 +136,8 @@ input:-ms-input-placeholder
     background-color: transparent;
     color: #dfdfdf;
 }
+
+/***************** ASIDE COMPONENT *****************/ 
+
+
 

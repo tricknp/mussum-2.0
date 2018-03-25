@@ -12,25 +12,53 @@
       </div>
 
       <div class="list-links">
-
-        <div class="text-xs-left" id="">
+        <div class="text-xs-left">
+          
           <v-menu open-on-hover top offset-y>
             <v-btn id="btn-list" dark slot="activator">Professoris</v-btn>
-            <v-list>
+            <v-list id="dropdown">
               <v-list-tile v-for="professor in professores" :key="professores.name" @click="">
                 <v-list-tile-title>{{ professor.name }}</v-list-tile-title>
               </v-list-tile>
             </v-list>
-          </v-menu>
-          
-          <v-menu open-on-hover top offset-y>
-            <v-btn id="btn-list" dark slot="activator"><a href="#" target="_blank">Horaris</a></v-btn>
-          </v-menu>
-        </div>   
+          </v-menu>    
 
+          <v-menu open-on-hover top offset-y>
+            <v-btn id="btn-list" dark slot="activator">Horaris</v-btn>
+            <v-list id="dropdown">
+              <v-list-tile v-for="horario in horarios" :key="horarios.turma" @click="">
+                <v-list-tile-title>{{ horario.turma }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+
+          <v-menu open-on-hover top offset-y>
+            <v-btn id="btn-list" dark slot="activator">Dereguederes</v-btn>
+            <v-list id="dropdown">
+              <v-list-tile v-for="horario in horarios" :key="horarios.turma" @click="">
+                <v-list-tile-title>{{ horario.turma }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        
+        </div>      
       </div>
 
-      <img class="menu-bar" src="../assets/images/menu-bar.svg">
+      <div id="menubar-right">
+        <div class="text-xs-right" id="as">
+          <v-menu open-on-hover top offset-y id="menubar">
+            <v-btn id="btn-list" dark slot="activator">
+              <img class="menubar-icon" src="../assets/images/menu-bar.svg">
+            </v-btn>
+            <v-list id="dropdown">
+              <v-list-tile v-for="item in items" :key="items.x" @click="">
+                <v-list-tile-title>{{ item.x }}</v-list-tile-title>
+              </v-list-tile>
+            </v-list>
+          </v-menu>
+        </div>
+      </div>
+
     </nav>
     
   </header>
@@ -47,9 +75,7 @@ export default {
 
 data(){
   return{
-
-    horarios: linkHorarios,
-
+    
     professores: 
     [
       {name: 'Angelo'},
@@ -59,8 +85,18 @@ data(){
       {name: 'Dartagnan'},
     ],
 
-   
+    horarios: 
+    [
+      {turma: 'Analise e Desenvolvimento de Sistemas'},
+      {turma: 'Redes de computadores'}
+    ],
 
+   items:
+   [
+     {x: 'test1'},
+     {x: 'test2'},
+     {x: 'test3'},
+   ],
     
   };
 },
