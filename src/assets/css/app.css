@@ -1,0 +1,174 @@
+*
+{
+    margin: 0;
+    font-family: 'Calibri', sans-serif;
+    color: #dfdfdf;
+}
+
+*:before, 
+*:after 
+{
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+a
+{
+    text-decoration: none;
+    cursor: pointer;
+}
+
+ul li
+{
+    list-style: none;
+}
+
+/*********************** HEADER COMPONENT ***********************/
+.head
+{
+    width: 100%;
+    background-color: #181b1e;
+    padding: 1.5em;
+}
+
+.logo
+{
+    position: absolute;
+    top: .4em;
+    width: 2.2em;
+}
+
+.search
+{
+    margin: -.8em 3.5em;
+}
+
+.input-search
+{
+    float: left;
+    font-weight: 350;
+    text-indent: 10px;
+    background-color: #353b42;
+    padding: 6px 0;
+    border-radius: 1px;
+    border: none;
+   
+}
+
+#menubar-right
+{
+    background-color: #181b1e;
+    position: absolute;
+    right: 1em;
+    top: .5em;
+}
+
+#btn-list
+{
+    background-color: transparent;
+    border: none;
+}
+
+.menubar-icon
+{
+    width: 2.3em;
+}
+
+input::-webkit-input-placeholder 
+{ /* WebKit browsers */
+ color: #6a6f75;
+ font-weight: 350;
+ text-indent: 10px;
+}
+input:-moz-placeholder 
+{ /* Mozilla Firefox 4 to 18 */
+    color: #6a6f75;
+    font-weight: 350;
+    text-indent: 10px;
+}
+input::-moz-placeholder 
+{ /* Mozilla Firefox 19+ */
+    color: #6a6f75;
+    font-weight: 350;
+    text-indent: 10px;
+}
+input:-ms-input-placeholder 
+{ /* Internet Explorer 10+ */
+    color: #6a6f75;
+    font-weight: 350;
+    text-indent: 10px;
+}
+
+.nav-list
+{
+    display: none;
+}
+
+/*-----------------------------> MOBILE FIRST <----------------------------*/
+/*---------------------> Small devices - Smartphones <---------------------*/
+@media screen and (min-width: 460px) 
+{
+    
+}
+
+/*---------------------> Medium devices - Tablets & Desktops <---------------------*/
+@media screen and (min-width: 960px)
+{
+
+    .logo
+    {
+        left: 7.5em;
+        top: .2em;
+        width: 2.5em;
+    }
+
+    .search
+    {
+        margin: -.9em 9.5em;
+    }
+
+    .input-search
+    {
+        padding: 6px 0;  
+        font-size: 1em; 
+    }
+
+    #menubar-right
+    {
+        right: 5em;
+        top: .35em;
+    }
+
+
+    .menubar-icon
+    {
+        width: 2.5em;
+    }
+
+    .list-links
+    {
+        top: 3%;
+        margin-left: 2em;
+    }
+
+    .nav-list
+    {
+        position: absolute;
+        display: inline;
+        background-color: #181b1e;
+        cursor: pointer;
+    }
+
+    #dropdown
+    {
+        font-weight: 350;
+    }
+
+    #btn-list
+    {
+        font-weight: 550;
+        font-size: .85em;
+    }
+
+}
