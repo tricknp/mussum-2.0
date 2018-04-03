@@ -38,9 +38,9 @@ export default {
     return{
       title:
       { 
-        link1: 'PROFESSORIS',
-        link2: 'HORARIS',
-        link3: 'DEREGUEDERIS',
+        link1: 'Professoris',
+        link2: 'Horaris',
+        link3: 'Dereguederis',
       },
       professores: 
       [

@@ -2,7 +2,7 @@
     
     <header class="head">
         <a href="#">
-            <img src="../../../static/logo.svg" class="logo">
+            <img src="../../../static/logo.svg" id="logo">
         </a>
         
         <div class="search">

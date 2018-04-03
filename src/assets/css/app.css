@@ -29,28 +29,31 @@ ul li
 {
     width: 100%;
     background-color: #181b1e;
-    padding: 1.5em;
+    padding: 1.9em 0;
 }
 
-.logo
+#logo
 {
     position: absolute;
-    top: .4em;
-    width: 2.2em;
+    top: .5em;
+    left: 1em;
+    width: 2.8em;
 }
 
 .search
 {
-    margin: -.8em 3.5em;
+    margin: -.9em 4.2em;
 }
 
 .input-search
 {
     float: left;
     font-weight: 350;
+    font-size: 1.1em;
     text-indent: 10px;
     background-color: #353b42;
     padding: 6px 0;
+    width: 80%;
     border-radius: 1px;
     border: none;
    
@@ -60,7 +63,7 @@ ul li
 {
     background-color: #181b1e;
     position: absolute;
-    right: 1em;
+    right: 2.5em;
     top: .5em;
 }
 
@@ -72,7 +75,7 @@ ul li
 
 .menubar-icon
 {
-    width: 2.3em;
+    width: 3.4em;
 }
 
 input::-webkit-input-placeholder 
@@ -109,49 +112,76 @@ input:-ms-input-placeholder
 /*---------------------> Small devices - Smartphones <---------------------*/
 @media screen and (min-width: 460px) 
 {
-    
-}
 
-/*---------------------> Medium devices - Tablets & Desktops <---------------------*/
-@media screen and (min-width: 960px)
-{
-
-    .logo
+    #logo
     {
-        left: 7.5em;
-        top: .2em;
-        width: 2.5em;
+        left: 2em;
     }
 
     .search
     {
-        margin: -.9em 9.5em;
+        margin: -.9em 6em;
     }
 
     .input-search
     {
-        padding: 6px 0;  
+        width: 15em;
+    }
+
+    #menubar-right
+    {
+        background-color: #181b1e;
+        position: absolute;
+        right: 4em;
+        top: .5em;
+    }
+}
+
+/*---------------------> Medium devices - Tablets & Desktops <---------------------*/
+@media screen and (min-width: 975px)
+{
+
+    .head
+    {
+        padding: 1.8em 0;
+    }
+
+    #logo
+    {
+        left: 10em;
+        top: .4em;
+        width: 2.8em;
+    }
+
+    .search
+    {
+        margin: -.9em 14em;
+    }
+
+    .input-search
+    {
+        padding: 8px 0;  
         font-size: 1em; 
     }
 
     #menubar-right
     {
-        right: 5em;
+        right: 10em;
         top: .35em;
     }
 
 
     .menubar-icon
     {
-        width: 2.5em;
+        width: 3.1em;
     }
 
     .list-links
     {
-        top: 3%;
-        margin-left: 2em;
+        top: 1.3em;
+        margin-left: 1em;
     }
-
+    
     .nav-list
     {
         position: absolute;
@@ -168,7 +198,56 @@ input:-ms-input-placeholder
     #btn-list
     {
         font-weight: 550;
-        font-size: .85em;
+        font-size: .95em;
+    }
+
+    
+    /*********************** ASIDE COMPONENT ***********************/
+    #aside
+    {
+        position: absolute;
+        top: 4.3em;
+        right: 10em;
+        height: 80vh;
+        width: 17%;
+    }
+    
+    .aside-head
+    {
+        border-radius: 3px 3px 0 0;
+        width: 99%;
+        border: solid 1px #999;
+        background-color: #dfdfdf;
+    }
+    
+    .aside-head > h1
+    {
+        font-size: 1.1em;
+        color: #181b1e;
+        margin-left: 10px;
+        padding: .6em 0; 
+    }
+    
+    .div-dir,
+    .div-links
+    {
+        margin-top: .5em;
+    }
+
+    .links-container
+    {
+        border: solid 1px #999;
+        border-radius: 0 0 3px 3px;
+        padding: 5em 0;
+        margin-top: -1px;
+    }
+
+    .dir-container
+    {
+        border: solid 1px #999;
+        border-radius: 0 0 3px 3px;
+        padding: 8.2em 0;
+        margin-top: -1px;
     }
 
 }
