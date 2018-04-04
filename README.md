@@ -41,3 +41,7 @@ npm test
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+***
+
+Este projeto está licenciado sob a [licença MIT](https://github.com/tricknp/mussum-2.0-Client/blob/master/LICENSE) - veja o arquivo LICENSE.md para obter detalhes.
