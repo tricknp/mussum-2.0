@@ -3,7 +3,7 @@
     <v-menu open-on-hover offset-y id="menubar">
               
         <v-btn id="btn-list" slot="activator">
-          <img class="menubar-icon" src="../../assets/images/menu-bar.svg">
+          <img class="menubar-icon" src="../../../assets/images/menu-bar.svg">
         </v-btn>
           
         <v-list id="dropdown">
