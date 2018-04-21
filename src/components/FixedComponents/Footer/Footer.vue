@@ -7,9 +7,24 @@
       
       <h4 class="developed-by"> 
           {{ by }}
-          <a href="#" target="_blank" id="name"> Patrick Porto, </a>
-          <a href="#" target="_blank" id="name"> Marcos Motta, </a>  
-          <a href="#" target="_blank" id="name"> Yuri Bento </a>
+          <a 
+             href="https://github.com/tricknp" 
+             target="_blank" 
+             id="name"> 
+             Patrick Porto, 
+          </a>
+          <a 
+             href="https://github.com/yurinb" 
+             target="_blank" 
+             id="name"> 
+             Yuri Bento, 
+           </a>
+          <a 
+             href="https://github.com/marcosmtt" 
+             target="_blank" 
+             id="name"> 
+             Marcos Motta 
+          </a>  
       </h4>
   </footer>
 </template>
