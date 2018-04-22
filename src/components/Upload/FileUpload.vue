@@ -98,20 +98,21 @@ export default {
         // upload data to the server
         this.currentStatus = STATUS_SAVING;
 
-        //upload(formData)
-        //  .then(x => {
-        //    this.uploadedFiles = [].concat(x);
-        //    this.currentStatus = STATUS_SUCCESS;
-        //  })
-
-        //--------------- FAKE SERVICE ---------------//
+    /* //--------------- FAKE SERVICE ---------------//
+      upload(formData)
+        .then(wait(1500)) // DEV ONLY: wait for 1.5s 
+        .then(x => {
+          this.uploadedFiles = [].concat(x);
+          this.currentStatus = STATUS_SUCCESS;
+        }) 
+      //------------- END FAKE SERVICE -------------//*/
+          
         upload(formData)
-          .then(wait(1500)) // DEV ONLY: wait for 1.5s 
           .then(x => {
             this.uploadedFiles = [].concat(x);
             this.currentStatus = STATUS_SUCCESS;
-          }) 
-          //------------- END FAKE SERVICE -------------//
+          })
+
           .catch(err => {
             this.uploadError = err.response;
             this.currentStatus = STATUS_FAILED;
