@@ -1,9 +1,9 @@
 <template>
     
     <header class="head">
-        <a href="#">
-            <img src="../../../../static/logo.svg" id="logo">
-        </a>
+        <router-link :to="{path:'/'}"> 
+            <img :src="logo" id="logo">
+        </router-link>
         
         <div class="search">
             <input type="text" class="input-search" placeholder="Procuraris">
@@ -29,6 +29,12 @@ export default {
       MenuBar,
       NavList,
   },
+
+  data(){
+      return{
+          logo: '../../../../static/logo.svg'
+      };
+  }
   
 
 }

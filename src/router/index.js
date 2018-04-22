@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 import '@/assets/css/app.css'
+//import { upload } from '@/components/Upload/upload.service.js' //true server
+import { upload } from '@/components/Upload/fake.upload.service.js'; //server for tests
 
 import Home from '@/components/GeneralViews/Home'
 import Login from '@/components/Authentication/Login'
