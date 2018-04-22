@@ -5,12 +5,16 @@ import '@/assets/css/app.css'
 import { upload } from '@/components/Upload/upload.service.js' //true server
 //import { upload } from '@/components/Upload/fake.upload.service.js'; //server for tests
 
+import VueBlu from 'vue-blu'
+import 'vue-blu/dist/css/vue-blu.min.css'
+
 import Home from '@/components/GeneralViews/Home'
 import Login from '@/components/Authentication/Login'
 import Admin from '@/components/SuperUsers/Admin/Admin'
 import Teacher from '@/components/SuperUsers/Teacher/Teacher'
 import NotFound from '@/components/GeneralViews/NotFoundPage'
 
+Vue.use(VueBlu)
 Vue.use(Router)
 
 export default new Router({

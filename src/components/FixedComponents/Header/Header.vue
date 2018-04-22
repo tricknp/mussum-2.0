@@ -10,8 +10,8 @@
             <!--<i class="material-icons" id="search-icon">search</i>-->
         </div>
             
-        <MenuBar></MenuBar>
         <NavList class="nav-list"></NavList>
+       <!-- <MenuBar /> -->
 
     </header>
     

@@ -1,18 +1,24 @@
 <template>
-  <div id="menubar-right">
-    <v-menu open-on-hover offset-y id="menubar">
-              
-        <v-btn id="btn-list" slot="activator">
-          <img class="menubar-icon" src="../../../assets/images/menu-bar.svg">
-        </v-btn>
-          
-        <v-list id="dropdown">
-          <v-list-tile v-for="item in items" :key="item.x">
-          <v-list-tile-title>{{ item.x }}</v-list-tile-title>
-          </v-list-tile>
-        </v-list>
-    </v-menu>
-  </div>   
+  <div>  
+    <dropdown trigger="hover">
+
+      <a>
+        <span><img class="menubar-icon" src="../../../assets/images/menu-bar.svg"></span>
+      </a>
+      
+      <div slot="content">
+      
+        <menus>
+          <menu-item v-for="item in items" :key="item.x">{{ item.x }}</menu-item>
+          <div class="divider"></div>
+          <menu-item icon="">Login</menu-item>       
+        </menus>
+        
+      </div>
+   
+    </dropdown> 
+
+  </div>  
 </template>
 
 
@@ -34,22 +40,3 @@ data(){
 
 }
 </script>
-
-
-<style>
-@import url("https://fonts.googleapis.com/css?family=Karla");
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
-
-.material-icons
-{
-  color: #dfdfdf;
-}
-
-.divider
-{
-  border: solid 1px darkgray;
-  height: 0;
-  line-height: 0;
-  list-style: none;
-}
-</style>

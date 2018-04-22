@@ -1,34 +1,42 @@
 <template>
-      <div class="list-links">
-          
-          <v-menu open-on-hover offset-y>
-            <v-btn id="btn-list" slot="activator"> {{ title.link1 }} </v-btn>
-            <v-list id="dropdown">
-              <v-list-tile v-for="professor in professores" :key="professor.name">
-                <v-list-tile-title>{{ professor.name }}</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>    
+  <div>
 
-          <v-menu open-on-hover offset-y>
-            <v-btn id="btn-list" slot="activator"> {{ title.link2 }} </v-btn>
-            <v-list id="dropdown">
-              <v-list-tile v-for="horario in horarios" :key="horario.turma">
-                <v-list-tile-title>{{ horario.turma }}</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
+      <dropdown trigger="hover">
+        <button>{{ title.listProfessores }}</button>
+        <div slot="content">
+          <menus>
+            <menu-item v-for="professor in professores" :key="professor.name">
+              {{ professor.name }}
+            </menu-item>
+          </menus>
+        </div>  
+      </dropdown>
 
-          <v-menu open-on-hover offset-y>
-            <v-btn id="btn-list" slot="activator"> {{ title.link3 }} </v-btn>
-            <v-list id="dropdown">
-              <v-list-tile v-for="horario in horarios" :key="horario.turma">
-                <v-list-tile-title>{{ horario.turma }}</v-list-tile-title>
-              </v-list-tile>
-            </v-list>
-          </v-menu>
-        
-        </div>      
+    
+      <dropdown trigger="hover">
+        <button>{{ title.listHorarios }}</button>
+        <div slot="content">
+          <menus>
+            <menu-item v-for="horario in horarios" :key="horario.turma">
+              {{ horario.turma }}
+            </menu-item>
+          </menus>
+        </div>  
+      </dropdown>
+
+    
+      <dropdown trigger="hover">
+        <button>{{ title.link3 }}</button>
+        <div slot="content">
+          <menus>
+            <menu-item v-for="professor in professores" :key="professor.name">
+              {{ professor.name }}
+            </menu-item>
+          </menus>
+        </div>  
+      </dropdown>
+      
+  </div>
 </template>
 
 <script>
@@ -38,8 +46,8 @@ export default {
     return{
       title:
       { 
-        link1: 'Professoris',
-        link2: 'Horaris',
+        listProfessores: 'Professoris',
+        listHorarios: 'Horaris',
         link3: 'Dereguederis',
       },
       professores: 
