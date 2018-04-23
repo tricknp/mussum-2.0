@@ -1,6 +1,7 @@
 <template>
   <div>  
-    <dropdown trigger="hover">
+  
+    <dropdown>
 
       <a>
         <span><img class="menubar-icon" src="../../../assets/images/menu-bar.svg"></span>
@@ -11,14 +12,17 @@
         <menus>
           <menu-item v-for="item in items" :key="item.x">{{ item.x }}</menu-item>
           <div class="divider"></div>
-          <menu-item icon="">Login</menu-item>       
+          <menu-item> 
+            <router-link :to="{ name: 'login' }"> Login </router-link>
+          </menu-item>       
         </menus>
         
       </div>
    
     </dropdown> 
 
-  </div>  
+  </div> 
+   
 </template>
 
 

@@ -11,7 +11,7 @@
         </div>
             
         <NavList class="nav-list"></NavList>
-       <!-- <MenuBar /> -->
+        <MenuBar />
 
     </header>
     
