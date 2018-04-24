@@ -19,7 +19,7 @@ import { Script } from "vm";
   </div>
 </template>
 
-<script>
+<script> //All THIS CONTENT MUST BE AT FormLogin.vue
   import axios from 'axios';
   import Header from '../FixedComponents/Header/Header'
   import FormLogin from './Views/FormLogin'
@@ -39,7 +39,7 @@ import { Script } from "vm";
       login() {
         axios.post('http://localhost:8080/login', //(Need to create a fake server to test) Still there is no Post for login route.
           { username: this.username, password: this.password }, //Send the user unformation from back to validate
-          { headers: { 'X-Requested-With': 'XMLHttpRequest' } }) //Send the information through an AJAX request
+          { headers: { 'X-Requested-With': 'XMLHttpRequest' } }) //Send the information through an AJAX equest
           .then(
             (response) => {
               const token = response.data.token;
