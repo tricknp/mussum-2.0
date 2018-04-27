@@ -30,25 +30,24 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login,
-      meta: {auth: false}
+      meta: { auth: false }
     },
 
     {
       path: '/admin',
       name: 'Admin',
       component: Admin,
-      meta: {auth: true}
+      meta: { auth: true }
     },
 
     {
       path: '/professor',
       name: 'Professor',
       component: Teacher,
-      meta: {auth: true}
+      meta: { auth: true }
     },
-
+    
     { path: '*', component: NotFound }
-
 
   ]
 })

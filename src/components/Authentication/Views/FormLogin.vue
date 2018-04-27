@@ -1,21 +1,23 @@
 <template>
   <div>
+    <h1>LOGIN</h1>
+    <P v-if="$route.query.redirect">
+      Você precisa logar primeiro.
+    </P>
     <form>
-      <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" id="username" name="username" class="form-control" v-model="username">
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" class="form-control" v-model="password">
-      </div>
-      <div>
-        <button type="submit" @click.prevent="login">Login</button>
-      </div>
+      <label>
+        <input type="text" v-model="username" placeholder="E-mail">
+      </label>
+      <label>
+        <input type="password" v-model="password" placeholder="Password">
+      </label><br>
+      <button type="submit" @click.prevent="login">Login</button>
+      
+      
     </form>
   </div>
-</template>
 
+</template>
 
 <script>
 import axios from "axios";
@@ -25,26 +27,25 @@ export default {
 
   data() {
     return {
-      username: "",
-      password: ""
+      login: {
+        username: "",
+        password: ""
+      }
     };
   },
 
   methods: {
-    login() {
+    logItIn() {
       axios
-        .post("http://localhost:8080/login", //(Need to create a fake server to test) Still there is no Post for login route.
-          { username: this.username, password: this.password }, //Send the user unformation from back to validate
-          { headers: { "X-Requested-With": "XMLHttpRequest" } }
-        ) //Send the information through an AJAX equest
+        .post("mussum2api.herokuapp.com/login", this.login, {
+          headers: { "X-Requested-With": "XMLHttpRequest" } //Send the information through an AJAX equest
+        })
         .then(response => {
-          const token = response.data.token;
-          const base64Url = token.split(".")[1];
-          const base64 = base64Url.replace("-", "+").replace("_", "/"); //Split and replace token elements just for  better visualization at console
+          const token = response.data.token; //Receive the token back from the server
           localStorage.setItem("token", token); //Store the token to send it to the back whem an access is needed
         })
         .catch(error => console.log(error));
-    }
+    } //Send the user information from back to validate
   }
 };
 </script>
