@@ -1,9 +1,9 @@
 import * as axios from 'axios';
 
-const BASE_URL = 'http://localhost:3001';
+const BASE_URL = 'mussum2api.herokuapp.com/';
 
 function upload(formData) {
-    const url = `${BASE_URL}/photos/upload`;
+    const url = `${BASE_URL}/ftp/upload`;
     return axios.post(url, formData)
         // get data
         .then(x => x.data)
