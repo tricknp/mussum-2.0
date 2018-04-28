@@ -40,6 +40,7 @@ export default {
     DirectoriesBox,
     CoursesBox
   },
+
   beforeMount() {
     //https://alligator.io/vuejs/component-lifecycle/
     const role = localStorage.getItem("role");
