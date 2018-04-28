@@ -1,19 +1,14 @@
 <template>
   <div>
     <h1>LOGIN</h1>
-    <P v-if="$route.query.redirect">
-      Você precisa logar primeiro.
-    </P>
-    <form>
+    <form  v-on:submit.prevent="onSubmit" method="POST">
       <label>
-        <input type="text" v-model="username" placeholder="E-mail">
+        <input type="text" v-model="username" placeholder="username">
       </label>
       <label>
         <input type="password" v-model="password" placeholder="Password">
       </label><br>
-      <button type="submit" @click.prevent="login">Login</button>
-      
-      
+      <button type="submit">Login</button>
     </form>
   </div>
 
@@ -27,25 +22,34 @@ export default {
 
   data() {
     return {
-      login: {
-        username: "",
-        password: ""
-      }
+      form: {},
+      username: "",
+      password: ""
     };
   },
 
   methods: {
-    logItIn() {
+    onSubmit() {
       axios
-        .post("mussum2api.herokuapp.com/login", this.login, {
-          headers: { "X-Requested-With": "XMLHttpRequest" } //Send the information through an AJAX equest
-        })
+        .post(
+          "http://www.mocky.io/v2/5ae3d1e33100004c0d083f3a",
+          this.username,
+          this.password,
+          {
+            headers: { "X-Requested-With": "XMLHttpRequest" } //Send the information through an AJAX equest
+          }
+        )
         .then(response => {
           const token = response.data.token; //Receive the token back from the server
+          const role = response.data.role;
+
           localStorage.setItem("token", token); //Store the token to send it to the back whem an access is needed
+          localStorage.setItem("role", role);
+
+          console.log(response);
         })
         .catch(error => console.log(error));
-    } //Send the user information from back to validate
+    }
   }
 };
 </script>
