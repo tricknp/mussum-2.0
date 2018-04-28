@@ -42,7 +42,6 @@ export default {
   },
 
   beforeMount() {
-    //https://alligator.io/vuejs/component-lifecycle/
     const role = localStorage.getItem("role");
     if (role !== "admin") {
       return this.$router.push("/");
