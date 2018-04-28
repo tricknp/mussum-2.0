@@ -22,12 +22,12 @@
 <script>
 //import FileUpload from '../../Upload/FileUpload'
 
-import Header from "../../FixedComponents/Header/Header";
-import TeacherBox from "../Boxes/TeacherBox";
-import ActivitiesBox from "../Boxes/ActivitiesBox";
-import LinksBox from "../Boxes/LinksBox";
-import DirectoriesBox from "../Boxes/DirectoriesBox";
-import CoursesBox from "../Boxes/CoursesBox";
+import Header from '../../FixedComponents/Header/Header'
+import TeacherBox from '../Boxes/Teacher/TeacherBox'
+import ActivitiesBox from '../Boxes/ActivitiesBox'
+import LinksBox from '../Boxes/LinksBox'
+import DirectoriesBox from '../Boxes/DirectoriesBox'
+import CoursesBox from '../Boxes/CoursesBox'
 
 export default {
   name: "Admin",
