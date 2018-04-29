@@ -1,5 +1,3 @@
-import { Script } from "vm";
-
 <template>
   <div>
     <Header />

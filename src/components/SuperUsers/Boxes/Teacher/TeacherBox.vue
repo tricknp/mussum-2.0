@@ -12,6 +12,8 @@
             <span> {{ professor.nome }} </span>
           </div>
 
+          <FileUpload />
+
       </div>
   </div>
 </template>
@@ -20,16 +22,17 @@
 <script>
 import axios from 'axios'
 import Create from './Create'
+import FileUpload from '../../../Upload/FileUpload'
 
 export default {
   name: 'TeacherBox',
 
-  components: { Create },
+  components: { Create, FileUpload },
   
     data() {
       return {
        title: 'Professoris',  
-       BASE_URL: 'http://mussum2api.herokuapp.com/',
+       BASE_URL: 'http://mussum2api.herokuapp.com',
        professores: []
     };
   },

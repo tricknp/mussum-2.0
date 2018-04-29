@@ -41,11 +41,6 @@ export default {
     CoursesBox
   },
 
-  beforeMount() {
-    const role = localStorage.getItem("role");
-    if (role !== "admin") {
-      return this.$router.push("/");
-    }
-  }
+
 };
 </script>

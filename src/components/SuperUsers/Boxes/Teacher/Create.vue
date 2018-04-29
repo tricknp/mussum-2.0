@@ -87,16 +87,7 @@ export default {
   },
 
 //========================== add =============================//
-   /* handleSubmit(professor){
-        axios.post( 'http://mussum2api.herokuapp.com/professores', form)
-            .then( (result) => {
-                this.msg = 'Professor adicionadis com sucessis'
-            }),
-            () => {
-                this.msg = 'Erris'
-            }
-            console.log(msg)
-    }*/
+
     handleSubmit(teacher){
         axios.post('http://mussum2api.herokuapp.com/professores', professor)
             .then( (result) => {

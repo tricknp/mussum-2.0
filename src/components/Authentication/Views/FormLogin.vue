@@ -1,14 +1,10 @@
 <template>
   <div>
     <h1>LOGIN</h1>
-    <form  v-on:submit.prevent="onSubmit" method="POST">
-      <label>
-        <input type="text" v-model="username" placeholder="username">
-      </label>
-      <label>
-        <input type="password" v-model="password" placeholder="Password">
-      </label><br>
-      <button type="submit">Login</button>
+    <form  @submit.prevent="onSubmit">
+        <input type="text" v-model="username" name="username" placeholder="username">
+        <input type="password" v-model="password" name="password" placeholder="Password">
+        <input type="submit">Login
     </form>
   </div>
 
@@ -22,26 +18,32 @@ export default {
 
   data() {
     return {
-      form: {},
-      username: "",
-      password: ""
+      username: '',
+      password: ''
     };
   },
 
   methods: {
     onSubmit() {
+      
+      let data = JSON.stringify({
+        username: this.username,
+        password: this.password
+      })
+
       axios
         .post(
-          "http://www.mocky.io/v2/5ae3d1e33100004c0d083f3a",
-          this.username,
-          this.password,
-          {
-            headers: { "X-Requested-With": "XMLHttpRequest" } //Send the information through an AJAX equest
+          'http://mussum2api.herokuapp.com/login', data, {
+            headers: { 
+              'X-Requested-With': 'XMLHttpRequest', 
+              'Content-Type': 'application/json'
+            }, //Send the information through an AJAX request
           }
         )
         .then(response => {
           const token = response.data.token; //Receive the token back from the server
           const role = response.data.role;
+          console.log(token)
 
           localStorage.setItem("token", token); //Store the token to send it to the back whem an access is needed
           localStorage.setItem("role", role);

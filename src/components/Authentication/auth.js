@@ -48,3 +48,5 @@ function pretendRequest(username, pass, cb) {
     }
   }, 0)
 }
+
+export { auth }
