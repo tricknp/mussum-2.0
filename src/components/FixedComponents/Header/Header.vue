@@ -1,16 +1,18 @@
 <template>
     
     <header class="head">
-        <router-link :to="{path:'/'}"> 
-            <img :src="logo" id="logo">
-        </router-link>
-        
-        <div class="search">
-            <input type="text" class="input-search" placeholder="Procuraris">
-            <!--<i class="material-icons" id="search-icon">search</i>-->
-        </div>
+        <div class="div-icon-search">
+            <router-link :to="{path:'/'}"> 
+                <img :src="logo" id="logo">
+            </router-link>
             
-        <NavList class="nav-list"></NavList>
+            <div class="search">
+                <input type="text" class="input-search" placeholder="Procuraris">
+                <!--<i class="material-icons" id="search-icon">search</i>-->
+            </div>
+         </div> 
+
+        <NavList />
         <MenuBar />
 
     </header>
@@ -40,7 +42,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" >
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 </style>
 

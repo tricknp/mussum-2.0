@@ -4,7 +4,7 @@
     <form  @submit.prevent="onSubmit">
         <input type="text" v-model="username" name="username" placeholder="username">
         <input type="password" v-model="password" name="password" placeholder="Password">
-        <input type="submit">Login
+        <button type="submit">ENTRAR</button>
     </form>
   </div>
 
@@ -49,7 +49,7 @@ export default {
           localStorage.setItem("role", role);
 
           console.log(response);
-        })
+        })  
         .catch(error => console.log(error));
     }
   }

@@ -1,11 +1,11 @@
 <template>
-  <div>
+  <div class="nav-list">
 
       <dropdown trigger="hover">
-        <button>{{ title.listProfessores }}</button>
-        <div slot="content">
+        <button id="btn-nav-list">{{ title.listProfessores }}</button>
+        <div slot="content" id="dropdown-content">
           <menus>
-            <menu-item v-for="professor in professores" :key="professor.name">
+            <menu-item id="dropdown-content" v-for="professor in professores" :key="professor.name">
               {{ professor.name }}
             </menu-item>
           </menus>
@@ -14,8 +14,8 @@
 
     
       <dropdown trigger="hover">
-        <button>{{ title.listHorarios }}</button>
-        <div slot="content">
+        <button id="btn-nav-list">{{ title.listHorarios }}</button>
+        <div slot="content" id="dropdown-content">
           <menus>
             <menu-item v-for="horario in horarios" :key="horario.turma">
               {{ horario.turma }}
@@ -26,8 +26,8 @@
 
     
       <dropdown trigger="hover">
-        <button>{{ title.link3 }}</button>
-        <div slot="content">
+        <button id="btn-nav-list">{{ title.link3 }}</button>
+        <div slot="content" id="dropdown-content">
           <menus>
             <menu-item v-for="professor in professores" :key="professor.name">
               {{ professor.name }}

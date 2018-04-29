@@ -1,0 +1,55 @@
+.head
+{
+    width: $full-size;
+    padding: .2em;
+    background-color: $black-background;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.div-icon-search
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.div-icon-search > .search
+{
+    margin-left: 1em;
+}
+
+
+.input-search
+{
+    font-weight: $default-weight;
+    font-size: $default-size;
+    text-indent: $input-indent;
+    color: $medium-grey;
+    background-color: $dark-background;
+    padding: 6px 0;
+    width: $full-size;
+    border-radius: $default-radius;
+    border: none;
+}
+
+#logo
+{
+    width: $width-icon;
+}
+
+.nav-list
+{
+    flex-grow: .1;
+    margin-left: -20em;
+}
+
+#menubar-icon
+{
+    width: $width-icon;
+    flex-wrap: wrap;
+}
+
+

@@ -93,8 +93,7 @@ export default {
             .then( (result) => {
                 this.isShow = !this.isShow;
                 console.log('sucess')
-            }), 
-            () => {
+            }), () => {
                 console.log('fail')
             }
     }

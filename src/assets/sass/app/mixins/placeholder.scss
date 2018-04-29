@@ -1,0 +1,8 @@
+@mixin placeholder ($color, $weight, $indent) 
+{
+-webkit-input-placeholder : $color, $weight, $indent;  
+    -moz-input-placeholder: $color, $weight, $indent;
+          -moz-placeholder: $color, $weight, $indent;
+     -ms-input-placeholder: $color, $weight, $indent;
+         input-placeholder: $color, $weight, $indent;
+}

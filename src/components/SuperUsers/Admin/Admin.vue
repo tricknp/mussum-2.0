@@ -41,6 +41,6 @@ export default {
     CoursesBox
   },
 
+}
 
-};
 </script>

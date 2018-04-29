@@ -12,8 +12,6 @@
             <span> {{ professor.nome }} </span>
           </div>
 
-          <FileUpload />
-
       </div>
   </div>
 </template>
@@ -22,12 +20,12 @@
 <script>
 import axios from 'axios'
 import Create from './Create'
-import FileUpload from '../../../Upload/FileUpload'
+//import FileUpload from '../../../Upload/FileUpload'
 
 export default {
   name: 'TeacherBox',
 
-  components: { Create, FileUpload },
+  components: { Create },
   
     data() {
       return {
@@ -39,7 +37,7 @@ export default {
   methods: {
 
     initialize () {
-      axios.get(this.BASE_URL + '/professores')
+      axios.get(this.BASE_URL + '/api/professores')
         .then( (res) => {
           this.professores = res.data
       })

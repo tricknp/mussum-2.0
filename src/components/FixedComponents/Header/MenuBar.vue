@@ -4,11 +4,10 @@
     <dropdown>
 
       <a>
-        <span><img class="menubar-icon" src="../../../assets/images/menu-bar.svg"></span>
+        <span><img id="menubar-icon" src="../../../assets/images/menu-bar.svg"></span>
       </a>
       
-      <div slot="content">
-      
+      <div slot="content" id="dropdown-content">  
         <menus>
           <menu-item v-for="item in items" :key="item.x">{{ item.x }}</menu-item>
           <div class="divider"></div>
@@ -16,7 +15,6 @@
             <router-link :to="{ name: 'login' }"> Login </router-link>
           </menu-item>       
         </menus>
-        
       </div>
    
     </dropdown> 

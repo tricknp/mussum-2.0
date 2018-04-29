@@ -1,0 +1,38 @@
+#footer
+{
+    position: absolute;
+    bottom: .3%;
+    padding: .45em 0;
+    width: 100%;
+}
+
+.divider
+{
+    margin: 0 10em 1em 8.9em;
+    border: .5px solid $medium-grey;
+}
+
+h4  
+{
+    color: $dark-background;   
+    font-weight: $default-weight;
+    font-size: .9em;     
+}
+
+#name
+{
+    color: $dark-grey;
+    font-weight: 700;
+}
+
+.college
+{
+    position: absolute;
+    left: 10em;
+}
+
+.developed-by
+{
+    text-align: right;
+    margin-right: 11em;
+}
