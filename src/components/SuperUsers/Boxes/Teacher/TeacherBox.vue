@@ -1,26 +1,24 @@
 <template>
-  <div class="">
-      <div class="">
-        <h1>{{title}}</h1>        
-        
-      </div>
-      <div class="">
-
-         <Create @create="initialize"></Create>
+  <div class="div-teacher">
       
+      <div class="teacher-head">
+        <h1>{{title}}</h1>        
+         <Create @create="initialize"></Create>
+      </div>
+      
+      <div class="teacher-container">
           <div v-for="professor in professores" :key="professor.nome">
             <span> {{ professor.nome }} </span>
           </div>
-
       </div>
+
   </div>
 </template>
 
 
 <script>
 import axios from 'axios'
-import Create from './Create'
-//import FileUpload from '../../../Upload/FileUpload'
+import Create from './Components/Create'
 
 export default {
   name: 'TeacherBox',
@@ -39,7 +37,7 @@ export default {
     initialize () {
       axios.get(this.BASE_URL + '/api/professores')
         .then( (res) => {
-          this.professores = res.data
+          this.professores = res.data;
       })
     },
 

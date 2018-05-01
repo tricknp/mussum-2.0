@@ -3,19 +3,21 @@
      
       <Header />
      
-      <div>
-        <div>
+      <div class="div-admin">
+
+        <div class="left-boxes">
           <TeacherBox />
           <ActivitiesBox />  
         </div>
         
-        <div>
+        <div class="right-boxes">
           <LinksBox />
           <DirectoriesBox />
           <CoursesBox /> 
         </div>
      
       </div>
+
   </section>
 </template>
 
@@ -24,10 +26,10 @@
 
 import Header from '../../FixedComponents/Header/Header'
 import TeacherBox from '../Boxes/Teacher/TeacherBox'
-import ActivitiesBox from '../Boxes/ActivitiesBox'
-import LinksBox from '../Boxes/LinksBox'
-import DirectoriesBox from '../Boxes/DirectoriesBox'
-import CoursesBox from '../Boxes/CoursesBox'
+import ActivitiesBox from '../Boxes/Activities/ActivitiesBox'
+import LinksBox from '../Boxes/Links/LinksBox'
+import DirectoriesBox from '../Boxes/Directories/DirectoriesBox'
+import CoursesBox from '../Boxes/Courses/CoursesBox'
 
 export default {
   name: "Admin",

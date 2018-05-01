@@ -1,7 +1,12 @@
 <template>
   <div>
-      <button @click="toggleAdd">add</button>
-        
+    
+    <div class="div-adm-button">
+      <button @click="toggleAdd" class="adm-button">+</button>
+      <button @click="toggleDel" class="adm-button">-</button>
+      <button @click="toggleDel" class="adm-button">&</button>
+    </div>
+
       <modal title="Adicionar Professor"
              transition="bounceUp" 
              :on-ok="okCb" 

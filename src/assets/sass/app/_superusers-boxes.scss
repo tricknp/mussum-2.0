@@ -1,0 +1,185 @@
+/*============== EQUAL CONTENT ==============*/
+%equal-flex-display
+{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+%default-header
+{
+    @extend %equal-flex-display;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    h1
+    {
+        font-size: $default-size;
+        color: $black-background;
+        font-weight: $default-weight + 150;
+        padding: .6em 0; 
+        margin-left: .3em;
+    }  
+
+    .div-adm-button
+    {
+        margin-right: 3px;
+    }
+
+    .adm-button
+    {
+        background-color: transparent;
+        font-weight: $default-weight + 150;
+        font-size: $default-size + .2em;
+        border: $none;
+        cursor: pointer;
+        margin: 0 -3%;            
+    }
+}
+
+%default-box
+{
+    width: $full-size;
+    border: $light-border $medium-grey;
+    border-radius: $default-radius + 1px;
+    background-color: $light-grey;
+}
+
+%equal-border
+{
+    border: $light-border $medium-grey;
+    border-radius: 0 0 3px 3px;
+    margin-top: -1px;
+}
+
+%equal-width
+{
+    width: 22em;
+}
+
+
+/*============== ADMIN SECTION ==============*/
+.div-admin
+{
+    @extend %equal-flex-display;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 1%;
+}
+
+.left-boxes
+{
+    @extend %equal-flex-display;
+    flex-direction: column;
+    margin-right: .35em;
+}
+
+.right-boxes
+{
+    @extend %equal-flex-display;
+    flex-direction: column;
+}
+
+/*============== TEACHER ==============*/
+.div-teacher
+{
+    @extend %equal-width;
+}
+
+.teacher-head
+{
+    @extend %default-header;
+    @extend %default-box;
+}
+
+
+.teacher-container
+{
+    @extend %equal-border;
+    padding: $left-boxes-padding;
+}
+
+
+/*============== Activities ==============*/
+.div-activities
+{
+    @extend %equal-width;
+    margin-top: .3em;
+}
+
+.activities-head
+{
+    @extend %default-header;
+    @extend %default-box;
+}
+
+
+.activities-container
+{
+    @extend %equal-border;
+    padding: $left-boxes-padding;
+}
+
+/*============== Links ==============*/
+.div-adm-links
+{
+    @extend %equal-width;
+}
+
+.adm-links-head
+{
+    @extend %default-header;
+    @extend %default-box;
+}
+
+
+.adm-links-container
+{
+    @extend %equal-border;
+    padding: $right-boxes-padding;
+}
+
+
+/*============== Directories ==============*/
+.div-directories
+{
+    @extend %equal-width;
+    margin-top: $boxes-margin-top;
+}
+
+.directories-head
+{
+    @extend %default-header;
+    @extend %default-box;
+}
+
+
+.directories-container
+{
+    @extend %equal-border;
+    padding: $right-boxes-padding;
+}
+
+/*============== Courses ==============*/
+.div-courses
+{
+    @extend %equal-width;
+    margin-top: $boxes-margin-top;
+}
+
+.courses-head
+{
+    @extend %default-header;
+    @extend %default-box;
+}
+
+
+.courses-container
+{
+    @extend %equal-border;
+    padding: $right-boxes-padding;
+}
+
+
+

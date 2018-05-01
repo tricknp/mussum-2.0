@@ -9,11 +9,19 @@
       
       <div slot="content" id="dropdown-content">  
         <menus>
-          <menu-item v-for="item in items" :key="item.x">{{ item.x }}</menu-item>
+          
+          <menu-item v-for="item in items"  :key="item.name">
+            <a href="#" > 
+              {{ item.name }} 
+            </a>
+          </menu-item>
+
           <div class="divider"></div>
+          
           <menu-item> 
             <router-link :to="{ name: 'login' }"> Login </router-link>
-          </menu-item>       
+          </menu-item>
+
         </menus>
       </div>
    
@@ -30,12 +38,19 @@ export default {
   
 data(){
   return{
-    items:
-   [
-     {x: 'test1'},
-     {x: 'test2'},
-     {x: 'test3'},
-   ],
+    items: 
+    [
+      { name: 'BlackBoard' },
+      { name: 'Portal do Aluno' },
+      { name: 'Faculdade Senac' },
+    ],
+
+    links: 
+    [
+      { url: 'https://senac.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_6_1' },
+      { url: 'https://www.senacrs.com.br/meusenac_login.asp' },
+      { url: 'https://www.senacrs.com.br/' }
+    ]
   
   };
 },

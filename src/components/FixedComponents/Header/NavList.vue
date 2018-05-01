@@ -12,6 +12,16 @@
         </div>  
       </dropdown>
 
+      <dropdown trigger="hover">
+        <button id="btn-nav-list">{{ title.link3 }}</button>
+        <div slot="content" id="dropdown-content">
+          <menus>
+            <menu-item v-for="professor in professores" :key="professor.name">
+              {{ professor.name }}
+            </menu-item>
+          </menus>
+        </div>  
+      </dropdown>
     
       <dropdown trigger="hover">
         <button id="btn-nav-list">{{ title.listHorarios }}</button>
@@ -19,18 +29,6 @@
           <menus>
             <menu-item v-for="horario in horarios" :key="horario.turma">
               {{ horario.turma }}
-            </menu-item>
-          </menus>
-        </div>  
-      </dropdown>
-
-    
-      <dropdown trigger="hover">
-        <button id="btn-nav-list">{{ title.link3 }}</button>
-        <div slot="content" id="dropdown-content">
-          <menus>
-            <menu-item v-for="professor in professores" :key="professor.name">
-              {{ professor.name }}
             </menu-item>
           </menus>
         </div>  
@@ -48,7 +46,7 @@ export default {
       { 
         listProfessores: 'Professoris',
         listHorarios: 'Horaris',
-        link3: 'Dereguederis',
+        link3: 'Cursis',
       },
       professores: 
       [
