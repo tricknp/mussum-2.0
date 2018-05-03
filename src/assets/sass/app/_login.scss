@@ -2,3 +2,47 @@
 {
     filter: blur(3px);
 }
+
+#senac-logo
+{
+    width: 7em;
+    display: table;
+    margin: auto;
+}
+
+%equal-inputs
+{
+    width: $full-size;
+    border-radius: 3px;
+}
+
+.form-login > input
+{
+    @extend %equal-inputs;
+    font-size: $default-size - .2em;
+    border: $light-grey $medium-border;
+    text-indent: $input-indent;
+    margin-top: 1.7%;
+    padding: .7em 0;
+}
+
+.btn-login
+{
+    @extend %equal-inputs;
+    font-size: 1.4em;
+    font-weight: $default-weight + 150;
+    color: $light-grey;
+    background-color: $nice-blue;
+    border: $medium-border;
+    border-color: transparent;
+    padding: .42em 0;
+    margin-top: -5%;
+    cursor: pointer;
+}
+
+.small-messages
+{
+    color: $nice-blue;
+    font-size: $small-size;
+    text-align: center;
+}

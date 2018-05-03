@@ -6,18 +6,18 @@
         @ba="showModal = true"
         @close="showModal = false">
 
-        <img :src="senacLogo" slot="header">
+        <img :src="senacLogo" slot="header" id="senac-logo">
         
-        <form slot="content" @submit.prevent="onSubmit">
+        <form slot="content" @submit.prevent="onSubmit" class="form-login">
           <input type="text" v-model="username" name="username" placeholder="username">
           <input type="password" v-model="password" name="password" placeholder="Password">
         </form>  
 
         <div slot="subContent">
-            <button type="submit">ENTRAR</button>
+            <button type="submit" class="btn-login">ENTRAR</button>
         </div>
 
-        <div slot="footer">
+        <div slot="footer" class="small-messages">
           <p>Esqueceu sua senha?</p>
           <p></p>
         </div>

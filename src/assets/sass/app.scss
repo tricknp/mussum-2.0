@@ -1,9 +1,16 @@
+//variables
 @import 'app/variables';
+
+//components
 @import 'app/header';
-@import 'app/dropdown';
 @import 'app/sidenavs';
 @import 'app/footer';
+@import 'app/superusers-boxes';
+
+//UI Components
+@import 'app/dropdown';
 @import 'app/modal';
+
+//views
 @import 'app/login';
-@import 'app/superusers-boxes'
 
