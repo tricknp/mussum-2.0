@@ -1,16 +1,80 @@
 <template>
   <div>
-    <Header />
-    <FormLogin />
+    <Home class="login"></Home>
+
+    <modal v-if="showModal" 
+        @ba="showModal = true"
+        @close="showModal = false">
+
+        <img :src="senacLogo" slot="header">
+        
+        <form slot="content" @submit.prevent="onSubmit">
+          <input type="text" v-model="username" name="username" placeholder="username">
+          <input type="password" v-model="password" name="password" placeholder="Password">
+        </form>  
+
+        <div slot="subContent">
+            <button type="submit">ENTRAR</button>
+        </div>
+
+        <div slot="footer">
+          <p>Esqueceu sua senha?</p>
+          <p></p>
+        </div>
+    </modal>
+
   </div>
 </template>
 
 <script>
-import Header from "../FixedComponents/Header/Header";
-import FormLogin from "./Views/FormLogin";
+import Header from '../FixedComponents/Header/Header';
+import Modal from '../UIComponents/Modal'
+import Home from '../GeneralViews/Home'
 
 export default {
   name: "Login",
-  components: { Header, FormLogin }
+
+  components: 
+    { 
+      Modal,
+      Home, 
+    },
+
+  data(){
+    return{
+      showModal: true,
+      senacLogo: '../../../static/senac-logo.png',
+      username: '',
+      password: '',
+    }
+  },
+
+  methods: {
+    onSubmit() {
+      
+      let data = JSON.stringify({
+        username: this.username,
+        password: this.password
+      })
+      axios
+        .post(
+          'http://mussum2api.herokuapp.com/login', data, {
+            headers: { 
+              'X-Requested-With': 'XMLHttpRequest', 
+              'Content-Type': 'application/json'
+            }, //Send the information through an AJAX request
+          }
+        )
+        .then(response => {
+          const token = response.data.token; //Receive the token back from the server
+          const role = response.data.role;
+          console.log(token)
+          localStorage.setItem("token", token); //Store the token to send it to the back whem an access is needed
+          localStorage.setItem("role", role);
+          console.log(response);
+        })  
+        .catch(error => console.log(error));
+    }
+  }
 }
 </script>

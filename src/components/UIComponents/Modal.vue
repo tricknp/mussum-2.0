@@ -1,14 +1,41 @@
 <template>
-  <div>
-    <modal title="title" 
-           transition="bounceUp" 
-           :on-ok="okCb" 
-           :on-cancel="cancelCb" 
-           :is-show="isShow" 
-           @close="isShow=false">
-    </modal>
-         <button @click="toggle" class=""></button>
-  </div>
+  <transition name="modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+
+          <div class="modal-header">
+            <slot name="header">
+              default header
+            </slot>
+          </div>
+
+          <div class="modal-body">
+            <slot name="content">
+              default body
+            </slot>
+          </div>
+
+          <div class="modal-body">
+            <slot name="subContent">
+              default msg
+            </slot>
+          </div>
+
+          <div class="modal-footer">
+            <slot name="footer">
+              default footer
+              <button class="modal-default-button" @click="$emit('close')">
+                OK
+              </button>
+
+              
+            </slot>
+          </div>
+        </div>
+      </div>
+    </div>
+  </transition>
 
 </template>
 
@@ -19,35 +46,8 @@ export default {
 
   data() {
       return { 
-        isShow: false,
+        
     };
-  },
-
-  methods: {
-    toggle() {
-      this.isShow = !this.isShow;
-    },
-
-    okCb() {
-      this.$notify.open({
-        type: 'success',
-        title: `Ok! Registradis.`,
-      });
-    },
-
-    cancelCb() {
-      this.$notify.open({
-        type: 'danger',
-        title: `Ok! Canceladis.`,
-      });
-    },
-
-    okCloseCb() {
-      setTimeout(() => {
-        this.toggle();
-      }, 2000);
-    },
-
   },
 }
 
