@@ -1,13 +1,13 @@
 <template>
   <aside id="aside">
-      <Links />
+      <Wikis />
       <Directories />
   </aside>
 </template>
 
 
 <script>
-import Links from './Links';
+import Wikis from './Wikis';
 import Directories from './Directories'
 
 export default {
@@ -15,7 +15,7 @@ export default {
   
   components:
   {
-      Links,
+      Wikis,
       Directories,
   },
 }

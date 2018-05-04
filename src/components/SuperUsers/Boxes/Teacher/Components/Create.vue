@@ -7,7 +7,7 @@
 
       <h1 slot="header">Adicionar Professor</h1>
 
-      <form slot="content" @submit.prevent="onSubmit" class="form-admin-modal">
+      <form slot="content" class="form-admin-modal">
           <input type="text" placeholder="Nome" name="nome" v-model="nome" required>
           <input type="text" placeholder="Descrição" name="sobre" v-model="sobre">
           <input type="email" placeholder="E-mail" name="email" v-model="email">
@@ -16,8 +16,17 @@
       </form>
 
       <div slot="footer" class="div-btn-modal">
-          <button type="submit" class="adm-modal-buttons">Adicionar</button>
-          <button @click="showModal = false" class="adm-modal-buttons">Cancelar</button>
+          <button 
+            type="submit" 
+            @click.prevent="onSubmit" 
+            class="adm-modal-buttons">
+                Adicionar
+          </button>
+          <button 
+            @click="showModal = false" 
+            class="adm-modal-buttons">
+                Cancelar
+          </button>
       </div>
 
     </modal>

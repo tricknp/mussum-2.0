@@ -12,11 +12,11 @@
 
 <script>
 export default {
-  name: 'Links',
+  name: 'Wikis',
   
   data(){
       return{
-          title: 'Links Interessantes'
+          title: 'Wikis'
       };
   }
 

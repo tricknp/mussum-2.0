@@ -7,13 +7,13 @@
 
         <img :src="senacLogo" slot="header" id="senac-logo">
         
-        <form slot="content" @submit.prevent="onSubmit" class="form-login">
+        <form slot="content" class="form-login">
           <input type="text" v-model="username" name="username" placeholder="username">
           <input type="password" v-model="password" name="password" placeholder="Password">
         </form>  
 
         <div slot="subContent">
-            <button type="submit" class="btn-login">ENTRAR</button>
+            <button type="submit" class="btn-login" @click.prevent="onSubmit">ENTRAR</button>
         </div>
 
         <div slot="footer" class="small-messages">
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Header from '../FixedComponents/Header/Header';
 import Modal from '../UIComponents/Modal'
 import Home from '../GeneralViews/Home'
@@ -67,7 +68,7 @@ export default {
         .then(response => {
           const token = response.data.token; //Receive the token back from the server
           const role = response.data.role;
-          console.log(token)
+          console.log(token)  
           localStorage.setItem("token", token); //Store the token to send it to the back whem an access is needed
           localStorage.setItem("role", role);
           console.log(response);

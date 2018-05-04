@@ -11,7 +11,7 @@
         </div>
         
         <div class="right-boxes">
-          <LinksBox />
+          <WikisBox />
           <DirectoriesBox />
           <CoursesBox /> 
         </div>
@@ -27,7 +27,7 @@
 import Header from '../../FixedComponents/Header/Header'
 import TeacherBox from '../Boxes/Teacher/TeacherBox'
 import ActivitiesBox from '../Boxes/Activities/ActivitiesBox'
-import LinksBox from '../Boxes/Links/LinksBox'
+import WikisBox from '../Boxes/Wikis/WikisBox'
 import DirectoriesBox from '../Boxes/Directories/DirectoriesBox'
 import CoursesBox from '../Boxes/Courses/CoursesBox'
 
@@ -38,7 +38,7 @@ export default {
     Header,
     TeacherBox,
     ActivitiesBox,
-    LinksBox,
+    WikisBox,
     DirectoriesBox,
     CoursesBox
   },

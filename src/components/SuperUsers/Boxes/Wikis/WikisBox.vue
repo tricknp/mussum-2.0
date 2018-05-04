@@ -19,13 +19,13 @@ import axios from 'axios'
 import Create from './Components/Create'
 
 export default {
-  name: 'LinksBox',
+  name: 'WikisBox',
 
   components: { Create },
   
     data() {
       return {
-       title: 'Links',  
+       title: 'Wikis',  
     };
   },
 }
