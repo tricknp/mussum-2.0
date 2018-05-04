@@ -3,7 +3,6 @@
     <Home class="login"></Home>
 
     <modal v-if="showModal" 
-        @ba="showModal = true"
         @close="showModal = false">
 
         <img :src="senacLogo" slot="header" id="senac-logo">

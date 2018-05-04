@@ -1,41 +1,26 @@
 <template>
   <div>
     
-    <div class="div-adm-button">
-      <button @click="toggleAdd" class="adm-button">+</button>
-      <button @click="toggleDel" class="adm-button">-</button>
-      <button @click="toggleDel" class="adm-button">&</button>
-    </div>
+    <button @click="show" class="adm-button">+</button> 
 
-      <modal title="Adicionar Professor"
-             transition="bounceUp" 
-             :on-ok="okCb" 
-             :on-cancel="cancelCb" 
-             :is-show="isShow" 
-             @close="isShow=false">
+    <modal v-if="showModal" @show="show()" id="admin-modal">
 
-            <form>
-                <label for="nome">Nome</label>
-                <input type="text" name="nome" v-model="professor.nome" required>
+      <h1 slot="header">Adicionar Professor</h1>
 
-                <label for="sobre">Descrição</label>
-                <input type="text" name="sobre" v-model="professor.desc">
+      <form slot="content" @submit.prevent="onSubmit" class="form-admin-modal">
+          <input type="text" placeholder="Nome" name="nome" v-model="nome" required>
+          <input type="text" placeholder="Descrição" name="sobre" v-model="sobre">
+          <input type="email" placeholder="E-mail" name="email" v-model="email">
+          <input type="text" placeholder="Username" name="username" v-model="username">
+          <input type="password" placeholder="Senha" name="password" v-model="password">
+      </form>
 
-                <label for="email">E-mail</label>
-                <input type="email" name="email" v-model="professor.email">
+      <div slot="footer" class="div-btn-modal">
+          <button type="submit" class="adm-modal-buttons">Adicionar</button>
+          <button @click="showModal = false" class="adm-modal-buttons">Cancelar</button>
+      </div>
 
-                <label for="username">Nome de usuario</label>
-                <input type="text" name="username" v-model="professor.username">
-
-                <label for="password">Senha</label>
-                <input type="password" name="password" v-model="professor.password">
-
-                <button>
-                    <a href="javascript:void(0);" @click="handleSubmit(teacher)"> Adicionar </a>
-                </button>
-            </form>      
-            
-        </modal>
+    </modal>
 
   </div>
 </template>
@@ -43,65 +28,50 @@
 
 <script>
 import axios from 'axios'
+import Modal from '../../../../UIComponents/Modal'
+
 export default {
   name: 'Create',
+
+  components: { Modal },
   
   data(){
       return{
-          professor:{
-              nome: null,
-              desc: null,
-              email: null,
-              username: null,
-              password: null,
-          },
-
-          isShow: false,
+          nome: null,
+          sobre: null,
+          email: null,
+          username: null,
+          password: null,
+        
+          showModal: false,
           msg: ''
       };
   },
 
   methods:{
-    //========================== modal =============================//
-    toggleAdd() {
-      this.isShow = !this.isShow;
-      this.$emit('created')
-    },
 
-    toggleDel() {
-      this.isShow = !this.isShow;
+    show(){
+      this.showModal = true;
     },
-
-    okCb() {
-      this.$notify.open({
-        type: 'success',
-        title: `Ok! Registradis.`,
-      });
-    },
-    cancelCb() {
-      this.$notify.open({
-        type: 'danger',
-        title: `Ok! Canceladis.`,
-      });
-    },
-    okCloseCb() {
-      setTimeout(() => {
-        this.toggle();
-      }, 2000);
-    },
-  },
-
-//========================== add =============================//
-
-    handleSubmit(teacher){
-        axios.post('http://mussum2api.herokuapp.com/professores', professor)
-            .then( (result) => {
-                this.isShow = !this.isShow;
-                console.log('sucess')
-            }), () => {
-                console.log('fail')
-            }
-    }
     
-}
+   onSubmit() {
+      let data = JSON.stringify({
+        nome: this.nome,
+        //sobre: this.sobre,
+        //email: this.email,
+        username: this.username,
+        password: this.password
+      })
+        axios
+          .post('http://mussum2api.herokuapp.com/api/professores', data, {
+              headers: { 'Content-Type': 'application/json'},
+            })
+          .then( (response) => {
+                console.log('sucess')
+            })
+          .catch(error => console.log(error))
+      }
+    }
+  }   
+    
 </script>

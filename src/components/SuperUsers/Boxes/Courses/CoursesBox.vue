@@ -3,7 +3,7 @@
       
       <div class="courses-head">
         <h1>{{title}}</h1>        
-         <Create @create="initialize"></Create>
+        
       </div>
       
       <div class="courses-container">
@@ -29,8 +29,5 @@ export default {
     };
   },
 
-  created(){
-    this.initialize();
-  }
 }
 </script>

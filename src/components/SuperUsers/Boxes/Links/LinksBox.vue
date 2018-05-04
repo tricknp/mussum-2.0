@@ -3,7 +3,7 @@
       
       <div class="adm-links-head">
         <h1>{{title}}</h1>        
-         <Create @create="initialize"></Create>
+         
       </div>
       
       <div class="adm-links-container">
@@ -28,9 +28,5 @@ export default {
        title: 'Links',  
     };
   },
-
-  created(){
-    this.initialize();
-  }
 }
 </script>

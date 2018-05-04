@@ -23,6 +23,7 @@
 
     .div-adm-button
     {
+        @extend %equal-flex-display;
         margin-right: 3px;
     }
 
@@ -80,6 +81,50 @@
     @extend %equal-flex-display;
     flex-direction: column;
 }
+
+/*============== ADMIN FORM - MODALS ==============*/
+#admin-modal
+{
+    h1
+    {
+        color: $dark-grey;
+        text-align: center;
+        font-size: 1.5em;
+        margin-bottom: -1em;
+    }
+
+    .form-admin-modal > input
+    {
+        font-size: $default-size;
+        border: $light-grey $medium-border;
+        border-radius: 3px;
+        margin-top: .4em;
+        padding: .3em;
+        width: $full-size;
+        text-indent: $input-indent;
+    }
+
+    .div-btn-modal
+    {
+        display: inline-block;
+        margin-top: -.5em;
+        width: 100%;
+    }
+
+    .adm-modal-buttons
+    {
+        cursor: pointer;
+        font-size: 1.3em;
+        width: 49.3%;
+        padding: .3em;
+        font-weight: 550;
+        background-color: $dark-grey;
+        color: $light-grey;
+        border: $light-border $medium-grey;
+        border-radius: 3px;
+    }
+}
+
 
 /*============== TEACHER ==============*/
 .div-teacher

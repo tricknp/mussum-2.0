@@ -19,7 +19,7 @@
           <div class="divider"></div>
           
           <menu-item> 
-            <router-link :to="{ name: 'login' }" @click="$emit('ba')"> Login </router-link>
+            <router-link :to="{ name: 'login' }"> Login </router-link>
           </menu-item>
 
         </menus>

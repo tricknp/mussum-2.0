@@ -3,7 +3,6 @@
       
       <div class="directories-head">
         <h1>{{title}}</h1>        
-         <Create @create="initialize"></Create>
       </div>
       
       <div class="directories-container">
@@ -28,9 +27,5 @@ export default {
        title: 'Diretóris',  
     };
   },
-
-  created(){
-    this.initialize();
-  }
 }
 </script>

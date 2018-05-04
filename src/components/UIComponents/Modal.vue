@@ -17,9 +17,7 @@
           </div>
 
           <div class="modal-body">
-            <slot name="subContent">
-              default msg
-            </slot>
+            <slot name="subContent"></slot>
           </div>
 
           <div class="modal-footer">
@@ -44,11 +42,6 @@
 export default {
   name: 'Modal',
 
-  data() {
-      return { 
-        
-    };
-  },
 }
 
 </script>
