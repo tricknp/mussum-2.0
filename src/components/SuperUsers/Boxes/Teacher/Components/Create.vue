@@ -23,7 +23,7 @@
                 Adicionar
           </button>
           <button 
-            @click="showModal = false" 
+            @click="cancel" 
             class="adm-modal-buttons">
                 Cancelar
           </button>
@@ -33,7 +33,6 @@
 
   </div>
 </template>
-
 
 <script>
 import axios from 'axios'
@@ -46,11 +45,11 @@ export default {
   
   data(){
       return{
-          nome: null,
-          sobre: null,
-          email: null,
-          username: null,
-          password: null,
+          nome      : null,
+          sobre     : null,
+          email     : null,
+          username  : null,
+          password  : null,
         
           showModal: false,
           msg: ''
@@ -58,27 +57,43 @@ export default {
   },
 
   methods:{
+    
+    reset(){
+      this.nome      =  ''
+      this.sobre     =  ''
+      this.email     =  ''
+      this.username  =  ''
+      this.password  =  ''
+    },
 
     show(){
       this.showModal = true;
+      this.reset();
     },
+
+    cancel(){
+      this.showModal = false;
+      this.reset();
+    },
+
     
    onSubmit() {
-      let data = JSON.stringify({
-        nome: this.nome,
-        //sobre: this.sobre,
-        //email: this.email,
-        username: this.username,
-        password: this.password
+     let data = JSON.stringify({
+        nome      :  this.nome,
+        username  :  this.username,
+        password  :  this.password
       })
         axios
           .post('http://mussum2api.herokuapp.com/api/professores', data, {
-              headers: { 'Content-Type': 'application/json'},
+            headers: { 'Content-Type': 'application/json'},
             })
           .then( (response) => {
                 console.log('sucess')
             })
           .catch(error => console.log(error))
+          
+          this.$emit('create');
+          this.showModal = false;
       }
     }
   }   

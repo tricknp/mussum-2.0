@@ -58,6 +58,19 @@
     width: 22em;
 }
 
+%equal-left-box-content
+{
+    overflow: auto;
+    height: 16.75em;
+    max-height: 16.8em;
+}
+
+%equal-right-box-content
+{
+    overflow: auto;
+    height: 10.3em;
+    max-height: 10.1em;
+}
 
 /*============== ADMIN SECTION ==============*/
 .div-admin
@@ -142,7 +155,19 @@
 .teacher-container
 {
     @extend %equal-border;
-    padding: $left-boxes-padding;
+    @extend %equal-left-box-content;
+
+    .teacher-content:nth-child(1)
+    {
+        margin-top: .9em;
+    }
+
+    .teacher-content
+    {
+        font-size: $default-size;
+        margin: .2em .4em;
+        font-weight: 600;
+    }
 }
 
 
@@ -163,7 +188,7 @@
 .activities-container
 {
     @extend %equal-border;
-    padding: $left-boxes-padding;
+    @extend %equal-left-box-content;
 }
 
 /*============== Links ==============*/
@@ -182,7 +207,7 @@
 .adm-links-container
 {
     @extend %equal-border;
-    padding: $right-boxes-padding;
+    @extend %equal-right-box-content;
 }
 
 
@@ -203,7 +228,7 @@
 .directories-container
 {
     @extend %equal-border;
-    padding: $right-boxes-padding;
+    @extend %equal-right-box-content;
 }
 
 /*============== Courses ==============*/
@@ -223,7 +248,7 @@
 .courses-container
 {
     @extend %equal-border;
-    padding: $right-boxes-padding;
+    @extend %equal-right-box-content;
 }
 
 

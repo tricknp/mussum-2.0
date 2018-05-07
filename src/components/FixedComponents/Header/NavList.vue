@@ -5,8 +5,8 @@
         <button id="btn-nav-list">{{ title.listProfessores }}</button>
         <div slot="content" id="dropdown-content">
           <menus>
-            <menu-item id="dropdown-content" v-for="professor in professores" :key="professor.name">
-              {{ professor.name }}
+            <menu-item id="dropdown-content" v-for="professor in professores" :key="professor.nome">
+              {{ professor.nome }}
             </menu-item>
           </menus>
         </div>  
@@ -16,8 +16,8 @@
         <button id="btn-nav-list">{{ title.link3 }}</button>
         <div slot="content" id="dropdown-content">
           <menus>
-            <menu-item v-for="professor in professores" :key="professor.name">
-              {{ professor.name }}
+            <menu-item v-for="professor in professores" :key="professor.nome">
+              {{ professores.nome }}
             </menu-item>
           </menus>
         </div>  
@@ -48,14 +48,12 @@ export default {
         listHorarios: 'Horaris',
         link3: 'Cursis',
       },
+
       professores: 
       [
-        {name: 'Angelo'},
-        {name: 'Edecio'},
-        {name: 'Gladimir'},
-        {name: 'CV'},
-        {name: 'Dartagnan'},
+        {nome: 'kkk'},
       ],
+
       horarios: 
       [
         {turma: 'Analise e Desenvolvimento de Sistemas'},
@@ -63,5 +61,15 @@ export default {
       ],
     };
   },
+
+  created(){
+    var vm = this;
+     this.$bus.$on('showTeacher', (teacher) => {
+       if(teacher){
+         console.log('teacher added')
+          vm.professores.push( {name: teacher} )
+       }
+    })
+  }
 }
 </script>

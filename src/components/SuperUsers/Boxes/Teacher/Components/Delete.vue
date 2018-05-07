@@ -1,55 +1,70 @@
-<template>
-   <div>
-    
-    <button @click="show" class="adm-button">-</button> 
-
-    <modal v-if="showModal" @show="show()">
-
-    <h1 slot="header">Remover Professor</h1>
-
-      <form slot="content" @submit.prevent="onSubmit">
-          <label for="nome" >Nome</label>
-          <input type="text" name="nome" readonly>
-
-          <label for="sobre">Descrição</label>
-          <input type="text" name="sobre" readonly> 
-
-          <label for="email">E-mail</label>
-          <input type="email" name="email" readonly>
-
-          <label for="username">Nome de usuario</label>
-          <input type="text" name="username" readonly>
-
-          <label for="password">Senha</label>
-          <input type="password" name="password" readonly>
+  <template>
+     <div>
+      
+      <button @click="show" class="adm-button">-</button> 
+  
+      <modal v-if="showModal" @show="show()" id="admin-modal">
+  
+      <h1 slot="header">Remover Professor</h1>
+  
+        <form slot="content" class="form-admin-modal">
+            <input type="text"    :value="nome"  readonly>
         </form>
-
-        <div slot="footer">
-            <button type="submit">Remover</button>
-            <button @click="showModal = false">Cancelar</button>
-        </div>
-
-    </modal>
-
-  </div> 
-</template>
-
+  
+          <div slot="footer">
+              <button type="submit" @click.prevent="onSubmit" class="adm-modal-buttons">
+                    Remover
+              </button>
+              <button @click="showModal = false" class="adm-modal-buttons">
+                    Cancelar
+              </button>
+          </div>
+  
+      </modal>
+  
+    </div> 
+  </template>
 
 <script>
-export default {
+import axios from 'axios'
+import Modal from '../../../../UIComponents/Modal'
+
+export default {  
   name: 'Delete',
+
+  components: { Modal },
 
   data(){
     return{
-       showModal: true
+       showModal: false,
+       nome: '',
     }
   },
 
   methods:{
     show(){
-      this.showModal = true;
+      this.showModal = true; 
+        this.$bus.$on('delete', (nome, id) => { 
+          this.nome = nome;
+          this.id = id;
+      })
     },
-  }
+
+    onSubmit(){
+      axios
+          .delete('http://25.77.220.94:8009/api/professores/' + this.id)
+          .then( (response) => {
+            console.log(response.data)
+            })
+          .catch(error => console.log(error));
+      this.showModal = false;
+      console.log(this.id)
+    },
+  },
+
 
 }
 </script>
+
+
+
