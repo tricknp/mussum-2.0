@@ -5,10 +5,10 @@
 
     <modal v-if="showModal" @show="show()" id="admin-modal">
 
-      <h1 slot="header">Editar Curso</h1>
+      <h1 slot="header">Editar Diretorio</h1>
 
       <form slot="content" class="form-admin-modal">
-          <input type="text"   :value="curso.titulo" placeholder="nome" required>
+          <input type="text"   :value="diretorio.titulo" placeholder="titulo" required>
         </form>
 
         <div slot="footer">
@@ -42,20 +42,20 @@ export default {
   data() {
     return {
       id: '',
-      curso : null,
+      diretorio : null,
     };
   },
 
   created() {
-    this.$bus.$on("objectEmited", (curso) => {
-      this.curso = curso;
-      this.id = this.curso.id;
+    this.$bus.$on("objectEmited", (diretorio) => {
+      this.diretorio = diretorio;
+      this.id = this.diretorio.id;
     });
   },
 
   methods: {
     postData(){
-      this.route = 'api/cursos/',
+      this.route = 'api/professores/',
       this.datas = JSON.stringify({
         id: this.id,
         titulo: this.titulo,

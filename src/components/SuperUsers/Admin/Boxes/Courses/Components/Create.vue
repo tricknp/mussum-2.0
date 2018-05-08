@@ -58,7 +58,7 @@ export default {
     postData(){
         this.route = 'api/cursos';
         this.datas = JSON.stringify({
-        nome:  this.titulo,
+           titulo:  this.titulo,
       })
     }
   },

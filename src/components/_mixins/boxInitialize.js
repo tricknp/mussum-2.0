@@ -4,17 +4,19 @@ export const initialize = {
     
     data() {
         return {
-          selected: null
+          selected: null,
+          object: '',
         }
       },
       
     methods: { 
       initialize() {
           this.postData();
+          
           axios
             .get(this.BASE_URL + this.route)
             .then(res => {
-            this.professores = res.data;
+            this.diretorios = res.data;
             });
         },
 
