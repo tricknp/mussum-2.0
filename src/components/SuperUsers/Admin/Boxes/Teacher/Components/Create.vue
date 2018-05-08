@@ -18,7 +18,7 @@
       <div slot="footer" class="div-btn-modal">
           <button 
             type="submit" 
-            @click.prevent="onSubmit" 
+            @click.stop.prevent="onSubmit" 
             class="adm-modal-buttons">
                 Adicionar
           </button>
@@ -35,13 +35,16 @@
 </template>
 
 <script>
-import axios from 'axios'
-import Modal from '../../../../UIComponents/Modal'
+import Modal from '../../../../../UIComponents/Modal'
+import { create } from '../../../../../_mixins/create.js'
+import { url } from '../../../../../_mixins/url.js'
 
 export default {
   name: 'Create',
 
   components: { Modal },
+
+  mixins: [ create, url ],
   
   data(){
       return{
@@ -50,14 +53,12 @@ export default {
           email     : null,
           username  : null,
           password  : null,
-        
-          showModal: false,
-          msg: ''
+          msg       : null,
+          datas: ''
       };
   },
 
-  methods:{
-    
+  methods:{   
     reset(){
       this.nome      =  ''
       this.sobre     =  ''
@@ -66,36 +67,19 @@ export default {
       this.password  =  ''
     },
 
-    show(){
-      this.showModal = true;
-      this.reset();
-    },
-
-    cancel(){
-      this.showModal = false;
-      this.reset();
-    },
-
-    
-   onSubmit() {
-     let data = JSON.stringify({
+    postData(){
+        this.route = 'api/professores';
+        this.datas = JSON.stringify({
         nome      :  this.nome,
+        sobre     :  this.sobre,
+        email     :  this.email,
         username  :  this.username,
         password  :  this.password
       })
-        axios
-          .post('http://mussum2api.herokuapp.com/api/professores', data, {
-            headers: { 'Content-Type': 'application/json'},
-            })
-          .then( (response) => {
-                console.log('sucess')
-            })
-          .catch(error => console.log(error))
-          
-          this.$emit('create');
-          this.showModal = false;
-      }
     }
-  }   
+  },
+
+
+}   
     
 </script>

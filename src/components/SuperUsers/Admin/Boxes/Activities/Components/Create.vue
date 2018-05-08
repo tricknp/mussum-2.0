@@ -26,6 +26,7 @@
 
 <script>
 import axios from 'axios'
+import Modal from "../../../../../UIComponents/Modal"
 export default {
   name: 'Create',
   
