@@ -5,13 +5,12 @@
 
     <modal v-if="showModal" @show="show()" id="admin-modal">
 
-      <h1 slot="header">Editar Professor</h1>
+      <h1 slot="header">Editar Aviso</h1>
 
       <form slot="content" class="form-admin-modal">
-          <input type="text"   :value="professor.nome" placeholder="nome" required>
-          <input type="email"  :value="professor.email" placeholder="email">
-          <input type="text"   :value="professor.username" placeholder="username" required>
-          <input type="password" placeholder="senha" :value="professor.password" required >
+          <input type="text"   :value="aviso.titulo" placeholder="Titulo" required>
+          <input type="text"   :value="aviso.descricao" placeholder="Descrição" required>
+          <input type="text "  :value="aviso.data" placeholder="Data">
         </form>
 
         <div slot="footer">
@@ -45,29 +44,26 @@ export default {
   data() {
     return {
       id: '',
-      professor : null,
+      aviso : null,
     };
   },
 
   created() {
-    this.$bus.$on("objectEmited", (professor) => {
-      this.professor = professor;
-      this.id = this.professor.id;
+    this.$bus.$on("objectEmited", (aviso) => {
+      this.aviso = aviso;
+      this.id = this.aviso.id;
     });
   },
 
   methods: {
     postData(){
-      this.route = 'api/professores/',
+      this.route = 'api/avisos/',
       this.datas = JSON.stringify({
         id: this.id,
-        nome: this.nome,
-        email: this.email,
-        username: this.username,
-        password: this.password
-        
+        titulo: this.aviso.titulo,
+        descricao: this.aviso.descricao,
+        data: this.aviso.data
       })
-        console.log('testtttttttttt'+datas);
     },
 
   }

@@ -16,7 +16,11 @@ export const initialize = {
           axios
             .get(this.BASE_URL + this.route)
             .then(res => {
-            this.wikis = res.data;
+                this.wikis = res.data;
+                this.professores = res.data;
+                this.cursos = res.data;
+                this.diretorios = res.data;
+                this.avisos = res.data;
             });
         },
 
@@ -32,6 +36,6 @@ export const initialize = {
     },
     
     updated() {
-        this.initialize();
+       // this.initialize();
     }
 }
