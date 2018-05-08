@@ -5,12 +5,10 @@
 
       <modal v-if="showModal" @show="show()" id="admin-modal">
 
-      <h1 slot="header">Remover Professor</h1>
+      <h1 slot="header">Remover Curso</h1>
 
       <form slot="content" class="form-admin-modal">
-          <input type="text"    :value="nome"  readonly>
-          <input type="text"    :value="email" placeholder="email não informado" readonly>
-          <input type="text"    :value="username"  readonly>
+          <input type="text" :value="titulo"  readonly>
       </form>
 
       <div slot="footer">
@@ -42,16 +40,14 @@ export default {
 
   data() {
     return {
-      nome: "",
-      email: '',
-      username: '',
+      titulo: "",
       id: ""
     };
   },
 
   methods:{
     postData(){
-      this.route = 'api/professores/';
+      this.route = 'api/cursos/';
       this.datas = JSON.stringify({
         id: this.id
       })
@@ -60,11 +56,9 @@ export default {
 
   created(){
     this.showModal = false;
-    this.$bus.$on("objectEmited", (professor) => {
-        this.nome = professor.nome;
-        this.email = professor.email;
-        this.username = professor.username
-        this.id = professor.id;
+    this.$bus.$on("objectEmited", (curso) => {
+        this.titulo = curso.titulo;
+        this.id = curso.id;
       });
   },
 

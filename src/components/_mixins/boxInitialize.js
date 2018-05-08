@@ -18,8 +18,9 @@ export const initialize = {
             });
         },
 
-       selectTeacher(obj) {
+       select(obj) {
          this.selected = obj;
+         console.log('selected    ' + this.selected.id)
          this.$bus.$emit("objectEmited", this.selected);
         },
     },
@@ -29,6 +30,6 @@ export const initialize = {
     },
     
     updated() {
-       // this.initialize();
+        this.initialize();
     }
 }

@@ -1,72 +1,69 @@
 <template>
   <div>
     
-    <div class="div-adm-button">
-      <button @click="toggleAdd" class="adm-button">+</button>
-      <button @click="toggleDel" class="adm-button">-</button>
-      <button @click="toggleDel" class="adm-button">&</button>
-    </div>
+    <button @click="show" class="adm-button">+</button> 
 
-      <modal title="Adicionar Cursis"
-             transition="bounceUp" 
-             :on-ok="okCb" 
-             :on-cancel="cancelCb" 
-             :is-show="isShow" 
-             @close="isShow=false">
+    <modal v-if="showModal" @show="show()" id="admin-modal">
 
-            <form>
-            
-            </form>      
-            
-        </modal>
+      <h1 slot="header">Adicionar Curso</h1>
+
+      <form slot="content" class="form-admin-modal">
+          <input type="text" placeholder="Nome" name="nome" v-model="titulo" required>
+      </form>
+
+      <div slot="footer" class="div-btn-modal">
+          <button 
+            type="submit" 
+            @click.stop.prevent="onSubmit" 
+            class="adm-modal-buttons">
+                Adicionar
+          </button>
+          <button 
+            @click="cancel" 
+            class="adm-modal-buttons">
+                Cancelar
+          </button>
+      </div>
+
+    </modal>
 
   </div>
 </template>
 
-
 <script>
-import axios from 'axios'
+import Modal from '../../../../../UIComponents/Modal'
+import { create } from '../../../../../_mixins/create.js'
+import { url } from '../../../../../_mixins/url.js'
+
 export default {
   name: 'Create',
+
+  components: { Modal },
+
+  mixins: [ create, url ],
   
   data(){
       return{
-          isShow: false,
-          msg: ''
+          titulo: null,
+          msg       : null,
+          datas: ''
       };
   },
 
-  methods:{
-    //========================== modal =============================//
-    toggleAdd() {
-      this.isShow = !this.isShow;
-      this.$emit('created')
+  methods:{   
+    reset(){
+      this.titulo =  '';
     },
 
-    toggleDel() {
-      this.isShow = !this.isShow;
-    },
-
-    okCb() {
-      this.$notify.open({
-        type: 'success',
-        title: `Ok! Registradis.`,
-      });
-    },
-    cancelCb() {
-      this.$notify.open({
-        type: 'danger',
-        title: `Ok! Canceladis.`,
-      });
-    },
-    okCloseCb() {
-      setTimeout(() => {
-        this.toggle();
-      }, 2000);
-    },
+    postData(){
+        this.route = 'api/cursos';
+        this.datas = JSON.stringify({
+        nome:  this.titulo,
+      })
+    }
   },
 
-//========================== add =============================//
- 
-}
+
+}   
+    
 </script>

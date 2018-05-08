@@ -13,7 +13,7 @@
       <div class="teacher-container">
           <div v-for="professor in professores" :key="professor.nome" class="teacher-content">
             <label>
-              <input type="radio" name="name" @change="selectTeacher(professor)">
+              <input type="radio" name="name" @change="select(professor)">
               <span for="name"> {{ professor.nome }} </span>
             </label>
           </div>
@@ -24,7 +24,6 @@
 
 
 <script>
-import axios from "axios";
 import Create from "./Components/Create";
 import Delete from "./Components/Delete";
 import Edit from "./Components/Edit";

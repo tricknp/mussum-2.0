@@ -5,13 +5,10 @@
 
     <modal v-if="showModal" @show="show()" id="admin-modal">
 
-      <h1 slot="header">Editar Professor</h1>
+      <h1 slot="header">Editar Curso</h1>
 
       <form slot="content" class="form-admin-modal">
-          <input type="text"   :value="professor.nome" placeholder="nome" required>
-          <input type="email"  :value="professor.email" placeholder="email">
-          <input type="text"   :value="professor.username" placeholder="username" required>
-          <input type="password" placeholder="senha" :value="professor.password" required >
+          <input type="text"   :value="curso.nome" placeholder="nome" required>
         </form>
 
         <div slot="footer">
@@ -45,26 +42,23 @@ export default {
   data() {
     return {
       id: '',
-      professor : null,
+      curso : null,
     };
   },
 
   created() {
-    this.$bus.$on("objectEmited", (professor) => {
-      this.professor = professor;
-      this.id = this.professor.id;
+    this.$bus.$on("objectEmited", (curso) => {
+      this.curso = curso;
+      this.id = this.curso.id;
     });
   },
 
   methods: {
     postData(){
-      this.route = 'api/professores/',
+      this.route = 'api/cursos/',
       this.datas = JSON.stringify({
         id: this.id,
-        nome: this.nome,
-        email: this.email,
-        username: this.username,
-        password: this.password
+        titulo: this.titulo,
       })
     },
 
