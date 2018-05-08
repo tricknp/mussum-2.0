@@ -191,20 +191,20 @@
     @extend %equal-left-box-content;
 }
 
-/*============== Links ==============*/
-.div-adm-links
+/*============== Wikis ==============*/
+.div-wikis
 {
     @extend %equal-width;
 }
 
-.adm-links-head
+.wikis-head
 {
     @extend %default-header;
     @extend %default-box;
 }
 
 
-.adm-links-container
+.wikis-container
 {
     @extend %equal-border;
     @extend %equal-right-box-content;

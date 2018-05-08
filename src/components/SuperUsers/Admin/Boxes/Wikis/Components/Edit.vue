@@ -5,11 +5,11 @@
 
     <modal v-if="showModal" @show="show()" id="admin-modal">
 
-      <h1 slot="header">Editar Diretório</h1>
+      <h1 slot="header">Editar Wiki</h1>
 
       <form slot="content" class="form-admin-modal">
-          <input type="text" :value="diretorio.titulo" placeholder="titulo" required>
-          <input type="text"   :value="diretorio.titulo" placeholder="link" required>
+          <input type="text"   :value="wiki.titulo" placeholder="Titulo" required>
+          <input type="text"  :value="wiki.url" placeholder="Url">
         </form>
 
         <div slot="footer">
@@ -42,22 +42,22 @@ export default {
 
   data() {
     return {
-      id: '',
-      diretorio : null,
-      url: '',
+      id   : '',
+      wiki : null,
+      url  : ''
     };
   },
 
   created() {
-    this.$bus.$on("objectEmited", (diretorio) => {
-      this.diretorio = diretorio;
-      this.id = this.diretorio.id;
+    this.$bus.$on("objectEmited", (wiki) => {
+      this.wiki = wiki;
+      this.id = this.wiki.id;
     });
   },
 
   methods: {
     postData(){
-      this.route = 'api/professores/',
+      this.route = 'api/wikis/',
       this.datas = JSON.stringify({
         id: this.id,
         titulo: this.titulo,

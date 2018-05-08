@@ -5,14 +5,11 @@
 
     <modal v-if="showModal" @show="show()" id="admin-modal">
 
-      <h1 slot="header">Adicionar Professor</h1>
+      <h1 slot="header">Adicionar Diretório</h1>
 
       <form slot="content" class="form-admin-modal">
-          <input type="text" placeholder="Nome" name="nome" v-model="nome" required>
-          <input type="text" placeholder="Descrição" name="sobre" v-model="sobre">
-          <input type="email" placeholder="E-mail" name="email" v-model="email">
-          <input type="text" placeholder="Username" name="username" v-model="username">
-          <input type="password" placeholder="Senha" name="password" v-model="password">
+          <input type="text" placeholder="Nome" name="titulo" v-model="titulo" required>
+          <input type="text" placeholder="Descrição" name="url" v-model="url">
       </form>
 
       <div slot="footer" class="div-btn-modal">
@@ -48,11 +45,8 @@ export default {
   
   data(){
       return{
-          nome      : null,
-          sobre     : null,
-          email     : null,
-          username  : null,
-          password  : null,
+          titulo    : null,
+          url       : null,
           msg       : null,
           datas: ''
       };
@@ -60,21 +54,15 @@ export default {
 
   methods:{   
     reset(){
-      this.nome      =  ''
-      this.sobre     =  ''
-      this.email     =  ''
-      this.username  =  ''
-      this.password  =  ''
+      this.titulo  =  ''
+      this.url     =  ''
     },
 
     postData(){
-        this.route = 'api/professores';
+        this.route = 'api/diretorios';
         this.datas = JSON.stringify({
-        nome      :  this.nome,
-        sobre     :  this.sobre,
-        email     :  this.email,
-        username  :  this.username,
-        password  :  this.password
+        titulo  :  this.titulo,
+        url     :  this.url,
       })
     }
   },

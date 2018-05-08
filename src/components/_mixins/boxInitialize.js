@@ -16,7 +16,7 @@ export const initialize = {
           axios
             .get(this.BASE_URL + this.route)
             .then(res => {
-            this.diretorios = res.data;
+            this.wikis = res.data;
             });
         },
 

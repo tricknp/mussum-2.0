@@ -5,11 +5,11 @@
 
       <modal v-if="showModal" @show="show()" id="admin-modal">
 
-      <h1 slot="header">Remover Diretório</h1>
+      <h1 slot="header">Remover Wiki</h1>
 
       <form slot="content" class="form-admin-modal">
           <input type="text" :value="titulo"  readonly>
-          <input type="text" :value="url"  readonly>
+          <input type="text" :value="url" placeholder="Url não informado" readonly>
       </form>
 
       <div slot="footer">
@@ -41,15 +41,14 @@ export default {
 
   data() {
     return {
-      titulo: "",
-      url: "",
-      id: ""
+      titulo: '',
+      url: '',
     };
   },
 
   methods:{
     postData(){
-      this.route = 'api/diretorios/';
+      this.route = 'api/wikis/';
       this.datas = JSON.stringify({
         id: this.id
       })
@@ -58,10 +57,10 @@ export default {
 
   created(){
     this.showModal = false;
-    this.$bus.$on("objectEmited", (diretorio) => {
-        this.titulo = diretorio.titulo;
-        this.url = diretorio.url;
-        this.id = diretorio.id;
+    this.$bus.$on("objectEmited", (wiki) => {
+        this.titulo = wiki.titulo;
+        this.url = wiki.url;
+        this.id = wiki.id;
       });
   },
 
