@@ -4,14 +4,13 @@
      <h1 class="title-teacher"> {{ title }} </h1>
 
      <div class="info-teacher">
-        <Photo />
-        <Description /> 
-         
-        <nav>
-           <Directories />
-           <Scrap />
-           <About />
-        </nav>
+        <div class="desc-photo">
+            <Photo />
+            <Description /> 
+        </div>
+        <div class="info-content">
+           <Tabs />
+        </div>
      </div>
 
   </div>
@@ -21,9 +20,7 @@
 <script>
 import Photo from './Components/Photo'
 import Description from './Components/Description'
-import Directories from './Components/Directories'
-import Scrap from './Components/Scrap'
-import About from './Components/About'
+import Tabs from './Tabs/Tabs'        
 
 export default {
   name: 'Info',
@@ -32,9 +29,7 @@ export default {
   {
       Photo,
       Description,
-      Directories,
-      Scrap,
-      About
+      Tabs
   },
 
   data(){

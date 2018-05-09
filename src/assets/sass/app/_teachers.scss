@@ -1,22 +1,76 @@
 /*========== General ==========*/
 .teacher-profile
 {
-    width: 61em;
+    width: 58em;
     height: 36.5em;
     max-height: 36.5em;
     overflow: auto;
-    margin: 3em 9em;
+    margin: 3em 12em;
     
     .title-teacher
     {
         font-size: $default-size + .1em;
         font-weight: $default-weight + 150;
     }
+    
+    .div-teacher-img
+    {
+        width: 15%;
+    }
+
+    .desc-photo
+    {
+        display: flex;
+    }
+
+    .teacher-description
+    {
+        font-size: 1.65em;
+        margin: .5em;
+        input
+        {
+            font-size: .5em;
+        }
+    }
 
     .info-teacher
     {
-        border-top: $medium-border $light-grey; 
-        border-bottom: $medium-border $light-grey;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        border-top: $light-border $medium-grey; 
+        border-bottom: $light-border $medium-grey;
+    }
+
+    .tabs-header 
+    {
+        border-bottom: $light-border $medium-grey;
+        margin-top: -1.2%;
+        span:nth-child(1){
+            margin-left: 20%;
+        }
+        span {
+            display: inline-block;
+            color: $font-color;
+            padding-bottom: 0.2rem;
+            margin-right: 1.5rem;
+            //@include transition (all 0.12s linear);
+            border-bottom: 2px solid transparent;
+            &.active 
+            {
+                color: $font-color;
+                border-bottom: 2px solid $nice-blue;
+            }
+            &:hover 
+            {
+                cursor: pointer;
+                color: $font-color;
+            }
+        }
+    }
+    
+    .tabs-content div {
+        padding: 1rem 0;
     }
 }
 

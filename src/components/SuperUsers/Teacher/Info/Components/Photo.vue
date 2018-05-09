@@ -1,14 +1,23 @@
 <template>
-  <div style="width: 120px;">
-      <img src="../../../../../../static/images/no-photo.png">
+  <div class="div-teacher-img">
+      <imgUpload />
   </div>
 </template>
 
 
 <script>
+import imgUpload from '../../../../UIComponents/ImageUpload'
+
 export default {
     name: 'Photo',
-    defautImg: '../../../../../static/images/no-photo.png'
+
+    components: { imgUpload },
+
+    data(){
+        return{
+
+        }
+    }
 
     
 }
