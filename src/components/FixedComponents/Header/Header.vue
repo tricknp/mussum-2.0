@@ -34,7 +34,7 @@ export default {
 
   data(){
       return{
-          logo: '../../../../static/logo.svg'
+          logo: '../../../../static/images/logo.svg'
       };
   }
   

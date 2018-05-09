@@ -43,7 +43,7 @@ export default {
   data(){
     return{
       showModal: true,
-      senacLogo: '../../../static/senac-logo.png',
+      senacLogo: '../../../static/images/senac-logo.png',
       username: '',
       password: '',
     }

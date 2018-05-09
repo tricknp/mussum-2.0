@@ -64,10 +64,10 @@ export default {
 
   created(){
     var vm = this;
-     this.$bus.$on('showTeacher', (teacher) => {
+     this.$bus.$on('objectEmited', (teacher) => {
        if(teacher){
-         console.log('teacher added')
-          vm.professores.push( {name: teacher} )
+         console.log('teacher added     ' + teacher.nome )
+          this.professores.push( {name: teacher.nome} )
        }
     })
   }

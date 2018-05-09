@@ -1,0 +1,23 @@
+/*========== General ==========*/
+.teacher-profile
+{
+    width: 61em;
+    height: 36.5em;
+    max-height: 36.5em;
+    overflow: auto;
+    margin: 3em 9em;
+    
+    .title-teacher
+    {
+        font-size: $default-size + .1em;
+        font-weight: $default-weight + 150;
+    }
+
+    .info-teacher
+    {
+        border-top: $medium-border $light-grey; 
+        border-bottom: $medium-border $light-grey;
+    }
+}
+
+

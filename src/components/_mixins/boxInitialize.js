@@ -23,11 +23,11 @@ export const initialize = {
                 this.avisos = res.data;
             });
         },
-
-       select(obj) {
-         this.selected = obj;
-         console.log('selected    ' + this.selected.id)
-         this.$bus.$emit("objectEmited", this.selected);
+        
+        select(obj) {
+            this.selected = obj;
+            console.log('selected    ' + this.selected.id)
+            this.$bus.$emit("objectEmited", this.selected);
         },
     },
     
@@ -36,6 +36,7 @@ export const initialize = {
     },
     
     updated() {
-       // this.initialize();
+        this.$bus.$emit("getTeachers", this.professores);
+        this.initialize();
     }
 }
