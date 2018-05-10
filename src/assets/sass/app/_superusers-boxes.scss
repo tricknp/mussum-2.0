@@ -136,7 +136,14 @@
         border: $light-border $medium-grey;
         border-radius: 3px;
     }
+
 }
+    .box-admin-content
+    {
+        font-size: $default-size;
+        margin: .2em .4em;
+        font-weight: 600;
+    }
 
 
 /*============== TEACHER ==============*/
@@ -160,13 +167,6 @@
     .teacher-content:nth-child(1)
     {
         margin-top: .9em;
-    }
-
-    .teacher-content
-    {
-        font-size: $default-size;
-        margin: .2em .4em;
-        font-weight: 600;
     }
 }
 

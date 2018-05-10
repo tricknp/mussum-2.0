@@ -18,10 +18,20 @@ export default {
       treeData: [
         { text: 'Analise e Desenvolvimento de Sistemas', state: { expanded: false }, 
           children: [ { text: 'Laboratório de Programação I', state: {expanded: false},
-                      children: [ { text: 'Bla Bla Bla', children: [ { text: 'bla bla bla' }], }], }, 
+                      children: [ { text: 'Bla Bla Bla', 
+                          children: [ 
+                              { text: 'bla bla bla.txt' }, 
+                              { text: 'bla bla bla.pdf' },
+                              { text: 'bla bla bla.pdf' },
+                              ], }
+                            ], 
+                        }, 
                       { text: 'TCC/Projeto Integrador', state: {expanded: false},
-                      children: [ { text: 'Bla Bla Bla', children: [ { text: 'bla bla bla' }], }], }, 
-                      { text: 'Algoritimos e Programação III' } ]
+                            children: [ { text: 'Bla Bla Bla', 
+                                children: [ { text: 'bla bla bla' },
+                                            { text: 'ble ble ble' }
+                                ], }], }, 
+                      { text: 'Algoritim  os e Programação III' } ]
         },
         
         { text: 'Redes de Computadores', state: { expanded: false }, 

@@ -36,15 +36,21 @@
     margin-top: -1px;
 }
 
+%equal-height
+{   
+    height: 15em;
+    max-height: 15em;
+    overflow: auto;
+}
+
 .links-container
 {
     @extend %equal-border;
-    padding: 6em 0;
-
+    @extend %equal-height;
 }
 
 .dir-container
 {
     @extend %equal-border;
-    padding: 9em 0;
+    @extend %equal-height;
 }

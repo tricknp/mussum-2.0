@@ -7,8 +7,8 @@
 
 
 <script>
-import Wikis from './Wikis';
-import Directories from './Directories'
+import Wikis from './User/Wikis';
+import Directories from './User/Directories'
 
 export default {
   name: 'Aside',

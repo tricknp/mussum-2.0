@@ -2,7 +2,7 @@
   <section>
       
       <Header />
-      <Aside />
+      
       <Info />
       <Footer />
 
@@ -11,14 +11,14 @@
 
 <script>
 import Header from '../../FixedComponents/Header/Header'
-import Aside from '../../FixedComponents/Aside/Aside'
+//import TeacherAside from '../../FixedComponents/Aside/TeacherAside'
 import Info from './Info/TeacherInfo'
 import Footer from '../../FixedComponents/Footer/Footer'
 
 export default {
   name: 'Teacher',
 
-  components: { Header, Aside, Info, Footer },
+  components: { Header, Info, Footer },
 
   data(){
     return{

@@ -11,7 +11,7 @@
       </div>
 
       <div class="teacher-container">
-          <div v-for="professor in professores" :key="professor.nome" class="teacher-content">
+          <div v-for="professor in professores" :key="professor.nome" class="box-admin-content">
             <label>
               <input type="radio" name="name" @change="select(professor)">
               <span for="name"> {{ professor.nome }} </span>

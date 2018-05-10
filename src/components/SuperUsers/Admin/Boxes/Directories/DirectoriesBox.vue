@@ -11,7 +11,7 @@
       </div>
 
       <div class="directories-container">
-          <div v-for="diretorio in diretorios" :key="diretorio.titulo" class="directories-content">
+          <div v-for="diretorio in diretorios" :key="diretorio.titulo" class="box-admin-content">
             <label>
               <input type="radio" name="name" @change="select(diretorio)">
               <span for="name"> {{ diretorio.titulo }} </span>

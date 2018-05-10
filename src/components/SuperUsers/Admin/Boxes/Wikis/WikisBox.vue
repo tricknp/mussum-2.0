@@ -1,5 +1,5 @@
 <template>
-  <div class="div-wikis">
+  <div class="div-wikis tp">
 
       <div class="wikis-head">
         <h1>{{title}}</h1>
@@ -10,8 +10,8 @@
         </div>
       </div>
 
-      <div class="wikis-container">
-          <div v-for="wiki in wikis" :key="wiki.titulo" class="">
+      <div class="wikis-container tc">
+          <div v-for="wiki in wikis" :key="wiki.titulo" class="box-admin-content">
             <label>
               <input type="radio" name="name" @change="select(wiki)">
               <span for="name"> {{ wiki.titulo }} </span>

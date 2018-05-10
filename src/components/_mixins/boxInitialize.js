@@ -37,6 +37,6 @@ export const initialize = {
     
     updated() {
         this.$bus.$emit("getTeachers", this.professores);
-        this.initialize();
+        //this.initialize();
     }
 }

@@ -11,7 +11,7 @@
       </div>
 
       <div class="activities-container">
-          <div v-for="aviso in avisos" :key="aviso.titulo" class="teacher-content">
+          <div v-for="aviso in avisos" :key="aviso.titulo" class="box-admin-content">
             <label>
               <input type="radio" name="name" @change="select(aviso)">
               <span for="name"> {{ aviso.titulo }} </span>
