@@ -9,6 +9,7 @@
 
       <form slot="content" class="form-admin-modal">
           <input type="text" placeholder="Nome" name="nome" v-model="nome" required>
+          <input type="text" placeholder="Sobrenome" name="sobrenome" v-model="sobrenome" required>
           <input type="text" placeholder="Descrição" name="sobre" v-model="sobre">
           <input type="email" placeholder="E-mail" name="email" v-model="email">
           <input type="text" placeholder="Username" name="username" v-model="username">
@@ -49,6 +50,7 @@ export default {
   data(){
       return{
           nome      : null,
+          sobrenome : null,
           sobre     : null,
           email     : null,
           username  : null,
@@ -61,6 +63,7 @@ export default {
   methods:{   
     reset(){
       this.nome      =  ''
+      this.sobrenome =  ''
       this.sobre     =  ''
       this.email     =  ''
       this.username  =  ''
@@ -71,6 +74,7 @@ export default {
         this.route = 'api/professores';
         this.datas = JSON.stringify({
         nome      :  this.nome,
+        sobrenome :  this.sobrenome,
         sobre     :  this.sobre,
         email     :  this.email,
         username  :  this.username,

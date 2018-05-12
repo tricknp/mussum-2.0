@@ -5,8 +5,13 @@
     <modal v-if="showModal" 
         @close="showModal = false">
 
-        <img :src="senacLogo" slot="header" id="senac-logo">
-        
+        <div slot="header">
+         <router-link :to="{ path: '/' }"> 
+            <button class="btn-close-log"> x </button>
+          </router-link> 
+          <img :src="senacLogo" id="senac-logo">
+        </div>
+
         <form slot="content" class="form-login">
           <input type="text" v-model="username" name="username" placeholder="username">
           <input type="password" v-model="password" name="password" placeholder="Password">

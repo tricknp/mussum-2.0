@@ -135,6 +135,12 @@
         color: $light-grey;
         border: $light-border $medium-grey;
         border-radius: 3px;
+        
+        &:hover
+        {
+            color: #fff;
+            transition: .25s ease-in;
+        }
     }
 
 }

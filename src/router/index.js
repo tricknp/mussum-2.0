@@ -33,7 +33,7 @@ export default new Router({
     },
 
     {
-      path: '/professores/:targetName',
+      path: '/professor/:targetName',
       name: 'Professor',
       component: Teacher
       //meta: { auth: true }

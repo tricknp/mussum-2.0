@@ -1,5 +1,5 @@
 <template>
-  <section class="admin-section">
+  <section class="admin-section" :id="isBlurred">
      
       <Header />
      
@@ -42,6 +42,10 @@ export default {
     DirectoriesBox,
     CoursesBox
   },
+
+  data(){
+    isBlurred: false;
+  }
 
 }
 
