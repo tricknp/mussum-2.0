@@ -2,23 +2,20 @@
   <div class="div-teacher-img">
       <imgUpload />
   </div>
+ 
 </template>
 
 
 <script>
-import imgUpload from '../../../../UIComponents/ImageUpload'
+import imgUpload from "../../../../UIComponents/ImageUpload";
 
 export default {
-    name: 'Photo',
+  name: "Photo",
 
-    components: { imgUpload },
+  components: { imgUpload },
 
-    data(){
-        return{
-
-        }
-    }
-
-    
-}
+  data() {
+    return {};
+  }
+};
 </script>

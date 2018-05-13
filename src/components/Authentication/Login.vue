@@ -31,55 +31,59 @@
 </template>
 
 <script>
-import axios from 'axios'
-import Header from '../FixedComponents/Header/Header';
-import Modal from '../UIComponents/Modal'
-import Home from '../GeneralViews/Home'
+import axios from "axios";
+import Header from "../FixedComponents/Header/Header";
+import Modal from "../UIComponents/Modal";
+import Home from "../GeneralViews/Home";
 
 export default {
   name: "Login",
 
-  components: 
-    { 
-      Modal,
-      Home, 
-    },
+  components: {
+    Modal,
+    Home
+  },
 
-  data(){
-    return{
+  data() {
+    return {
       showModal: true,
-      senacLogo: '../../../static/images/senac-logo.png',
-      username: '',
-      password: '',
-    }
+      senacLogo: "../../../static/images/senac-logo.png",
+      username: "",
+      password: ""
+    };
   },
 
   methods: {
     onSubmit() {
-      
       let data = JSON.stringify({
         username: this.username,
         password: this.password
-      })
+      });
       axios
-        .post(
-          'http://mussum2api.herokuapp.com/login', data, {
-            headers: { 
-              'X-Requested-With': 'XMLHttpRequest', 
-              'Content-Type': 'application/json'
-            }, //Send the information through an AJAX request
-          }
-        )
+        .post("http://mussum2api.herokuapp.com/login", data, {
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+            "Content-Type": "application/json"
+          } //Send the information through an AJAX request
+        })
         .then(response => {
           const token = response.data.token; //Receive the token back from the server
           const role = response.data.role;
-          console.log(token)  
+          console.log(token);
           localStorage.setItem("token", token); //Store the token to send it to the back whem an access is needed
           localStorage.setItem("role", role);
           console.log(response);
-        })  
+
+          if (role === "professor") {
+            return this.$router.push(`professor/${this.username}`);
+          } else if (role === "admin") {
+            return this.$router.push(`/admin`);
+          } else if (!role) {
+            alert('Usuário ou Senha inválidos');
+          }
+        })
         .catch(error => console.log(error));
     }
   }
-}
+};
 </script>
