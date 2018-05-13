@@ -6,6 +6,7 @@ import Login from '@/components/Authentication/Login'
 import Admin from '@/components/SuperUsers/Admin/Admin'
 import Teacher from '@/components/SuperUsers/Teacher/Teacher'
 import NotFound from '@/components/GeneralViews/NotFoundPage'
+import AuthMiddleware from '../services/middleware'
 
 Vue.use(Router)
 
@@ -29,6 +30,7 @@ export default new Router({
       path: '/admin',
       name: 'Admin',
       component: Admin,
+      beforeEnter: AuthMiddleware.isAdmin,
       //meta: { auth: true }
     },
 
