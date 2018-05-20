@@ -31,39 +31,57 @@
 </template>
 
 <script>
-import Modal from '../../../../../UIComponents/Modal'
-import { create } from '../../../../../_mixins/create.js'
-import { url } from '../../../../../_mixins/url.js'
+import Modal from "../../../../../UIComponents/Modal";
+import { create } from "../../../../../_mixins/create.js";
+import { url } from "../../../../../_mixins/url.js";
+import auth from "../../../../../../services/auth.js";
+import axios from "axios";
 
 export default {
-  name: 'Create',
+  name: "Create",
 
   components: { Modal },
 
-  mixins: [ create, url ],
-  
-  data(){
-      return{
-          titulo: null,
-          msg       : null,
-          datas: ''
-      };
+  mixins: [create, url],
+
+  data() {
+    return {
+      titulo: null,
+      msg: null,
+      datas: "",
+    };
   },
 
-  methods:{   
-    reset(){
-      this.titulo =  '';
+  methods: {
+    reset() {
+      this.titulo = "";
     },
 
-    postData(){
-        this.route = 'api/cursos';
-        this.datas = JSON.stringify({
-           titulo:  this.titulo,
-      })
+    postData() {
+      this.route = "api/cursos";
+      this.datas = JSON.stringify({
+        titulo: this.titulo
+      });
+    },
+
+    onSubmit() {
+      let data = JSON.stringify({
+        titulo: this.titulo
+      });
+      axios
+        .post("http://mussum2api.herokuapp.com/api/cursos", data, {
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${auth.getToken()}`
+          }
+        })
+        .then(response => {
+          this.showModal = false;
+          console.log(response);
+        })
+        .catch(error => console.log(error));
     }
-  },
-
-
-}   
-    
+  }
+};
 </script>

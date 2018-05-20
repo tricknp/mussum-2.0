@@ -1,4 +1,5 @@
 import user from './auth'
+import axios from 'axios'
 
 export default {
     isAdmin(to, from, next) {

@@ -59,6 +59,7 @@ export default {
         username: this.username,
         password: this.password
       });
+      //mesmo quando não enviar o error enviar erro 401 e não 500
       axios
         .post("http://mussum2api.herokuapp.com/login", data, {
           headers: {
@@ -72,14 +73,13 @@ export default {
           console.log(token);
           localStorage.setItem("token", token); //Store the token to send it to the back whem an access is needed
           localStorage.setItem("role", role);
+          console.log(token);
           console.log(response);
 
           if (role === "professor") {
             return this.$router.push(`professor/${this.username}`);
           } else if (role === "admin") {
             return this.$router.push(`/admin`);
-          } else if (!role) {
-            alert('Usuário ou Senha inválidos');
           }
         })
         .catch(error => console.log(error));

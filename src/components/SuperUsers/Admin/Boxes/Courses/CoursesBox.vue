@@ -4,7 +4,7 @@
       <div class="courses-head">
         <h1>{{title}}</h1>
         <div class="div-adm-button">
-          <Create @create="initialize"></Create>
+          <Create prop-name="cursos" @create="initialize"></Create>
           <Delete></Delete>
           <Edit></Edit>
         </div>
