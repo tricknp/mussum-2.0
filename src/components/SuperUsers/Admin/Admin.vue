@@ -1,5 +1,5 @@
 <template>
-  <section class="admin-section" :id="isBlurred">
+  <section class="admin-section">
      
       <Header />
      
@@ -44,7 +44,9 @@ export default {
   },
 
   data(){
-    isBlurred: false;
+    return{
+
+    }
   }
 
 }

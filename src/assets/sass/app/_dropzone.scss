@@ -4,11 +4,12 @@
     margin-top: 15%;
     position: relative;
     border: 2px dashed $light-grey;
-    //@include transition (all 0.12s linear);
-    &:hover, &.dropzone-hover {
+    transition: .10s ease-in;
+    &:hover, &.dropzone-hover {       
         border: 2px dashed $nice-blue;
         .dropzone-title {
-            color: darken($nice-blue, 10);
+            transition: .15s ease-in;
+            color: $nice-blue;
         }
     }
 }

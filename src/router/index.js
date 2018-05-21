@@ -7,6 +7,7 @@ import Admin from '@/components/SuperUsers/Admin/Admin'
 import Teacher from '@/components/SuperUsers/Teacher/Teacher'
 import NotFound from '@/components/GeneralViews/NotFoundPage'
 
+
 Vue.use(Router)
 
 export default new Router({

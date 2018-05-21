@@ -13,6 +13,7 @@ import LiquorTree from 'liquor-tree'
 Vue.use(VueBlu)
 Vue.use(VueResource)
 Vue.use (LiquorTree)
+
 Vue.config.productionTip = false
 
 const EventBus = new Vue()
@@ -23,6 +24,8 @@ Object.defineProperties(Vue.prototype, {
     }
   }
 })
+
+
 
 /* eslint-disable no-new */
 new Vue({
