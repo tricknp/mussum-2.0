@@ -74,12 +74,12 @@ export default {
         .then(response => {
           const token = response.data.token; //Receive the token back from the server
           const role = response.data.role;
-          // const name = response.data.nome;
+          const nome = response.data.nome;
 
           console.log("============ TOKEN ============ ");
           console.log(token);
-          //console.log("============ NOME ============ ");
-          //console.log(nome);
+          console.log("============ NOME ============ ");
+          console.log(nome);
           console.log("============ ROLE ============ ");
           console.log(role);
 
@@ -89,8 +89,8 @@ export default {
           console.log(response);
 
           if (role === "professor") {
-          //localStorage.setItem("nome", nome);
-            return this.$router.push(`professor/${this.username}`);
+          localStorage.setItem("nome", nome);
+            return this.$router.push(`professor/${nome}`);
           } else if (role === "admin") {
             return this.$router.push(`/admin`);
           }

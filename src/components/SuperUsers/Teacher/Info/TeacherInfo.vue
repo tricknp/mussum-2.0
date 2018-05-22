@@ -38,14 +38,17 @@ export default {
     'configPhoto': Photo,
     'configDescription': Description,
     'configTabs': Tabs,
-    'viewPhoto': '',
-    'viewDescription': '',
-    'viewTabs': ''
+    'viewPhoto': "",
+    'viewDescription': "",
+    'viewTabs': ""
   },
 
-  methods: {
+  computed: {
     isProfessor: function() {
-     //Refazer lógica para o v-if, comparar o nome do professor com nome da rota
+      const nome = localStorage.getItem("nome").toLowerCase();
+      const role = localStorage.getItem("role");
+
+      return role === "professor" && nome === this.$route.params.targetName;
     }
   },
 
