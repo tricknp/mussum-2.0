@@ -10,26 +10,30 @@
     margin: auto;
 }
 
+
 .btn-close-log
 {
     cursor: pointer;
     float: right;
-    margin: -.8em -.9em;
+    margin: -.7em -.6em;
     background: transparent;
     border: 0;
-    font-size: 1.9em;
-    font-family: sans-serif;
-    color: $light-grey;
+    font-size: 1.9em; 
     
-    &:hover
-    {   
-        
-        color: $nice-blue;
-        transition: .45s ease-out;
-
+    .icon-log
+    {
+        fill: #ddd;
+        box-sizing: border-box;
+        padding: .3em;     
+        &:hover
+        {   
+            fill: $nice-blue;
+            transition: .45s ease-out;
+        }   
     }
-    
 }
+
+
 
 %equal-inputs
 {

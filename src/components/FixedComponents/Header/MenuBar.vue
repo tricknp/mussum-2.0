@@ -4,7 +4,7 @@
     <dropdown>
 
       <a>
-        <span><img id="menubar-icon" src="../../../assets/images/menu-bar.svg"></span>
+        <span><img id="menubar-icon" src="../../../../static/images/icons/menu-bar.svg"></span>
       </a>
       
       <div slot="content" id="dropdown-content">  

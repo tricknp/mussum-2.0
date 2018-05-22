@@ -1,4 +1,15 @@
 /*========== General ==========*/
+%equal-flex-direction
+{
+    display: flex;
+    flex-direction: row;
+}
+
+%no-border
+{
+    border: none;
+}
+
 .teacher-profile
 {
     width: 58em;
@@ -27,10 +38,21 @@
     {
         font-size: 1.65em;
         margin: .5em;
-        input
-        {
-            font-size: .5em;
+        .div-desc-teacher{
+            @extend %equal-flex-direction;
+            .input-teacher-profile{
+                @extend %no-border;
+                width: 55%;
+                max-width: 100%;
+            }
+            .btn-edit{
+                background: transparent;
+                @extend %no-border;
+                cursor: pointer;
+            }
         }
+        .div-email-teacher { @extend .div-desc-teacher; }
+        
     }
 
     .info-teacher
@@ -54,7 +76,7 @@
             color: $font-color;
             padding-bottom: 0.2rem;
             margin-right: 1.5rem;
-            //@include transition (all 0.12s linear);
+            transition: .10s ease-in;
             border-bottom: 2px solid transparent;
             &.active 
             {

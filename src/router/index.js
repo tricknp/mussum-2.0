@@ -8,6 +8,7 @@ import Teacher from '@/components/SuperUsers/Teacher/Teacher'
 import NotFound from '@/components/GeneralViews/NotFoundPage'
 import AuthMiddleware from '../services/middleware'
 
+
 Vue.use(Router)
 
 const router = new Router({
