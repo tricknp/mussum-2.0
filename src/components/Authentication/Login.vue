@@ -39,6 +39,7 @@ import axios from "axios";
 import Header from "../FixedComponents/Header/Header";
 import Modal from "../UIComponents/Modal";
 import Home from "../GeneralViews/Home";
+import { url } from '../_mixins/url';
 
 export default {
   name: "Login",
@@ -64,7 +65,7 @@ export default {
       });
       //mesmo quando não enviar o error enviar erro 401 e não 500
       axios
-        .post("http://mussum2api.herokuapp.com/login", data, {
+        .post(this.BASE_URL + "login", data, {
           headers: {
             "X-Requested-With": "XMLHttpRequest",
             "Content-Type": "application/json"
@@ -73,12 +74,12 @@ export default {
         .then(response => {
           const token = response.data.token; //Receive the token back from the server
           const role = response.data.role;
-          const name = response.data.name;
+          // const name = response.data.nome;
 
           console.log("============ TOKEN ============ ");
           console.log(token);
-          console.log("============ NAME ============ ");
-          console.log(name);
+          //console.log("============ NOME ============ ");
+          //console.log(nome);
           console.log("============ ROLE ============ ");
           console.log(role);
 
@@ -88,8 +89,8 @@ export default {
           console.log(response);
 
           if (role === "professor") {
-            localStorage.setItem("name", name);
-            return this.$router.push(`professor/${name}`);
+          //localStorage.setItem("nome", nome);
+            return this.$router.push(`professor/${this.username}`);
           } else if (role === "admin") {
             return this.$router.push(`/admin`);
           }

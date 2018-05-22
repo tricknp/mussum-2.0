@@ -52,7 +52,7 @@ export default {
     return {
       titulo: null,
       msg: null,
-      datas: ""
+      datas: "",
     };
   },
 
@@ -64,15 +64,14 @@ export default {
     postData() {
       this.route = "api/cursos";
       this.datas = JSON.stringify({
-      titulo: this.titulo
+        titulo: this.titulo
       });
     },
 
     onSubmit() {
       let data = JSON.stringify({
-      titulo: this.titulo
+        titulo: this.titulo
       });
-
       axios
         .post("http://mussum2api.herokuapp.com/api/cursos", data, {
           headers: {
