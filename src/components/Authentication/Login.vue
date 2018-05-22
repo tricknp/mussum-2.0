@@ -90,7 +90,7 @@ export default {
 
           if (role === "professor") {
           localStorage.setItem("nome", nome);
-            return this.$router.push(`professor/${nome}`);
+            return this.$router.push(`professor/${nome.toLowerCase()}`);
           } else if (role === "admin") {
             return this.$router.push(`/admin`);
           }
