@@ -71,19 +71,19 @@ export default {
           const token = response.data.token; //Receive the token back from the server
           const role = response.data.role;
           const name = response.data.name;
-          
+
           console.log(token);
           console.log(name);
           console.log(role);
 
           localStorage.setItem("token", token); //Store the token to send it to the back whem an access is needed
           localStorage.setItem("role", role);
-          
+
           console.log(response);
 
           if (role === "professor") {
             localStorage.setItem("name", name);
-            return this.$router.push(`professor/${this.username}`);
+            return this.$router.push(`professor/${name}`);
           } else if (role === "admin") {
             return this.$router.push(`/admin`);
           }

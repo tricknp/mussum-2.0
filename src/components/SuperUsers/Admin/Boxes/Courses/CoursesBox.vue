@@ -11,7 +11,7 @@
       </div>
 
       <div class="courses-container">
-          <div v-for="curso in cursos" :key="curso.titulo" class="box-admin-content">
+          <div v-for="curso in cursos" v-bind:key="curso.titulo" class="box-admin-content">
             <label>
               <input type="radio" name="name" @change="select(curso)">
               <span for="name"> {{ curso.titulo }} </span>

@@ -40,7 +40,7 @@ const router = new Router({
       component: Teacher
       //meta: { auth: true }
     },
-    
+
     { path: '*', component: NotFound }
 
   ]
