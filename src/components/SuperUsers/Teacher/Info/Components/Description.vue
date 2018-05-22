@@ -1,11 +1,6 @@
 <template>
   <div class="teacher-description">
     <h1>Default namis</h1>
-<<<<<<< HEAD
-    <input type="text" placeholder="Sem descriçõesis">
-      <br> 
-    <input type="email" name="" id="" placeholder="email">
-=======
 
     <div class="div-desc-teacher">
       <input type="text" placeholder="Sem descriçõesis" class="input-teacher-profile"> 
@@ -28,7 +23,6 @@
     </div>
 
 
->>>>>>> 6584cee72c2664b756557b4f797cee87e3c6a36d
   </div>  
 </template>
 
