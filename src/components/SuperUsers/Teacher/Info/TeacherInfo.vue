@@ -45,7 +45,7 @@ export default {
 
   methods: {
     isProfessor: function() {
-     //Apaguei a lógica, tava bugando, tem que refazer.
+     //Refazer lógica para o v-if, comparar o nome do professor com nome da rota
     }
   },
 
