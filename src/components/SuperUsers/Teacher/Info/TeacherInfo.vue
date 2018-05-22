@@ -18,26 +18,25 @@
 
 
 <script>
-import Photo from './Components/Photo'
-import Description from './Components/Description'
-import Tabs from './Tabs/Tabs'        
+import Photo from "./Components/Photo";
+import Description from "./Components/Description";
+import Tabs from "./Tabs/Tabs";
 //Usar rotas dinamicas para diferenciar os componentes do usuário professor e aluno
 
 export default {
-  name: 'Info',
-  
-  components: 
-  {
-      Photo,
-      Description,
-      Tabs
+  name: "Info",
+
+  components: {
+    Photo,
+    Description,
+    Tabs
   },
 
-  data(){
-      return{
-          title: 'Professoris',
-      }
-  },
-
-}
+  data() {
+      console.log("Nome da Rota: " + this.$route.params.targetName);
+    return {
+      title: "Professoris"
+    };
+  }
+};
 </script>
