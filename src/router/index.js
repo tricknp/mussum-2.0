@@ -26,7 +26,6 @@ const router = new Router({
       component: Login,
       //meta: { auth: false }
     },
-
     {
       path: '/admin',
       name: 'Admin',

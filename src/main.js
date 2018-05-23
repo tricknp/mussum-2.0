@@ -12,7 +12,7 @@ import axios from 'axios';
 
 Vue.use(VueBlu)
 Vue.use(VueResource)
-Vue.use(LiquorTree)
+Vue.use (LiquorTree)
 
 Vue.config.productionTip = false
 

@@ -18,7 +18,10 @@
 
           <div class="divider"></div>
           
-          <menu-item> 
+          <menu-item v-if='isLoged'>
+            <h1 v-on:click='signOut'> Sign Out </h1>
+          </menu-item>
+          <menu-item v-else> 
             <router-link :to="{ name: 'login' }"> Login </router-link>
           </menu-item>
 
@@ -34,27 +37,39 @@
 
 <script>
 export default {
-  name: 'Navbar',
-  
-data(){
-  return{
-    showModal: false,
-    items: 
-    [
-      { name: 'BlackBoard' },
-      { name: 'Portal do Aluno' },
-      { name: 'Faculdade Senac' },
-    ],
+  name: "Navbar",
 
-    links: 
-    [
-      { url: 'https://senac.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_6_1' },
-      { url: 'https://www.senacrs.com.br/meusenac_login.asp' },
-      { url: 'https://www.senacrs.com.br/' }
-    ]
-  
-  };
-},
+  computed: {
+    isLoged: function() {
+      const localSize = localStorage.length;
+      return localSize > 1;
+    }
+  },
+  methods: {
+    signOut: function() {
+      localStorage.clear();
+      this.$router.push("/");
+    }
+  },
 
-}
+  data() {
+    return {
+      showModal: false,
+      items: [
+        { name: "BlackBoard" },
+        { name: "Portal do Aluno" },
+        { name: "Faculdade Senac" }
+      ],
+
+      links: [
+        {
+          url:
+            "https://senac.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_6_1"
+        },
+        { url: "https://www.senacrs.com.br/meusenac_login.asp" },
+        { url: "https://www.senacrs.com.br/" }
+      ]
+    };
+  }
+};
 </script>

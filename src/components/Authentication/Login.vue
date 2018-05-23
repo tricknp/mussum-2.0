@@ -39,7 +39,7 @@ import axios from "axios";
 import Header from "../FixedComponents/Header/Header";
 import Modal from "../UIComponents/Modal";
 import Home from "../GeneralViews/Home";
-import { url } from '../_mixins/url';
+import { url } from "../_mixins/url";
 
 export default {
   name: "Login",
@@ -78,6 +78,8 @@ export default {
 
           console.log("============ TOKEN ============ ");
           console.log(token);
+          console.log("============ NOME ============ ");
+          console.log(nome);
           console.log("============ ROLE ============ ");
           console.log(role);
           console.log("============ NOME ============ ");
@@ -85,12 +87,12 @@ export default {
 
           localStorage.setItem("token", token); //Store the token to send it to the back whem an access is needed
           localStorage.setItem("role", role);
+          localStorage.setItem("nome", nome);
 
           console.log(response);
 
           if (role === "professor") {
-          localStorage.setItem("nome", nome);
-            return this.$router.push(`professor/${this.username}`);
+            return this.$router.push(`professor/${nome.toLowerCase()}`);
           } else if (role === "admin") {
             return this.$router.push(`/admin`);
           }
