@@ -26,19 +26,6 @@ const router = new Router({
       component: Login,
       //meta: { auth: false }
     },
-
-    {
-      path: '/logout',
-      redirect: '/',
-      beforeEnter: {
-      logout: function () {
-
-        localStorage = localStorage.clear();
-        next();
-      }
-      }
-    },
-
     {
       path: '/admin',
       name: 'Admin',

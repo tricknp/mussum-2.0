@@ -19,7 +19,7 @@
           <div class="divider"></div>
           
           <menu-item v-if='isLoged'>
-            <router-link :to="{ path: '/logout' }"> Sign Out </router-link>
+            <h1 v-on:click='signOut'> Sign Out </h1>
           </menu-item>
           <menu-item v-else> 
             <router-link :to="{ name: 'login' }"> Login </router-link>
@@ -43,6 +43,12 @@ export default {
     isLoged: function() {
       const localSize = localStorage.length;
       return localSize > 1;
+    }
+  },
+  methods: {
+    signOut: function() {
+      localStorage.clear();
+      this.$router.push("/");
     }
   },
 
