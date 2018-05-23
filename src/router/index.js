@@ -28,6 +28,18 @@ const router = new Router({
     },
 
     {
+      path: '/logout',
+      redirect: '/',
+      beforeEnter: {
+      logout: function () {
+
+        localStorage = localStorage.clear();
+        next();
+      }
+      }
+    },
+
+    {
       path: '/admin',
       name: 'Admin',
       component: Admin,
