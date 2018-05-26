@@ -41,6 +41,8 @@ import PublicPhoto from "./Components/PublicTeacher/publicPhoto";
 import PublicDescription from "./Components/PublicTeacher/publicDescription";
 import PublicTabs from "./Components/PublicTeacher/publicTabs";
 
+import auth from "../../../../services/auth";
+
 export default {
   name: "Info",
 
@@ -54,10 +56,12 @@ export default {
   },
   computed: {
     isProfessor: function() {
-      const nome = localStorage.getItem("nome").toLowerCase();
-      const role = localStorage.getItem("role");
+      if (auth.getNome() !== null && auth.getRole() !== null) {
+        const nome = auth.getNome().toLowerCase();
+        const role = auth.getRole();
 
-      return role == "professor" && nome == this.$route.params.targetName;
+        return role == "professor" && nome == this.$route.params.targetName;
+      }
     }
   },
 

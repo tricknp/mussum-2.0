@@ -2,8 +2,10 @@
   <div>  
   
     <dropdown>
-
-      <a>
+   <a v-if='isLoged'>
+    <h1> {{ this.user.name }}</h1>
+      </a>
+      <a v-else>
         <span><img id="menubar-icon" src="../../../../static/images/icons/menu-bar.svg"></span>
       </a>
       
@@ -42,6 +44,7 @@ export default {
   computed: {
     isLoged: function() {
       const localSize = localStorage.length;
+      this.user.name = localStorage.getItem('nome');
       return localSize > 1;
     }
   },
@@ -58,9 +61,12 @@ export default {
       items: [
         { name: "BlackBoard" },
         { name: "Portal do Aluno" },
-        { name: "Faculdade Senac" }
+        { name: "Faculdade Senac" },
+        { name: "Administrador"}
       ],
-
+      user: {
+        name: ''
+      },
       links: [
         {
           url:

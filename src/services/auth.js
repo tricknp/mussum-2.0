@@ -6,5 +6,8 @@ export default {
     },
     getToken() {
         return localStorage.getItem('token');
+    },
+    getNome() {
+        return localStorage.getItem('nome');
     }
 }

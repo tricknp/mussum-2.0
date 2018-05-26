@@ -15,7 +15,6 @@
           </router-link> 
           <img :src="senacLogo" id="senac-logo">
         </div>
-
         <form slot="content" class="form-login">
           <input type="text" v-model="username" name="username" placeholder="username">
           <input type="password" v-model="password" name="password" placeholder="Password">
@@ -26,6 +25,7 @@
         </div>
 
         <div slot="footer" class="small-messages">
+          <h1>{{status}}</h1>
           <p>Esqueceu sua senha?</p>
           <p></p>
         </div>
@@ -53,7 +53,8 @@ export default {
       showModal: true,
       senacLogo: "../../../static/images/senac-logo.png",
       username: "",
-      password: ""
+      password: "",
+      status: ""
     };
   },
 
@@ -88,6 +89,7 @@ export default {
           localStorage.setItem("nome", nome);
 
           console.log(response);
+          console.log("Status do erro:" + response.status);
 
           if (role === "professor") {
             return this.$router.push(`professor/${nome.toLowerCase()}`);
@@ -95,7 +97,10 @@ export default {
             return this.$router.push(`/admin`);
           }
         })
-        .catch(error => console.log(error));
+        .catch(
+          error => console.log(error),
+          (this.status = "Usuário ou Senha Inválidos")
+        );
     }
   }
 };

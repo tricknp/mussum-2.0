@@ -9,7 +9,7 @@
                 v-for="professor in professores" 
                 :key="professor.nome"
                 :targetName="professor.nome" >
-                <router-link :to="{ path: '/professor/' + professor.nome }">
+                <router-link :to="{ path: '/professor/' + professor.nome.toLowerCase() }">
                   {{ professor.nome }}
                 </router-link>
         

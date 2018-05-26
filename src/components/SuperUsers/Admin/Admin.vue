@@ -44,7 +44,9 @@ export default {
   },
 
   data() {
-    isBlurred: false;
+    return{
+    isBlurred: false,
+    }
   }
 };
 </script>
