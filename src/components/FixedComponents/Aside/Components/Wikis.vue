@@ -1,12 +1,16 @@
 <template>
     <div class="div-links">
         <div class="aside-head"> 
-            <h1> {{ title }} </h1>
+            <slot name="header">
+                <h1> {{ title }} </h1>
+            </slot>    
         </div>
         <div class="links-container">
-            <h1 v-for="wiki in wikis" :key="wiki.titulo"> 
-                {{ wiki.titulo }} 
-            </h1>
+            <slot name="content">    
+                <h1 v-for="wiki in wikis" :key="wiki.titulo"> 
+                    {{ wiki.titulo }} 
+                </h1>
+            </slot>    
         </div>
 
     </div>

@@ -12,8 +12,9 @@
            <PrivateTabs />
         </div>
      </div>
-
+        <PrivateAside />
   </div>
+
   <div v-else class="teacher-profile">
 
      <h1 class="title-teacher"> {{ title }} </h1>
@@ -27,34 +28,39 @@
            <PublicTabs />
         </div>
      </div>
-
+      <Aside />
   </div>
 </template>
 
 
 <script>
 //private views, only be acessed when the teacher is logged
-import PrivatePhoto from "../PrivateViews/Photo"
-import PrivateDescription from "../PrivateViews/Description"
-import PrivateTabs from "../PrivateViews/Tabs/Tabs"
+import PrivatePhoto       from  "../PrivateViews/Photo"
+import PrivateDescription from  "../PrivateViews/Description"
+import PrivateTabs        from  "../PrivateViews/Tabs/Tabs"
+import PrivateAside       from  '../PrivateViews/Aside/Aside'
 
 //public views, everybody without token can see this content
-import PublicPhoto from "../PublicViews/Photo"
-import PublicDescription from "../PublicViews/Description"
-import PublicTabs from "../PublicViews/Tabs/Tabs"
-
-import auth from "../../../../services/auth";
+import PublicPhoto        from  "../PublicViews/Photo"
+import PublicDescription  from  "../PublicViews/Description"
+import PublicTabs         from  "../PublicViews/Tabs/Tabs"
+import Aside              from  '../../../FixedComponents/Aside/Aside'
+import auth               from  "../../../../services/auth";
 
 export default {
-  name: "Info",
+  name: "Info", 
 
   components: {
+    //components with private views
     PrivatePhoto,
     PrivateDescription,
     PrivateTabs,
+    PrivateAside,
+    //components with public views
     PublicPhoto,
     PublicDescription,
-    PublicTabs
+    PublicTabs,
+    Aside
   },
   computed: {
     isProfessor: function() {

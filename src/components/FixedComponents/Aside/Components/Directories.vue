@@ -1,12 +1,16 @@
 <template>
   <div class="div-dir">
       <div class="aside-head">
-          <h1> {{ title }} </h1>
+          <slot name="header">
+            <h1> {{ title }} </h1>
+          </slot>  
       </div>
       <div class="dir-container">
-        <h1 v-for="diretorio in diretorios" :key="diretorio.titulo">
-          {{ diretorio.titulo }}
-        </h1>
+        <slot name="content">
+          <h1 v-for="diretorio in diretorios" :key="diretorio.titulo">
+            {{ diretorio.titulo }}
+          </h1>
+        </slot>  
       </div>
   </div>
 </template>

@@ -38,7 +38,6 @@ import { showModal } from '../../../../../_mixins/showModal.js'
 import { edit } from '../../../../../_mixins/edit.js'
 
 export default {
-  name: "Edit",
 
   components: { Modal },
 

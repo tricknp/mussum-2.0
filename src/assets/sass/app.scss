@@ -1,21 +1,21 @@
 //variables
-@import 'app/variables';
+@import 'app/Variables/variables';
 
 //components
-@import 'app/header';
-@import 'app/sidenavs';
-@import 'app/footer';
-@import 'app/superusers-boxes';
-@import 'app/teachers';
-@import 'app/dropzone';
+@import 'app/MainComponents/header';
+@import 'app/MainComponents/sidenavs';
+@import 'app/MainComponents/footer';
+@import 'app/MainComponents/superusers-boxes';
+@import 'app/MainComponents/teachers';
 
 //UI icons
-@import 'app/icons';
+@import 'app/UIComponents/icons';
 
 //UI Components
-@import 'app/dropdown';
-@import 'app/modal';
+@import 'app/UIComponents/dropdown';
+@import 'app/UIComponents/modal';
+@import 'app/UIComponents/dropzone';
 
 //views
-@import 'app/login';
+@import 'app/MainComponents/login';
 

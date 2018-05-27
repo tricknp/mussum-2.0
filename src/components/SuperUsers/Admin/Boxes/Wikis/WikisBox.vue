@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <div class="wikis-container tc">
+      <div class="wikis-container">
           <div v-for="wiki in wikis" :key="wiki.titulo" class="box-admin-content">
             <label>
               <input type="radio" name="name" @change="select(wiki)">

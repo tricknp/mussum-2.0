@@ -42,8 +42,7 @@ import { create } from '../../../../../_mixins/create.js'
 import { url } from '../../../../../_mixins/url.js'
 
 export default {
-  name: 'Create',
-
+  
   components: { Modal },
 
   mixins: [ create, url ],

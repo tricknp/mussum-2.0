@@ -1,17 +1,18 @@
 <template>
   <aside id="aside">
       <Wikis />
-      <Directories />
+      <Directories /> 
+
   </aside>
 </template>
 
 
 <script>
 import Wikis from './Components/Wikis';
-import Directories from './Components/Directories'
+import Directories from './Components/Directories';
 
 export default {
-  name: 'Aside',
+  name: 'PrivateAside',
   
   components:
   {

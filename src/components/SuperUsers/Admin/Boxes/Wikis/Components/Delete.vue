@@ -37,7 +37,6 @@ import { showModal } from '../../../../../_mixins/showModal.js'
 import { del } from '../../../../../_mixins/delete.js'
 
 export default {
-  name: "Delete",
 
   components: { Modal },
 
