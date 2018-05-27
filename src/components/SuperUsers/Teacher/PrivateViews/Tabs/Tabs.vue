@@ -26,7 +26,6 @@ import Scraps from './Components/Scrap'
 import About from './Components/About'
 
     export default {
-        name: 'Tabs',
 
         components:
         {

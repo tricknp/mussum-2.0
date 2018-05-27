@@ -5,11 +5,12 @@
                 <span class="dropzone-title">Arraste a imagem aqui ou clique para selecionar</span>
                 <span class="dropzone-info" v-if="info">{{ info }}</span>
             </div>
-            <input type="file" @change="onFileChange">
+            <input type="file" @change="onFileChange" name="img">
         </div>
     </div>
     <div class="dropzone-preview" v-else>
         <img :src="image" />
+        <button @click="onUpload">Upload</button>
         <div class="dropzone-close modal-close" @click="removeImage">
             <span></span>
             <span></span>
@@ -18,13 +19,16 @@
 </template>
 
 <script>
+import { url } from '../_mixins/url.js'
+
     export default {
         name: 'imgUpload',
         props: ['info'],
         data() {
             return {
                 image: '',
-                hovering: false
+                hovering: false,
+                selectedFile: ''
             }
         },
         methods: {
@@ -43,6 +47,11 @@
                 };
                 reader.readAsDataURL(file);
             },
+
+            onUpload() {
+              axios.post(this.BASE_URL + 'api/photo', this.selectedFile)
+            },   
+
             removeImage: function (e) {
                 this.image = '';
             }

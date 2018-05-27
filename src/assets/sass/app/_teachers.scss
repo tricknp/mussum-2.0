@@ -87,6 +87,8 @@
             {
                 cursor: pointer;
                 color: $font-color;
+                transition: none;
+                border-bottom: 2px solid $medium-grey;
             }
         }
     }

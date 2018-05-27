@@ -7,10 +7,9 @@
 
 
 <script>
-import imgUpload from "../../../../UIComponents/ImageUpload";
+import imgUpload from "../../../UIComponents/ImageUpload";
 
 export default {
-  name: "Photo",
 
   components: { imgUpload },
 

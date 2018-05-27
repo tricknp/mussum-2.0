@@ -5,11 +5,11 @@
 
      <div class="info-teacher">
         <div class="desc-photo">
-            <Photo />
-            <Description /> 
+            <PrivatePhoto />
+            <PrivateDescription /> 
         </div>
         <div class="info-content">
-           <Tabs />
+           <PrivateTabs />
         </div>
      </div>
 
@@ -33,13 +33,15 @@
 
 
 <script>
-import Photo from "./Components/Photo";
-import Description from "./Components/Description";
-import Tabs from "./Tabs/Tabs";
-//Componentes temporários para teste
-import PublicPhoto from "./Components/PublicTeacher/publicPhoto";
-import PublicDescription from "./Components/PublicTeacher/publicDescription";
-import PublicTabs from "./Components/PublicTeacher/publicTabs";
+//private views, only be acessed when the teacher is logged
+import PrivatePhoto from "../PrivateViews/Photo"
+import PrivateDescription from "../PrivateViews/Description"
+import PrivateTabs from "../PrivateViews/Tabs/Tabs"
+
+//public views, everybody without token can see this content
+import PublicPhoto from "../PublicViews/Photo"
+import PublicDescription from "../PublicViews/Description"
+import PublicTabs from "../PublicViews/Tabs/Tabs"
 
 import auth from "../../../../services/auth";
 
@@ -47,9 +49,9 @@ export default {
   name: "Info",
 
   components: {
-    Photo,
-    Description,
-    Tabs,
+    PrivatePhoto,
+    PrivateDescription,
+    PrivateTabs,
     PublicPhoto,
     PublicDescription,
     PublicTabs
