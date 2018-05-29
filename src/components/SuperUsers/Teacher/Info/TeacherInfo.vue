@@ -12,7 +12,7 @@
            <PrivateTabs />
         </div>
      </div>
-        <PrivateAside />
+        <!--<PrivateAside />-->
   </div>
 
   <div v-else class="teacher-profile">

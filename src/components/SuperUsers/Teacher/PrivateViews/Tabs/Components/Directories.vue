@@ -1,6 +1,6 @@
 <template>
   <div>
-    <select v-model="item">
+    <select v-model="dir">
       <option v-for="curso in cursos" 
               :key="curso.id" 
               :value="curso.titulo"> 
@@ -22,26 +22,28 @@ import { url } from '../../../../../_mixins/url'
 export default {
   name: 'Directories',
 
+  props: {
+    dir: {},
+    username: {},
+  },
+
   mixins: [ url ],
 
   data(){
     return{
-      item: null,
       cursos: null,
       treeData: 
       [
         { text: 'Curso', state: { expanded: false }, 
-          children: [ { text: 'REPOSITÓRIO PAI - 1', state: {expanded: false},
-                      children: [ { text: 'FILHO', 
-                  }], 
-                },   
-             ]},
-           ],
-           
-          treeOptions: {
-          }
+          children: 
+          [{ 
+            text: 'REPOSITÓRIO PAI - 1', state: {expanded: false}, 
+          }]
+        }],        
+          treeOptions: {}
         }
       },
+
       methods: {
       	onNodeSelected(node) {
         	console.log(node.text)
@@ -55,22 +57,40 @@ export default {
             })
         },
 
-        addCourse(){
-          const dir = this.item;
+        getRepositorys(){
+          console.log('username nessa merda  ' + this.username)
           axios
-            .post(`${this.BASE_URL}api/repository`, dir, {
-              headers: { 'dir' : dir}
+            .get(`${this.BASE_URL}api/repository`, {
+              headers: { 'dir' : '', 'username': this.username }, 
+            })
+            .then( res => {
+              this.treeData = res.data
+              console.log('========= repositorios =======');
+              console.log('repositorios   ->' + this.treeData)
+            })
+        },
+
+        addCourse(){
+          axios
+            .post(`${this.BASE_URL}api/repository`, this.dir, {
+              headers: { 'dir' : this.dir}
             })
             .then(res => {
               //this.treeData.push({ text: dir, state: { expanded: false } });
                 console.log('Curso adicionado com sucesso')
-          }).catch(error => console.log('erro -> ' + error))
+          }).catch(error => console.log('error -> ' + error))
         }
       },
 
       created(){
         this.getCourses();
-      },
-    }
+        this.getRepositorys();
+        this.$bus.$on('teacherData', (teacher) => {
+          console.log('==== emit =====');
+          console.log('DADO EMITIDO NESSA MERDA ----> ' + teacher.username)
+              this.username = teacher.username;
+            });
+    },
+  }
   
 </script>
