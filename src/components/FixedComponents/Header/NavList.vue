@@ -8,9 +8,9 @@
                 id="dropdown-content" 
                 v-for="professor in professores" 
                 :key="professor.nome"
-                :targetName="professor.nome" >
+                :targetName="professor.username" >
                 <router-link :to="{ path: '/professor/' + professor.username.toLowerCase() }">
-                  <a @click="getData(professor)">
+                  <a>
                     {{ professor.nome }}
                   </a>  
                 </router-link>
@@ -82,10 +82,6 @@ export default {
               this.professores = res.data;
             });
         },
-
-      getData(professor){
-        this.$bus.$emit('teacherData', professor)
-      },
 
       select(obj) {
         this.targetName = obj;

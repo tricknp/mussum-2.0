@@ -22,15 +22,11 @@ import { url } from '../../../../../_mixins/url'
 export default {
   name: 'Directories',
 
-  props: {
-    dir: {},
-    username: {},
-  },
-
   mixins: [ url ],
 
   data(){
     return{
+      dir: null,
       cursos: null,
       treeData: 
       [
@@ -58,15 +54,13 @@ export default {
         },
 
         getRepositorys(){
-          console.log('username nessa merda  ' + this.username)
           axios
             .get(`${this.BASE_URL}api/repository`, {
-              headers: { 'dir' : '', 'username': this.username }, 
+              headers: { 'dir' : '', 'username': this.$route.params.targetName }, 
             })
             .then( res => {
-              this.treeData = res.data
-              console.log('========= repositorios =======');
-              console.log('repositorios   ->' + this.treeData)
+              console.log(res.data.pastas)
+              this.treeData.push({ text: res.dir  })
             })
         },
 
@@ -77,7 +71,7 @@ export default {
             })
             .then(res => {
               //this.treeData.push({ text: dir, state: { expanded: false } });
-                console.log('Curso adicionado com sucesso')
+                console.log('Curso adicionado com sucesso ' + this.dir)
           }).catch(error => console.log('error -> ' + error))
         }
       },
@@ -85,12 +79,8 @@ export default {
       created(){
         this.getCourses();
         this.getRepositorys();
-        this.$bus.$on('teacherData', (teacher) => {
-          console.log('==== emit =====');
-          console.log('DADO EMITIDO NESSA MERDA ----> ' + teacher.username)
-              this.username = teacher.username;
-            });
-    },
+      },
+
   }
   
 </script>

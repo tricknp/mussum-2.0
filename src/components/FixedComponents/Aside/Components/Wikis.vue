@@ -34,14 +34,10 @@ export default {
 
   methods: { 
       initWikis() {
-          console.log('ta chegando aq');
-          
           axios
             .get(this.BASE_URL + 'api/wikis')
             .then(res => {
               this.wikis = res.data;
-              console.log(this.wikis);
-              
             });
         },
     },

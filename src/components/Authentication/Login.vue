@@ -77,14 +77,8 @@ export default {
           const role = response.data.role;
           const nome = response.data.nome;
 
-          console.log("============ TOKEN ============ ");
-          console.log(token);
-          console.log("============ NOME ============ ");
-          console.log(nome);
-          console.log("============ ROLE ============ ");
-          console.log(role);
-          console.log("============ NOME ============ ");
-          console.log(nome);
+          //console.log("============ ROLE ============ ");
+          //console.log(role);
 
           localStorage.setItem("token", token); //Store the token to send it to the back whem an access is needed
           localStorage.setItem("role", role);

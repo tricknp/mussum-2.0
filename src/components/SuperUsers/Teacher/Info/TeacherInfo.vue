@@ -74,7 +74,6 @@ export default {
   },
 
   data() {
-    console.log("Nome da Rota: " + this.$route.params.targetName);
     return {
       title: "Professoris"
     };
