@@ -35,7 +35,9 @@ import { url } from '../_mixins/url.js'
             return {
                 image: '',
                 hovering: false,
-                selectedFile: ''
+                selectedFile: '',
+                image: '',
+                hovering: '',
             }
         },
         methods: {
@@ -43,14 +45,14 @@ import { url } from '../_mixins/url.js'
                 let files = e.target.files || e.dataTransfer.files;
                 if (!files.length) return;
                 this.createImage(files[0]);
+                this.selectedFile = files[0];
             },
             createImage(file) {
                 let image = new Image();
                 let reader = new FileReader();
-                let vm = this;
                 reader.onload = (e) => {
-                    vm.image = e.target.result;
-                    vm.hovering = false;
+                    this.image = e.target.result;
+                    this.hovering = false;
                 };
                 reader.readAsDataURL(file);
             },

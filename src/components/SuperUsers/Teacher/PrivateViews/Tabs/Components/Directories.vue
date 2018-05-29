@@ -57,9 +57,14 @@ export default {
 
         addCourse(){
           const dir = this.item;
-          this.treeData.push({ text: dir, state: { expanded: false } });
-          console.log(dir)
-          console.log(this.treeData)
+          axios
+            .post(`${this.BASE_URL}api/repository`, dir, {
+              headers: { 'dir' : dir}
+            })
+            .then(res => {
+              //this.treeData.push({ text: dir, state: { expanded: false } });
+                console.log('Curso adicionado com sucesso')
+          }).catch(error => console.log('erro -> ' + error))
         }
       },
 
