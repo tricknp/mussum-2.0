@@ -21,50 +21,56 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { url } from '../_mixins/url.js'
+import axios from "axios";
+import { url } from "../_mixins/url.js";
 
-    export default {
-        name: 'imgUpload',
+export default {
+  name: "imgUpload",
 
-        props: ['info'],
+  props: ["info"],
 
-        mixins:[ url ],
+  mixins: [url],
 
-        data() {
-            return {
-                image: '',
-                hovering: false,
-                selectedFile: '',
-                image: '',
-                hovering: '',
-            }
-        },
-        methods: {
-            onFileChange(e) {
-                let files = e.target.files || e.dataTransfer.files;
-                if (!files.length) return;
-                this.createImage(files[0]);
-                this.selectedFile = files[0];
-            },
-            createImage(file) {
-                let image = new Image();
-                let reader = new FileReader();
-                reader.onload = (e) => {
-                    this.image = e.target.result;
-                    this.hovering = false;
-                };
-                reader.readAsDataURL(file);
-            },
-
-            onUpload() {
-                axios.post(this.BASE_URL + 'api/photo', this.selectedFile, { 
-                    headers: { 'Content-Type': 'multipart/form-data'}}   
-            )},
-
-            removeImage: function (e) {
-                this.image = '';
-            }
-        }
+  data() {
+    return {
+      image: "",
+      hovering: false,
+      selectedFile: "",
+      image: "",
+      hovering: ""
     };
+  },
+  methods: {
+    onFileChange(e) {
+      let files = e.target.files || e.dataTransfer.files;
+      if (!files.length) return;
+      this.createImage(files[0]);
+      this.selectedFile = files[0];
+    },
+    createImage(file) {
+      let image = new Image();
+      let reader = new FileReader();
+      reader.onload = e => {
+        this.image = e.target.result;
+        this.hovering = false;
+      };
+      reader.readAsDataURL(file);
+    },
+
+    onUpload() {
+      const formData = new FormData();
+      formData.append("img", this.selectedFile, this.selectedFile.name);
+      axios.post(this.BASE_URL + "api/photo", formData, {
+        headers: {
+          "Content-Type":
+            "multipart/form-data; boundary=--------------------------703046025918186291990540"
+        }
+      });
+    },
+
+    removeImage: function(e) {
+      this.image = "";
+    }
+  }
+};
 </script>
