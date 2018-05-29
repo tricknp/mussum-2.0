@@ -42,11 +42,5 @@ export default {
     DirectoriesBox,
     CoursesBox
   },
-
-  data() {
-    return{
-    isBlurred: false,
-    }
-  }
 };
 </script>

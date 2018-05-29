@@ -9,7 +9,7 @@
 <script>
 import Tabs from '../../../../UIComponents/Tabs'
 import Directories from './Components/Directories'
-import Scraps from './Components/Scrap'
+import Scraps from './Components/Scraps/Scrap'
 import About from './Components/About'
 
     export default {

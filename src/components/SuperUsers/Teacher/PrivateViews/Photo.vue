@@ -13,8 +13,5 @@ export default {
 
   components: { imgUpload },
 
-  data() {
-    return {};
-  }
 };
 </script>

@@ -1,47 +1,42 @@
 <template>
   <div>
-    <tree
-      :data="treeData"
-      :options="treeOptions"
-      @node:selected="onNodeSelected"
-    />  
+    <select v-model="item">
+      <option v-for="curso in cursos" 
+              :key="curso.id" 
+              :value="curso.titulo"> 
+              {{ curso.titulo }}
+      </option>
+    </select>
+    <button @click="addCourse">+</button>
+
+    <tree :data="treeData" :options="treeOptions" @node:selected="onNodeSelected" /> 
+
   </div>  
 </template>
 
 
 <script>
+import axios from 'axios'
+import { url } from '../../../../../_mixins/url'
+
 export default {
   name: 'Directories',
 
+  mixins: [ url ],
+
   data(){
     return{
-      treeData: [
-        { text: 'Analise e Desenvolvimento de Sistemas', state: { expanded: false }, 
-          children: [ { text: 'Laboratório de Programação I', state: {expanded: false},
-                      children: [ { text: 'Bla Bla Bla', 
-                          children: [ 
-                              { text: 'bla bla bla.txt' }, 
-                              { text: 'bla bla bla.pdf' },
-                              { text: 'bla bla bla.pdf' },
-                              ], }
-                            ], 
-                        }, 
-                      { text: 'TCC/Projeto Integrador', state: {expanded: false},
-                            children: [ { text: 'Bla Bla Bla', 
-                                children: [ { text: 'bla bla bla' },
-                                            { text: 'ble ble ble' }
-                                ], }], }, 
-                      { text: 'Algoritim  os e Programação III' } ]
-        },
-        
-        { text: 'Redes de Computadores', state: { expanded: false }, 
-         children: [ { text: 'Laboratório de Programação I' }, 
-                      { text: 'TCC/Projeto Integrador' }, 
-                      { text: 'Algoritimos e Programação III' } ]
-        },                    
-           
+      item: null,
+      cursos: null,
+      treeData: 
+      [
+        { text: 'Curso', state: { expanded: false }, 
+          children: [ { text: 'REPOSITÓRIO PAI - 1', state: {expanded: false},
+                      children: [ { text: 'FILHO', 
+                  }], 
+                },   
+             ]},
            ],
-
            
           treeOptions: {
           }
@@ -50,8 +45,27 @@ export default {
       methods: {
       	onNodeSelected(node) {
         	console.log(node.text)
+        },
+
+        getCourses(){
+          axios
+            .get(this.BASE_URL + 'api/cursos')
+            .then( res => {
+              this.cursos = res.data;
+            })
+        },
+
+        addCourse(){
+          const dir = this.item;
+          this.treeData.push({ text: dir, state: { expanded: false } });
+          console.log(dir)
+          console.log(this.treeData)
         }
-      }
+      },
+
+      created(){
+        this.getCourses();
+      },
     }
   
 </script>

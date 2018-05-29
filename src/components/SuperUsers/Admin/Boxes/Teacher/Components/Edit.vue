@@ -12,10 +12,10 @@
       <h1 slot="header">Editar Professor</h1>
 
       <form slot="content" class="form-admin-modal">
-          <input type="text"   :value="professor.nome" placeholder="nome" required>
-          <input type="email"  :value="professor.email" placeholder="email">
-          <input type="text"   :value="professor.username" placeholder="username" required>
-          <input type="password" placeholder="senha" :value="professor.password" required >
+          <input type="text"  v-model="professor.nome"  placeholder="nome" required>
+          <input type="email" v-model="professor.email" placeholder="email">
+          <input type="text"  v-model="professor.username" placeholder="username" required>
+          <input type="text"  v-model="professor.password"  required >
         </form>
 
         <div slot="footer">
@@ -48,15 +48,16 @@ export default {
 
   data() {
     return {
+      datas: '',
+      professor: '',
       id: '',
-      professor : null,
     };
   },
 
   created() {
     this.$bus.$on("objectEmited", (professor) => {
       this.professor = professor;
-      this.id = this.professor.id;
+      this.id = professor.id;
     });
   },
 
@@ -65,13 +66,12 @@ export default {
       this.route = 'api/professores/',
       this.datas = JSON.stringify({
         id: this.id,
-        nome: this.nome,
-        email: this.email,
-        username: this.username,
-        password: this.password
-        
+        nome: this.professor.nome,
+        email: this.professor.email,
+        username: this.professor.username,
+        password: this.professor.password
       })
-        console.log('testtttttttttt'+datas);
+        console.log('response do datas ' + this.datas)
     },
 
   }

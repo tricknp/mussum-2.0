@@ -5,7 +5,9 @@
                 <span class="dropzone-title">Arraste a imagem aqui ou clique para selecionar</span>
                 <span class="dropzone-info" v-if="info">{{ info }}</span>
             </div>
-            <input type="file" @change="onFileChange" name="img">
+            <form>
+                <input type="file" @change="onFileChange" name="img">
+            </form>
         </div>
     </div>
     <div class="dropzone-preview" v-else>
@@ -19,11 +21,16 @@
 </template>
 
 <script>
+import axios from 'axios'
 import { url } from '../_mixins/url.js'
 
     export default {
         name: 'imgUpload',
+
         props: ['info'],
+
+        mixins:[ url ],
+
         data() {
             return {
                 image: '',
@@ -33,14 +40,14 @@ import { url } from '../_mixins/url.js'
         },
         methods: {
             onFileChange(e) {
-                var files = e.target.files || e.dataTransfer.files;
+                let files = e.target.files || e.dataTransfer.files;
                 if (!files.length) return;
                 this.createImage(files[0]);
             },
             createImage(file) {
-                var image = new Image();
-                var reader = new FileReader();
-                var vm = this;
+                let image = new Image();
+                let reader = new FileReader();
+                let vm = this;
                 reader.onload = (e) => {
                     vm.image = e.target.result;
                     vm.hovering = false;
@@ -49,8 +56,9 @@ import { url } from '../_mixins/url.js'
             },
 
             onUpload() {
-              axios.post(this.BASE_URL + 'api/photo', this.selectedFile)
-            },   
+                axios.post(this.BASE_URL + 'api/photo', this.selectedFile, { 
+                    headers: { 'Content-Type': 'multipart/form-data'}}   
+            )},
 
             removeImage: function (e) {
                 this.image = '';

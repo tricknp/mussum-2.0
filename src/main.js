@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import axios from 'axios';
 
 import './assets/sass/app.scss'
 import 'vue-blu/dist/css/vue-blu.min.css'
@@ -8,7 +9,6 @@ import 'vue-blu/dist/css/vue-blu.min.css'
 import VueResource from "vue-resource"
 import VueBlu from 'vue-blu'
 import LiquorTree from 'liquor-tree'
-import axios from 'axios';
 
 Vue.use(VueBlu)
 Vue.use(VueResource)

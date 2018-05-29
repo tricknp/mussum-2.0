@@ -1,6 +1,6 @@
 <template>
     <Tabs> 
-        
+            
     </Tabs>
 </template>
 

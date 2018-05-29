@@ -6,8 +6,9 @@ import Login from '@/components/Authentication/Login'
 import Admin from '@/components/SuperUsers/Admin/Admin'
 import Teacher from '@/components/SuperUsers/Teacher/Teacher'
 import NotFound from '@/components/GeneralViews/NotFoundPage'
+
 import AuthMiddleware from '../services/middleware'
-import AxiosMid from '../services/axiosMid'
+import interceptors from '../services/interceptors'
 
 
 Vue.use(Router)
