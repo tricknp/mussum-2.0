@@ -84,9 +84,6 @@ export default {
           localStorage.setItem("role", role);
           localStorage.setItem("nome", nome);
 
-          console.log(response);
-          console.log("Status do erro:" + response.status);
-
           if (role === "professor") {
             return this.$router.push(`professor/${nome.toLowerCase()}`);
           } else if (role === "admin") {
