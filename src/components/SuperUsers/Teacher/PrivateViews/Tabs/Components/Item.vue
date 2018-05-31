@@ -4,7 +4,7 @@
       {{ model.name }}
       <span v-if="isFolder">[ {{ open ? '-' : '+' }} ]</span>
     </div>
-    
+
     <ul v-show="open" v-if="isFolder">
         <div class="all">
             <button>edit</button>
@@ -15,7 +15,7 @@
             :key="index"
             :model="model">
           </item>
-        </div> 
+        </div>
         <li class="add" @click="addChild">
             <button>novo</button>
         </li>
@@ -25,40 +25,39 @@
 
 <script>
 export default {
-    name: 'item',
-    props: {
+  name: "item",
+  props: {
     model: Object
   },
-  data: function () {
+  data: function() {
     return {
       open: false
-    }
+    };
   },
   computed: {
-    isFolder: function () {
-      return this.model.children &&
-        this.model.children.length
+    isFolder: function() {
+      return this.model.children && this.model.children.length;
     }
   },
   methods: {
-    toggle: function () {
+    toggle: function() {
       if (this.isFolder) {
-        this.open = !this.open
+        this.open = !this.open;
       }
     },
 
     addChild: () => {
       this.model.children.push({
-        name: 'blalbalblalblalbal'
-      })
+        name: "blalbalblalblalbal"
+      });
     }
   }
-}
+};
 </script>
 
 <style>
-.all{
-    display: inline-block;
+.all {
+  display: inline-block;
 }
 
 .item {
