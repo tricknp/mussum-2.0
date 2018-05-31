@@ -26,21 +26,18 @@ const router = new Router({
       path: '/login',
       name: 'login',
       component: Login,
-      //meta: { auth: false }
     },
     {
       path: '/admin',
       name: 'Admin',
       component: Admin,
       beforeEnter: AuthMiddleware.isAdmin,
-      //meta: { auth: true }
     },
 
     {
       path: '/professor/:targetName',
       name: 'Professor',
       component: Teacher
-      //meta: { auth: true }
     },
 
     { path: '*', component: NotFound }

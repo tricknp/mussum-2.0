@@ -8,12 +8,15 @@
       </option>
     </select>
     <button @click="addCourse">+</button>
-
-    <tree class="tree--small"
-          :data="treeData" 
-          :options="treeOptions" 
-          @node:selected="onNodeSelected" >
-    </tree>      
+    
+   <div class="tree">
+    <item
+      class="item"
+      :model="treeData">
+      <button>asa</button>
+  
+  </item>
+  </div>
 
   </div>  
 </template>
@@ -22,86 +25,101 @@
 <script>
 import axios from 'axios'
 import { url } from '../../../../../_mixins/url'
+import item from './Item'
 
 export default {
   name: 'Directories',
+
+  components: { item },
 
   mixins: [ url ],
 
   data(){
     return{
       dir: null,
-      cursos: null,
-      
-        
-      treeData: [ { text: 'aa', state: { expanded: false } } 
-        //children: [{  text: '', state: {expanded: false} }]
-      ],
-                
-        treeOptions: {}
-        }
-      },
+      cursos: null,  
+      treeData: 
+      {
+        name: 'asdas', 
+        children: [{ name: 'bkakbkak', 
+                    children: [{ name: 'sadsd', 
+                                 children: [ { name: 'sadas' } ]
+                                }]
+                             }]
+                          }
+      }
+    },
 
-      methods: {
-      	onNodeSelected(node) {
-        	console.log(node.text)
-        },
 
-        /*===================================================* 
-         *          Getting the courses existing.            *
-         *                    - // -                         *
-         *          Obtendo todos os cursos existentes.      *
-         *===================================================*/
-        getCourses(){
-          axios
-            .get(`${this.BASE_URL}api/cursos`)
-            .then( res => {
-              this.cursos = res.data;
-            })
-        },
-        
-        /*=================================================*
-         *      Add a course to teacher repositories       *
-         *                     - // -                      *      
-         *  Adiciona um curso ao repositório do professor  *
-         *=================================================*/
-        addCourse(){
-          axios
-            .post(`${this.BASE_URL}api/repository`, this.dir, {
-              headers: { 'dir' : this.dir}
-            })
-            .then(res => {
-              this.treeData.push({ text: this.dir, state: { expanded: false } });
-                console.log('Curso adicionado com sucesso ' + this.dir)
-          }).catch(error => console.log('error -> ' + error))
-        },
+  methods: { 
+        getdata(){
+      this.formated = this.$refs.tree.reformatData();
+    },
 
-        /*========================================================================================*
-         *    Getting all repositories from current teacher and adding they in the tree of        * 
-         * repositories                                                                           *
-         *                                    - // -                                              *
-         *    Obtem todos os repositórios do professor atual e adicionando-os na árvore dos       *
-         * repositórios                                                                           *
-         *========================================================================================*/
-        getRepositorys(){
-          axios
-            .get(`${this.BASE_URL}api/repository`, {
-              headers: { 'dir' : '', 'username': this.$route.params.targetName }, 
-            })
-            .then( res => {
-              let folders = res.data.pastas;
-              this.treeData.push( { text: folders } )
-              console.log(this.treeData)  
-            })
-         },
-      
-      }, 
-
-      created(){
-        this.getCourses();
-        this.getRepositorys();
-      },
-
-  }
+    /*===================================================* 
+     *          Getting the courses existing.            *
+     *                    - // -                         *
+     *          Obtendo todos os cursos existentes.      *
+     *===================================================*/
+    getCourses(){
+      axios
+        .get(`${this.BASE_URL}api/cursos`)
+        .then( res => {
+          this.cursos = res.data;
+        })
+    },
+    
+    /*=================================================*
+     *      Add a course to teacher repositories       *
+     *                     - // -                      *      
+     *  Adiciona um curso ao repositório do professor  *
+     *=================================================*/
+    addCourse(){
+      axios
+        .post(`${this.BASE_URL}api/repository`, this.dir, {
+          headers: { 'dir' : this.dir}
+        })
+        .then(res => {
+          this.treeData.name = this.dir
+            console.log('Curso adicionado com sucesso ' + this.dir)
+      }).catch(error => console.log('error -> ' + error))
+    },    
+    
+    /*========================================================================================*
+     *    Getting all repositories from current teacher and adding they in the tree of        * 
+     * repositories                                                                           *
+     *                                    - // -                                              *
+     *    Obtem todos os repositórios do professor atual e adicionando-os na árvore dos       *
+     * repositórios                                                                           *
+     *========================================================================================*/
+    getRepositorys(){
+      axios
+        .get(`${this.BASE_URL}api/repository`, {
+          headers: { 'dir' : '', 'username': this.$route.params.targetName }, 
+        })
+        .then( res => {
+          let folders = res.data.pastas;
+          
+          folders.forEach(element => {
+            this.treeData.name = element.dir
+            console.log(this.treeData.name)
+          })
+          
+          console.log('fora do for')
+          console.log(this.treeData.name)
+      })
+     },
+  
+  },    
+  
+  created(){
+    this.getCourses();
+    this.getRepositorys();
+  },
+  
+}
   
 </script>
+
+
+
