@@ -6,7 +6,9 @@
     <h1> {{ this.user.name }}</h1>
       </a>
       <a v-else>
-        <span><img id="menubar-icon" src="../../../../static/images/icons/menu-bar.svg"></span>
+        <span>
+          <img id="menubar-icon" src="../../../../static/images/icons/menu-bar.svg">
+        </span>
       </a>
       
       <div slot="content" id="dropdown-content">  

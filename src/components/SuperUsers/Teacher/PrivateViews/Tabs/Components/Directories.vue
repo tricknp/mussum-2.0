@@ -10,9 +10,11 @@
     <button @click="addCourse">+</button>
 
    <div class="tree">
-    <item
-      class="item"
-      :model="treeData">
+    <item v-for="(tree, i) in treeData"
+          :key="i"
+          class="item"
+          :model="tree"
+          @itemClicked="getRepositorys">
       <button>asa</button>
 
   </item>
@@ -26,31 +28,27 @@
 import axios from "axios";
 import { url } from "../../../../../_mixins/url";
 import item from "./Item";
-
+import Vue from "vue";
+const ComponentClass = Vue.extend(item);
 export default {
   name: "Directories",
-
   components: { item },
-
   mixins: [url],
-
   data() {
     return {
       dir: null,
       cursos: null,
-
-      treeData: {
-        name: "Repositórios",
-        children: []
-      }
+      components: [],
+      treeData: []
     };
   },
-
   methods: {
+    a() {
+      console.log(this.$refs.afs);
+    },
     getdata() {
       this.formated = this.$refs.tree.reformatData();
     },
-
     /*===================================================*
      *          Getting the courses existing.            *
      *                    - // -                         *
@@ -61,7 +59,6 @@ export default {
         this.cursos = res.data;
       });
     },
-
     /*=================================================*
      *      Add a course to teacher repositories       *
      *                     - // -                      *
@@ -78,7 +75,6 @@ export default {
         })
         .catch(error => console.log("error -> " + error));
     },
-
     /*========================================================================================*
      *    Getting all repositories from current teacher and adding they in the tree of        *
      * repositories                                                                           *
@@ -86,36 +82,46 @@ export default {
      *    Obtem todos os repositórios do professor atual e adicionando-os na árvore dos       *
      * repositórios                                                                           *
      *========================================================================================*/
-    getRepositorys() {
+    getRepositorys(div, dire) {
+      console.log("get repositorys from " + dire);
+      axios
+        .get(`${this.BASE_URL}api/repository`, {
+          headers: { dir: dire, username: this.$route.params.targetName }
+        })
+        .then(res => {
+          let folders = res.data.pastas;
+          console.log("Pastas encontradas em " + dire);
+          console.log(folders);
+          folders.forEach(element => {
+            console.log("element " + element.dir);
+            var instance = new ComponentClass({
+              propsData: {
+                model: { name: element.dir }
+              }
+            });
+            this.components.push(instance);
+            instance.$mount();
+            div.appendChild(instance.$el);
+          });
+        });
+    },
+    startRepository() {
       axios
         .get(`${this.BASE_URL}api/repository`, {
           headers: { dir: "", username: this.$route.params.targetName }
         })
         .then(res => {
           let folders = res.data.pastas;
-
           folders.forEach(element => {
-            this.treeData.children.push({
-              name: element.dir,
-              children: []
-            });
-            console.log(this.treeData.name);
+            this.treeData.push({ name: element.dir });
           });
-
-          console.log("fora do for");
-          console.log(this.treeData);
         });
     }
   },
-
   addChild() {},
-
   created() {
     this.getCourses();
-    this.getRepositorys();
+    this.startRepository();
   }
 };
 </script>
-
-
-
