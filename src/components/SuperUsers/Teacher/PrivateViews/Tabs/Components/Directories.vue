@@ -29,11 +29,17 @@ import axios from "axios";
 import { url } from "../../../../../_mixins/url";
 import item from "./Item";
 import Vue from "vue";
+
 const ComponentClass = Vue.extend(item);
+
 export default {
+
   name: "Directories",
+  
   components: { item },
+  
   mixins: [url],
+  
   data() {
     return {
       dir: null,
@@ -118,7 +124,6 @@ export default {
         });
     }
   },
-  addChild() {},
   created() {
     this.getCourses();
     this.startRepository();
