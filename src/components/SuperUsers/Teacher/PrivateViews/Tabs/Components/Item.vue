@@ -1,21 +1,23 @@
 <template>
   <li>
-    <div @click="toggle">
+    <div @click="toggle, itemClicked(model.children, model.name)">
       {{ model.name }}
       <span v-if="isFolder">[ {{ open ? '-' : '+' }} ]</span>
     </div>
 
     <ul v-show="open" v-if="isFolder">
+      <div v-for="(child, index) in model.children" :key="index" >
         <div class="all">
             <button>edit</button>
             <button>delete</button>
           <item
             class="item"
-            v-for="(model, index) in model.children"
-            :key="index"
-            :model="model">
+            :model="model"
+
+            >
           </item>
         </div>
+      </div>
         <li class="add" @click="addChild">
             <button>novo</button>
         </li>
@@ -26,9 +28,9 @@
 <script>
 export default {
   name: "item",
-  props: {
-    model: Object
-  },
+  props: [
+    'model',
+  ],
   data: function() {
     return {
       open: false
@@ -44,6 +46,12 @@ export default {
       if (this.isFolder) {
         this.open = !this.open;
       }
+    },
+
+    itemClicked(array, dir) {
+      console.log('itemClicked');
+
+      this.$emit('itemClicked', array, dir)
     },
 
     addChild: () => {

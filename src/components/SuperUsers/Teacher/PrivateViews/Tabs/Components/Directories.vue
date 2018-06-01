@@ -10,9 +10,11 @@
     <button @click="addCourse">+</button>
 
    <div class="tree">
-    <item
-      class="item"
-      :model="treeData">
+    <item v-for="(tree, i) in treeData"
+          :key="i"
+          class="item"
+          :model="tree"
+          @itemClicked="getRepositorys">
       <button>asa</button>
 
   </item>
@@ -39,10 +41,7 @@ export default {
       dir: null,
       cursos: null,
 
-      treeData: {
-        name: "Repositórios",
-        children: []
-      }
+      treeData: []
     };
   },
 
@@ -86,24 +85,25 @@ export default {
      *    Obtem todos os repositórios do professor atual e adicionando-os na árvore dos       *
      * repositórios                                                                           *
      *========================================================================================*/
-    getRepositorys() {
+    getRepositorys(arrayRaiz, dire) {
+      console.log('get repositorys');
+      console.log(arrayRaiz);
+      console.log(dire);
+
       axios
         .get(`${this.BASE_URL}api/repository`, {
-          headers: { dir: "", username: this.$route.params.targetName }
+          headers: { dir: dire, username: this.$route.params.targetName }
         })
         .then(res => {
           let folders = res.data.pastas;
 
           folders.forEach(element => {
-            this.treeData.children.push({
+            arrayRaiz.push({
               name: element.dir,
               children: []
             });
-            console.log(this.treeData.name);
           });
-
-          console.log("fora do for");
-          console.log(this.treeData);
+          console.log(arrayRaiz);
         });
     }
   },
@@ -112,7 +112,7 @@ export default {
 
   created() {
     this.getCourses();
-    this.getRepositorys();
+    this.getRepositorys(this.treeData, "");
   }
 };
 </script>
