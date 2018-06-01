@@ -1,26 +1,23 @@
 <template>
   <li>
-    <div @click="toggle, itemClicked(model.children, model.name)">
-      {{ model.name }}
+
+    <div @click="toggle(), itemClicked(model.name)"> {{ model.name }}
+
+      <div class="all">
+        <button>edit</button>
+        <button>delete</button>
+      </div>
+
       <span v-if="isFolder">[ {{ open ? '-' : '+' }} ]</span>
+
     </div>
 
-    <ul v-show="open" v-if="isFolder">
-      <div v-for="(child, index) in model.children" :key="index" >
-        <div class="all">
-            <button>edit</button>
-            <button>delete</button>
-          <item
-            class="item"
-            :model="model"
+    <ul v-show="open" v-if="isFolder" :id="model.name" :ref="model.name">
 
-            >
-          </item>
-        </div>
-      </div>
-        <li class="add" @click="addChild">
-            <button>novo</button>
-        </li>
+      <li class="add" @click="addChild">
+        <button>novo</button>
+      </li>
+
     </ul>
   </li>
 </template>
@@ -28,9 +25,10 @@
 <script>
 export default {
   name: "item",
-  props: [
-    'model',
-  ],
+
+  props: {
+    model: Object
+  },
   data: function() {
     return {
       open: false
@@ -38,27 +36,29 @@ export default {
   },
   computed: {
     isFolder: function() {
-      return this.model.children && this.model.children.length;
+      //return this.model.children && this.model.children.length;
+      return true;
     }
   },
   methods: {
     toggle: function() {
       if (this.isFolder) {
-        this.open = !this.open;
+        if (this.open) {
+          this.open = false;
+        } else {
+          this.open = true;
+        }
       }
     },
 
-    itemClicked(array, dir) {
-      console.log('itemClicked');
+    itemClicked(dir) {
+      console.log('clicked');
+      console.log(this.$refs[dir]);
 
-      this.$emit('itemClicked', array, dir)
+        this.$emit("itemClicked", this.$refs[dir], dir);
     },
 
-    addChild: () => {
-      this.model.children.push({
-        name: "blalbalblalblalbal"
-      });
-    }
+    addChild() {}
   }
 };
 </script>

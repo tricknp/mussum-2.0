@@ -29,6 +29,10 @@ import axios from "axios";
 import { url } from "../../../../../_mixins/url";
 import item from "./Item";
 
+import Vue from "vue";
+
+const ComponentClass = Vue.extend(item);
+
 export default {
   name: "Directories",
 
@@ -41,11 +45,17 @@ export default {
       dir: null,
       cursos: null,
 
+      components: [],
+
       treeData: []
     };
   },
 
   methods: {
+    a() {
+      console.log(this.$refs.afs);
+    },
+
     getdata() {
       this.formated = this.$refs.tree.reformatData();
     },
@@ -85,25 +95,44 @@ export default {
      *    Obtem todos os repositórios do professor atual e adicionando-os na árvore dos       *
      * repositórios                                                                           *
      *========================================================================================*/
-    getRepositorys(arrayRaiz, dire) {
-      console.log('get repositorys');
-      console.log(arrayRaiz);
-      console.log(dire);
-
+    getRepositorys(div, dire) {
+      console.log("get repositorys from " + dire);
       axios
         .get(`${this.BASE_URL}api/repository`, {
           headers: { dir: dire, username: this.$route.params.targetName }
         })
         .then(res => {
           let folders = res.data.pastas;
+          console.log("Pastas encontradas em " + dire);
+          console.log(folders);
 
           folders.forEach(element => {
-            arrayRaiz.push({
-              name: element.dir,
-              children: []
+            console.log("element " + element.dir);
+
+            var instance = new ComponentClass({
+              propsData: {
+                model: { name: element.dir }
+              }
             });
+
+            this.components.push(instance);
+            instance.$mount();
+            div.appendChild(instance.$el);
           });
-          console.log(arrayRaiz);
+        });
+    },
+
+    startRepository() {
+      axios
+        .get(`${this.BASE_URL}api/repository`, {
+          headers: { dir: "", username: this.$route.params.targetName }
+        })
+        .then(res => {
+          let folders = res.data.pastas;
+
+          folders.forEach(element => {
+            this.treeData.push({ name: element.dir });
+          });
         });
     }
   },
@@ -112,7 +141,7 @@ export default {
 
   created() {
     this.getCourses();
-    this.getRepositorys(this.treeData, "");
+    this.startRepository();
   }
 };
 </script>
