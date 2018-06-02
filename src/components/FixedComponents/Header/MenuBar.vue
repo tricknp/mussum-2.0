@@ -7,7 +7,7 @@
       </a>
       <a v-else>
         <span>
-          <img id="menubar-icon" src="../../../../static/images/icons/menu-bar.svg">
+          <IconNavbar />
         </span>
       </a>
       
@@ -40,8 +40,12 @@
 
 
 <script>
+import IconNavbar from '../../_utils/Svgs/IconNavbar'
+
 export default {
   name: "Navbar",
+
+  components: { IconNavbar },
 
   computed: {
     isLoged: function() {

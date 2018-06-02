@@ -44,7 +44,7 @@
 .form-login > input
 {
     @extend %equal-inputs;
-    font-size: $default-size - .2em;
+    font-size: $default-size - .1em;
     border: $light-grey $medium-border;
     text-indent: $input-indent;
     margin-top: 1.7%;
@@ -70,4 +70,8 @@
     color: $nice-blue;
     font-size: $small-size;
     text-align: center;
+    .login-fail
+    {
+        color: $hover-red;
+    }
 }

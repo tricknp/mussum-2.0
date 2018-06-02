@@ -10,7 +10,7 @@
                 :key="professor.nome"
                 :targetName="professor.username" >
                 <router-link :to="{ path: '/professor/' + professor.username.toLowerCase() }">
-                  <a>
+                  <a class="ass">
                     {{ professor.nome }}
                   </a>  
                 </router-link>

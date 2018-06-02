@@ -1,21 +1,25 @@
 <template>
   <div>
-    <select v-model="dir">
-      <option v-for="curso in cursos"
-              :key="curso.id"
-              :value="curso.titulo">
-              {{ curso.titulo }}
-      </option>
-    </select>
-    <button @click="addCourse">+</button>
+    <div class="div-select-course">
+      <select v-model="dir" class="select-course">
+        <option v-for="curso in cursos"
+                :key="curso.id"
+                :value="curso.titulo">
+                {{ curso.titulo }}
+        </option>
+      </select>
+
+      <button @click="addCourse"> 
+        <IconAdd /> 
+      </button>
+    </div>
 
    <div class="tree">
     <item v-for="(tree, i) in treeData"
           :key="i"
           class="item"
           :model="tree"
-          >
-  </item>
+    ></item>
   </div>
 
   </div>
@@ -23,32 +27,40 @@
 
 
 <script>
-import axios from "axios";
-import { url } from "../../../../../_mixins/url";
-import item from "./Item";
-import Vue from "vue";
+import axios from "axios"
+import { url } from "../../../../../_mixins/url"
+import IconAdd from '../../../../../_utils/Svgs/IconAdd'
+import item from "./Item"
+import Vue from "vue"
 
 const ComponentClass = Vue.extend(item);
 
 export default {
   name: "Directories",
   
-  components: { item },
+  components: { item, IconAdd },
   
   mixins: [url],
   
+  props: {
+    selected: {
+      default: 'Adicionar curso'
+    }
+  },
+
   data() {
     return {
       dir: null,
       cursos: null,
       //components: [],
-      treeData: []
+      treeData: [],
     };
   },
   methods: {
     getdata() {
       this.formated = this.$refs.tree.reformatData();
     },
+
     /*===================================================*
      *          Getting the courses existing.            *
      *                    - // -                         *
@@ -59,11 +71,13 @@ export default {
         this.cursos = res.data;
       });
     },
+
     /*=================================================*
      *      Add a course to teacher repositories       *
      *                     - // -                      *
      *  Adiciona um curso ao repositório do professor  *
      *=================================================*/
+    
     addCourse() {
       axios
         .post(`${this.BASE_URL}api/repository`, this.dir, {
@@ -108,6 +122,7 @@ export default {
           });
         });
     },
+
     //RUNS ONE TIME TO GET CURSES FOLDERS
     startRepository() {
       axios
@@ -132,3 +147,11 @@ export default {
   }
 };
 </script>
+
+
+<style>
+.div-select-course
+{
+  display: flex;
+}
+</style>

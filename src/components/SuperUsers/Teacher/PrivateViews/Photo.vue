@@ -18,7 +18,7 @@ export default {
   mixins: [ url ],
 
   methods:{
-    getPhoto(){
+    /*getPhoto(){
       axios
         .get(`${this.BASE_URL}api/photo`, {
           headers: { professor: this.$route.params.targetName }
@@ -27,12 +27,12 @@ export default {
           console.log(res)
           console.log(this.$route.params.targetName)
         })    
-    },
+    },*/
 
   },
   
   created(){
-    this.getPhoto();
+    //this.getPhoto();
   }
 
 

@@ -37,7 +37,14 @@
     }
 }
 
-
-
+.icon-menubar
+{   width: 2.9em;
+    fill: $light-grey;
+    padding: .1em;
+    &:hover
+    {
+        fill: $hover-white;
+    }
+}
 
 
