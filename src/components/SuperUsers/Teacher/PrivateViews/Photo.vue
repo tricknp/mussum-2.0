@@ -25,6 +25,7 @@ export default {
         })
         .then( (res) => {
           console.log(res)
+          console.log(this.$route.params.targetName)
         })    
     },
 

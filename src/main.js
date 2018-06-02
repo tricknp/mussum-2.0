@@ -8,10 +8,7 @@ import 'vue-blu/dist/css/vue-blu.min.css'
 import axios from 'axios';
 import VueBlu from 'vue-blu'
 
-
 Vue.use(VueBlu)
-
-
 Vue.config.productionTip = false
 
 const EventBus = new Vue()

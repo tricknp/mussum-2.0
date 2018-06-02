@@ -58,8 +58,16 @@
 }
 
 .dropzone-preview {
+    margin-top: 1em;
+    text-align: center;
     position: relative;
     &:hover .dropzone-close.modal-close {
         visibility: visible;
-    }
+    }    
+}
+
+.photo-upload
+{
+    max-width: 9em;
+    max-height: 8em;
 }

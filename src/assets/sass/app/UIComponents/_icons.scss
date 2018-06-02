@@ -1,12 +1,39 @@
+%hover-transition
+{
+    transition: ease .35s;
+}
+
 .icon 
 {   
     padding: .22em;
     fill: $medium-grey;
-    
+    cursor: pointer;
     &:hover
-    {
+    {   
+        @extend %hover-transition;
         transition: .11s ease-in;
         fill: $dark-background;
+    }
+}
+
+.icon-ok
+{
+    fill: $defaut-green;
+    padding: .1em;
+    &:hover
+    {
+        @extend %hover-transition;
+        fill: $hover-green;
+    } 
+}
+
+.icon-cancel
+{
+    fill: $default-red;
+    &:hover
+    {
+        @extend %hover-transition;
+        fill: $hover-red;
     }
 }
 

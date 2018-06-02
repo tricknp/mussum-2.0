@@ -1,9 +1,9 @@
 <template>
   <li class="tree-item">
 
-    <div @click="toggle(), itemClicked(model.name)" class="ss"> 
+    <div @click="toggle(), itemClicked(model.name)" class="ss">
       <span v-if="isFolder">
-        <!-- Arrow right -->       
+        <!-- Arrow right -->
         <span v-if="open === false">
           <svg class="icon" enable-background="new 0 0 129 129" version="1.1" viewBox="0 0 129 129" xmlns="http://www.w3.org/2000/svg">
             <path d="m40.4 121.3c-0.8 0.8-1.8 1.2-2.9 1.2s-2.1-0.4-2.9-1.2c-1.6-1.6-1.6-4.2 0-5.8l51-51-51-51c-1.6-1.6-1.6-4.2 0-5.8s4.2-1.6 5.8 0l53.9 53.9c1.6 1.6 1.6 4.2 0 5.8l-53.9 53.9z"/>
@@ -18,7 +18,7 @@
       </span>
 
       {{ model.name }}
-    
+
       <div class="tree-buttons">
         <!-- edit -->
         <button>
@@ -50,65 +50,47 @@
 
     <ul v-show="open" v-if="isFolder" :id="model.name" :ref="model.name">
       <!-- <li class="add-tree" @click="addChild"></li> -->
-    </ul> 
+    </ul>
 
   </li>
 </template>
 
 <script>
 export default {
-  
   name: "item",
-  
   props: {
-    model: Object | Array
+    model: Object
   },
-  
   data: function() {
     return {
       open: false
     };
   },
-  
   computed: {
     isFolder: function() {
       //return this.model.children && this.model.children.length;
       return true;
     }
   },
-  
   methods: {
     toggle: function() {
       if (this.isFolder) {
-        if (this.open) {
-          this.open = false;
-        } else {
-          this.open = true;
-        }
+        this.open = !this.open;
       }
     },
-  
     itemClicked(dir) {
-      console.log('clicked');
+      console.log("clicked");
       console.log(this.$refs[dir]);
-        this.$emit("itemClicked", this.$refs[dir], dir);
+      this.$bus.$emit("itemClicked", this.$refs[dir], dir);
     },
-  
     addChild() {}
   }
-
-}
+};
 </script>
 
 <style>
-button{
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
 
-.tree-item
-{
+.tree-item {
   list-style: none;
   font-size: 1em;
   border-bottom: 1px solid #eee;
@@ -124,11 +106,11 @@ button{
   display: flex;
   flex-direction: row;
   right: 2em;
-  top: .5em;
+  top: 0.5em;
   cursor: pointer;
 }
 
-.add-tree{
+.add-tree {
   color: red;
   text-align: right;
 }
@@ -139,7 +121,6 @@ button{
 }
 
 ul {
-  
   padding-left: 2em;
   line-height: 1.5em;
 }

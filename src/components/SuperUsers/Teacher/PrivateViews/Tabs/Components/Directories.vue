@@ -14,7 +14,7 @@
           :key="i"
           class="item"
           :model="tree"
-          @itemClicked="getRepositorys">
+          >
   </item>
   </div>
 
@@ -31,7 +31,6 @@ import Vue from "vue";
 const ComponentClass = Vue.extend(item);
 
 export default {
-
   name: "Directories",
   
   components: { item },
@@ -42,14 +41,11 @@ export default {
     return {
       dir: null,
       cursos: null,
-      components: [],
+      //components: [],
       treeData: []
     };
   },
   methods: {
-    a() {
-      console.log(this.$refs.afs);
-    },
     getdata() {
       this.formated = this.$refs.tree.reformatData();
     },
@@ -100,15 +96,19 @@ export default {
             console.log("element " + element.dir);
             var instance = new ComponentClass({
               propsData: {
-                model: { name: element.dir }
+                model: { name: element.dir },
+                parent: this.$parent.$children[0]
               }
             });
             //this.components.push(instance);
             instance.$mount();
             div.appendChild(instance.$el);
+            //this.$children.push(instance);
+            console.log(this.$children);
           });
         });
     },
+    //RUNS ONE TIME TO GET CURSES FOLDERS
     startRepository() {
       axios
         .get(`${this.BASE_URL}api/repository`, {
@@ -125,6 +125,10 @@ export default {
   created() {
     this.getCourses();
     this.startRepository();
+    this.$bus.$on("itemClicked", (div, dire) => {
+      console.log(dire);
+      this.getRepositorys(div, dire);
+    });
   }
 };
 </script>
