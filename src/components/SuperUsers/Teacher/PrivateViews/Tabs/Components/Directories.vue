@@ -15,8 +15,6 @@
           class="item"
           :model="tree"
           @itemClicked="getRepositorys">
-      <button>asa</button>
-
   </item>
   </div>
 
@@ -105,7 +103,7 @@ export default {
                 model: { name: element.dir }
               }
             });
-            this.components.push(instance);
+            //this.components.push(instance);
             instance.$mount();
             div.appendChild(instance.$el);
           });

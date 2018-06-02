@@ -104,6 +104,7 @@ export default {
 button{
   background: transparent;
   border: none;
+  cursor: pointer;
 }
 
 .tree-item
@@ -115,7 +116,6 @@ button{
 }
 
 .ss:hover{
-  padding: .3em;
   background: #eee;
 }
 
