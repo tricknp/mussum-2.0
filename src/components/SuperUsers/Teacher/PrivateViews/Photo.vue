@@ -1,6 +1,9 @@
 <template>
   <div class="div-teacher-img">
       <imgUpload />
+
+      <img :src="`data:image/png;base64,${img}`" >
+
   </div>
  
 </template>
@@ -17,6 +20,12 @@ export default {
 
   mixins: [ url ],
 
+  data(){
+    return{
+      img: '',
+    }
+  },
+
   methods:{
     getPhoto(){
       axios
@@ -24,8 +33,11 @@ export default {
           headers: { professor: this.$route.params.targetName }
         })
         .then( (res) => {
-          console.log(res)
-          console.log(this.$route.params.targetName)
+          //let f = res.data
+          //this.$refs.photo.src = `data:image/png;base64,${f}`;
+          //this.img = this.$refs.photo
+          this.img = res.data;
+          
         })    
     },
 

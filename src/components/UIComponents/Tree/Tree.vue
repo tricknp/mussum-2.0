@@ -47,7 +47,7 @@ export default {
     model: Object
   },
   
-  data: function() {
+  data() {
     return {
       open: false
     };

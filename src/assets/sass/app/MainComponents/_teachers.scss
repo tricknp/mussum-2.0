@@ -42,8 +42,7 @@
             @extend %equal-flex-direction;
             .input-teacher-profile{
                 @extend %no-border;
-                width: 55%;
-                max-width: 100%;
+                color: $dark-grey;
             }
             .btn-edit{
                 background: transparent;

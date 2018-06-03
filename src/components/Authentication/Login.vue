@@ -75,6 +75,7 @@ export default {
           const token = response.data.token; //Receive the token back from the server
           const role = response.data.role;
           const nome = response.data.nome;
+          const sobrenome = response.data.sobrenome;
 
           //console.log("============ ROLE ============ ");
           //console.log(role);
@@ -83,6 +84,7 @@ export default {
           localStorage.setItem("role", role);
           localStorage.setItem("nome", nome);
           localStorage.setItem("username", this.username)
+          
 
           if (role === "professor") {
             return this.$router.push(`professor/${this.username.toLowerCase()}`);

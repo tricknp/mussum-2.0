@@ -1,20 +1,63 @@
 <template>
   <div class="teacher-description">
-    <h1>Default namis</h1>
+    <h1> {{ name }} </h1>
 
-    <div class="div-desc-teacher">
-      <input type="text" placeholder="Sem descriçõesis" class="input-teacher-profile"> 
+    <div class="div-desc-teacher"> 
+      <p>{{ description }}</p>
     </div>
     
     <div class="div-email-teacher">
-      <input type="text" placeholder="Sem E-mail" class="input-teacher-profile"> 
+      <IconEmail />
+      <p> {{ email }} </p> 
     </div>
 
 
   </div>  
 </template>
 
-
 <script>
-export default {};
+import  axios     from  'axios'
+//import  auth      from  "../../../../services/auth";
+import  IconEmail from '../../../_utils/Svgs/IconEmail'
+import  { url }   from  '../../../_mixins/url'
+
+export default {
+  components: { IconEmail },
+
+  mixins: [ url ],
+
+  data() {
+    return {
+      username:'',
+      name: '',
+      description: '',
+      email: '',
+    }
+  },
+
+  created(){
+    this.getTeacher();
+  },
+
+  methods: {
+    getTeacher(){
+      axios
+        .get(`${this.BASE_URL}api/professores`)
+        .then(res => {
+           let t = res.data
+           console.log(t.length)
+           for(let i = 0; i < t.length; i++){
+             if (this.$route.params.targetName == t[i].username) {
+               this.name = `${t[i].nome} ${t[i].sobrenome}`;
+               this.email = t[i].email;
+               this.description = t[i].sobre;
+             }
+           }
+        })
+    }
+          
+          
+  },
+
+}
 </script>
