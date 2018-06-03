@@ -14,33 +14,61 @@
       </button>
     </div>
 
-   <div class="tree">
-    <item v-for="(tree, i) in treeData"
-          :key="i"
-          class="item"
-          :model="tree"
-    ></item>
-  </div>
+     <div class="tree">
+      <tree v-for="(tree, i) in treeData"
+            :key="i"
+            class="item"
+            :model="tree"
+       ></tree>
+     </div>
+
+    <modal v-if="showModal" @show="show()" id="admin-modal">
+      <h1 slot="header">Adicionar</h1>
+      <form slot="content" class="form-admin-modal">
+        <input type="text" placeholder="diretorio" v-model="child" required>
+      </form>
+      <div slot="footer">
+          <button type="submit" @click.prevent="addChild" >
+            Confirmar
+          </button>
+          <button @click="showModal = false" class="adm-modal-buttons">
+              Cancelar
+          </button>
+      </div>
+    </modal>
+
+    <modal v-if="showUpload" @s="showUp()" id="admin-modal">
+      <h1 slot="header">Adicionar arquivo</h1>
+      <form slot="content" class="form-admin-modal">
+        <input type="text" placeholder="diretorio" required>
+        <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+      </form>
+      <div slot="footer">
+           <button @click="submitFile()">dalhe pau</button>
+      </div>
+    </modal>
 
   </div>
 </template>
 
 
 <script>
-import axios from "axios"
-import { url } from "../../../../../_mixins/url"
-import IconAdd from '../../../../../_utils/Svgs/IconAdd'
-import item from "./Item"
-import Vue from "vue"
+import  Vue           from  "vue"
+import  axios         from  "axios"
+import  { url }       from  "../../../../../_mixins/url"
+import  { showModal } from  "../../../../../_mixins/showModal"
+import  IconAdd       from  '../../../../../_utils/Svgs/IconAdd'
+import  tree          from  "../../../../../UIComponents/Tree/Tree"
+import  Modal         from  "../../../../../UIComponents/Modal"
 
-const ComponentClass = Vue.extend(item);
+const ComponentClass = Vue.extend(tree);
 
 export default {
   name: "Directories",
   
-  components: { item, IconAdd },
+  components: { tree, IconAdd, Modal },
   
-  mixins: [url],
+  mixins: [url, showModal],
   
   props: {
     selected: {
@@ -52,13 +80,59 @@ export default {
     return {
       dir: null,
       cursos: null,
-      //components: [],
       treeData: [],
+      child: null,
+      showUpload: false,
+      file: '',
     };
   },
+
+  created() {
+    this.getCourses();
+    this.startRepository();
+    this.$bus.$on("itemClicked", (div, dire) => {
+      console.log(dire);
+      this.getRepositorys(div, dire);
+    })
+  },
+
+  mounted(){
+    this.$bus.$on('addChild', (dirs) => {
+      this.dir = dirs;
+      this.showModal = true;
+    }),
+    this.$bus.$on('handleUpload', (dirs) => {
+      this.dir = dirs;
+      this.showUpload = true; 
+    })
+  },
+
   methods: {
+
+    showUp(){
+      showUpload = true;
+    },
+
     getdata() {
       this.formated = this.$refs.tree.reformatData();
+    },
+
+    handleFileUpload(){
+      this.file = this.$refs.file.files[0];
+    },
+
+    submitFile(){
+      const formData = new FormData();
+      formData.append("files", this.file, this.file.name);
+      axios.post(this.BASE_URL + "api/upload", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'dir': this.dir
+        }
+      }).then( res => {
+          console.log('brilhou')
+          this.showUpload = false;
+      })
     },
 
     /*===================================================*
@@ -108,7 +182,7 @@ export default {
           console.log(folders);
           folders.forEach(element => {
             console.log("element " + element.dir);
-            var instance = new ComponentClass({
+            let instance = new ComponentClass({
               propsData: {
                 model: { name: element.dir },
                 parent: this.$parent.$children[0]
@@ -135,16 +209,21 @@ export default {
             this.treeData.push({ name: element.dir });
           });
         });
-    }
+    },
+
+    addChild(){
+      axios
+        .post(`${this.BASE_URL}api/repository`, this.dir, {
+          headers: { dir: `${this.dir}/${this.child}` }
+        })
+        .then(res => {
+          this.treeData.name = this.dir;
+          console.log("Curso adicionado com sucesso " + `${this.dir}/${this.child}`);
+          this.showModal = false;
+        })
+    },
   },
-  created() {
-    this.getCourses();
-    this.startRepository();
-    this.$bus.$on("itemClicked", (div, dire) => {
-      console.log(dire);
-      this.getRepositorys(div, dire);
-    });
-  }
+    
 };
 </script>
 

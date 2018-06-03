@@ -3,8 +3,8 @@
 
     <div @click="toggle(), itemClicked(model.name)" class="ss">
       <span v-if="isFolder">
-        <span v-if="open === false"> <IconArrowRight /> </span>
-        <span v-else> <IconArrowDown /> </span>
+        <span v-if="open === false"><IconArrowRight /></span>
+        <span v-else><IconArrowDown /></span>
       </span>
 
       {{ model.name }}
@@ -12,25 +12,25 @@
       <div class="tree-buttons">
         <button> <IconEdit   /> </button>
         <button> <IconDelete /> </button>
-        <button> <IconUpload /> </button>
-        <button> <IconAdd    /> </button>
+        <button  @click="upload"> <IconUpload /> </button>
+        <button  @click="add"> <IconAdd    /> </button>
       </div>
     </div>
 
-    <ul v-show="open" v-if="isFolder" :id="model.name" :ref="model.name">
-      <!-- <li class="add-tree" @click="addChild"></li> -->
-    </ul>
-
+    <ul v-show="open" v-if="isFolder" :id="model.name" :ref="model.name"></ul>
+    
   </li>
 </template>
 
 <script>
-import  IconArrowRight  from   '../../../../../_utils/Svgs/IconArrowRight'
-import  IconArrowDown   from   '../../../../../_utils/Svgs/IconArrowDown'
-import  IconEdit        from   '../../../../../_utils/Svgs/IconEdit'
-import  IconDelete      from   '../../../../../_utils/Svgs/IconDelete'
-import  IconUpload      from   '../../../../../_utils/Svgs/IconUpload'
-import  IconAdd         from   '../../../../../_utils/Svgs/IconAdd'
+import  Modal           from   '../Modal'
+import  {showModal}     from   '../../_mixins/showModal'
+import  IconArrowRight  from   '../../_utils/Svgs/IconArrowRight'
+import  IconArrowDown   from   '../../_utils/Svgs/IconArrowDown'
+import  IconEdit        from   '../../_utils/Svgs/IconEdit'
+import  IconDelete      from   '../../_utils/Svgs/IconDelete'
+import  IconUpload      from   '../../_utils/Svgs/IconUpload'
+import  IconAdd         from   '../../_utils/Svgs/IconAdd'
 
 export default {
   components: 
@@ -69,7 +69,15 @@ export default {
       console.log(this.$refs[dir]);
       this.$bus.$emit("itemClicked", this.$refs[dir], dir);
     },
-    addChild() {}
+
+    add(){
+      this.$bus.$emit('addChild', this.model.name)
+    },
+
+    upload(){
+      this.$bus.$emit('handleUpload', this.model.name)
+    }
+
   }
 };
 </script>
