@@ -170,33 +170,39 @@ export default {
      *    Obtem todos os repositórios do professor atual e adicionando-os na árvore dos       *
      * repositórios                                                                           *
      *========================================================================================*/
-    getRepositorys(div, dire) {
-      console.log("get repositorys from " + dire);
-      axios
-        .get(`${this.BASE_URL}api/repository`, {
-          headers: { dir: dire, username: this.$route.params.targetName }
-        })
-        .then(res => {
-          let folders = res.data.pastas;
-          console.log("Pastas encontradas em " + dire);
-          console.log(folders);
-          folders.forEach(element => {
-            console.log("element " + element.dir);
-            let instance = new ComponentClass({
-              propsData: {
-                model: { name: element.dir },
-                parent: this.$parent.$children[0]
-              }
+     getRepositorys(div, dire) {
+        console.log("get repositorys from " + dire);
+        axios
+          .get(`${this.BASE_URL}api/repository`, {
+            headers: { dir: dire, username: this.$route.params.targetName }
+          })
+          .then(res => {
+            let folders = res.data.pastas;
+            let files = res.data.arquivos;
+            console.log("Pastas encontradas em " + dire);
+            console.log(folders);
+            console.log("Arquivos encontradas em " + dire);
+            console.log(files);
+            folders.forEach(element => {
+              this.createTreeElement(div, element);
             });
-            //this.components.push(instance);
-            instance.$mount();
-            div.appendChild(instance.$el);
-            //this.$children.push(instance);
-            console.log(this.$children);
+            files.forEach(element => {
+              this.createTreeElement(div, element);
+            });
           });
-        });
-    },
+      },
 
+      createTreeElement(div, element) {
+        console.log("Criando elemento tree > " + element.nome);
+        let instance = new ComponentClass({
+          propsData: {
+            model: { name: element.nome, dir: element.dir }
+          }
+        });
+        instance.$mount();
+        div.appendChild(instance.$el);
+        },
+  
     //RUNS ONE TIME TO GET CURSES FOLDERS
     startRepository() {
       axios
@@ -206,10 +212,10 @@ export default {
         .then(res => {
           let folders = res.data.pastas;
           folders.forEach(element => {
-            this.treeData.push({ name: element.dir });
+            this.treeData.push({ name: element.nome, dir: element.dir });
           });
         });
-    },
+      },
 
     addChild(){
       axios

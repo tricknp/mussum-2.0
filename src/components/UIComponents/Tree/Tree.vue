@@ -1,7 +1,7 @@
 <template>
   <li class="tree-item">
 
-    <div @click="toggle(), itemClicked(model.name)" class="ss">
+    <div @click="toggle(), itemClicked(model.dir)" class="ss">
       <span v-if="isFolder">
         <span v-if="open === false"><IconArrowRight /></span>
         <span v-else><IconArrowDown /></span>
@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <ul v-show="open" v-if="isFolder" :id="model.name" :ref="model.name"></ul>
+    <ul v-show="open" v-if="isFolder" :id="model.dir" :ref="model.dir"></ul>
     
   </li>
 </template>
