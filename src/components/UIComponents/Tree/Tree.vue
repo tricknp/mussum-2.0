@@ -12,8 +12,9 @@
       <div class="tree-buttons">
         <button> <IconEdit   /> </button>
         <button> <IconDelete /> </button>
-        <button  @click="upload"> <IconUpload /> </button>
-        <button  @click="add"> <IconAdd    /> </button>
+        <button v-if="isFolder" @click="upload"> <IconUpload/> </button>
+        <button v-if="isFolder" @click="add"> <IconAdd/> </button>
+        <button v-if="isFolder==false" @click="download"> <IconDownload/> </button>
       </div>
     </div>
 
@@ -23,30 +24,31 @@
 </template>
 
 <script>
-import  Modal           from   '../Modal'
-import  {showModal}     from   '../../_mixins/showModal'
-import  IconArrowRight  from   '../../_utils/Svgs/IconArrowRight'
-import  IconArrowDown   from   '../../_utils/Svgs/IconArrowDown'
-import  IconEdit        from   '../../_utils/Svgs/IconEdit'
-import  IconDelete      from   '../../_utils/Svgs/IconDelete'
-import  IconUpload      from   '../../_utils/Svgs/IconUpload'
-import  IconAdd         from   '../../_utils/Svgs/IconAdd'
+import Modal from "../Modal";
+import { showModal } from "../../_mixins/showModal";
+import IconArrowRight from "../../_utils/Svgs/IconArrowRight";
+import IconArrowDown from "../../_utils/Svgs/IconArrowDown";
+import IconEdit from "../../_utils/Svgs/IconEdit";
+import IconDelete from "../../_utils/Svgs/IconDelete";
+import IconUpload from "../../_utils/Svgs/IconUpload";
+import IconAdd from "../../_utils/Svgs/IconAdd";
+import IconDownload from "../../_utils/Svgs/IconDownload";
 
 export default {
-  components: 
-{ 
+  components: {
     IconArrowRight,
     IconArrowDown,
-    IconEdit, 
+    IconEdit,
     IconDelete,
-    IconUpload, 
-    IconAdd, 
+    IconUpload,
+    IconAdd,
+    IconDownload
   },
-  
+
   props: {
     model: Object
   },
-  
+
   data() {
     return {
       open: false
@@ -55,7 +57,7 @@ export default {
   computed: {
     isFolder: function() {
       //return this.model.children && this.model.children.length;
-      return true;
+      return this.model.isFolder;
     }
   },
   methods: {
@@ -70,20 +72,22 @@ export default {
       this.$bus.$emit("itemClicked", this.$refs[dir], dir);
     },
 
-    add(){
-      this.$bus.$emit('addChild', this.model.name)
+    add() {
+      this.$bus.$emit("addChild", this.model.name);
     },
 
-    upload(){
-      this.$bus.$emit('handleUpload', this.model.name)
-    }
+    upload() {
+      this.$bus.$emit("handleUpload", this.model.name);
+    },
 
+    download() {
+
+    }
   }
 };
 </script>
 
 <style>
-
 .tree-item {
   list-style: none;
   font-size: 1em;
@@ -91,7 +95,7 @@ export default {
   position: relative;
 }
 
-.ss:hover{
+.ss:hover {
   background: #eee;
 }
 

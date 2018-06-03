@@ -184,19 +184,19 @@ export default {
             console.log("Arquivos encontradas em " + dire);
             console.log(files);
             folders.forEach(element => {
-              this.createTreeElement(div, element);
+              this.createTreeElement(div, element, true);
             });
             files.forEach(element => {
-              this.createTreeElement(div, element);
+              this.createTreeElement(div, element, false);
             });
           });
       },
 
-      createTreeElement(div, element) {
+      createTreeElement(div, element, isFolder) {
         console.log("Criando elemento tree > " + element.nome);
         let instance = new ComponentClass({
           propsData: {
-            model: { name: element.nome, dir: element.dir }
+            model: { name: element.nome, dir: element.dir, isFolder: isFolder }
           }
         });
         instance.$mount();
@@ -212,7 +212,7 @@ export default {
         .then(res => {
           let folders = res.data.pastas;
           folders.forEach(element => {
-            this.treeData.push({ name: element.nome, dir: element.dir });
+            this.treeData.push({ name: element.nome, dir: element.dir, isFolder: true });
           });
         });
       },
