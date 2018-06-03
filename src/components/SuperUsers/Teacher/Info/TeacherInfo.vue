@@ -45,6 +45,7 @@ import PublicPhoto        from  "../PublicViews/Photo"
 import PublicDescription  from  "../PublicViews/Description"
 import PublicTabs         from  "../PublicViews/Tabs/Tabs"
 import Aside              from  '../../../FixedComponents/Aside/Aside'
+
 import auth               from  "../../../../services/auth";
 
 export default {
@@ -64,11 +65,11 @@ export default {
   },
   computed: {
     isProfessor: function() {
-      if (auth.getNome() !== null && auth.getRole() !== null) {
-        const nome = auth.getNome().toLowerCase();
+      if (auth.getUsername() !== null && auth.getRole() !== null) {
+        const username = auth.getUsername().toLowerCase();
         const role = auth.getRole();
 
-        return role == "professor" && nome == this.$route.params.targetName;
+        return role == "professor" && username == this.$route.params.targetName;
       }
     }
   },

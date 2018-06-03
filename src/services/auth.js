@@ -9,5 +9,8 @@ export default {
     },
     getNome() {
         return localStorage.getItem('nome');
+    },
+    getUsername(){
+        return localStorage.getItem('username')
     }
 }

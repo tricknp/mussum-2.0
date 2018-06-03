@@ -82,9 +82,10 @@ export default {
           localStorage.setItem("token", token); //Store the token to send it to the back whem an access is needed
           localStorage.setItem("role", role);
           localStorage.setItem("nome", nome);
+          localStorage.setItem("username", this.username)
 
           if (role === "professor") {
-            return this.$router.push(`professor/${nome.toLowerCase()}`);
+            return this.$router.push(`professor/${this.username.toLowerCase()}`);
           } else if (role === "admin") {
             return this.$router.push(`/admin`);
           }
