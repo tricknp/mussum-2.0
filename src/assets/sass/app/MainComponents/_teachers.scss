@@ -40,13 +40,18 @@
         margin: .5em;
         .div-desc-teacher{
             @extend %equal-flex-direction;
+            width: 28.5em;
+            p{
+             font-size: .6em;   
+            }
             .input-teacher-profile{
+                background-color: transparent;
+                width: $full-size;
                 @extend %no-border;
                 color: $dark-grey;
             }
-            .btn-edit{
-                background: transparent;
-                @extend %no-border;
+            .btn-edit
+            {
                 cursor: pointer;
             }
         }
@@ -96,5 +101,6 @@
         padding: 1rem 0;
     }
 }
+
 
 

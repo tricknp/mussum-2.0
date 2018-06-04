@@ -85,7 +85,7 @@ export default {
     },
 
     upload() {
-      this.$bus.$emit("handleUpload", this.model.name);
+      this.$bus.$emit("handleUpload", this.model.dir + "/" + this.model.name);
     },
 
     download() {

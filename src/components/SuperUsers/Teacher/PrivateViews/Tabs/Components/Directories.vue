@@ -40,11 +40,12 @@
     <modal v-if="showUpload" @s="showUp()" id="admin-modal">
       <h1 slot="header">Adicionar arquivo</h1>
       <form slot="content" class="form-admin-modal">
-        <input type="text" placeholder="diretorio" required>
+        <input type="text" ref="fileName" placeholder="nome do arquivo (com extensão)" disabled>
         <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
       </form>
       <div slot="footer">
-           <button @click="submitFile()">dalhe pau</button>
+           <button @click="showUpload=false">CANCELAR</button>
+           <button @click="submitFile()">UPLOAD!</button>
       </div>
     </modal>
 
@@ -113,14 +114,15 @@ export default {
               dir: dir,
               professor: this.$route.params.targetName,
               fileName: fileName
-            }
+            },
+            responseType: "blob"
           })
           .then(res => {
             console.log("Fazendo download file: " + fileName);
             console.log("From directory... " + dir);
 
             var blob = new Blob([res.data], {
-              type: "application/force-download"
+              type: "application/octet-stream"
             });
             var url = window.URL.createObjectURL(blob);
 
@@ -147,6 +149,8 @@ export default {
 
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
+      this.$refs.fileName.value = this.file.name;
+      this.$refs.fileName.removeAttribute('disabled');
     },
 
     submitFile() {
@@ -156,11 +160,13 @@ export default {
         .post(this.BASE_URL + "api/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-            dir: this.dir
+            dir: this.dir,
+            fileName: this.$refs.fileName.value
           }
         })
         .then(res => {
           console.log("brilhou");
+          console.log(this.$refs.fileName.value);
           this.showUpload = false;
         });
     },
