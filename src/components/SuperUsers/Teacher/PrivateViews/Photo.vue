@@ -2,7 +2,7 @@
   <div class="div-teacher-img">
       <imgUpload />
 
-      <img :src="`data:image/png;base64,${img}`" >
+      <!--<img :src="`data:image/png;base64,${img}`" >-->
 
   </div>
  

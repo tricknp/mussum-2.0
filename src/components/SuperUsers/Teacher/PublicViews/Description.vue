@@ -3,7 +3,7 @@
     <h1> {{ name }} </h1>
 
     <div class="div-desc-teacher"> 
-      <p>{{ description }}</p>
+      <p class="p-desc">{{ description }}</p>
     </div>
     
     <div class="div-email-teacher">

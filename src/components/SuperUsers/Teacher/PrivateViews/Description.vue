@@ -3,18 +3,27 @@
     <h1> {{ fullName }} </h1>
 
     <div class="div-desc-teacher">
-      <input type="text" :value="description" placeholder="Sem descrição" class="input-teacher-profile"> 
-    
-      <button type="submit" class="btn-edit">
-        <IconEdit />
-      </button>
+          <input type="text" 
+                :disabled="disabled"
+                placeholder="Sem descrição" 
+                class="input-teacher-profile"
+                ref="desc"
+                :value="description"> 
+          <button type="submit" class="btn-edit" @click="editDesc">
+            <IconEdit />
+          </button> 
     </div>
     
     <div class="div-email-teacher">
       <IconEmail />
-      <input type="text" :value="email" placeholder="Nenhum e-mail informado" class="input-teacher-profile"> 
+      <input type="text"  
+             :disabled="disabled"
+             placeholder="Nenhum e-mail informado" 
+             class="input-teacher-profile"
+             ref="mail"
+             :value="email"> 
     
-      <button type="submit" class="btn-edit">
+      <button type="submit" class="btn-edit" @click="editEmail">
         <IconEdit />
       </button>
     </div>
@@ -43,6 +52,7 @@ export default {
       fullName: '',
       description: '',
       email: '',
+      disabled: true,
     }
   },
 
@@ -64,6 +74,16 @@ export default {
             }
           }
         })
+    },
+
+    editDesc(){
+      this.disabled = false;
+      this.$refs.desc.focus();
+    },
+
+    editEmail(){
+      this.disabled = false;
+      this.$refs.mail.focus();
     }
   },
 
