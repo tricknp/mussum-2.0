@@ -51,6 +51,7 @@ export default {
 
   data() {
     return {
+      clicked: false,
       open: false
     };
   },
@@ -67,9 +68,22 @@ export default {
       }
     },
     itemClicked(dir) {
+<<<<<<< HEAD
       console.log("clicked");
       console.log(this.$refs[dir]);
       this.$bus.$emit("itemClicked", this.$refs[dir], dir);
+=======
+      if (!this.clicked) {
+        console.log("clicked");
+        console.log(this.$refs[dir]);
+        this.$bus.$emit(
+          "itemClicked",
+          this.$refs[dir],
+          dir + "/" + this.model.name
+        );
+        this.clicked = true;
+      }
+>>>>>>> 007a42f73977bb5c63d01611fbda079caa837d0b
     },
 
     add() {
