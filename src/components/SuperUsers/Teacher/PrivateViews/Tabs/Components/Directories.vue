@@ -53,29 +53,24 @@
 
 
 <script>
-import  Vue           from  "vue"
-import  axios         from  "axios"
-import  { url }       from  "../../../../../_mixins/url"
-import  { showModal } from  "../../../../../_mixins/showModal"
-import  IconAdd       from  '../../../../../_utils/Svgs/IconAdd'
-import  tree          from  "../../../../../UIComponents/Tree/Tree"
-import  Modal         from  "../../../../../UIComponents/Modal"
-
+import Vue from "vue";
+import axios from "axios";
+import fs from "fs";
+import { url } from "../../../../../_mixins/url";
+import { showModal } from "../../../../../_mixins/showModal";
+import IconAdd from "../../../../../_utils/Svgs/IconAdd";
+import tree from "../../../../../UIComponents/Tree/Tree";
+import Modal from "../../../../../UIComponents/Modal";
 const ComponentClass = Vue.extend(tree);
-
 export default {
   name: "Directories",
-  
   components: { tree, IconAdd, Modal },
-  
   mixins: [url, showModal],
-  
   props: {
     selected: {
-      default: 'Adicionar curso'
+      default: "Adicionar curso"
     }
   },
-
   data() {
     return {
       dir: null,
@@ -83,58 +78,78 @@ export default {
       treeData: [],
       child: null,
       showUpload: false,
-      file: '',
+      file: ""
     };
   },
-
   created() {
     this.getCourses();
     this.startRepository();
     this.$bus.$on("itemClicked", (div, dire) => {
       console.log(dire);
       this.getRepositorys(div, dire);
-    })
+    });
   },
-
-  mounted(){
-    this.$bus.$on('addChild', (dirs) => {
+  mounted() {
+    this.$bus.$on("addChild", dirs => {
       this.dir = dirs;
       this.showModal = true;
     }),
-    this.$bus.$on('handleUpload', (dirs) => {
-      this.dir = dirs;
-      this.showUpload = true; 
-    })
+      this.$bus.$on("handleUpload", dirs => {
+        this.dir = dirs;
+        this.showUpload = true;
+      }),
+      this.$bus.$on("download", (dir, fileName) => {
+        axios
+          .get(`${this.BASE_URL}api/download`, {
+            headers: {
+              dir: dir,
+              professor: this.$route.params.targetName,
+              fileName: fileName
+            }
+          })
+          .then(res => {
+            console.log("Fazendo download file: " + fileName);
+            console.log("From directory... " + dir);
+            var blob = new Blob([res.data], {
+              type: "application/force-download"
+            });
+            var url = window.URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            document.body.appendChild(a);
+            a.style = "display: none";
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            a.remove();
+            console.log("download feito.");
+          });
+      });
   },
-
   methods: {
-
-    showUp(){
+    showUp() {
       showUpload = true;
     },
-
     getdata() {
       this.formated = this.$refs.tree.reformatData();
     },
-
-    handleFileUpload(){
+    handleFileUpload() {
       this.file = this.$refs.file.files[0];
     },
-
-    submitFile(){
+    submitFile() {
       const formData = new FormData();
       formData.append("files", this.file, this.file.name);
-      axios.post(this.BASE_URL + "api/upload", formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          'dir': this.dir
-        }
-      }).then( res => {
-          console.log('brilhou')
+      axios
+        .post(this.BASE_URL + "api/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            dir: this.dir
+          }
+        })
+        .then(res => {
+          console.log("brilhou");
           this.showUpload = false;
-      })
+        });
     },
-
     /*===================================================*
      *          Getting the courses existing.            *
      *                    - // -                         *
@@ -145,13 +160,11 @@ export default {
         this.cursos = res.data;
       });
     },
-
     /*=================================================*
      *      Add a course to teacher repositories       *
      *                     - // -                      *
      *  Adiciona um curso ao repositório do professor  *
      *=================================================*/
-    
     addCourse() {
       axios
         .post(`${this.BASE_URL}api/repository`, this.dir, {
@@ -170,39 +183,37 @@ export default {
      *    Obtem todos os repositórios do professor atual e adicionando-os na árvore dos       *
      * repositórios                                                                           *
      *========================================================================================*/
-     getRepositorys(div, dire) {
-        console.log("get repositorys from " + dire);
-        axios
-          .get(`${this.BASE_URL}api/repository`, {
-            headers: { dir: dire, username: this.$route.params.targetName }
-          })
-          .then(res => {
-            let folders = res.data.pastas;
-            let files = res.data.arquivos;
-            console.log("Pastas encontradas em " + dire);
-            console.log(folders);
-            console.log("Arquivos encontradas em " + dire);
-            console.log(files);
-            folders.forEach(element => {
-              this.createTreeElement(div, element, true);
-            });
-            files.forEach(element => {
-              this.createTreeElement(div, element, false);
-            });
+    getRepositorys(div, dire) {
+      console.log("get repositorys from " + dire);
+      axios
+        .get(`${this.BASE_URL}api/repository`, {
+          headers: { dir: dire, username: this.$route.params.targetName }
+        })
+        .then(res => {
+          let folders = res.data.pastas;
+          let files = res.data.arquivos;
+          console.log("Pastas encontradas em " + dire);
+          console.log(folders);
+          console.log("Arquivos encontradas em " + dire);
+          console.log(files);
+          folders.forEach(element => {
+            this.createTreeElement(div, element, true);
           });
-      },
-
-      createTreeElement(div, element, isFolder) {
-        console.log("Criando elemento tree > " + element.nome);
-        let instance = new ComponentClass({
-          propsData: {
-            model: { name: element.nome, dir: element.dir, isFolder: isFolder }
-          }
+          files.forEach(element => {
+            this.createTreeElement(div, element, false);
+          });
         });
-        instance.$mount();
-        div.appendChild(instance.$el);
-        },
-  
+    },
+    createTreeElement(div, element, isFolder) {
+      console.log("Criando elemento tree > " + element.nome);
+      let instance = new ComponentClass({
+        propsData: {
+          model: { name: element.nome, dir: element.dir, isFolder: isFolder }
+        }
+      });
+      instance.$mount();
+      div.appendChild(instance.$el);
+    },
     //RUNS ONE TIME TO GET CURSES FOLDERS
     startRepository() {
       axios
@@ -212,31 +223,34 @@ export default {
         .then(res => {
           let folders = res.data.pastas;
           folders.forEach(element => {
-            this.treeData.push({ name: element.nome, dir: element.dir, isFolder: true });
+            this.treeData.push({
+              name: element.nome,
+              dir: element.dir,
+              isFolder: true
+            });
           });
         });
-      },
-
-    addChild(){
+    },
+    addChild() {
       axios
         .post(`${this.BASE_URL}api/repository`, this.dir, {
           headers: { dir: `${this.dir}/${this.child}` }
         })
         .then(res => {
           this.treeData.name = this.dir;
-          console.log("Curso adicionado com sucesso " + `${this.dir}/${this.child}`);
+          console.log(
+            "Curso adicionado com sucesso " + `${this.dir}/${this.child}`
+          );
           this.showModal = false;
-        })
-    },
-  },
-    
+        });
+    }
+  }
 };
 </script>
 
 
 <style>
-.div-select-course
-{
+.div-select-course {
   display: flex;
 }
 </style>

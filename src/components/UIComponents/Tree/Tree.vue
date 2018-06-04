@@ -1,7 +1,7 @@
 <template>
   <li class="tree-item">
 
-    <div @click="toggle(), itemClicked(model.dir)" class="ss">
+    <div @click="toggle(), isFolder ?  itemClicked(model.dir) : null" class="ss">
       <span v-if="isFolder">
         <span v-if="open === false"><IconArrowRight /></span>
         <span v-else><IconArrowDown /></span>
@@ -12,8 +12,8 @@
       <div class="tree-buttons">
         <button> <IconEdit   /> </button>
         <button> <IconDelete /> </button>
-        <button v-if="isFolder" @click="upload"> <IconUpload/> </button>
-        <button v-if="isFolder" @click="add"> <IconAdd/> </button>
+        <button v-if="isFolder"        @click="upload"> <IconUpload/> </button>
+        <button v-if="isFolder"        @click="add"> <IconAdd/> </button>
         <button v-if="isFolder==false" @click="download"> <IconDownload/> </button>
       </div>
     </div>
@@ -33,7 +33,6 @@ import IconDelete from "../../_utils/Svgs/IconDelete";
 import IconUpload from "../../_utils/Svgs/IconUpload";
 import IconAdd from "../../_utils/Svgs/IconAdd";
 import IconDownload from "../../_utils/Svgs/IconDownload";
-
 export default {
   components: {
     IconArrowRight,
@@ -44,13 +43,12 @@ export default {
     IconAdd,
     IconDownload
   },
-
   props: {
     model: Object
   },
-
   data() {
     return {
+      clicked: false,
       open: false
     };
   },
@@ -67,21 +65,26 @@ export default {
       }
     },
     itemClicked(dir) {
-      console.log("clicked");
-      console.log(this.$refs[dir]);
-      this.$bus.$emit("itemClicked", this.$refs[dir], dir);
+      if (!this.clicked) {
+        console.log("clicked");
+        console.log(this.$refs[dir]);
+        this.$bus.$emit(
+          "itemClicked",
+          this.$refs[dir],
+          dir + "/" + this.model.name
+        );
+        this.clicked = true;
+      }
     },
-
     add() {
       this.$bus.$emit("addChild", this.model.name);
     },
-
     upload() {
       this.$bus.$emit("handleUpload", this.model.name);
     },
-
     download() {
-
+      console.log("THIS MODEL DIR " + this.model.dir);
+      this.$bus.$emit("download", this.model.dir, this.model.name);
     }
   }
 };
@@ -94,11 +97,9 @@ export default {
   border-bottom: 1px solid #eee;
   position: relative;
 }
-
 .ss:hover {
   background: #eee;
 }
-
 .tree-buttons {
   position: absolute;
   display: flex;
@@ -107,17 +108,14 @@ export default {
   top: 0.5em;
   cursor: pointer;
 }
-
 .add-tree {
   color: red;
   text-align: right;
 }
-
 .item {
   cursor: pointer;
   padding: 5px;
 }
-
 ul {
   padding-left: 2em;
   line-height: 1.5em;
