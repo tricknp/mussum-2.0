@@ -55,11 +55,14 @@
 <script>
 import  Vue           from  "vue"
 import  axios         from  "axios"
+import  fs            from  "fs"
 import  { url }       from  "../../../../../_mixins/url"
 import  { showModal } from  "../../../../../_mixins/showModal"
 import  IconAdd       from  '../../../../../_utils/Svgs/IconAdd'
 import  tree          from  "../../../../../UIComponents/Tree/Tree"
 import  Modal         from  "../../../../../UIComponents/Modal"
+
+
 
 const ComponentClass = Vue.extend(tree);
 
@@ -104,6 +107,18 @@ export default {
     this.$bus.$on('handleUpload', (dirs) => {
       this.dir = dirs;
       this.showUpload = true; 
+    }),
+    this.$bus.$on('download', (dir, fileName) => {
+      axios
+        .get(`${this.BASE_URL}api/download`, {
+          headers: { dir: dir, professor: this.$route.params.targetName, fileName: fileName }
+        })
+        .then(res => {
+          console.log('Fazendo download file: ' + fileName);
+          console.log('From directory... ' + dir);
+          //fs.writeFileSync('download/fileName', res.data);
+          console.log('download feito.');
+        });
     })
   },
 

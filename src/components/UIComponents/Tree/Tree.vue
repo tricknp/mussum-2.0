@@ -1,7 +1,7 @@
 <template>
   <li class="tree-item">
 
-    <div @click="toggle(), itemClicked(model.dir)" class="ss">
+    <div @click="toggle(), isFolder ?  itemClicked(model.dir) : null" class="ss">
       <span v-if="isFolder">
         <span v-if="open === false"><IconArrowRight /></span>
         <span v-else><IconArrowDown /></span>
@@ -12,8 +12,8 @@
       <div class="tree-buttons">
         <button> <IconEdit   /> </button>
         <button> <IconDelete /> </button>
-        <button v-if="isFolder" @click="upload"> <IconUpload/> </button>
-        <button v-if="isFolder" @click="add"> <IconAdd/> </button>
+        <button v-if="isFolder"        @click="upload"> <IconUpload/> </button>
+        <button v-if="isFolder"        @click="add"> <IconAdd/> </button>
         <button v-if="isFolder==false" @click="download"> <IconDownload/> </button>
       </div>
     </div>
@@ -69,7 +69,11 @@ export default {
     itemClicked(dir) {
       console.log("clicked");
       console.log(this.$refs[dir]);
-      this.$bus.$emit("itemClicked", this.$refs[dir], dir);
+      this.$bus.$emit(
+        "itemClicked",
+        this.$refs[dir],
+        dir + "/" + this.model.name
+      );
     },
 
     add() {
@@ -81,7 +85,9 @@ export default {
     },
 
     download() {
+      console.log("THIS MODEL DIR " + this.model.dir);
 
+      this.$bus.$emit("download", this.model.dir, this.model.name);
     }
   }
 };
