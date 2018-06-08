@@ -11,6 +11,7 @@
 
       <form slot="content" class="form-admin-modal">
           <input type="text"  v-model="professor.nome"  placeholder="nome" required>
+          <input type="text"  v-model="professor.sobrenome"  placeholder="sobrenome" required>
           <input type="email" v-model="professor.email" placeholder="email">
           <input type="text"  v-model="professor.username" placeholder="username" required>
           <input type="text"  v-model="professor.password"  required >
@@ -66,11 +67,11 @@ export default {
       this.datas = JSON.stringify({
         id: this.id,
         nome: this.professor.nome,
+        sobrenome: this.professor.sobrenome,
         email: this.professor.email,
         username: this.professor.username,
         password: this.professor.password
       })
-        console.log('response do datas ' + this.datas)
     },
 
   }

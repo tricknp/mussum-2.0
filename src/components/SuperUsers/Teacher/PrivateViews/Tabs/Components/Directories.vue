@@ -40,11 +40,12 @@
     <modal v-if="showUpload" @s="showUp()" id="admin-modal">
       <h1 slot="header">Adicionar arquivo</h1>
       <form slot="content" class="form-admin-modal">
-        <input type="text" placeholder="diretorio" required>
+        <input type="text" ref="fileName" placeholder="nome do arquivo (com extensão)" disabled>
         <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
       </form>
       <div slot="footer">
-           <button @click="submitFile()">dalhe pau</button>
+           <button @click="showUpload=false">CANCELAR</button>
+           <button @click="submitFile()">UPLOAD!</button>
       </div>
     </modal>
 
@@ -53,15 +54,6 @@
 
 
 <script>
-<<<<<<< HEAD
-import  Vue           from  "vue"
-import  axios         from  "axios"
-import  { url }       from  "../../../../../_mixins/url"
-import  { showModal } from  "../../../../../_mixins/showModal"
-import  IconAdd       from  '../../../../../_utils/Svgs/IconAdd'
-import  tree          from  "../../../../../UIComponents/Tree/Tree"
-import  Modal         from  "../../../../../UIComponents/Modal"
-=======
 import Vue from "vue";
 import axios from "axios";
 import fs from "fs";
@@ -70,23 +62,16 @@ import { showModal } from "../../../../../_mixins/showModal";
 import IconAdd from "../../../../../_utils/Svgs/IconAdd";
 import tree from "../../../../../UIComponents/Tree/Tree";
 import Modal from "../../../../../UIComponents/Modal";
->>>>>>> 007a42f73977bb5c63d01611fbda079caa837d0b
-
 const ComponentClass = Vue.extend(tree);
-
 export default {
   name: "Directories",
-
   components: { tree, IconAdd, Modal },
-
   mixins: [url, showModal],
-
   props: {
     selected: {
       default: "Adicionar curso"
     }
   },
-
   data() {
     return {
       dir: null,
@@ -97,7 +82,6 @@ export default {
       file: ""
     };
   },
-
   created() {
     this.getCourses();
     this.startRepository();
@@ -106,7 +90,6 @@ export default {
       this.getRepositorys(div, dire);
     });
   },
-
   mounted() {
     this.$bus.$on("addChild", dirs => {
       this.dir = dirs;
@@ -123,17 +106,16 @@ export default {
               dir: dir,
               professor: this.$route.params.targetName,
               fileName: fileName
-            }
+            },
+            responseType: "blob"
           })
           .then(res => {
             console.log("Fazendo download file: " + fileName);
             console.log("From directory... " + dir);
-
             var blob = new Blob([res.data], {
-              type: "application/force-download"
+              type: "application/octet-stream"
             });
             var url = window.URL.createObjectURL(blob);
-
             var a = document.createElement("a");
             document.body.appendChild(a);
             a.style = "display: none";
@@ -145,20 +127,18 @@ export default {
           });
       });
   },
-
   methods: {
     showUp() {
       showUpload = true;
     },
-
     getdata() {
       this.formated = this.$refs.tree.reformatData();
     },
-
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
+      this.$refs.fileName.value = this.file.name;
+      this.$refs.fileName.removeAttribute('disabled');
     },
-
     submitFile() {
       const formData = new FormData();
       formData.append("files", this.file, this.file.name);
@@ -166,15 +146,16 @@ export default {
         .post(this.BASE_URL + "api/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
-            dir: this.dir
+            dir: this.dir,
+            fileName: this.$refs.fileName.value
           }
         })
         .then(res => {
           console.log("brilhou");
+          console.log(this.$refs.fileName.value);
           this.showUpload = false;
         });
     },
-
     /*===================================================*
      *          Getting the courses existing.            *
      *                    - // -                         *
@@ -185,13 +166,11 @@ export default {
         this.cursos = res.data;
       });
     },
-
     /*=================================================*
      *      Add a course to teacher repositories       *
      *                     - // -                      *
      *  Adiciona um curso ao repositório do professor  *
      *=================================================*/
-
     addCourse() {
       axios
         .post(`${this.BASE_URL}api/repository`, this.dir, {
@@ -231,7 +210,6 @@ export default {
           });
         });
     },
-
     createTreeElement(div, element, isFolder) {
       console.log("Criando elemento tree > " + element.nome);
       let instance = new ComponentClass({
@@ -242,7 +220,6 @@ export default {
       instance.$mount();
       div.appendChild(instance.$el);
     },
-
     //RUNS ONE TIME TO GET CURSES FOLDERS
     startRepository() {
       axios
@@ -260,7 +237,6 @@ export default {
           });
         });
     },
-
     addChild() {
       axios
         .post(`${this.BASE_URL}api/repository`, this.dir, {

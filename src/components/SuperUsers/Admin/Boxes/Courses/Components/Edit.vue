@@ -10,7 +10,7 @@
       <h1 slot="header">Editar Curso</h1>
 
       <form slot="content" class="form-admin-modal">
-          <input type="text"   :value="curso.titulo" placeholder="nome" required>
+          <input type="text"   v-model="curso.titulo" placeholder="nome" required>
         </form>
 
         <div slot="footer">
@@ -61,7 +61,7 @@ export default {
       this.route = 'api/cursos/',
       this.datas = JSON.stringify({
         id: this.id,
-        titulo: this.titulo,
+        titulo: this.curso.titulo,
       })
     },
 

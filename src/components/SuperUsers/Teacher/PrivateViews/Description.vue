@@ -3,14 +3,19 @@
     <h1> {{ fullName }} </h1>
 
     <div class="div-desc-teacher">
+          <IconResume />
           <input type="text" 
                 :disabled="disabled"
                 placeholder="Sem descrição" 
                 class="input-teacher-profile"
                 ref="desc"
                 :value="description"> 
-          <button type="submit" class="btn-edit" @click="editDesc">
+          <button type="submit" @click="actionDesc" v-if="!editFocused">
             <IconEdit />
+          </button> 
+          
+          <button type="submit" @click="editDesc" v-else>
+            <IconOk />
           </button> 
     </div>
     
@@ -23,9 +28,13 @@
              ref="mail"
              :value="email"> 
     
-      <button type="submit" class="btn-edit" @click="editEmail">
+      <button type="submit" @click="actionMail" v-if="!mailFocused">
         <IconEdit />
-      </button>
+      </button> 
+
+      <button type="submit" @click="editEmail" v-else>
+        <IconOk />
+      </button> 
     </div>
 
 
@@ -34,14 +43,23 @@
 
 
 <script>
-import  axios     from  'axios'
-import  auth      from  "../../../../services/auth";
-import  IconEdit  from  '../../../_utils/Svgs/IconEdit'
-import  IconEmail from '../../../_utils/Svgs/IconEmail'
-import  { url }   from  '../../../_mixins/url'
+import  axios      from  'axios'
+import  auth       from  "../../../../services/auth";
+import  IconOk     from  '../../../_utils/Svgs/IconOk'
+import  IconEdit   from  '../../../_utils/Svgs/IconEdit'
+import  IconResume from  '../../../_utils/Svgs/IconResume'
+import  IconEmail  from '../../../_utils/Svgs/IconEmail'
+import  { url }    from  '../../../_mixins/url'
 
 export default {
-  components: { IconEdit, IconEmail },
+  components: 
+    {
+      IconEdit,
+      IconOk, 
+      IconResume, 
+      IconEmail,  
+
+    },
 
   mixins: [ url ],
 
@@ -53,6 +71,8 @@ export default {
       description: '',
       email: '',
       disabled: true,
+      editFocused: false,
+      mailFocused: false,
     }
   },
 
@@ -76,14 +96,24 @@ export default {
         })
     },
 
-    editDesc(){
-      this.disabled = false;
+    actionDesc(){
+      this.$refs.desc.disabled = false;
+      this.$refs.mail.disabled = true;
       this.$refs.desc.focus();
+      this.editFocused = true;
+      this.mailFocused = false;
     },
 
-    editEmail(){
-      this.disabled = false;
+    actionMail(){
+      this.$refs.mail.disabled = false;
+      this.$refs.desc.disabled = true;
       this.$refs.mail.focus();
+      this.mailFocused = true;
+      this.editFocused = false;
+    },
+
+    editDesc(){
+      alert('cliquei')
     }
   },
 

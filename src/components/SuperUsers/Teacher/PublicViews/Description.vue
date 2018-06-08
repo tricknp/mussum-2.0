@@ -3,6 +3,7 @@
     <h1> {{ name }} </h1>
 
     <div class="div-desc-teacher"> 
+      <IconResume />
       <p class="p-desc">{{ description }}</p>
     </div>
     
@@ -18,11 +19,12 @@
 <script>
 import  axios     from  'axios'
 //import  auth      from  "../../../../services/auth";
+import  IconResume from  '../../../_utils/Svgs/IconResume'
 import  IconEmail from '../../../_utils/Svgs/IconEmail'
 import  { url }   from  '../../../_mixins/url'
 
 export default {
-  components: { IconEmail },
+  components: { IconEmail, IconResume, },
 
   mixins: [ url ],
 
