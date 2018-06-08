@@ -10,8 +10,8 @@
       <h1 slot="header">Editar Diretório</h1>
 
       <form slot="content" class="form-admin-modal">
-          <input type="text" :value="diretorio.titulo" placeholder="titulo" required>
-          <input type="text"   :value="diretorio.titulo" placeholder="link" required>
+          <input type="text" v-model="diretorio.titulo" placeholder="titulo" required>
+          <input type="text"   v-model="diretorio.url" placeholder="link" required>
         </form>
 
         <div slot="footer">
@@ -46,7 +46,6 @@ export default {
     return {
       id: '',
       diretorio : null,
-      url: '',
     };
   },
 
@@ -59,11 +58,11 @@ export default {
 
   methods: {
     postData(){
-      this.route = 'api/professores/',
+      this.route = 'api/diretorios/',
       this.datas = JSON.stringify({
         id: this.id,
-        titulo: this.titulo,
-        url: this.url
+        titulo: this.diretorio.titulo,
+        url: this.diretorio.url
       })
     },
 

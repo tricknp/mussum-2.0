@@ -10,9 +10,9 @@
       <h1 slot="header">Editar Aviso</h1>
 
       <form slot="content" class="form-admin-modal">
-          <input type="text"   :value="aviso.titulo" placeholder="Titulo" required>
-          <input type="text"   :value="aviso.descricao" placeholder="Descrição" required>
-          <input type="text "  :value="aviso.data" placeholder="Data">
+          <input type="text"   v-model="aviso.titulo" placeholder="Titulo" required>
+          <input type="text"   v-model="aviso.descricao" placeholder="Descrição" required>
+          <input type="text "  v-model="aviso.data" placeholder="Data">
         </form>
 
         <div slot="footer">

@@ -10,8 +10,8 @@
       <h1 slot="header">Editar Wiki</h1>
 
       <form slot="content" class="form-admin-modal">
-          <input type="text"   :value="wiki.titulo" placeholder="Titulo" required>
-          <input type="text"  :value="wiki.url" placeholder="Url">
+          <input type="text"   v-model="wiki.titulo" placeholder="Titulo" required>
+          <input type="text"   v-model="wiki.url" placeholder="Url">
         </form>
 
         <div slot="footer">
@@ -46,7 +46,6 @@ export default {
     return {
       id   : '',
       wiki : null,
-      url  : ''
     };
   },
 
@@ -62,8 +61,8 @@ export default {
       this.route = 'api/wikis/',
       this.datas = JSON.stringify({
         id: this.id,
-        titulo: this.titulo,
-        url: this.url
+        titulo: this.wiki.titulo,
+        url: this.wiki.url
       })
     },
 
