@@ -174,8 +174,15 @@
     {
         margin-top: .9em;
     }
+
 }
 
+.div-checkbox-teacher
+{
+    @extend %equal-flex-display;
+    flex-direction: row;
+    justify-content: space-around;
+}
 
 /*============== Activities ==============*/
 .div-activities

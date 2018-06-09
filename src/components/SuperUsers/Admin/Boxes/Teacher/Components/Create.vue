@@ -10,6 +10,18 @@
       <h1 slot="header">Adicionar Professor</h1>
 
       <form slot="content" class="form-admin-modal">
+          <div class="div-checkbox-teacher">
+            <div class="div-checkbox-admin">
+              <input type="checkbox" name="admin">
+              <label for="admin">Admin</label>
+            </div>
+          
+            <div class="div-checkbox-teacher">
+              <input type="checkbox" name="professor" >
+              <label for="professor">Professor</label>
+            </div>
+          </div>
+
           <input type="text" placeholder="Nome" name="nome" v-model="nome" required>
           <input type="text" placeholder="Sobrenome" name="sobrenome" v-model="sobrenome" required>
           <input type="text" placeholder="Descrição" name="sobre" v-model="sobre">

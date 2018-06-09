@@ -1,6 +1,6 @@
 <template>
   <div class="teacher-description">
-    <h1> {{ fullName }} </h1>
+    <h1> {{ `${teacher.nome} ${teacher.sobrenome}` }} </h1>
 
     <div class="div-desc-teacher">
           <IconResume />
@@ -9,12 +9,12 @@
                 placeholder="Sem descrição" 
                 class="input-teacher-profile"
                 ref="desc"
-                :value="description"> 
+                v-model="teacher.sobre"> 
           <button type="submit" @click="actionDesc" v-if="!editFocused">
             <IconEdit />
           </button> 
           
-          <button type="submit" @click="editDesc" v-else>
+          <button type="submit" @click.prevent="onSubmit" v-else>
             <IconOk />
           </button> 
     </div>
@@ -26,13 +26,13 @@
              placeholder="Nenhum e-mail informado" 
              class="input-teacher-profile"
              ref="mail"
-             :value="email"> 
+             v-model="teacher.email"> 
     
       <button type="submit" @click="actionMail" v-if="!mailFocused">
         <IconEdit />
       </button> 
 
-      <button type="submit" @click="editEmail" v-else>
+      <button type="submit" @click.prevent="onSubmit" v-else>
         <IconOk />
       </button> 
     </div>
@@ -50,6 +50,7 @@ import  IconEdit   from  '../../../_utils/Svgs/IconEdit'
 import  IconResume from  '../../../_utils/Svgs/IconResume'
 import  IconEmail  from '../../../_utils/Svgs/IconEmail'
 import  { url }    from  '../../../_mixins/url'
+import  { edit }   from  '../../../_mixins/edit'
 
 export default {
   components: 
@@ -61,15 +62,14 @@ export default {
 
     },
 
-  mixins: [ url ],
+  mixins: [ url, edit ],
 
   data() {
     return {
+      teacher: '',
+      id: '',
       role: auth.getRole(),
       username: auth.getUsername(),
-      fullName: '',
-      description: '',
-      email: '',
       disabled: true,
       editFocused: false,
       mailFocused: false,
@@ -86,11 +86,13 @@ export default {
         .get(`${this.BASE_URL}api/professores`)
         .then(res => {
           let t = res.data
-          for( let i = 0; i<t.length; i++){
+          for( let i = 0; i < t.length; i++){
             if (this.username == t[i].username && this.username != '') {
-              this.fullName = `${t[i].nome} ${t[i].sobrenome}`
-              this.description = t[i].sobre
-              this.email = t[i].email
+              this.teacher = t[i];
+              this.id = t[i].id
+              //this.fullName = `${t[i].nome} ${t[i].sobrenome}`
+              //this.description = t[i].sobre
+              //this.email = t[i].email
             }
           }
         })
@@ -100,7 +102,7 @@ export default {
       this.$refs.desc.disabled = false;
       this.$refs.mail.disabled = true;
       this.$refs.desc.focus();
-      this.editFocused = true;
+      this.editFocused = true;  
       this.mailFocused = false;
     },
 
@@ -112,10 +114,23 @@ export default {
       this.editFocused = false;
     },
 
-    editDesc(){
-      alert('cliquei')
-    }
-  },
+    postData(){
+      //route to post teacher
+      this.route = 'api/professores/',
+
+      this.datas = JSON.stringify({
+        id: this.id,
+        email: this.teacher.email,
+        sobre: this.teacher.sobre,
+      })
+
+      this.$refs.mail.disabled = true;
+      this.$refs.desc.disabled = true;
+      this.editFocused = false;  
+      this.mailFocused = false;
+    },
+
+  }
 
 }
 </script>

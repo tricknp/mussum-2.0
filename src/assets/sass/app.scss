@@ -7,6 +7,7 @@
 @import 'app/MainComponents/footer';
 @import 'app/MainComponents/superusers-boxes';
 @import 'app/MainComponents/teachers';
+@import 'app/MainComponents/feed';
 
 //UI icons
 @import 'app/UIComponents/icons';
@@ -19,5 +20,6 @@
 //views
 @import 'app/MainComponents/login';
 
-//reset
+//responsive and reset
+@import 'app/Responsive/responsive';
 @import 'app/Reset/reset';

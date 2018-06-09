@@ -1,10 +1,10 @@
 #aside
 {
     position: absolute;
-    top: 4.3em;
-    right: 10em;
+    top: 3.5em;
+    right: 14em;
     height: 80vh;
-    width: 17%;
+    width: 23%;
 }
 
 .aside-head
@@ -12,7 +12,7 @@
     border-radius: $default-radius + 1px;
     width: $full-size;
     border: $light-border $medium-grey;
-    background-color: $light-grey;
+    background-color: $absolute-white;
 
     h1{
         font-size: $default-size;
