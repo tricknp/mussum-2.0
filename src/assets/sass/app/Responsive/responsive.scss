@@ -1,1 +1,66 @@
 //============================== max width 1680 ==============================//
+
+
+@media screen and (max-width: 1680px) { 
+    // ---> home <---
+    .home-container
+    {
+        width: 71%;
+    }
+    
+    #aside
+    {
+        width: 40%
+    }
+}
+
+@media screen and (max-width: 1600px) { 
+    // ---> home <---
+    .home-container
+    {
+        width: 72%;
+        height: 87vh;
+        margin: .5% auto;
+    }
+}
+
+@media screen and (max-width: 1440px){
+    // ---> home <---
+    .home-container
+    {
+        width: 75.5%;
+    }
+}
+
+@media screen and (max-width: 1366px){
+    // ---> home <---
+    .home-container
+    {
+        width: 77%;
+        height: 83.2vh;
+        margin: .4% auto;
+    }
+
+}
+
+@media screen and (max-width: 1280px){
+    // ---> home <---
+    .home-container
+    {
+        width: 80%;
+        height: 82.5vh;
+        margin: .3% auto;
+    }
+}
+
+@media screen and (max-width: 1024px){
+    // ---> home <---
+
+
+    .home-container
+    {
+        width: 80%;
+        height: 83.5vh;
+        margin: .3% auto;
+    }
+}

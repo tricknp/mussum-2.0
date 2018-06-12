@@ -6,12 +6,12 @@
     height: 100%;
     margin-left: .7%;
     width: 35%;
-    border: $light-border $light-grey;
-    border-radius: 4px;
 }
 
 .div-dir-home, .div-wikis-home
 {
+    border-radius: 4px;
+    border: $light-border $light-grey;
     height: 49.5%;
     background-color: $absolute-white;
     width: $full-size;
@@ -21,7 +21,7 @@
 
 .div-wikis-home
 {
-    margin-top: -.9%;
+    margin-top: -1%;
 }
 
 .div-dir-home

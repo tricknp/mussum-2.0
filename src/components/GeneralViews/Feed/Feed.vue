@@ -56,7 +56,7 @@ export default {
                     console.log(element)
                     if (element.tipo == 'upload') {          
                         this.type = 'upload'
-                    a.push({
+                    a.unshift({
                           professor: element.professor,
                           dir: element.dir,
                           arquivo: element.arquivo,
@@ -65,7 +65,7 @@ export default {
                       })
                     }else if(element.tipo == 'recado'){
                         this.type = 'recado'
-                        a.push({
+                        a.unshift({
                           professor: element.professor,
                           titulo: element.titulo,
                           comentario: element.comentario,

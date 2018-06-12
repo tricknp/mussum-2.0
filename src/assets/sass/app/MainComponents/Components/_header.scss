@@ -17,10 +17,9 @@
     .center-header
     {
         @extend %equal-flex-items;
-        justify-content: space-between;
-        width: 28%;
+        justify-content: center;
+        width: $full-size;
         margin-left: -43%;
-
         
         .search
         {
