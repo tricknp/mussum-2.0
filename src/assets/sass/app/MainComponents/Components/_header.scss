@@ -52,12 +52,18 @@
                 font-weight: $default-weight;
                 font-size: $default-size;
                 text-indent: $input-indent;
-                color: $medium-grey;
+                color: $light-grey;
                 background-color: $clear-blue;
                 //padding: 6px 0;
                 border-radius: 5px 0 0 5px;
                 border: none;
             }
+            
+            .input-search::placeholder
+            {
+                color: $light-grey;
+            }
+
         }
         
         

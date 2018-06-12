@@ -1,25 +1,30 @@
 <template>
     <div class="feed">
-        <div  v-for="content in feedContent" :key="content.id">
 
-            <div v-if="type === 'upload'">
-                <img src="#">
-                <p> {{ `${content.professor} ${textUpload} ${content.dir}` }} </p>
-                <p> {{ content.arquivo }} </p>
-                <p> {{ content.comentario }} </p>
-                <p> {{ content.dataCriacao }} </p>
-                <br>
+        <h1 class="feed-title"> Atividades </h1>
+
+        <div class="feed-container">
+            <div  v-for="content in feedContent" :key="content.id" >
+                <div class="feed-types">
+                    <div v-if="content.tipo == 'upload'" class="feed-upload">
+                        <img src="#">
+                        <p> <b>{{ content.professor }}</b> {{textUpload}} <b>{{ content.dir }}</b> </p>
+                        <p> <b>{{ content.arquivo }}</b> </p>
+                        <p> {{ content.comentario }} </p>
+                        <p> {{ content.dataCriacao }} </p>
+                        <br>
+                    </div>
+
+                    <div v-if="content.tipo == 'recado'">
+                        <img src="#">
+                        <p> <b>{{ content.professor }}</b> {{ textRecado }} </p>
+                        <p> {{ `${content.titulo}` }} </p>
+                        <p> {{ `${content.comentario}` }} </p>
+                        <p> {{ content.dataCriacao }} </p>
+                        <br>
+                    </div>
+                </div>
             </div>
-
-            <div v-if="type == 'recado'">
-                <img src="#">
-                <p> {{ `${content.professor} ${textRecado}` }} </p>
-                <p> {{ `${content.titulo}` }} </p>
-                <p> {{ `${content.comentario}` }} </p>
-                <p> {{ content.dataCriacao }} </p>
-                <br>
-            </div>
-
         </div>
     </div>    
 </template>
@@ -33,8 +38,7 @@ export default {
 
     data(){
         return{
-            feedContent: '', 
-            type: '',
+            feedContent: '',
             textUpload: 'adicionou um novo arquivo em',
             textRecado: 'adicionou um novo recado.'
         }
@@ -55,8 +59,8 @@ export default {
                 contents.forEach(element => {
                     console.log(element)
                     if (element.tipo == 'upload') {          
-                        this.type = 'upload'
                     a.unshift({
+                          tipo: 'upload',
                           professor: element.professor,
                           dir: element.dir,
                           arquivo: element.arquivo,
@@ -64,8 +68,8 @@ export default {
                           dataCriacao: element.dataCriacao
                       })
                     }else if(element.tipo == 'recado'){
-                        this.type = 'recado'
                         a.unshift({
+                          tipo: 'recado',
                           professor: element.professor,
                           titulo: element.titulo,
                           comentario: element.comentario,
@@ -74,7 +78,7 @@ export default {
                     }
                 });
 
-                this.feedContent = a;
+                this.feedContent = a;   
                 console.log(this.feedContent)
             })
         }

@@ -6,19 +6,51 @@
     background-color: $absolute-white;
     width: 65%;
     height: 100%;
-    max-height: 100%;
-    overflow: auto;
     border: $light-border $light-grey;
     border-radius: 4px;
-
+    
     .feed-title
     {
-        font-size: 1.4em;
-        border-bottom: 2.5px solid $medium-grey;
+        font-size: 1.3em;
+        border-bottom: 2px solid $medium-grey;
         text-indent: 1em;
-        width: 95%;
-        margin: 2%;
+        width: 97%;
+        margin: 2.2% auto;
+    
+    }
+    .feed-container
+    {
+        height: 100%;
+        max-height: 100%;
+        overflow: auto;
+        width: 98%;
+        margin: auto;
+
+
+        .feed-types
+        {
+            width: 97%;
+            margin: 1% auto;
+            
+            .feed-upload
+            {
+                border: $light-border $light-grey;
+            }
+        }
+        
     }
 
+    .feed-container::-webkit-scrollbar
+    {
+        
+        width: 7px;
+        background-color: $absolute-white;
+    }
 
+    .feed-container::-webkit-scrollbar-thumb
+    {
+        border-radius: 7px;
+        background-color: rgba(202, 200, 200, 0.904);
+    }
 }
+
