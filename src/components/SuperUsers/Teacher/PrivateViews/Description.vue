@@ -9,7 +9,7 @@
                 placeholder="Sem descrição" 
                 class="input-teacher-profile"
                 ref="desc"
-                v-model="teacher.sobre"> 
+                v-model="teacher.descricao"> 
           <button type="submit" @click="actionDesc" v-if="!editFocused">
             <IconEdit />
           </button> 
@@ -90,6 +90,7 @@ export default {
             if (this.username == t[i].username && this.username != '') {
               this.teacher = t[i];
               this.id = t[i].id
+              console.log(t)
               //this.fullName = `${t[i].nome} ${t[i].sobrenome}`
               //this.description = t[i].sobre
               //this.email = t[i].email
@@ -121,7 +122,7 @@ export default {
       this.datas = JSON.stringify({
         id: this.id,
         email: this.teacher.email,
-        sobre: this.teacher.sobre,
+        descricao: this.teacher.descricao,
       })
 
       this.$refs.mail.disabled = true;

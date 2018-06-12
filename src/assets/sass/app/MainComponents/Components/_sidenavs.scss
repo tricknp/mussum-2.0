@@ -1,0 +1,60 @@
+#aside
+{
+    @extend %equal-flex-display;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 100%;
+    margin-left: .7%;
+    width: 35%;
+    border: $light-border $light-grey;
+    border-radius: 4px;
+}
+
+.div-dir-home, .div-wikis-home
+{
+    height: 49.5%;
+    background-color: $absolute-white;
+    width: $full-size;
+    display: flex;
+    justify-content: center;
+}
+
+.div-wikis-home
+{
+    margin-top: -.9%;
+}
+
+.div-dir-home
+{
+    margin-bottom: -1%;
+}
+
+
+.div-aside-home
+{
+    width: 95%;
+
+    .aside-head
+    {
+        margin-top: 1em;
+        width: $full-size;
+        text-indent: 1em;
+        font-size: 1.3em; 
+        border-bottom: solid 2px $clear-blue;
+        
+        .title-home-aside
+        {
+            margin-top: 2.5%;
+        }
+        
+    }
+    
+    .home-aside-container
+    {
+        overflow: auto;
+        height: 88%;
+        max-height: 88%;
+        margin-top: 1.6%;
+    }
+}
+

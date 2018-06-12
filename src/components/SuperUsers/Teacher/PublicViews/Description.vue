@@ -52,7 +52,7 @@ export default {
              if (this.$route.params.targetName == t[i].username) {
                this.name = `${t[i].nome} ${t[i].sobrenome}`;
                this.email = t[i].email;
-               this.description = t[i].sobre;
+               this.description = t[i].descricao;
              }
            }
         })

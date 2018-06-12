@@ -24,7 +24,7 @@
 
         <div slot="footer" class="small-messages">
           <h1 class="login-fail" v-show="fail">{{status}}</h1>
-          <p>Esqueceu sua senha?</p>
+          <p @click="forgotPass" class="forgotPass"> Esqueceu sua senha? </p>
         </div>
     </modal>
 
@@ -96,7 +96,19 @@ export default {
           console.log(error)
           this.fail = true
         });
+    },
+
+    forgotPass(){
+      alert('Bem feitis!')
     }
   }
 };
 </script>
+
+<style>
+  .forgotPass
+  {
+    cursor: pointer;
+  }
+</style>
+

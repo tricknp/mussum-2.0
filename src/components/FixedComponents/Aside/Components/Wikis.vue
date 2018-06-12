@@ -1,16 +1,19 @@
 <template>
-    <div class="div-links">
-        <div class="aside-head"> 
-            <slot name="header">
-                <h1> {{ title }} </h1>
-            </slot>    
-        </div>
-        <div class="links-container">
-            <slot name="content">    
-                <h1 v-for="wiki in wikis" :key="wiki.titulo"> 
-                    {{ wiki.titulo }} 
-                </h1>
-            </slot>    
+    <div class="div-wikis-home">
+        
+        <div class="div-aside-home">
+            <div class="aside-head"> 
+                <slot name="header">
+                    <h1 class="title-home-aside"> {{ title }} </h1>
+                </slot>    
+            </div>
+            <div class="home-aside-container">
+                <slot name="content">    
+                    <h1 v-for="wiki in wikis" :key="wiki.titulo"> 
+                        {{ wiki.titulo }} 
+                    </h1>
+                </slot>    
+            </div>
         </div>
 
     </div>

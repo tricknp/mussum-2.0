@@ -1,0 +1,105 @@
+/*======== Using in header ========*/
+%equal-flex-items
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+/*======== usings at admin page, feed and sidenavs ========*/
+%equal-flex-display
+{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+%default-header
+{
+    @extend %equal-flex-display;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    h1
+    {
+        font-size: $default-size;
+        color: $black-background;
+        font-weight: $default-weight + 150;
+        padding: .6em 0; 
+        margin-left: .3em;
+    }  
+
+    .div-adm-button
+    {
+        @extend %equal-flex-display;
+        margin-right: 3px;
+    }
+
+    .adm-button
+    {
+        background-color: transparent;
+        font-weight: $default-weight + 150;
+        font-size: $default-size + .2em;
+        border: $none;
+        cursor: pointer;
+        margin: 0 -3%;            
+    }
+}
+
+%default-box
+{
+    width: $full-size;
+    border: $light-border $medium-grey;
+    border-radius: $default-radius + 1px;
+    background-color: $light-grey;
+}
+
+
+%equal-width
+{
+    width: 22em;
+}
+
+%equal-left-box-content
+{
+    overflow: auto;
+    height: 16.75em;
+    max-height: 16.8em;
+}
+
+%equal-right-box-content
+{
+    overflow: auto;
+    height: 10.3em;
+    max-height: 10.1em;
+}
+
+
+/*======== Using in sidenavs ========*/
+%equal-border
+{
+    border: $light-border $medium-grey;
+    border-radius: 0 0 3px 3px;
+    margin-top: -1px;
+}
+
+
+/*======== Using in teachers ========*/
+%equal-flex-direction
+{
+    display: flex;
+    flex-direction: row;
+}
+
+%no-border
+{
+    border: none;
+}
+
+
+/*======== Using in icons ========*/
+%hover-transition
+{
+    transition: ease .35s;
+}

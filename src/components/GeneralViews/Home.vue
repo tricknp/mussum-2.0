@@ -1,9 +1,15 @@
 <template>
   <section class="home">
+      
       <Header />
-      <Feed   />
-      <Aside  />
+      
+      <div class="home-container">
+        <Feed   />
+        <Aside  />
+      </div>
+     
       <Footer />
+
   </section>
 </template>
  

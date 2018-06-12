@@ -1,0 +1,8 @@
+.home-container
+{
+    @extend %equal-flex-items;
+    justify-content: space-around;
+    margin: .35% auto;
+    width: 67%;
+    height: 90vh;
+}

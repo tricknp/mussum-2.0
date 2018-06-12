@@ -1,8 +1,3 @@
-%hover-transition
-{
-    transition: ease .35s;
-}
-
 .icon 
 {   
     padding: .22em;
@@ -50,6 +45,11 @@
 .icon-resume
 {
     padding: .2em;
+}
+
+.icon-search
+{
+    fill: $light-grey;
 }
 
 

@@ -1,17 +1,17 @@
 .feed
 {
-    background-color: $absolute-white;
-    display: flex;
+    @extend %equal-flex-display;
     flex-direction: column;
-    width: 50%;
-    height: 84vh;
-    margin: .5% 0% 1% 13%;
-    border: $light-border $medium-grey;
+    //flex-grow: 1;
+    background-color: $absolute-white;
+    width: 65%;
+    height: 90vh;
+    max-height: 90vh;
+    border: $light-border $light-grey;
     border-radius: 4px;
 
     .feed-title
     {
-
         font-size: 1.4em;
         border-bottom: 2.5px solid $medium-grey;
         text-indent: 1em;

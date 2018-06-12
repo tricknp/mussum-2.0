@@ -31,7 +31,9 @@ export default {
   methods:{
     init(){
       axios
-        .get(`${this.BASE_URL}api/recados`)
+        .get(`${this.BASE_URL}api/recados`, {
+          headers: { 'username': this.$route.params.targetName }
+        })
         .then( res => {
           this.scraps = res.data;
         })

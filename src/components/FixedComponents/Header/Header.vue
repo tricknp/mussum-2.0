@@ -1,19 +1,18 @@
 <template>
     
     <header class="head">
-        <div class="div-icon-search">
+        <div class="header-container">
             <router-link :to="{path:'/'}"> 
                 <img :src="logo" id="logo">
             </router-link>
             
-            <div class="search">
-                <input type="text" class="input-search" placeholder="Procuraris">
-                <!--<i class="material-icons" id="search-icon">search</i>-->
+            <div class="center-header">
+                <Search  />
+                <NavList />
             </div>
-         </div> 
-
-        <NavList />
-        <MenuBar />
+            
+            <MenuBar />
+        </div>
 
     </header>
     
@@ -22,6 +21,7 @@
 <script>
 import MenuBar from './MenuBar'
 import NavList from './NavList'
+import Search from './Search'
 
 export default {
   name: 'Header',
@@ -30,6 +30,7 @@ export default {
   {
       MenuBar,
       NavList,
+      Search,
   },
 
   data(){

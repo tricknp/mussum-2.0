@@ -1,13 +1,18 @@
-//variables
-@import 'app/Variables/variables';
+//variables, mixins and placeholders
+@import 'app/_Variables/variables';
+@import 'app/_Placeholders/placeholders';
 
 //components
-@import 'app/MainComponents/header';
-@import 'app/MainComponents/sidenavs';
-@import 'app/MainComponents/footer';
-@import 'app/MainComponents/superusers-boxes';
-@import 'app/MainComponents/teachers';
-@import 'app/MainComponents/feed';
+@import 'app/MainComponents/Components/header';
+@import 'app/MainComponents/Components/sidenavs';
+@import 'app/MainComponents/Components/footer';
+@import 'app/MainComponents/Components/superusers-boxes';
+@import 'app/MainComponents/Components/feed';
+
+//Pages
+@import 'app/MainComponents/Pages/teachers';
+@import 'app/MainComponents/Pages/login';
+@import 'app/MainComponents/Pages/home';
 
 //UI icons
 @import 'app/UIComponents/icons';
@@ -17,8 +22,6 @@
 @import 'app/UIComponents/modal';
 @import 'app/UIComponents/dropzone';
 
-//views
-@import 'app/MainComponents/login';
 
 //responsive and reset
 @import 'app/Responsive/responsive';
