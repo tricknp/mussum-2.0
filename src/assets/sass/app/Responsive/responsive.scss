@@ -30,6 +30,11 @@
     {
         width: 75.5%;
     }
+
+    .div-aside-container
+    {
+        max-height: 84%;
+    }
 }
 
 @media screen and (max-width: 1366px){
@@ -41,6 +46,11 @@
         margin: .4% auto;
     }
 
+    .div-aside-container
+    {
+        max-height: 76.6%;
+    }
+
 }
 
 @media screen and (max-width: 1280px){
@@ -50,6 +60,11 @@
         width: 80%;
         height: 82.5vh;
         margin: .3% auto;
+    }
+
+    .div-aside-container
+    {
+        max-height: 79%;
     }
 }
 

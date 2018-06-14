@@ -33,6 +33,8 @@
 .div-aside-home
 {
     width: 95%;
+    height: $full-size;
+    
 
     .aside-head
     {
@@ -47,14 +49,26 @@
             margin-top: 2.5%;
         }
         
-    }
-    
-    .home-aside-container
-    {
-        overflow: auto;
-        height: 88%;
-        max-height: 88%;
-        margin-top: 1.6%;
+        
     }
 }
 
+.div-aside-container
+{
+    overflow: auto;
+    max-height: 85%;
+    margin-top: 1.6%; 
+}
+
+.div-aside-container::-webkit-scrollbar
+    {
+        
+        width: 7px;
+        background-color: $absolute-white;
+    }
+
+    .div-aside-container::-webkit-scrollbar-thumb
+    {
+        border-radius: 7px;
+        background-color: rgba(202, 200, 200, 0.904);
+    }

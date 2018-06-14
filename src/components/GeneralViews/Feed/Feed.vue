@@ -6,13 +6,18 @@
         <div class="feed-container">
             <div  v-for="content in feedContent" :key="content.id" >
                 <div class="feed-types">
+                    
                     <div v-if="content.tipo == 'upload'" class="feed-upload">
                         <img src="#">
-                        <p> <b>{{ content.professor }}</b> {{textUpload}} <b>{{ content.dir }}</b> </p>
-                        <p> <b>{{ content.arquivo }}</b> </p>
-                        <p> {{ content.comentario }} </p>
-                        <p> {{ content.dataCriacao }} </p>
-                        <br>
+                        <div class="feed-text-content">
+                            <p> 
+                                <b>{{ content.professor }}</b> {{textUpload}} 
+                                <b class="feed-link-place"> {{ content.dir }}</b>
+                            </p>
+                            <p> <b class="feed-archive-name">{{ content.arquivo }}</b> </p>
+                            <p> {{ content.comentario }} </p>
+                        </div>
+                        <p class="feed-date"> {{ content.dataCriacao }} </p>
                     </div>
 
                     <div v-if="content.tipo == 'recado'">
@@ -21,8 +26,8 @@
                         <p> {{ `${content.titulo}` }} </p>
                         <p> {{ `${content.comentario}` }} </p>
                         <p> {{ content.dataCriacao }} </p>
-                        <br>
                     </div>
+                
                 </div>
             </div>
         </div>

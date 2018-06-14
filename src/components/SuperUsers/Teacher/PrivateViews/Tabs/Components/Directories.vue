@@ -42,6 +42,7 @@
       <form slot="content" class="form-admin-modal">
         <input type="text" ref="fileName" placeholder="nome do arquivo (com extensão)" disabled>
         <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+        <input type="text" v-model="comment">
       </form>
       <div slot="footer">
            <button @click="showUpload=false">CANCELAR</button>
@@ -79,7 +80,8 @@ export default {
       treeData: [],
       child: null,
       showUpload: false,
-      file: ""
+      file: "",
+      comment: ''
     };
   },
   created() {
@@ -147,7 +149,8 @@ export default {
           headers: {
             "Content-Type": "multipart/form-data",
             dir: this.dir,
-            fileName: this.$refs.fileName.value
+            fileName: this.$refs.fileName.value,
+            comment: this.comment
           }
         })
         .then(res => {

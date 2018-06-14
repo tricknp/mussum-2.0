@@ -7,11 +7,13 @@
                     <h1 class="title-home-aside"> {{ title }} </h1>
                 </slot>    
             </div>
-            <div class="home-aside-container">
+            <div class="div-aside-container">
                 <slot name="content">    
-                    <h1 v-for="wiki in wikis" :key="wiki.titulo"> 
-                        {{ wiki.titulo }} 
-                    </h1>
+                    <div class="home-aside-container">
+                        <h1 v-for="wiki in wikis" :key="wiki.titulo"> 
+                            {{ wiki.titulo }} 
+                        </h1>
+                    </div>
                 </slot>    
             </div>
         </div>

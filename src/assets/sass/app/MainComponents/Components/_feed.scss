@@ -12,10 +12,10 @@
     .feed-title
     {
         font-size: 1.3em;
-        border-bottom: 2px solid $medium-grey;
+        border-bottom: 2px solid $clear-blue;
         text-indent: 1em;
         width: 97%;
-        margin: 2.2% auto;
+        margin: 2.75% auto;
     
     }
     .feed-container
@@ -31,10 +31,37 @@
         {
             width: 97%;
             margin: 1% auto;
-            
+            font-size: $default-size - .1em;
+
             .feed-upload
             {
                 border: $light-border $light-grey;
+                
+                .feed-text-content
+                {
+                    margin: auto 5%;
+                }
+
+                .feed-date
+                {
+                    text-align: right;
+                    margin-right: 1%;
+                    color: $dark-background;
+                    font-size: .8em;
+                    font-weight: 600;
+                }
+
+                .feed-link-place
+                {
+                    color: $medium-blue;
+                    cursor: pointer;
+                }  
+                
+                .feed-archive-name
+                {
+                    @extend .feed-link-place;
+                    font-size: $default-size - .22em;
+                }             
             }
         }
         
