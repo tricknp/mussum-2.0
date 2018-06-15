@@ -12,9 +12,11 @@
       <div class="tree-buttons">
         <button> <IconEdit   /> </button>
         <button> <IconDelete /> </button>
-        <button v-if="isFolder"        @click="upload"> <IconUpload/> </button>
-        <button v-if="isFolder"        @click="add"> <IconAdd/> </button>
-        <button v-if="isFolder==false" @click="download"> <IconDownload/> </button>
+        <button v-if="isFolder"   @click="upload"> <IconUpload/> </button>
+        <button v-if="isFolder"   @click="add"> <IconAdd/> </button>
+        <button v-if="isVisible"  @click="toggleVisible"> esconder </button>
+        <button v-if="!isVisible" @click="toggleVisible"> publicar </button>
+        <button v-if="!isFolder"  @click="download"> <IconDownload/> </button>
       </div>
     </div>
 
@@ -56,6 +58,10 @@ export default {
     isFolder: function() {
       //return this.model.children && this.model.children.length;
       return this.model.isFolder;
+    },
+    isVisible: function() {
+      //return this.model.children && this.model.children.length;
+      return this.model.isVisible;
     }
   },
   methods: {
@@ -83,8 +89,10 @@ export default {
       this.$bus.$emit("handleUpload", this.model.dir + "/" + this.model.name);
     },
     download() {
-      console.log("THIS MODEL DIR " + this.model.dir);
       this.$bus.$emit("download", this.model.dir, this.model.name);
+    },
+    toggleVisible() {
+      this.$bus.$emit("toggleVisible", this.model.dir, this.model.name);
     }
   }
 };

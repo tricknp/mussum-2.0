@@ -81,7 +81,7 @@ export default {
       child: null,
       showUpload: false,
       file: "",
-      comment: ''
+      comment: ""
     };
   },
   created() {
@@ -127,6 +127,25 @@ export default {
             a.remove();
             console.log("download feito.");
           });
+      }),
+      this.$bus.$on("toggleVisible", (dir, fileName) => {
+        axios
+          .post(
+            `${this.BASE_URL}api/togglevisible`,
+            {},
+            {
+              headers: {
+                dir: dir,
+                fileName: fileName
+              }
+            }
+          )
+          .then(res => {
+            console.log("TOGGLE: " + fileName);
+            console.log("From directory... " + dir);
+            console.log(res);
+            console.log("toggle feito.");
+          });
       });
   },
   methods: {
@@ -139,7 +158,7 @@ export default {
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
       this.$refs.fileName.value = this.file.name;
-      this.$refs.fileName.removeAttribute('disabled');
+      this.$refs.fileName.removeAttribute("disabled");
     },
     submitFile() {
       const formData = new FormData();
@@ -217,7 +236,12 @@ export default {
       console.log("Criando elemento tree > " + element.nome);
       let instance = new ComponentClass({
         propsData: {
-          model: { name: element.nome, dir: element.dir, isFolder: isFolder }
+          model: {
+            name: element.nome,
+            dir: element.dir,
+            isFolder: isFolder,
+            isVisible: element.visivel
+          }
         }
       });
       instance.$mount();
@@ -235,7 +259,8 @@ export default {
             this.treeData.push({
               name: element.nome,
               dir: element.dir,
-              isFolder: true
+              isFolder: true,
+              isVisible: element.visivel
             });
           });
         });
