@@ -10,13 +10,22 @@
       {{ model.name }}
 
       <div class="tree-buttons">
+        <button v-if="isVisible  && !isVisibleProc"     @click="toggleVisible"> 
+          <IconVisiblePrivate />  
+        </button>
+        
+        <button v-if="!isVisible && !isVisibleProc"     @click="toggleVisible">
+           <IconVisiblePublic /> 
+        </button>
+        
+        <button v-if="isVisibleProc" @click="toggleVisible"> 
+          <img src="../../../../static/loading.gif" class="icon">
+        </button>
+
         <button> <IconEdit   /> </button>
         <button> <IconDelete /> </button>
-        <button v-if="isFolder"      @click="upload"> <IconUpload/> </button>
         <button v-if="isFolder"      @click="add"> <IconAdd/> </button>
-        <button v-if="isVisible  && !isVisibleProc"     @click="toggleVisible"> esconder </button>
-        <button v-if="!isVisible && !isVisibleProc"     @click="toggleVisible"> publicar </button>
-        <button v-if="isVisibleProc" @click="toggleVisible"> processando... </button>
+        <button v-if="isFolder"      @click="upload"> <IconUpload/> </button>
         <button v-if="!isFolder"     @click="download"> <IconDownload/> </button>
       </div>
     </div>
@@ -37,7 +46,11 @@ import IconDelete from "../../_utils/Svgs/IconDelete";
 import IconUpload from "../../_utils/Svgs/IconUpload";
 import IconAdd from "../../_utils/Svgs/IconAdd";
 import IconDownload from "../../_utils/Svgs/IconDownload";
+import IconVisiblePublic from "../../_utils/Svgs/IconVisiblePublic";
+import IconVisiblePrivate from '../../_utils/Svgs/IconVisiblePrivate';
+
 export default {
+
   components: {
     IconArrowRight,
     IconArrowDown,
@@ -45,8 +58,11 @@ export default {
     IconDelete,
     IconUpload,
     IconAdd,
-    IconDownload
+    IconDownload,
+    IconVisiblePublic,
+    IconVisiblePrivate
   },
+
   props: {
     model: Object
   },
