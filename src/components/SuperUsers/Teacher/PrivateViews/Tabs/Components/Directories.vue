@@ -127,26 +127,7 @@ export default {
             a.remove();
             console.log("download feito.");
           });
-      }),
-      this.$bus.$on("toggleVisible", (dir, fileName) => {
-        axios
-          .post(
-            `${this.BASE_URL}api/togglevisible`,
-            {},
-            {
-              headers: {
-                dir: dir,
-                fileName: fileName
-              }
-            }
-          )
-          .then(res => {
-            console.log("TOGGLE: " + fileName);
-            console.log("From directory... " + dir);
-            console.log(res);
-            console.log("toggle feito.");
-          });
-      });
+      })
   },
   methods: {
     showUp() {
@@ -240,7 +221,8 @@ export default {
             name: element.nome,
             dir: element.dir,
             isFolder: isFolder,
-            isVisible: element.visivel
+            isVisible: element.visivel,
+            baseUrl: this.BASE_URL
           }
         }
       });
@@ -260,7 +242,8 @@ export default {
               name: element.nome,
               dir: element.dir,
               isFolder: true,
-              isVisible: element.visivel
+              isVisible: element.visivel,
+              baseUrl: this.BASE_URL
             });
           });
         });

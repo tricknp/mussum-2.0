@@ -12,11 +12,12 @@
       <div class="tree-buttons">
         <button> <IconEdit   /> </button>
         <button> <IconDelete /> </button>
-        <button v-if="isFolder"   @click="upload"> <IconUpload/> </button>
-        <button v-if="isFolder"   @click="add"> <IconAdd/> </button>
-        <button v-if="isVisible"  @click="toggleVisible"> esconder </button>
-        <button v-if="!isVisible" @click="toggleVisible"> publicar </button>
-        <button v-if="!isFolder"  @click="download"> <IconDownload/> </button>
+        <button v-if="isFolder"      @click="upload"> <IconUpload/> </button>
+        <button v-if="isFolder"      @click="add"> <IconAdd/> </button>
+        <button v-if="isVisible  && !isVisibleProc"     @click="toggleVisible"> esconder </button>
+        <button v-if="!isVisible && !isVisibleProc"     @click="toggleVisible"> publicar </button>
+        <button v-if="isVisibleProc" @click="toggleVisible"> processando... </button>
+        <button v-if="!isFolder"     @click="download"> <IconDownload/> </button>
       </div>
     </div>
 
@@ -27,6 +28,7 @@
 
 <script>
 import Modal from "../Modal";
+import axios from "axios";
 import { showModal } from "../../_mixins/showModal";
 import IconArrowRight from "../../_utils/Svgs/IconArrowRight";
 import IconArrowDown from "../../_utils/Svgs/IconArrowDown";
@@ -51,7 +53,8 @@ export default {
   data() {
     return {
       clicked: false,
-      open: false
+      open: false,
+      isVisibleProc: false
     };
   },
   computed: {
@@ -92,7 +95,23 @@ export default {
       this.$bus.$emit("download", this.model.dir, this.model.name);
     },
     toggleVisible() {
-      this.$bus.$emit("toggleVisible", this.model.dir, this.model.name);
+      this.isVisibleProc = true;
+      axios
+        .post(
+          `${this.model.baseUrl}api/togglevisible`,
+          {},
+          {
+            headers: {
+              dir: this.model.dir,
+              fileName: this.model.name
+            }
+          }
+        )
+        .then(res => {
+          console.log("TOGGLE");
+          this.model.isVisible = res.data;
+          this.isVisibleProc = false;
+        });
     }
   }
 };
