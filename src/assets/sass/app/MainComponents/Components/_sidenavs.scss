@@ -8,6 +8,7 @@
     width: 35%;
 }
 
+
 .div-dir-home, .div-wikis-home
 {
     border-radius: 4px;
@@ -61,14 +62,13 @@
 }
 
 .div-aside-container::-webkit-scrollbar
-    {
-        
-        width: 7px;
-        background-color: $absolute-white;
-    }
+{   
+    width: 7px;
+    background-color: $absolute-white;
+}
 
-    .div-aside-container::-webkit-scrollbar-thumb
-    {
-        border-radius: 7px;
-        background-color: rgba(202, 200, 200, 0.904);
-    }
+.div-aside-container::-webkit-scrollbar-thumb
+{
+    border-radius: 7px;
+    background-color: rgba(202, 200, 200, 0.904);
+}

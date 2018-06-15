@@ -34,10 +34,11 @@
 </template>
 
 <script>
-import  Modal       from   '../../../../../UIComponents/Modal'
-import  { create }  from   '../../../../../_mixins/create.js'
-import  { url }     from   '../../../../../_mixins/url.js'
-import  IconAdd     from   '../../../../../_utils/Svgs/IconAdd'
+import  Modal         from   '../../../../../UIComponents/Modal'
+import  { create }    from   '../../../../../_mixins/create.js'
+import  { url }       from   '../../../../../_mixins/url.js'
+import  { showModal } from   '../../../../../_mixins/showModal.js'
+import  IconAdd       from   '../../../../../_utils/Svgs/IconAdd'
 
 export default {
 
