@@ -6,13 +6,13 @@
             <h1 slot="header">Novo Recado</h1>
 
             <form slot="content"> 
-                <input type="text" placeholder="Titulo">
-                <input type="text" placeholder="Recado">
+                <input type="text" placeholder="Titulo" v-model="titulo">
+                <input type="text" placeholder="Recado" v-model="descricao">
             </form>
             
             <div slot="footer">
-                <button>Ok</button>
-                <button>Cancelar</button>
+                <button @click="onSubmit">Ok</button>
+                <button @click="cancel">Cancelar</button>
             </div>
 
         </Modal>
@@ -21,16 +21,40 @@
 </template>
 
 <script>
-import Modal from '../../../../../../../UIComponents/Modal'
-import { showModal } from '../../../../../../../_mixins/showModal'
-import { url } from '../../../../../../../_mixins/url'
+import Modal         from  '../../../../../../../UIComponents/Modal'
+import { showModal } from  '../../../../../../../_mixins/showModal'
+import { url }       from  '../../../../../../../_mixins/url'
+import { create }    from  '../../../../../../../_mixins/create'
 
 
 export default {
     
     components: { Modal },
 
-    mixins: [ url, showModal ],
+    mixins: [ url, showModal, create ],
+
+    data(){
+        return{
+            titulo: '', 
+            descricao: '',
+            datas: ''
+        }
+    },
+
+    methods: {
+      reset(){
+        this.descricao = ''
+        this.titulo =  ''
+      },
+
+      postData(){
+         this.route = 'api/recados'
+         this.datas = JSON.stringify({
+             titulo: this.titulo,
+             descricao: this.descricao
+         })
+      }
+    }   
 
 
 

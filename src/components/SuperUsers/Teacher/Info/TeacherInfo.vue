@@ -16,7 +16,8 @@
   </div>
 
   <div v-else class="teacher-profile">
-
+    
+    <div class="left-teacher-profile">
      <h1 class="title-teacher"> {{ title }} </h1>
 
      <div class="info-teacher">
@@ -28,7 +29,11 @@
            <PublicTabs />
         </div>
      </div>
+    </div>
+    
+    <div class="right-teacher-profile">
       <Aside />
+    </div>
   </div>
 </template>
 
@@ -81,3 +86,4 @@ export default {
   }
 };
 </script>
+  

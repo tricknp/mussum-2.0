@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Home class="login"></Home>
+    <Home class="login" />
 
     <modal v-if="showModal" 
         @close="showModal = false">
@@ -14,7 +14,7 @@
           <img :src="senacLogo" id="senac-logo">
         </div>
         <form slot="content" class="form-login">
-          <input type="text" v-model="username" name="username" placeholder="username">
+          <input type="text" v-model="username" name="username" placeholder="Username">
           <input type="password" v-model="password" name="password" placeholder="Password">
         </form>  
 
@@ -42,7 +42,12 @@ import IconDelete from '../_utils/Svgs/IconDelete'
 export default {
   name: "Login",
 
-  components: { Modal, Home, IconDelete },
+  components: 
+  { 
+    Home,
+    Modal,  
+    IconDelete 
+  },
 
   mixins: [url],
 

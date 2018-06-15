@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Create></Create>
+    <Create></Create>   
     <div v-for="scrap in scraps" :key="scrap.titulo">
       <h1>{{ scrap.titulo }}</h1>
       <h3>{{ scrap.descricao }}</h3>

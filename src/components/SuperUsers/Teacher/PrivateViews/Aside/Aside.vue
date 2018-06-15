@@ -2,7 +2,6 @@
   <aside id="aside">
       <Wikis />
       <Directories /> 
-
   </aside>
 </template>
 
