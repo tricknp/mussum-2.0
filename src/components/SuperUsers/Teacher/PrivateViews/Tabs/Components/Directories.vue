@@ -84,7 +84,13 @@ import { showModal } from "../../../../../_mixins/showModal";
 import IconAdd from "../../../../../_utils/Svgs/IconAdd";
 import tree from "../../../../../UIComponents/Tree/Tree";
 import Modal from "../../../../../UIComponents/Modal";
+<<<<<<< HEAD
 const ComponentClass = Vue.extend(tree);
+=======
+
+const ComponentClass = Vue.extend(tree);
+
+>>>>>>> caa942a946a98e09ff43b0741126475c6cb40029
 export default {
   name: "Directories",
   components: { tree, IconAdd, Modal },
@@ -94,7 +100,7 @@ export default {
       default: "Adicionar curso"
     }
   },
-  
+
   data() {
     return {
       dir: null,
@@ -108,6 +114,10 @@ export default {
       visibility: true,
     };
   },
+<<<<<<< HEAD
+=======
+
+>>>>>>> caa942a946a98e09ff43b0741126475c6cb40029
   created() {
     this.getCourses();
     this.startRepository();
@@ -116,6 +126,10 @@ export default {
       this.getRepositorys(div, dire);
     });
   },
+<<<<<<< HEAD
+=======
+
+>>>>>>> caa942a946a98e09ff43b0741126475c6cb40029
   mounted() {
     this.$bus.$on("addChild", dir => {
       this.dir = dir;
@@ -171,9 +185,17 @@ export default {
       this.$refs.fileName.value = this.file.name;
       this.$refs.fileName.removeAttribute("disabled");
     },
+<<<<<<< HEAD
     submitFile() {
       const formData = new FormData();
       formData.append("files", this.file, this.file.name);
+=======
+
+    submitFile() {
+      const formData = new FormData();
+      formData.append("files", this.file, this.file.name);
+
+>>>>>>> caa942a946a98e09ff43b0741126475c6cb40029
       axios
         .post(this.BASE_URL + "api/upload", formData, {
           headers: {
@@ -260,6 +282,7 @@ export default {
       instance.$mount();
       div.appendChild(instance.$el);
     },
+
     //RUNS ONE TIME TO GET CURSES FOLDERS
     startRepository() {
       axios
@@ -282,6 +305,7 @@ export default {
           });
         });
     },
+
     addChild() {
       axios
         .post(`${this.BASE_URL}api/repository`, this.dir, {

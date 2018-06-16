@@ -48,6 +48,10 @@ import IconAdd from "../../_utils/Svgs/IconAdd";
 import IconDownload from "../../_utils/Svgs/IconDownload";
 import IconVisiblePublic from "../../_utils/Svgs/IconVisiblePublic";
 import IconVisiblePrivate from "../../_utils/Svgs/IconVisiblePrivate";
+<<<<<<< HEAD
+=======
+
+>>>>>>> caa942a946a98e09ff43b0741126475c6cb40029
 export default {
   components: {
     IconArrowRight,
