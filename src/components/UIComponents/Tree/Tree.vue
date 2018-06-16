@@ -11,11 +11,11 @@
 
       <div class="tree-buttons">
         <button v-if="isVisible  && !isVisibleProc" @click="toggleVisible"> 
-          <IconVisiblePrivate />  
+          <IconVisiblePublic />  
         </button>
         
         <button v-if="!isVisible && !isVisibleProc" @click="toggleVisible">
-           <IconVisiblePublic /> 
+           <IconVisiblePrivate /> 
         </button>
         
         <button v-if="isVisibleProc" @click="toggleVisible"> 
@@ -47,10 +47,8 @@ import IconUpload from "../../_utils/Svgs/IconUpload";
 import IconAdd from "../../_utils/Svgs/IconAdd";
 import IconDownload from "../../_utils/Svgs/IconDownload";
 import IconVisiblePublic from "../../_utils/Svgs/IconVisiblePublic";
-import IconVisiblePrivate from '../../_utils/Svgs/IconVisiblePrivate';
-
+import IconVisiblePrivate from "../../_utils/Svgs/IconVisiblePrivate";
 export default {
-
   components: {
     IconArrowRight,
     IconArrowDown,
@@ -62,7 +60,6 @@ export default {
     IconVisiblePublic,
     IconVisiblePrivate
   },
-
   props: {
     model: Object
   },
@@ -102,7 +99,7 @@ export default {
       }
     },
     add() {
-      this.$bus.$emit("addChild", this.model.name);
+      this.$bus.$emit("addChild", this.model.dir + "/" + this.model.name);
     },
     upload() {
       this.$bus.$emit("handleUpload", this.model.dir + "/" + this.model.name);
