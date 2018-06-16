@@ -250,7 +250,7 @@ import Modal from "../../../../../UIComponents/Modal";
     startRepository() {
       axios
         .get(`${this.BASE_URL}api/repository`, {
-          headers: { dir: "", username: this.$route.params.targetName }
+          headers: { dir: this.$route.params.targetName, username: this.$route.params.targetName }
         })
         .then(res => {
           let folders = res.data.pastas;
