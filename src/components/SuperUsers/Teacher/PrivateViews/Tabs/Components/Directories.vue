@@ -26,6 +26,10 @@
       <h1 slot="header">Adicionar</h1>
       <form slot="content" class="form-admin-modal">
         <input type="text" placeholder="diretorio" v-model="child" required>
+        <div>
+            <p><input type="radio" v-model="visibility" :value="true"  name="visibility"> Publico </p>
+            <p><input type="radio" v-model="visibility" :value="false" name="visibility"> Oculto</p>
+        </div>
       </form>
       <div slot="footer">
           <button type="submit" @click.prevent="addChild" >
@@ -40,7 +44,7 @@
     <modal v-if="showUpload" @s="showUp()" id="admin-modal">
       <h1 slot="header">Adicionar arquivo</h1>
       <form slot="content" class="form-admin-modal">
-        <input type="text" ref="fileName" placeholder="nome do arquivo (com extensão)" disabled>
+        <input type="text" ref="fileName" placeholder="nome do arquivo (com extensÃ£o)" disabled>
         <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
         <input type="text" v-model="comment">
         <div>
@@ -68,10 +72,9 @@ import IconAdd from "../../../../../_utils/Svgs/IconAdd";
 import tree from "../../../../../UIComponents/Tree/Tree";
 import Modal from "../../../../../UIComponents/Modal";
 
-  const ComponentClass = Vue.extend(tree);
+const ComponentClass = Vue.extend(tree);
 
-  export default {
-
+export default {
   name: "Directories",
 
   components: { tree, IconAdd, Modal },
@@ -83,7 +86,7 @@ import Modal from "../../../../../UIComponents/Modal";
       default: "Adicionar curso"
     }
   },
-  
+
   data() {
     return {
       dir: null,
@@ -96,7 +99,7 @@ import Modal from "../../../../../UIComponents/Modal";
       visibility: true
     };
   },
-  
+
   created() {
     this.getCourses();
     this.startRepository();
@@ -105,10 +108,10 @@ import Modal from "../../../../../UIComponents/Modal";
       this.getRepositorys(div, dire);
     });
   },
-  
+
   mounted() {
-    this.$bus.$on("addChild", dirs => {
-      this.dir = dirs;
+    this.$bus.$on("addChild", dir => {
+      this.dir = dir;
       this.showModal = true;
     }),
       this.$bus.$on("handleUpload", dirs => {
@@ -141,7 +144,7 @@ import Modal from "../../../../../UIComponents/Modal";
             a.remove();
             console.log("download feito.");
           });
-      })
+      });
   },
   methods: {
     showUp() {
@@ -155,18 +158,18 @@ import Modal from "../../../../../UIComponents/Modal";
       this.$refs.fileName.value = this.file.name;
       this.$refs.fileName.removeAttribute("disabled");
     },
-    
+
     submitFile() {
       const formData = new FormData();
       formData.append("files", this.file, this.file.name);
-    
+
       axios
         .post(this.BASE_URL + "api/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             dir: this.dir,
             fileName: this.$refs.fileName.value,
-            comment: this.comment, 
+            comment: this.comment,
             visible: this.visibility
           }
         })
@@ -189,7 +192,7 @@ import Modal from "../../../../../UIComponents/Modal";
     /*=================================================*
      *      Add a course to teacher repositories       *
      *                     - // -                      *
-     *  Adiciona um curso ao repositório do professor  *
+     *  Adiciona um curso ao repositÃ³rio do professor  *
      *=================================================*/
     addCourse() {
       axios
@@ -206,8 +209,8 @@ import Modal from "../../../../../UIComponents/Modal";
      *    Getting all repositories from current teacher and adding they in the tree of        *
      * repositories                                                                           *
      *                                    - // -                                              *
-     *    Obtem todos os repositórios do professor atual e adicionando-os na árvore dos       *
-     * repositórios                                                                           *
+     *    Obtem todos os repositÃ³rios do professor atual e adicionando-os na Ã¡rvore dos       *
+     * repositÃ³rios                                                                           *
      *========================================================================================*/
     getRepositorys(div, dire) {
       console.log("get repositorys from " + dire);
@@ -246,11 +249,15 @@ import Modal from "../../../../../UIComponents/Modal";
       instance.$mount();
       div.appendChild(instance.$el);
     },
+
     //RUNS ONE TIME TO GET CURSES FOLDERS
     startRepository() {
       axios
         .get(`${this.BASE_URL}api/repository`, {
-          headers: { dir: this.$route.params.targetName, username: this.$route.params.targetName }
+          headers: {
+            dir: this.$route.params.targetName,
+            username: this.$route.params.targetName
+          }
         })
         .then(res => {
           let folders = res.data.pastas;
@@ -265,10 +272,14 @@ import Modal from "../../../../../UIComponents/Modal";
           });
         });
     },
+
     addChild() {
       axios
         .post(`${this.BASE_URL}api/repository`, this.dir, {
-          headers: { dir: `${this.dir}/${this.child}` }
+          headers: {
+            dir: `${this.dir}/${this.child}`,
+            visible: this.visibility
+          }
         })
         .then(res => {
           this.treeData.name = this.dir;
