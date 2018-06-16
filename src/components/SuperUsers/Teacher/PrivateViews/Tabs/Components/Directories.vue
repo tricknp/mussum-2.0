@@ -43,6 +43,10 @@
         <input type="text" ref="fileName" placeholder="nome do arquivo (com extensão)" disabled>
         <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
         <input type="text" v-model="comment">
+        <div>
+            <p><input type="radio" v-model="visibility" :value="true"  name="visibility"> Publico </p>
+            <p><input type="radio" v-model="visibility" :value="false" name="visibility"> Oculto</p>
+        </div>
       </form>
       <div slot="footer">
            <button @click="showUpload=false">CANCELAR</button>
@@ -63,16 +67,23 @@ import { showModal } from "../../../../../_mixins/showModal";
 import IconAdd from "../../../../../_utils/Svgs/IconAdd";
 import tree from "../../../../../UIComponents/Tree/Tree";
 import Modal from "../../../../../UIComponents/Modal";
-const ComponentClass = Vue.extend(tree);
-export default {
+
+  const ComponentClass = Vue.extend(tree);
+
+  export default {
+
   name: "Directories",
+
   components: { tree, IconAdd, Modal },
+
   mixins: [url, showModal],
+
   props: {
     selected: {
       default: "Adicionar curso"
     }
   },
+  
   data() {
     return {
       dir: null,
@@ -81,9 +92,11 @@ export default {
       child: null,
       showUpload: false,
       file: "",
-      comment: ""
+      comment: "",
+      visibility: true
     };
   },
+  
   created() {
     this.getCourses();
     this.startRepository();
@@ -92,6 +105,7 @@ export default {
       this.getRepositorys(div, dire);
     });
   },
+  
   mounted() {
     this.$bus.$on("addChild", dirs => {
       this.dir = dirs;
@@ -141,16 +155,19 @@ export default {
       this.$refs.fileName.value = this.file.name;
       this.$refs.fileName.removeAttribute("disabled");
     },
+    
     submitFile() {
       const formData = new FormData();
       formData.append("files", this.file, this.file.name);
+    
       axios
         .post(this.BASE_URL + "api/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             dir: this.dir,
             fileName: this.$refs.fileName.value,
-            comment: this.comment
+            comment: this.comment, 
+            visible: this.visibility
           }
         })
         .then(res => {
