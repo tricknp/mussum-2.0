@@ -12,14 +12,14 @@
       <form slot="content" class="form-admin-modal">
           <input type="text"  v-model="professor.nome"  placeholder="nome" required>
           <input type="text"  v-model="professor.sobrenome"  placeholder="sobrenome" required>
-          <input type="email" v-model="professor.email" placeholder="email">
+          <input type="email" v-model="professor.email" placeholder="email" > 
           <input type="text"  v-model="professor.username" placeholder="username" required>
-          <input type="text"  v-model="professor.password"  required >
+          <input type="text"  v-model="professor.password" placeholder="password" required >
         </form>
 
         <div slot="footer">
             <button type="submit" @click.prevent="onSubmit" class="adm-modal-buttons">
-              Confirmar
+              Confirmar 
             </button>
             <button @click="showModal = false" class="adm-modal-buttons">
               Cancelar
@@ -70,7 +70,9 @@ export default {
         sobrenome: this.professor.sobrenome,
         email: this.professor.email,
         username: this.professor.username,
-        password: this.professor.password
+        password: this.professor.password,
+        descricao: this.professor.descricao,
+        sobre: this.professor.sobre,
       })
     },
 

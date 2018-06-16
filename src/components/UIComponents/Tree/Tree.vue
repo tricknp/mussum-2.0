@@ -10,11 +10,11 @@
       {{ model.name }}
 
       <div class="tree-buttons">
-        <button v-if="isVisible  && !isVisibleProc"     @click="toggleVisible"> 
+        <button v-if="isVisible  && !isVisibleProc" @click="toggleVisible"> 
           <IconVisiblePrivate />  
         </button>
         
-        <button v-if="!isVisible && !isVisibleProc"     @click="toggleVisible">
+        <button v-if="!isVisible && !isVisibleProc" @click="toggleVisible">
            <IconVisiblePublic /> 
         </button>
         
@@ -24,9 +24,9 @@
 
         <button> <IconEdit   /> </button>
         <button> <IconDelete /> </button>
-        <button v-if="isFolder"      @click="add"> <IconAdd/> </button>
-        <button v-if="isFolder"      @click="upload"> <IconUpload/> </button>
-        <button v-if="!isFolder"     @click="download"> <IconDownload/> </button>
+        <button v-if="isFolder"  @click="add"> <IconAdd/> </button>
+        <button v-if="isFolder"  @click="upload"> <IconUpload/> </button>
+        <button v-if="!isFolder" @click="download"> <IconDownload/> </button>
       </div>
     </div>
 
