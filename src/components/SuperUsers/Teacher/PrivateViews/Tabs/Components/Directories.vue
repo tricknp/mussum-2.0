@@ -38,7 +38,7 @@
     <modal v-if="showModal" @show="show()" id="admin-modal">
       <h1 slot="header">Adicionar</h1>
       <form slot="content" class="form-admin-modal">
-        <input type="text" placeholder="Diretório X" v-model="child" required>
+        <input type="text" placeholder="Nova Pasta" v-model="child" required>
         <div>
             <p><input type="radio" v-model="visibility" :value="true"  name="visibility"> Publico </p>
             <p><input type="radio" v-model="visibility" :value="false" name="visibility"> Oculto</p>
@@ -117,7 +117,7 @@ export default {
   mounted() {},
   created() {
     this.getCourses();
-    this.startRepository();
+    this.resetRepository();
     this.$bus.$on("itemClicked", (div, dire) => {
       console.log(dire);
       //this.getRepositorys(div, dire);
@@ -166,7 +166,15 @@ export default {
             }
           })
           .then(res => {
-            this.$bus.$emit("refresh", this.getFatherFromChild(dir).dir, this.getFatherFromChild(dir).name);
+            if (dir.split("/").length < 2) {
+              this.resetRepository();
+            } else {
+              this.$bus.$emit(
+                "refresh",
+                this.getFatherFromChild(dir).dir,
+                this.getFatherFromChild(dir).name
+              );
+            }
           });
       }),
       this.$bus.$on("removeArq", (dir, name) => {
@@ -178,10 +186,11 @@ export default {
             }
           })
           .then(res => {
-            console.log("Arquivo removida?");
-            console.log(dir);
-            console.log(name);
-            console.log(res);
+            this.$bus.$emit(
+              "refresh",
+              this.getFatherFromChild(dir).dir,
+              this.getFatherFromChild(dir).name
+            );
           });
       }),
       this.$bus.$on("newChild", (div, ele, isFolder) => {
@@ -304,7 +313,8 @@ export default {
     },
 
     //RUNS ONE TIME TO GET CURSES FOLDERS
-    startRepository() {
+    resetRepository() {
+      this.treeData = [];
       axios
         .get(`${this.BASE_URL}api/repository`, {
           headers: {
@@ -337,10 +347,12 @@ export default {
           }
         })
         .then(res => {
-          this.treeData.name = this.dir;
+          //this.treeData.name = this.dir;
           console.log(
             "Curso adicionado com sucesso " + `${this.dir}/${this.child}`
           );
+          this.resetRepository();
+          this.child = "Nova Pasta";
           this.showModal = false;
         });
     },

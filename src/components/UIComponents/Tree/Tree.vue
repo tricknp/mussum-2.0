@@ -77,10 +77,11 @@ export default {
   },
   created() {
     this.$bus.$on("refresh", (dir, name) => {
-      //console.log('refreshDir: '+dir);
-      //console.log('refreshName: '+name);
-      //console.log('refreshDir this: '+this.model.dir);
-      //console.log('refreshName this: '+this.model.name);
+      console.log('refreshDir: '+dir);
+      console.log('refreshName: '+name);
+      console.log('refreshDir this: '+this.model.dir);
+      console.log('refreshName this: '+this.model.name);
+      console.log('-------------------------');
 
       if (dir == this.model.dir + "/" && name == this.model.name) {
         console.log("REFRESH" + dir + name);
@@ -107,6 +108,8 @@ export default {
       if (this.isFolder) {
         if (!this.open) {
           this.refreshChild();
+          console.log('refresh toggle');
+          
         }
         this.open = !this.open;
       }
