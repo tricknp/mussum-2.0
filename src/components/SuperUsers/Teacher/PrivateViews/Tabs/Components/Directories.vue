@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <div class="div-select-course">
@@ -14,6 +15,17 @@
         <IconAdd /> 
       </button>
     </div>
+
+    <modal v-if="showOtherCourse" @show="show"> 
+      <h1 slot="header">Novo Curso</h1>
+      <form slot="content"> 
+        <input type="text" v-model="otherCourse">
+      </form>
+      <div slot="footer">
+        <button @click="addNewCourse">Ok</button>
+        <button @click="showModal == false">CANCELAR</button>
+      </div>
+    </modal>
 
      <div class="tree">
       <tree v-for="(tree, i) in treeData"
@@ -72,16 +84,11 @@ import { showModal } from "../../../../../_mixins/showModal";
 import IconAdd from "../../../../../_utils/Svgs/IconAdd";
 import tree from "../../../../../UIComponents/Tree/Tree";
 import Modal from "../../../../../UIComponents/Modal";
-
 const ComponentClass = Vue.extend(tree);
-
 export default {
   name: "Directories",
-
   components: { tree, IconAdd, Modal },
-
   mixins: [url, showModal],
-
   props: {
     selected: {
       default: "Adicionar curso"
@@ -97,10 +104,10 @@ export default {
       showUpload: false,
       file: "",
       comment: "",
+      showOtherCourse: false,
       visibility: true
     };
   },
-
   created() {
     this.getCourses();
     this.startRepository();
@@ -109,7 +116,6 @@ export default {
       this.getRepositorys(div, dire);
     });
   },
-
   mounted() {
     this.$bus.$on("addChild", (dir, name) => {
       this.dir = dir + "/" + name;
@@ -162,8 +168,8 @@ export default {
           });
       }),
       this.$bus.$on("removeArq", (dir, name) => {
-        console.log('MANDANDO REMOVE ARQ...');
-        
+        console.log("MANDANDO REMOVE ARQ...");
+
         axios
           .delete(`${this.BASE_URL}api/upload`, {
             headers: {
@@ -180,6 +186,11 @@ export default {
       });
   },
   methods: {
+    addNewCourse() {
+      this.dir = this.otherCourse;
+      console.log(this.dir);
+    },
+
     showUp() {
       showUpload = true;
     },
@@ -191,11 +202,9 @@ export default {
       this.$refs.fileName.value = this.file.name;
       this.$refs.fileName.removeAttribute("disabled");
     },
-
     submitFile() {
       const formData = new FormData();
       formData.append("files", this.file, this.file.name);
-
       axios
         .post(this.BASE_URL + "api/upload", formData, {
           headers: {

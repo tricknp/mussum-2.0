@@ -48,7 +48,6 @@ import IconAdd from "../../_utils/Svgs/IconAdd";
 import IconDownload from "../../_utils/Svgs/IconDownload";
 import IconVisiblePublic from "../../_utils/Svgs/IconVisiblePublic";
 import IconVisiblePrivate from "../../_utils/Svgs/IconVisiblePrivate";
-
 export default {
   components: {
     IconArrowRight,
@@ -61,7 +60,6 @@ export default {
     IconVisiblePublic,
     IconVisiblePrivate
   },
-
   props: {
     model: Object
   },
