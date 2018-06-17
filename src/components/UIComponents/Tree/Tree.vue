@@ -6,11 +6,12 @@
         <span v-if="open === false"><IconArrowRight /></span>
         <span v-else><IconArrowDown /></span>
       </span>
-
-      <InteligentIcon  :model="{extension: model.name}" ></InteligentIcon>
       
+      <InteligentIcon  :model="{extension: model.name}" ></InteligentIcon>
+
       <a v-if="model.link" :href="model.link">{{ model.name.substr(0, model.name.lastIndexOf('.')) || model.name}}</a>
       {{ model.link ? null : model.name.substr(0, model.name.lastIndexOf('.')) || model.name  }}
+
       <div class="tree-buttons">
         <button v-if="isVisible  && !isVisibleProc" @click="toggleVisible"> 
           <IconVisiblePublic />  
