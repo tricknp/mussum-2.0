@@ -7,6 +7,7 @@
         <span v-else><IconArrowDown /></span>
       </span>
 
+      <InteligentIcon  :model="{extension: model.name}" ></InteligentIcon>
       {{ model.name }}
 
       <div class="tree-buttons">
@@ -26,7 +27,7 @@
         <button                  @click="remove"> <IconDelete /> </button>
         <button v-if="isFolder"  @click="add"> <IconAdd/> </button>
         <button v-if="isFolder"  @click="upload"> <IconUpload/> </button>
-        <button v-if="!isFolder" @click="download"> <IconDownload/> </button>
+        <button v-if="!isFolder && !isLink" @click="download"> <IconDownload/> </button>
       </div>
     </div>
 
@@ -48,6 +49,7 @@ import IconAdd from "../../_utils/Svgs/IconAdd";
 import IconDownload from "../../_utils/Svgs/IconDownload";
 import IconVisiblePublic from "../../_utils/Svgs/IconVisiblePublic";
 import IconVisiblePrivate from "../../_utils/Svgs/IconVisiblePrivate";
+import InteligentIcon from "../../_utils/Svgs/_extensions/InteligentIcon";
 export default {
   components: {
     IconArrowRight,
@@ -58,7 +60,8 @@ export default {
     IconAdd,
     IconDownload,
     IconVisiblePublic,
-    IconVisiblePrivate
+    IconVisiblePrivate,
+    InteligentIcon
   },
   props: {
     model: Object
@@ -74,6 +77,10 @@ export default {
     isFolder: function() {
       //return this.model.children && this.model.children.length;
       return this.model.isFolder;
+    },
+    isLink: function() {
+      //return this.model.children && this.model.children.length;
+      return this.model.isLink;
     },
     isVisible: function() {
       //return this.model.children && this.model.children.length;
@@ -105,7 +112,7 @@ export default {
       if (this.isFolder) {
         this.$bus.$emit("removeDir", this.model.dir, this.model.name);
       } else {
-        console.log('emit');
+        console.log("emit");
         this.$bus.$emit("removeArq", this.model.dir, this.model.name);
       }
     },

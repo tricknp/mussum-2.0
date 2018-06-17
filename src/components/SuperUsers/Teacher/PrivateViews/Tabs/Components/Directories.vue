@@ -57,9 +57,14 @@
     <modal v-if="showUpload" @s="showUp()" id="admin-modal">
       <h1 slot="header">Adicionar arquivo</h1>
       <form slot="content" class="form-admin-modal">
-        <input type="text" ref="fileName" placeholder="nome do arquivo (com extensÃ£o)" disabled>
-        <input type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
-        <input type="text" v-model="comment">
+        <div>
+            <p><input type="radio" v-model="isLink" :value="true"  name="isLink"> Link </p>
+            <p><input type="radio" v-model="isLink" :value="false" name="isLink"> Arquivo</p>
+        </div>
+        <input type="text" ref="fileName" placeholder="Nome do arquivo/link">
+        <input v-if="isLink" type="text" ref="link" placeholder="URL">
+        <input v-if="!isLink" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+        <input type="text" v-model="comment" placeholder="Escreva um comentário (FEED)">
         <div>
             <p><input type="radio" v-model="visibility" :value="true"  name="visibility"> Publico </p>
             <p><input type="radio" v-model="visibility" :value="false" name="visibility"> Oculto</p>
@@ -105,7 +110,8 @@ export default {
       file: "",
       comment: "",
       showOtherCourse: false,
-      visibility: true
+      visibility: true,
+      isLink: false
     };
   },
   created() {
@@ -168,8 +174,6 @@ export default {
           });
       }),
       this.$bus.$on("removeArq", (dir, name) => {
-        console.log("MANDANDO REMOVE ARQ...");
-
         axios
           .delete(`${this.BASE_URL}api/upload`, {
             headers: {
@@ -200,7 +204,7 @@ export default {
     handleFileUpload() {
       this.file = this.$refs.file.files[0];
       this.$refs.fileName.value = this.file.name;
-      this.$refs.fileName.removeAttribute("disabled");
+      //this.$refs.fileName.removeAttribute("disabled");
     },
     submitFile() {
       const formData = new FormData();
@@ -211,6 +215,7 @@ export default {
             "Content-Type": "multipart/form-data",
             dir: this.dir,
             fileName: this.$refs.fileName.value,
+            link: this.$refs.link.value,
             comment: this.comment,
             visible: this.visibility
           }
@@ -284,6 +289,7 @@ export default {
             dir: element.dir,
             isFolder: isFolder,
             isVisible: element.visivel,
+            isLink: element.link ? true : false,
             baseUrl: this.BASE_URL
           }
         }
