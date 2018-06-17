@@ -114,19 +114,18 @@ export default {
       isLink: false
     };
   },
+  mounted() {},
   created() {
     this.getCourses();
     this.startRepository();
     this.$bus.$on("itemClicked", (div, dire) => {
       console.log(dire);
-      this.getRepositorys(div, dire);
-    });
-  },
-  mounted() {
-    this.$bus.$on("addChild", (dir, name) => {
-      this.dir = dir + "/" + name;
-      this.showModal = true;
+      //this.getRepositorys(div, dire);
     }),
+      this.$bus.$on("addChild", (dir, name) => {
+        this.dir = dir + "/" + name;
+        this.showModal = true;
+      }),
       this.$bus.$on("handleUpload", dirs => {
         this.dir = dirs;
         this.showUpload = true;
@@ -167,10 +166,7 @@ export default {
             }
           })
           .then(res => {
-            console.log("Pasta removida?");
-            console.log(dir);
-            console.log(name);
-            console.log(res);
+            this.$bus.$emit("refresh", this.getFatherFromChild(dir).dir, this.getFatherFromChild(dir).name);
           });
       }),
       this.$bus.$on("removeArq", (dir, name) => {
@@ -187,6 +183,11 @@ export default {
             console.log(name);
             console.log(res);
           });
+      }),
+      this.$bus.$on("newChild", (div, ele, isFolder) => {
+        console.log("NEW CHILD");
+        this.createTreeElement(div, ele, isFolder);
+        console.log("SUCCESS CHILD");
       });
   },
   methods: {
@@ -244,7 +245,7 @@ export default {
      *  Adiciona um curso ao repositÃ³rio do professor  *
      *=================================================*/
     addCourse() {
-      if ((this.dir = "novo")) {
+      if (this.dir == "novo") {
         this.child = this.dir;
         this.dir = this.$route.params.targetName;
         this.showModal = true;
@@ -293,6 +294,7 @@ export default {
             isVisible: element.visivel,
             isLink: element.link ? true : false,
             link: element.link ? element.link : "",
+            username: this.$route.params.targetName,
             baseUrl: this.BASE_URL
           }
         }
@@ -318,6 +320,7 @@ export default {
               dir: element.dir,
               isFolder: true,
               isVisible: element.visivel,
+              username: this.$route.params.targetName,
               baseUrl: this.BASE_URL
             });
           });
@@ -340,6 +343,21 @@ export default {
           );
           this.showModal = false;
         });
+    },
+    getFatherFromChild(dir) {
+      let fatherName = dir.split("/").pop();
+      console.log("fatherName" + fatherName);
+
+      let fatherDir = dir.split("/");
+      let indexOfName = fatherDir.length;
+      fatherDir[indexOfName - 1] = "";
+      fatherDir = fatherDir.join("/");
+      console.log("fatherDir" + fatherDir);
+
+      return {
+        dir: fatherDir,
+        name: fatherName
+      };
     }
   }
 };

@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <ul v-show="open" v-if="isFolder" :id="model.dir" :ref="model.dir"></ul>
+    <ul v-show="open" v-if="isFolder" :id="model.dir +'/'+ model.name" :ref="'li'"></ul>
     
   </li>
 </template>
@@ -75,6 +75,19 @@ export default {
       isVisibleProc: false
     };
   },
+  created() {
+    this.$bus.$on("refresh", (dir, name) => {
+      //console.log('refreshDir: '+dir);
+      //console.log('refreshName: '+name);
+      //console.log('refreshDir this: '+this.model.dir);
+      //console.log('refreshName this: '+this.model.name);
+
+      if (dir == this.model.dir + "/" && name == this.model.name) {
+        console.log("REFRESH" + dir + name);
+        this.refreshChild();
+      }
+    });
+  },
   computed: {
     isFolder: function() {
       //return this.model.children && this.model.children.length;
@@ -92,16 +105,19 @@ export default {
   methods: {
     toggle: function() {
       if (this.isFolder) {
+        if (!this.open) {
+          this.refreshChild();
+        }
         this.open = !this.open;
       }
     },
     itemClicked(dir) {
       if (!this.clicked) {
         console.log("clicked");
-        console.log(this.$refs[dir]);
+        console.log(this.$refs.li);
         this.$bus.$emit(
           "itemClicked",
-          this.$refs[dir],
+          this.$refs.li,
           dir + "/" + this.model.name
         );
         this.clicked = true;
@@ -148,6 +164,39 @@ export default {
           console.log("TOGGLE");
           this.model.isVisible = res.data;
           this.isVisibleProc = false;
+        });
+    },
+    refreshChild() {
+      //this.isVisibleProc = true;
+      axios
+        .get(`${this.model.baseUrl}api/repository`, {
+          headers: {
+            dir: this.model.dir + "/" + this.model.name,
+            username: this.model.username
+          }
+        })
+        .then(res => {
+          var ele = this.$refs.li;
+          var child = ele.firstChild;
+          while (child) {
+            this.$refs.li.removeChild(child);
+            child = ele.firstChild;
+          }
+          console.log("REFRESHHHHH");
+          console.log(res.data);
+
+          let folders = res.data.pastas;
+          let files = res.data.arquivos;
+          folders.forEach(element => {
+            this.$bus.$emit("newChild", ele, element, true);
+            //this.createTreeElement(ele, element, true);
+          });
+          files.forEach(element => {
+            this.$bus.$emit("newChild", ele, element, false);
+            //this.createTreeElement(ele, element, false);
+          });
+
+          //this.isVisibleProc = false;
         });
     }
   }

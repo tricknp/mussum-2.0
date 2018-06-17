@@ -57,11 +57,9 @@ export default {
   computed: {
     extension: function() {
       //return this.model.children && this.model.children.length;
-      console.log("EXTENSAO:: " + this.model.extension);
       var re = /(?:\.([^.]+))?$/;
       var ext = re.exec(this.model.extension)[1];
       //this.model.extension = this.model.extension.split(".").pop();
-      console.log("EXTENSAO FINAL:: " + ext);
 
       return ext ? ext : "folder";
     }
