@@ -4,12 +4,13 @@
       <select v-model="dir" class="select-course">
         <option v-for="curso in cursos"
                 :key="curso.id"
-                :value="curso.titulo">
+                :value="$route.params.targetName+'/'+curso.titulo">
                 {{ curso.titulo }}
         </option>
+        <option :value="'novo'">nova pasta raiz</option>
       </select>
 
-      <button @click="addCourse"> 
+      <button @click="addCourse()"> 
         <IconAdd /> 
       </button>
     </div>
@@ -25,7 +26,7 @@
     <modal v-if="showModal" @show="show()" id="admin-modal">
       <h1 slot="header">Adicionar</h1>
       <form slot="content" class="form-admin-modal">
-        <input type="text" placeholder="diretorio" v-model="child" required>
+        <input type="text" placeholder="Diretório X" v-model="child" required>
         <div>
             <p><input type="radio" v-model="visibility" :value="true"  name="visibility"> Publico </p>
             <p><input type="radio" v-model="visibility" :value="false" name="visibility"> Oculto</p>
@@ -110,8 +111,8 @@ export default {
   },
 
   mounted() {
-    this.$bus.$on("addChild", dir => {
-      this.dir = dir;
+    this.$bus.$on("addChild", (dir, name) => {
+      this.dir = dir + "/" + name;
       this.showModal = true;
     }),
       this.$bus.$on("handleUpload", dirs => {
@@ -143,6 +144,38 @@ export default {
             a.click();
             a.remove();
             console.log("download feito.");
+          });
+      }),
+      this.$bus.$on("removeDir", (dir, name) => {
+        axios
+          .delete(`${this.BASE_URL}api/repository`, {
+            headers: {
+              dir: dir,
+              name: name
+            }
+          })
+          .then(res => {
+            console.log("Pasta removida?");
+            console.log(dir);
+            console.log(name);
+            console.log(res);
+          });
+      }),
+      this.$bus.$on("removeArq", (dir, name) => {
+        console.log('MANDANDO REMOVE ARQ...');
+        
+        axios
+          .delete(`${this.BASE_URL}api/upload`, {
+            headers: {
+              dir: dir,
+              name: name
+            }
+          })
+          .then(res => {
+            console.log("Arquivo removida?");
+            console.log(dir);
+            console.log(name);
+            console.log(res);
           });
       });
   },
@@ -195,15 +228,15 @@ export default {
      *  Adiciona um curso ao repositÃ³rio do professor  *
      *=================================================*/
     addCourse() {
-      axios
-        .post(`${this.BASE_URL}api/repository`, this.dir, {
-          headers: { dir: this.dir }
-        })
-        .then(res => {
-          this.treeData.name = this.dir;
-          console.log("Curso adicionado com sucesso " + this.dir);
-        })
-        .catch(error => console.log("error -> " + error));
+      if ((this.dir = "novo")) {
+        this.child = this.dir;
+        this.dir = this.$route.params.targetName;
+        this.showModal = true;
+      } else {
+        this.child = this.dir;
+        this.dir = "";
+        this.addChild();
+      }
     },
     /*========================================================================================*
      *    Getting all repositories from current teacher and adding they in the tree of        *
@@ -277,7 +310,8 @@ export default {
       axios
         .post(`${this.BASE_URL}api/repository`, this.dir, {
           headers: {
-            dir: `${this.dir}/${this.child}`,
+            dir: this.dir,
+            name: this.child,
             visible: this.visibility
           }
         })

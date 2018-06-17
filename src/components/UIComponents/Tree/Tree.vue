@@ -22,8 +22,8 @@
           <img src="../../../../static/loading.gif" class="icon">
         </button>
 
-        <button> <IconEdit   /> </button>
-        <button> <IconDelete /> </button>
+        <button                  @click="edit"> <IconEdit   /> </button>
+        <button                  @click="remove"> <IconDelete /> </button>
         <button v-if="isFolder"  @click="add"> <IconAdd/> </button>
         <button v-if="isFolder"  @click="upload"> <IconUpload/> </button>
         <button v-if="!isFolder" @click="download"> <IconDownload/> </button>
@@ -101,7 +101,22 @@ export default {
       }
     },
     add() {
-      this.$bus.$emit("addChild", this.model.dir + "/" + this.model.name);
+      this.$bus.$emit("addChild", this.model.dir, this.model.name);
+    },
+    remove() {
+      if (this.isFolder) {
+        this.$bus.$emit("removeDir", this.model.dir, this.model.name);
+      } else {
+        console.log('emit');
+        this.$bus.$emit("removeArq", this.model.dir, this.model.name);
+      }
+    },
+    edit() {
+      if (this.isFolder) {
+        this.$bus.$emit("editDir", this.model.dir, this.model.name);
+      } else {
+        this.$bus.$emit("editArq", this.model.dir, this.model.name);
+      }
     },
     upload() {
       this.$bus.$emit("handleUpload", this.model.dir + "/" + this.model.name);
