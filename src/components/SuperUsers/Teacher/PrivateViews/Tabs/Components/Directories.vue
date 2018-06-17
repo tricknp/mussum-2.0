@@ -64,7 +64,7 @@
         <input type="text" ref="fileName" placeholder="Nome do arquivo/link">
         <input v-if="isLink" type="text" ref="link" placeholder="URL">
         <input v-if="!isLink" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
-        <input type="text" v-model="comment" placeholder="Escreva um comentário (FEED)">
+        <input type="text" ref="comment" placeholder="Escreva um comentário (FEED)">
         <div>
             <p><input type="radio" v-model="visibility" :value="true"  name="visibility"> Publico </p>
             <p><input type="radio" v-model="visibility" :value="false" name="visibility"> Oculto</p>
@@ -208,15 +208,17 @@ export default {
     },
     submitFile() {
       const formData = new FormData();
-      formData.append("files", this.file, this.file.name);
+      if (this.file) {
+        formData.append("files", this.file, this.file.name);
+      }
       axios
         .post(this.BASE_URL + "api/upload", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
             dir: this.dir,
             fileName: this.$refs.fileName.value,
-            link: this.$refs.link.value,
-            comment: this.comment,
+            link: this.$refs.link ? this.$refs.link.value : "",
+            comment: this.$refs.comment.value,
             visible: this.visibility
           }
         })
@@ -290,6 +292,7 @@ export default {
             isFolder: isFolder,
             isVisible: element.visivel,
             isLink: element.link ? true : false,
+            link: element.link ? element.link : "",
             baseUrl: this.BASE_URL
           }
         }

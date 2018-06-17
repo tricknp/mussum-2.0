@@ -8,8 +8,9 @@
       </span>
 
       <InteligentIcon  :model="{extension: model.name}" ></InteligentIcon>
-      {{ model.name }}
-
+      
+      <a v-if="model.link" :href="model.link">{{ model.name.substr(0, model.name.lastIndexOf('.')) || model.name}}</a>
+      {{ model.link ? null : model.name.substr(0, model.name.lastIndexOf('.')) || model.name  }}
       <div class="tree-buttons">
         <button v-if="isVisible  && !isVisibleProc" @click="toggleVisible"> 
           <IconVisiblePublic />  

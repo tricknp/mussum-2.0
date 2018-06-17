@@ -5,7 +5,7 @@
 <IconAvi  v-if = "extension=='avi'" />
 <IconDoc  v-if = "extension=='doc'" />
 <IconFile v-if = "extension=='exe'" />
-<IconHtml v-if = "extension=='html'" />
+<IconHtml v-if = "extension=='html' || extension=='link'" />
 <IconIso  v-if = "extension=='iso'" />
 <IconJs   v-if = "extension=='js'" />
 <IconJson v-if = "extension=='json'" />
