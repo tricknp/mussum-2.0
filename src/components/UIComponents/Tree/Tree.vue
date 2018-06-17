@@ -9,7 +9,7 @@
       
       <InteligentIcon  :model="{extension: model.name}" ></InteligentIcon>
 
-      <a v-if="model.link" :href="model.link">{{ model.name.substr(0, model.name.lastIndexOf('.')) || model.name}}</a>
+      <a v-if="model.link" :href="model.link" target="_blank" >{{ model.name.substr(0, model.name.lastIndexOf('.')) || model.name}}</a>
       {{ model.link ? null : model.name.substr(0, model.name.lastIndexOf('.')) || model.name  }}
 
       <div class="tree-buttons">
