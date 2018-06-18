@@ -20,9 +20,11 @@
 <IconJson v-if = "extension == 'json'" />
 <IconMp3  v-if = "extension == 'mp3'"  />
 <IconPdf  v-if = "extension == 'pdf'"  />
+<IconPhp  v-if = "extension == 'php'"  />
 <IconPng  v-if = "extension == 'png'"  />
 <IconPpt  v-if = "extension == 'ppt'"  />
 <IconRtf  v-if = "extension == 'rtf'"  />
+<IconSql  v-if = "extension == 'sql'"  />
 <IconSvg  v-if = "extension == 'svg'"  />
 <IconTxt  v-if = "extension == 'txt'"  />
 <IconXls  v-if = "extension == 'xls'"  />
@@ -53,9 +55,11 @@ import IconJson   from  "./Svgs/_extensions/IconJson";
 import IconMp3    from  "./Svgs/_extensions/IconMp3";
 import IconMp4    from  "./Svgs/_extensions/IconMp4";
 import IconPdf    from  "./Svgs/_extensions/IconPdf";
+import IconPhp    from  "./Svgs/_extensions/IconPhp";
 import IconPng    from  "./Svgs/_extensions/IconPng";
 import IconPpt    from  "./Svgs/_extensions/IconPpt";
 import IconRtf    from  "./Svgs/_extensions/IconRtf";
+import IconSql    from  "./Svgs/_extensions/IconSql";
 import IconSvg    from  "./Svgs/_extensions/IconSvg";
 import IconTxt    from  "./Svgs/_extensions/IconTxt";
 import IconXls    from  "./Svgs/_extensions/IconXls";
@@ -84,9 +88,11 @@ export default {
     IconMp3,
     IconMp4,
     IconPdf,
+    IconPhp,
     IconPng,
     IconPpt,
     IconRtf,
+    IconSql,
     IconSvg,
     IconTxt,
     IconXls,
