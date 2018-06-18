@@ -52,7 +52,8 @@ import IconAdd from "../../_utils/Svgs/IconAdd";
 import IconDownload from "../../_utils/Svgs/IconDownload";
 import IconVisiblePublic from "../../_utils/Svgs/IconVisiblePublic";
 import IconVisiblePrivate from "../../_utils/Svgs/IconVisiblePrivate";
-import InteligentIcon from "../../_utils/Svgs/_extensions/InteligentIcon";
+import InteligentIcon from "../../_utils/InteligentIcon";
+
 export default {
   components: {
     IconArrowRight,
