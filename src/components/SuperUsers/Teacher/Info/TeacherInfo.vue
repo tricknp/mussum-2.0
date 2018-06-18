@@ -1,5 +1,5 @@
 <template>
-  <div v-if='isProfessor' class="teacher-profile">
+  <div class="teacher-profile">
 
      <h1 class="title-teacher"> {{ title }} </h1>
 
@@ -15,46 +15,22 @@
         <!--<PrivateAside />-->
   </div>
 
-  <div v-else class="teacher-profile">
-    
-    <div class="left-teacher-profile">
-     <h1 class="title-teacher"> {{ title }} </h1>
-
-     <div class="info-teacher">
-        <div class="desc-photo">
-            <PublicPhoto />
-            <PublicDescription /> 
-        </div>
-        <div class="info-content">
-           <PublicTabs />
-        </div>
-     </div>
-    </div>
-    
-    <div class="right-teacher-profile">
-      <Aside />
-    </div>
-  </div>
 </template>
 
 
 <script>
 //private views, only be acessed when the teacher is logged
-import PrivatePhoto       from  "../PrivateViews/Photo"
-import PrivateDescription from  "../PrivateViews/Description"
-import PrivateTabs        from  "../PrivateViews/Tabs/Tabs"
-import PrivateAside       from  '../PrivateViews/Aside/Aside'
+import PrivatePhoto from "../PrivateViews/Photo";
+import PrivateDescription from "../PrivateViews/Description";
+import PrivateTabs from "../PrivateViews/Tabs/Tabs";
+import PrivateAside from "../PrivateViews/Aside/Aside";
 
-//public views, everybody without token can see this content
-import PublicPhoto        from  "../PublicViews/Photo"
-import PublicDescription  from  "../PublicViews/Description"
-import PublicTabs         from  "../PublicViews/Tabs/Tabs"
-import Aside              from  '../../../FixedComponents/Aside/Aside'
+import Aside from "../../../FixedComponents/Aside/Aside";
 
-import auth               from  "../../../../services/auth";
+import auth from "../../../../services/auth";
 
 export default {
-  name: "Info", 
+  name: "Info",
 
   components: {
     //components with private views
@@ -62,11 +38,10 @@ export default {
     PrivateDescription,
     PrivateTabs,
     PrivateAside,
-    //components with public views
-    PublicPhoto,
-    PublicDescription,
-    PublicTabs,
     Aside
+  },
+  created() {
+    //isProfessor();
   },
   computed: {
     isProfessor: function() {

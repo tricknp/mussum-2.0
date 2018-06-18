@@ -1,7 +1,6 @@
 <template>
   <div class="teacher-description">
-    <h1> {{ `${teacher.nome} ${teacher.sobrenome}` }} </h1>
-
+    <h1> {{ `${teachers.find(x => x.username === this.username).nome} ${teachers.find(x => x.username == this.username).sobrenome}` }} </h1>
     <div class="div-desc-teacher">
           <IconResume />
           <input type="text" 
@@ -9,7 +8,7 @@
                 placeholder="Sem descrição" 
                 class="input-teacher-profile"
                 ref="desc"
-                v-model="teacher.descricao"> 
+                v-model="teachers.find(x => x.username === this.username).descricao"> 
           <button type="submit" @click="actionDesc" v-if="!editFocused">
             <IconEdit />
           </button> 
@@ -26,7 +25,7 @@
              placeholder="Nenhum e-mail informado" 
              class="input-teacher-profile"
              ref="mail"
-             v-model="teacher.email"> 
+             v-model="teachers.find(x => x.username === this.username).email"> 
     
       <button type="submit" @click="actionMail" v-if="!mailFocused">
         <IconEdit />
@@ -43,71 +42,62 @@
 
 
 <script>
-import  axios      from  'axios'
-import  auth       from  "../../../../services/auth";
-import  IconOk     from  '../../../_utils/Svgs/IconOk'
-import  IconEdit   from  '../../../_utils/Svgs/IconEdit'
-import  IconResume from  '../../../_utils/Svgs/IconResume'
-import  IconEmail  from '../../../_utils/Svgs/IconEmail'
-import  { url }    from  '../../../_mixins/url'
-import  { edit }   from  '../../../_mixins/edit'
+import axios from "axios";
+import auth from "../../../../services/auth";
+import IconOk from "../../../_utils/Svgs/IconOk";
+import IconEdit from "../../../_utils/Svgs/IconEdit";
+import IconResume from "../../../_utils/Svgs/IconResume";
+import IconEmail from "../../../_utils/Svgs/IconEmail";
+import { url } from "../../../_mixins/url";
+import { edit } from "../../../_mixins/edit";
 
 export default {
-  components: 
-    {
-      IconEdit,
-      IconOk, 
-      IconResume, 
-      IconEmail,  
+  components: {
+    IconEdit,
+    IconOk,
+    IconResume,
+    IconEmail
+  },
 
-    },
-
-  mixins: [ url, edit ],
+  mixins: [url, edit],
 
   data() {
     return {
-      teacher: '',
-      id: '',
+      teachers: [],
       role: auth.getRole(),
-      username: auth.getUsername(),
+      username: this.$route.params.targetName,
       disabled: true,
       editFocused: false,
-      mailFocused: false,
-    }
+      mailFocused: false
+    };
   },
-
-  created(){
-    this.getTeacher();
+  created() {
+    this.getTeacher(),
+      this.$bus.$on("selectProfessor", (username) => {
+        this.username = username;
+        //this.getTeacher();
+      });
   },
-
   methods: {
-    getTeacher(){
-      axios
-        .get(`${this.BASE_URL}api/professores`)
-        .then(res => {
-          let t = res.data
-          for( let i = 0; i < t.length; i++){
-            if (this.username == t[i].username && this.username != '') {
-              this.teacher = t[i];
-              this.id = t[i].id
-              console.log(t)
-              //this.fullName = `${t[i].nome} ${t[i].sobrenome}`
-              //this.description = t[i].sobre
-              //this.email = t[i].email
-            }
-          }
-        })
+    getTeacher() {
+      console.log("USERNAME");
+      console.log(this.username);
+
+      axios.get(`${this.BASE_URL}api/professores`).then(res => {
+        this.teachers = res.data;
+        console.log(res.data);
+      });
     },
 
-    actionDesc(){
+    actionDesc() {
       this.$refs.desc.disabled = false;
       this.$refs.mail.disabled = true;
       this.$refs.desc.focus();
-      this.editFocused = true;  
+      this.editFocused = true;
       this.mailFocused = false;
     },
 
-    actionMail(){
+    actionMail() {
       this.$refs.mail.disabled = false;
       this.$refs.desc.disabled = true;
       this.$refs.mail.focus();
@@ -115,23 +105,20 @@ export default {
       this.editFocused = false;
     },
 
-    postData(){
+    postData() {
       //route to post teacher
-      this.route = 'api/professores/',
-
-      this.datas = JSON.stringify({
-        id: this.id,
-        email: this.teacher.email,
-        descricao: this.teacher.descricao,
-      })
+      (this.route = "api/professores/"),
+        (this.datas = JSON.stringify({
+          id: this.id,
+          email: this.teacher.email,
+          descricao: this.teacher.descricao
+        }));
 
       this.$refs.mail.disabled = true;
       this.$refs.desc.disabled = true;
-      this.editFocused = false;  
+      this.editFocused = false;
       this.mailFocused = false;
-    },
-
+    }
   }
-
-}
+};
 </script>

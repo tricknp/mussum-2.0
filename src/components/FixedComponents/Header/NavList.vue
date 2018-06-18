@@ -9,8 +9,8 @@
                 v-for="professor in professores" 
                 :key="professor.nome"
                 :targetName="professor.username" >
-                <router-link :to="{ path: '/professor/' + professor.username.toLowerCase() }">
-                  <a class="ass">
+                <router-link :to="{ path: '/professor/' + professor.username.toLowerCase() }" >
+                  <a class="ass" @click="test(professor.username)">
                     {{ professor.nome }}
                   </a>  
                 </router-link>
@@ -46,54 +46,67 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { url } from '../../_mixins/url.js'
+import axios from "axios";
+import { url } from "../../_mixins/url.js";
+import auth from "../../../services/auth.js";
 
 export default {
-  name: 'NavList',
+  name: "NavList",
 
-  mixins: [ url ],
+  mixins: [url],
 
-  props:{
-    targetName:
-    {
+  props: {
+    targetName: {
       type: Object | String
     }
   },
 
-  data(){
-    return{
-      title:
-      { 
-        listProfessores: 'Professoris',
-        listHorarios: 'Horaris',
-        link3: 'Cursis',
+  data() {
+    return {
+      title: {
+        listProfessores: "Professoris",
+        listHorarios: "Horaris",
+        link3: "Cursis"
       },
-      professores: '',
-      horarios:'',
+      professores: "",
+      horarios: ""
     };
   },
 
-  methods: { 
-      initHeader() {
-          axios
-            .get(this.BASE_URL + 'api/professores')
-            .then(res => {
-              this.professores = res.data;
-            });
-        },
-
-      select(obj) {
-        this.targetName = obj;
-        },
+  methods: {
+    initHeader() {
+      axios.get(this.BASE_URL + "api/professores").then(res => {
+        this.professores = res.data;
+      });
     },
 
-  created(){
-    this.initHeader();
+    select(obj) {
+      this.targetName = obj;
+    },
+    test(username) {
+      this.$route.params.targetName = username;
+      this.$bus.$emit("selectProfessor", username);
+
+      if (auth.getUsername() == username) {
+        this.$bus.isOwner = true;
+      } else {
+        this.$bus.isOwner = false;
+      }
+    }
   },
 
-  updated(){
+  beforeMount() {
+    this.initHeader();
+    
+      if (auth.getUsername() == this.$route.params.targetName) {
+        this.$bus.isOwner = true;
+      } else {
+        this.$bus.isOwner = false;
+      }
+  },
+
+  updated() {
     //this.initialize();
   }
-}
+};
 </script>

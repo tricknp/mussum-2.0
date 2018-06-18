@@ -1,7 +1,7 @@
 
 <template>
   <div>
-    <div class="div-select-course">
+    <div v-if="this.$bus.isOwner" class="div-select-course">
       <select v-model="dir" class="select-course">
         <option v-for="curso in cursos"
                 :key="curso.id"
@@ -114,14 +114,17 @@ export default {
       isLink: false
     };
   },
-  mounted() {},
+
   created() {
     this.getCourses();
     this.resetRepository();
-    this.$bus.$on("itemClicked", (div, dire) => {
-      console.log(dire);
-      //this.getRepositorys(div, dire);
+    this.$bus.$on("selectProfessor", username => {
+      this.resetRepository();
     }),
+      this.$bus.$on("itemClicked", (div, dire) => {
+        console.log(dire);
+        //this.getRepositorys(div, dire);
+      }),
       this.$bus.$on("addChild", (dir, name) => {
         this.dir = dir + "/" + name;
         this.showModal = true;
