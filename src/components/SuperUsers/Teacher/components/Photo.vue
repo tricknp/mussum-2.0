@@ -1,8 +1,9 @@
 <template>
   <div class="div-teacher-img">
-      <imgUpload />
+      
+      <imgUpload v-if="isTeacher" />
 
-      <!--<img :src="`data:image/png;base64,${img}`" >-->
+      <img :src="img">
 
   </div>
  
@@ -10,15 +11,16 @@
 
 
 <script>
+import axios from 'axios'
 import imgUpload from "../../../UIComponents/ImageUpload";
 import { url } from '../../../_mixins/url'
-import axios from 'axios'
+import isTeacher from '../../../_mixins/isTeacher'
 
 export default {
 
   components: { imgUpload },
 
-  mixins: [ url ],
+  mixins: [ url, isTeacher ],
 
   data(){
     return{

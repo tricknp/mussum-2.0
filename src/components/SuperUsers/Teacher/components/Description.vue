@@ -10,13 +10,16 @@
                 class="input-teacher-profile"
                 ref="desc"
                 v-model="teacher.descricao"> 
-          <button type="submit" @click="actionDesc" v-if="!editFocused">
-            <IconEdit />
-          </button> 
           
-          <button type="submit" @click.prevent="onSubmit" v-else>
-            <IconOk />
-          </button> 
+          <span v-if="isTeacher">
+            <button type="submit" @click="actionDesc" v-if="!editFocused">
+              <IconEdit />
+            </button> 
+            
+            <button type="submit" @click.prevent="onSubmit" v-else>
+              <IconOk />
+            </button> 
+          </span>
     </div>
     
     <div class="div-email-teacher">
@@ -27,16 +30,18 @@
              class="input-teacher-profile"
              ref="mail"
              v-model="teacher.email"> 
-    
-      <button type="submit" @click="actionMail" v-if="!mailFocused">
-        <IconEdit />
-      </button> 
+             
+      <span v-if="isTeacher">
+        <button type="submit" @click="actionMail" v-if="!mailFocused">
+          <IconEdit />
+        </button> 
 
-      <button type="submit" @click.prevent="onSubmit" v-else>
-        <IconOk />
-      </button> 
+        <button type="submit" @click.prevent="onSubmit" v-else>
+          <IconOk />
+        </button> 
+      </span>
+
     </div>
-
 
   </div>  
 </template>
@@ -48,9 +53,10 @@ import  auth       from  "../../../../services/auth";
 import  IconOk     from  '../../../_utils/Svgs/IconOk'
 import  IconEdit   from  '../../../_utils/Svgs/IconEdit'
 import  IconResume from  '../../../_utils/Svgs/IconResume'
-import  IconEmail  from '../../../_utils/Svgs/IconEmail'
+import  IconEmail  from  '../../../_utils/Svgs/IconEmail'
 import  { url }    from  '../../../_mixins/url'
 import  { edit }   from  '../../../_mixins/edit'
+import isTeacher   from  '../../../_mixins/isTeacher'
 
 export default {
   components: 
@@ -62,7 +68,7 @@ export default {
 
     },
 
-  mixins: [ url, edit ],
+  mixins: [ url, edit, isTeacher ],
 
   data() {
     return {

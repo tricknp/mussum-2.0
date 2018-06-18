@@ -5,9 +5,11 @@
     
     <input type="text" ref="sobre" :disabled="disabled" v-model="professor.sobre" placeholder="sobre...">
     
-    <button v-if="!focused" @click="focus"> <IconEdit /> </button>
-    
-    <button v-if="focused" @click="onSubmit"> <IconOk /> </button>
+    <span v-if="isTeacher">
+      <button v-if="!focused" @click="focus"> <IconEdit /> </button>
+      
+      <button v-if="focused" @click="onSubmit"> <IconOk /> </button>
+    </span>
 
   </div>
 </template>
@@ -19,12 +21,13 @@ import { url } from '../../../../../_mixins/url'
 import { edit } from '../../../../../_mixins/edit'
 import IconEdit from '../../../../../_utils/Svgs/IconEdit'
 import IconOk from '../../../../../_utils/Svgs/IconOk'
+import isTeacher from '../../../../../_mixins/isTeacher'
 
 export default {
   
   components: { IconEdit, IconOk },
 
-  mixins: [ url, edit ],
+  mixins: [ url, edit, isTeacher ],
 
   data(){
     return{

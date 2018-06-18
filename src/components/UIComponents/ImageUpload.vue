@@ -35,7 +35,7 @@ export default {
 
   props: ["info"],
 
-  mixins: [url],
+
 
   data() {
     return {
