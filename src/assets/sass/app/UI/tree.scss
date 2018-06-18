@@ -1,0 +1,40 @@
+.tree-item 
+{
+  list-style: none;
+  font-size: 1em;
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+.ss:hover 
+{
+  background: #eee;
+}
+
+.tree-buttons 
+{
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  right: 2em;
+  top: 0.5em;
+  cursor: pointer;
+}
+
+.item 
+{
+  cursor: pointer;
+  padding: 5px;
+}
+
+.tree-ul {
+  padding-left: 3em;
+  line-height: 1.5em;
+}
+
+.inteligent-icon
+{
+  position: absolute;
+  left: -3em;
+  top: -.5em;
+}

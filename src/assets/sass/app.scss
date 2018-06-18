@@ -15,13 +15,13 @@
 @import 'app/MainComponents/Pages/home';
 
 //UI icons
-@import 'app/UIComponents/icons';
+@import 'app/UI/icons';
 
-//UI Components
-@import 'app/UIComponents/dropdown';
-@import 'app/UIComponents/modal';
-@import 'app/UIComponents/dropzone';
-
+//UI 
+@import 'app/UI/dropdown';
+@import 'app/UI/modal';
+@import 'app/UI/dropzone';
+@import 'app/UI/tree';
 
 //responsive and reset
 @import 'app/Responsive/responsive';

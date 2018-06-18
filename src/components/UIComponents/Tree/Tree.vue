@@ -1,13 +1,14 @@
 <template>
   <li class="tree-item">
 
+    
     <div @click="toggle(), isFolder ?  itemClicked(model.dir) : null" class="ss">
+      <InteligentIcon class="inteligent-icon" :model="{extension: model.name}" ></InteligentIcon>
+
       <span v-if="isFolder">
         <span v-if="open === false"><IconArrowRight /></span>
         <span v-else><IconArrowDown /></span>
       </span>
-      
-      <InteligentIcon  :model="{extension: model.name}" ></InteligentIcon>
 
       <a v-if="model.link" :href="model.link" target="_blank" >{{ model.name.substr(0, model.name.lastIndexOf('.')) || model.name}}</a>
       {{ model.link ? null : model.name.substr(0, model.name.lastIndexOf('.')) || model.name  }}
@@ -33,7 +34,7 @@
       </div>
     </div>
 
-    <ul v-show="open" v-if="isFolder" :id="model.dir +'/'+ model.name" :ref="'li'"></ul>
+    <ul v-show="open" v-if="isFolder" :id="model.dir +'/'+ model.name" :ref="'li'" class="tree-ul"></ul>
     
   </li>
 </template>
@@ -206,34 +207,3 @@ export default {
 };
 </script>
 
-<style>
-.tree-item {
-  list-style: none;
-  font-size: 1em;
-  border-bottom: 1px solid #eee;
-  position: relative;
-}
-.ss:hover {
-  background: #eee;
-}
-.tree-buttons {
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  right: 2em;
-  top: 0.5em;
-  cursor: pointer;
-}
-.add-tree {
-  color: red;
-  text-align: right;
-}
-.item {
-  cursor: pointer;
-  padding: 5px;
-}
-ul {
-  padding-left: 2em;
-  line-height: 1.5em;
-}
-</style>
