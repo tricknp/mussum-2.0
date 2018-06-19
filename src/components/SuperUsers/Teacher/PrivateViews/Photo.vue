@@ -1,11 +1,12 @@
 <template>
   <div class="div-teacher-img">
       
-      <PhotoUpload v-if="image == false" />
+      <PhotoUpload v-if="!img && this.$bus.isOwner" />
       
-      <div v-else class="square-photo">
-        <img class="teacher-photo" :src="`data:image/png;base64,${img}`">
-        <IconEdit class="edit-photo-profile" />
+      <div class="square-photo">
+        <img v-if="img" class="teacher-photo" :src="`data:image/png;base64,${img}`">
+        <img v-if="!img" class="teacher-photo" src="../../../../../static/images/blackNwhite.jpeg">
+        <IconEdit v-if="this.$bus.isOwner" class="edit-photo-profile" />
       </div>
 
   </div>
@@ -27,8 +28,7 @@ export default {
 
   data(){
     return{
-      img: '',
-      image: false
+      img: ''
     }
   },
 
@@ -43,7 +43,6 @@ export default {
           //this.$refs.photo.src = `data:image/png;base64,${f}`;
           //this.img = this.$refs.photo
           this.img = res.data;
-          this.image = true
         })
         .catch(error => {
           this.img = 0;

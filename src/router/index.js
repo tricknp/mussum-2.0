@@ -38,7 +38,6 @@ const router = new Router({
       path: '/professor/:targetName',
       name: 'Professor',
       component: Teacher,
-      //props: { newsletterPopup: false } 
     },
 
     { path: '*', component: NotFound }
