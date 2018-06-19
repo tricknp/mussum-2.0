@@ -1,6 +1,6 @@
 <template>
   <div class="teacher-description">
-    <h1> {{ `${teachers.find(x => x.username === this.username).nome} ${teachers.find(x => x.username == this.username).sobrenome}` }} </h1>
+    <h1> {{ `${this.name} ${this.lastname}` }} </h1>
     <div class="div-desc-teacher">
           <IconResume />
           <input type="text" 
@@ -8,7 +8,7 @@
                 placeholder="Sem descrição" 
                 class="input-teacher-profile"
                 ref="desc"
-                v-model="teachers.find(x => x.username === this.username).descricao"> 
+                v-model="this.description"> 
           <button type="submit" @click="actionDesc" v-if="!editFocused">
             <IconEdit />
           </button> 
@@ -25,7 +25,7 @@
              placeholder="Nenhum e-mail informado" 
              class="input-teacher-profile"
              ref="mail"
-             v-model="teachers.find(x => x.username === this.username).email"> 
+             v-model="this.email"> 
     
       <button type="submit" @click="actionMail" v-if="!mailFocused">
         <IconEdit />
@@ -65,6 +65,10 @@ export default {
     return {
       teachers: [],
       role: auth.getRole(),
+      name: "",
+      lastname: "",
+      email: "",
+      description: "",
       username: this.$route.params.targetName,
       disabled: true,
       editFocused: false,
@@ -73,19 +77,23 @@ export default {
   },
   created() {
     this.getTeacher(),
-      this.$bus.$on("selectProfessor", (username) => {
-        this.username = username;
-        //this.getTeacher();
+      this.$bus.$on("selectProfessor", username => {
+        this.refresh(username);
       });
   },
   methods: {
+    refresh(username) {
+      this.username = username;
+      let teacher = this.teachers.find(x => x.username === username);
+      this.name = teacher.nome;
+      this.lastname = teacher.sobrenome;
+      this.email = teacher.email;
+      this.description = teacher.descricao;
+    },
     getTeacher() {
-      console.log("USERNAME");
-      console.log(this.username);
-
       axios.get(`${this.BASE_URL}api/professores`).then(res => {
         this.teachers = res.data;
-        console.log(res.data);
+        this.refresh(this.username);
       });
     },
 
