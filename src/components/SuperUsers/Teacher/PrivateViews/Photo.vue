@@ -1,12 +1,19 @@
 <template>
   <div class="div-teacher-img">
       
-      <PhotoUpload v-if="!img && this.$bus.isOwner" />
-      
-      <div class="square-photo">
+      <div v-show="upload">
+        <PhotoUpload v-if="this.$bus.isOwner" />
+      </div>
+    
+      <div class="square-photo" v-show="photo">
+        
         <img v-if="img" class="teacher-photo" :src="`data:image/png;base64,${img}`">
-        <img v-if="!img" class="teacher-photo" src="../../../../../static/images/blackNwhite.jpeg">
-        <IconEdit v-if="this.$bus.isOwner" class="edit-photo-profile" />
+        <img v-if="!img" class="teacher-photo" :src="defaultImg">
+        
+        <button @click="showUpload">
+          <IconEdit v-if="this.$bus.isOwner" class="edit-photo-profile" />
+        </button>
+
       </div>
 
   </div>
@@ -28,7 +35,10 @@ export default {
 
   data(){
     return{
-      img: ''
+      defaultImg: '../../../../../static/images/blackNwhite.jpeg',
+      img: '',
+      upload: false,
+      photo: true,
     }
   },
 
@@ -47,14 +57,28 @@ export default {
         .catch(error => {
           this.img = 0;
         });
-    }
+    },
+
+    showUpload(){
+      this.upload = true
+      this.photo = false
+    },
+
   },
 
   created() {
     this.getPhoto();
+    
     this.$bus.$on("selectProfessor", username => {
       this.getPhoto();
     });
+    
+    this.$bus.$on('onUpload', () => {
+      this.upload = false;
+      this.photo = true;
+      this.getPhoto();
+    });
+
   }
 };
 </script>

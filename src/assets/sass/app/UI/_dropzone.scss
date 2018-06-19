@@ -81,7 +81,8 @@
 }
 
 .teacher-photo
-{
+{   
+    position: absolute;
     max-width: $full-size;
     max-height: $full-size;
 }
@@ -89,6 +90,6 @@
 .edit-photo-profile
 {
     position: absolute;
-    top: -1%;
+    top: -2% ;
     right: 1%;
 }

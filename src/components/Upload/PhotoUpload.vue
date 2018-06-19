@@ -71,6 +71,7 @@ export default {
         }
       }).then( res => {
           console.log('imagem enviada com sucesso')
+          this.$bus.$emit('onUpload')
       })
     },
 
