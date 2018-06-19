@@ -35,7 +35,7 @@ export default {
 
   data(){
       return{
-          logo: '../../../../static/images/logo.svg'
+          logo: '../../../../static/images/mussum2.0.png'
       };
   }
   

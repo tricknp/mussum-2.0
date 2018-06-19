@@ -31,7 +31,9 @@
                     <div v-if="content.tipo == 'link'">
                         <img src="#">
                         <p> <b>{{ content.professor }}</b> {{ textLink }} </p>
-                        <p> <a :href="content.link">{{ `${content.titulo}` }}</a> </p>
+                        <p> <a :href="content.link" target="_blank">
+                          {{ `${content.titulo}` }}
+                        </a> </p>
                         <p> {{ `${content.comentario}` }}  </p>
                         <p> {{ content.dataCriacao }} </p>
                     </div>
