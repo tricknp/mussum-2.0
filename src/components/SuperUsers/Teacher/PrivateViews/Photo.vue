@@ -1,8 +1,8 @@
 <template>
   <div class="div-teacher-img">
-      <imgUpload />
+      <imgUpload v-if="!img"/>
 
-      <!--<img :src="`data:image/png;base64,${img}`" >-->
+      <img v-if="img" :src="`data:image/png;base64,${img}`" >
 
   </div>
  
@@ -11,43 +11,43 @@
 
 <script>
 import imgUpload from "../../../UIComponents/ImageUpload";
-import { url } from '../../../_mixins/url'
-import axios from 'axios'
+import { url } from "../../../_mixins/url";
+import axios from "axios";
 
 export default {
-
   components: { imgUpload },
 
-  mixins: [ url ],
+  mixins: [url],
 
-  data(){
-    return{
-      img: '',
-    }
+  data() {
+    return {
+      img: ""
+    };
   },
 
-  methods:{
-    getPhoto(){
+  methods: {
+    getPhoto() {
       axios
         .get(`${this.BASE_URL}api/photo`, {
           headers: { professor: this.$route.params.targetName }
         })
-        .then( (res) => {
+        .then((res, err) => {
           //let f = res.data
           //this.$refs.photo.src = `data:image/png;base64,${f}`;
           //this.img = this.$refs.photo
           this.img = res.data;
-          
-        })    
-    },
-
+        })
+        .catch(error => {
+          this.img = 0;
+        });
+    }
   },
-  
-  created(){
+
+  created() {
     this.getPhoto();
+    this.$bus.$on("selectProfessor", username => {
+      this.getPhoto();
+    });
   }
-
-
-
-}
+};
 </script>
