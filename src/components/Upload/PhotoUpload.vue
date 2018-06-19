@@ -42,8 +42,6 @@ export default {
       image: "",
       hovering: false,
       selectedFile: "",
-      image: "",
-      hovering: ""
     };
   },
   methods: {

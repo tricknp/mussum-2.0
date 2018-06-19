@@ -71,3 +71,13 @@
     max-width: 9em;
     max-height: 8em;
 }
+
+.square-photo
+{
+    @extend .dropzone-area;
+}
+
+.teacher-photo
+{
+    @extend .photo-upload;
+}

@@ -1,8 +1,11 @@
 <template>
   <div class="div-teacher-img">
-      <imgUpload />
-
-      <!--<img :src="`data:image/png;base64,${img}`" >-->
+      
+      <PhotoUpload v-if="image == false" />
+      
+      <div v-else class="square-photo">
+        <img class="teacher-photo" :src="`data:image/png;base64,${img}`">
+      </div>
 
   </div>
  
@@ -10,19 +13,20 @@
 
 
 <script>
-import imgUpload from "../../../UIComponents/ImageUpload";
+import PhotoUpload from "../../../Upload/PhotoUpload";
 import { url } from '../../../_mixins/url'
 import axios from 'axios'
 
 export default {
 
-  components: { imgUpload },
+  components: { PhotoUpload },
 
   mixins: [ url ],
 
   data(){
     return{
       img: '',
+      image: false
     }
   },
 
@@ -33,11 +37,8 @@ export default {
           headers: { professor: this.$route.params.targetName }
         })
         .then( (res) => {
-          //let f = res.data
-          //this.$refs.photo.src = `data:image/png;base64,${f}`;
-          //this.img = this.$refs.photo
           this.img = res.data;
-          
+          this.image = true
         })    
     },
 
