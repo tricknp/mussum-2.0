@@ -1,7 +1,7 @@
 .dropzone-area {
     width: $full-size;
     height: 120px;
-    margin-top: 15%;
+    margin-top: 7%;
     position: relative;
     border: 2px dashed $light-grey;
     transition: .10s ease-in;
@@ -74,10 +74,21 @@
 
 .square-photo
 {
-    @extend .dropzone-area;
+    width: $full-size;
+    height: 120px;
+    margin-top: 7%;
+    position: relative;
 }
 
 .teacher-photo
 {
-    @extend .photo-upload;
+    max-width: $full-size;
+    max-height: $full-size;
+}
+
+.edit-photo-profile
+{
+    position: absolute;
+    top: -1%;
+    right: 1%;
 }

@@ -5,6 +5,7 @@
       
       <div v-else class="square-photo">
         <img class="teacher-photo" :src="`data:image/png;base64,${img}`">
+        <IconEdit class="edit-photo-profile" />
       </div>
 
   </div>
@@ -15,13 +16,14 @@
 <script>
 import PhotoUpload from "../../../Upload/PhotoUpload";
 import { url } from '../../../_mixins/url'
+import IconEdit from '../../../_utils/Svgs/IconEdit'
 import axios from 'axios'
 
 export default {
 
-  components: { PhotoUpload },
+  components: { PhotoUpload, IconEdit },
 
-  mixins: [ url ],
+  mixins: [url],
 
   data(){
     return{
@@ -30,25 +32,30 @@ export default {
     }
   },
 
-  methods:{
-    getPhoto(){
+  methods: {
+    getPhoto() {
       axios
         .get(`${this.BASE_URL}api/photo`, {
           headers: { professor: this.$route.params.targetName }
         })
-        .then( (res) => {
+        .then((res, err) => {
+          //let f = res.data
+          //this.$refs.photo.src = `data:image/png;base64,${f}`;
+          //this.img = this.$refs.photo
           this.img = res.data;
           this.image = true
-        })    
-    },
-
+        })
+        .catch(error => {
+          this.img = 0;
+        });
+    }
   },
-  
-  created(){
+
+  created() {
     this.getPhoto();
+    this.$bus.$on("selectProfessor", username => {
+      this.getPhoto();
+    });
   }
-
-
-
-}
+};
 </script>
