@@ -1,3 +1,8 @@
+.home
+{
+  @extend %page;
+}
+
 .home-container
 {
     @extend %equal-flex-items;

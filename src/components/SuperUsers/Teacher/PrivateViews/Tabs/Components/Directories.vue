@@ -1,6 +1,6 @@
 
 <template>
-  <div>
+  <div class="directories">
     <div v-if="this.$bus.isOwner" class="div-select-course">
       <select v-model="dir" class="select-course">
         <option v-for="curso in cursos"

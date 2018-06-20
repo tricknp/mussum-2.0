@@ -2,9 +2,11 @@
   <div>  
   
     <dropdown>
-   <a v-if='isLoged'>
-    <h1> {{ this.user.name }}</h1>
+      <a v-if='isLoged'>
+        <h1> {{ this.user.name }}</h1>
+        
       </a>
+
       <a v-else>
         <span>
           <IconNavbar />
@@ -17,6 +19,7 @@
           <menu-item v-for="item in items"  :key="item.name">
             <a href="#" > 
               {{ item.name }} 
+              <img v-if="img" class="teacher-photo" :src="`data:image/png;base64,${img}`">
             </a>
           </menu-item>
 
@@ -46,21 +49,6 @@ export default {
   name: "Navbar",
 
   components: { IconNavbar },
-
-  computed: {
-    isLoged: function() {
-      const localSize = localStorage.length;
-      this.user.name = localStorage.getItem('nome');
-      return localSize > 1;
-    }
-  },
-  methods: {
-    signOut: function() {
-      localStorage.clear();
-      this.$router.push("/");
-    }
-  },
-
   data() {
     return {
       showModal: false,
@@ -73,15 +61,40 @@ export default {
       user: {
         name: ''
       },
-      links: [
-        {
-          url:
-            "https://senac.blackboard.com/webapps/portal/execute/tabs/tabAction?tab_tab_group_id=_6_1"
-        },
-        { url: "https://www.senacrs.com.br/meusenac_login.asp" },
-        { url: "https://www.senacrs.com.br/" }
-      ]
+
+      img: '',
+     
     };
-  }
+  },
+
+  computed: {
+    isLoged: function() {
+      const localSize = localStorage.length;
+      this.user.name = localStorage.getItem('nome');
+      return localSize > 1;
+    }
+  },
+  
+  methods: {
+    signOut: function() {
+      localStorage.clear();
+      this.$router.push("/");
+    },
+
+    getPhoto() {
+      axios
+        .get(`${this.BASE_URL}api/photo`, {
+          headers: { professor: this.$route.params.targetName }
+        })
+        .then((res, err) => {
+          //let f = res.data
+          //this.$refs.photo.src = `data:image/png;base64,${f}`;
+          //this.img = this.$refs.photo
+          this.img = res.data;
+        })
+    }
+
+  },
+
 };
 </script>

@@ -1,3 +1,11 @@
+/*======== Using in main pages ========*/
+%page
+{
+  background-color: $default-background;
+  width: $full-size;
+  height: 100vh;
+}
+
 /*======== Using in header ========*/
 %equal-flex-items
 {

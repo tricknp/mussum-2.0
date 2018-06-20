@@ -28,13 +28,3 @@ export default {
 
 }
 </script>
-
-<style >
-  .home
-  {
-    background-color: rgba(240, 240, 240, 0.966);
-    width: 100%;
-    height: 100vh;
-  }
-</style>
-

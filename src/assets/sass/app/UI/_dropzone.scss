@@ -1,6 +1,6 @@
 .dropzone-area {
     width: $full-size;
-    height: 120px;
+    height: 145px;
     margin-top: 7%;
     position: relative;
     border: 2px dashed $light-grey;
@@ -53,7 +53,6 @@
     transform: inherit;
     //@include transition (all 0.06s linear);
     &:hover span {
-        background-color: red;
     }
 }
 
@@ -74,17 +73,37 @@
 
 .square-photo
 {
-    width: $full-size;
-    height: 120px;
-    margin-top: 7%;
+    width: 145px;
+    height: 145px;
+    margin-top: 10%;
     position: relative;
+    &:hover
+    {
+        opacity: .4;
+        transition: ease-in-out .25s;
+        .edit-photo-profile
+        {
+            fill: #000;          
+            &:hover
+            {
+                transition: ease-in-out .25s;
+                border-radius: 20px;
+                background: #000;
+                fill: #fff;
+            }   
+        }
+    }
 }
 
 .teacher-photo
 {   
     position: absolute;
+    border-radius: 5px;
+    min-width: $full-size;
     max-width: $full-size;
+    min-height: $full-size;
     max-height: $full-size;
+
 }
 
 .edit-photo-profile

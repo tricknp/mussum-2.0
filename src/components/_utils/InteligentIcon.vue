@@ -106,8 +106,8 @@ export default {
   computed: {
     extension: function() {
       //return this.model.children && this.model.children.length;
-      var re = /(?:\.([^.]+))?$/;
-      var ext = re.exec(this.model.extension)[1];
+      let re = /(?:\.([^.]+))?$/;
+      let ext = re.exec(this.model.extension)[1];
       //this.model.extension = this.model.extension.split(".").pop();
 
       return ext ? ext : "folder";
