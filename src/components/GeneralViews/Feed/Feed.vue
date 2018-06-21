@@ -87,6 +87,7 @@ import IconDelete from "../../_utils/Svgs/IconDelete";
 export default {
   data() {
     return {
+      id: null,
       feedContent: "",
       textUpload: "adicionou um novo arquivo em",
       textRecado: "adicionou um novo recado.",
@@ -120,20 +121,19 @@ export default {
         this.feedContent = res.data;
         this.feedContent.forEach(element => {
         this.getphoto(element);
-        this.deleteFeed(element);
+        this.id = element.id
         });
         this.feedContent.reverse();
       });
       
     },
 
-    deleteFeed(feed) {
-      console.log(feed)
+    deleteFeed() {
       axios
-        .delete(`${this.BASE_URL}api/feed/${feed.id}`)
+        .delete(`${this.BASE_URL}api/feed/${this.id}`)
         .then(res => {
-          this.feedContent.push({});
-          this.feedContent.splice(-1,1)   
+          console.log('deleted')
+          console.log(res.data)
       })
     }
   }
