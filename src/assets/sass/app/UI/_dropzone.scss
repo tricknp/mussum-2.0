@@ -41,9 +41,9 @@
      color: $medium-grey;
      //@include text-dropdown();
 }
-.dropzone-info {
+//.dropzone-info {
     //@include text-descrete();
-}
+//}
 
 .dropzone-close.modal-close {
     position: absolute;
@@ -52,8 +52,8 @@
     visibility: hidden;
     transform: inherit;
     //@include transition (all 0.06s linear);
-    &:hover span {
-    }
+    //&:hover span {
+    //}
 }
 
 .dropzone-preview {

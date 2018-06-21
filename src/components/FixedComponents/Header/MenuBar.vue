@@ -1,18 +1,20 @@
 <template>
   <div>  
   
+
     <dropdown>
       <a v-if='isLoged'>
-        <h1> {{ this.user.name }}</h1>
-        
+        <span class="span-nav-photo">
+          <Arrow class="arrow" />
+          <img v-if="img" class="nav-teacher-photo" :src="`data:image/png;base64,${img}`">
+        </span>
       </a>
-
+      
       <a v-else>
         <span>
           <IconNavbar />
         </span>
       </a>
-      
       <div slot="content" id="dropdown-content">  
         <menus>
           
@@ -44,11 +46,18 @@
 
 <script>
 import IconNavbar from '../../_utils/Svgs/IconNavbar'
+import Arrow from '../../_utils/Svgs/IconArrowDown'
+import {url} from '../../_mixins/url'
+import axios from 'axios'
 
 export default {
+
   name: "Navbar",
 
-  components: { IconNavbar },
+  components: { IconNavbar, Arrow },
+
+  mixins: [ url ],
+
   data() {
     return {
       showModal: false,
@@ -59,9 +68,8 @@ export default {
         { name: "Administrador"}
       ],
       user: {
-        name: ''
+        name: '',
       },
-
       img: '',
      
     };
@@ -71,8 +79,13 @@ export default {
     isLoged: function() {
       const localSize = localStorage.length;
       this.user.name = localStorage.getItem('nome');
+
       return localSize > 1;
     }
+  },
+
+  created(){
+    this.getPhoto()
   },
   
   methods: {
@@ -84,13 +97,11 @@ export default {
     getPhoto() {
       axios
         .get(`${this.BASE_URL}api/photo`, {
-          headers: { professor: this.$route.params.targetName }
+          headers: { professor: localStorage.username }
         })
-        .then((res, err) => {
-          //let f = res.data
-          //this.$refs.photo.src = `data:image/png;base64,${f}`;
-          //this.img = this.$refs.photo
+        .then((res) => {
           this.img = res.data;
+          
         })
     }
 
@@ -98,3 +109,16 @@ export default {
 
 };
 </script>
+
+<style>
+.nav-teacher-photo
+{
+  width: 37px;
+  border-radius: 50px;
+}
+
+.arrow
+{
+  margin-top: 15%;
+}
+</style>
