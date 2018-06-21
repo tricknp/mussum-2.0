@@ -14,7 +14,7 @@
                       </button>
 
                       <div class="content-aligned">
-                        <img v-if="img" class="feed-photo" :src="`data:image/png;base64,${img}`">
+                        <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
                         <div class="feed-text-content">
                             <p> 
                                 <b>{{ content.professor }}</b> {{textUpload}} 
@@ -34,7 +34,7 @@
                       </button>
 
                       <div class="content-aligned">
-                        <img v-if="img" class="feed-photo" :src="`data:image/png;base64,${img}`">
+                        <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
                         <div class="feed-text-content">
                           <p> <b>{{ content.professor }}</b> {{ textRecado }} </p>
                           <b> <p class="feed-archive-name"> {{ `${content.titulo}` }} </p> </b>
@@ -52,7 +52,7 @@
 
                         <div class="content-aligned">
                           <div>
-                            <img v-if="img" class="feed-photo" :src="`data:image/png;base64,${img}`">
+                            <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
                           </div>
 
                           <div class="feed-text-content">
@@ -82,18 +82,15 @@
 import axios from "axios";
 import { url } from "../../_mixins/url";
 import LoginVue from "../../Authentication/Login.vue";
-import IconDelete from '../../_utils/Svgs/IconDelete'
+import IconDelete from "../../_utils/Svgs/IconDelete";
 
 export default {
-
   data() {
     return {
       feedContent: "",
-      img: '',
       textUpload: "adicionou um novo arquivo em",
       textRecado: "adicionou um novo recado.",
-      textLink: "adicionou um novo link.",
-      username: '',
+      textLink: "adicionou um novo link."
     };
   },
 
@@ -102,95 +99,44 @@ export default {
   mixins: [url],
 
   created() {
-    this.getphoto();
     this.feed();
   },
 
   methods: {
-    getphoto(){
+    getphoto(feed) {
       axios
         .get(`${this.BASE_URL}api/photo`, {
-          headers: { professor: this.username }
+          headers: { professor: feed.username }
         })
         .then((res, err) => {
-          this.img = res.data;
-        })
-      },
+          feed.img = res.data;
+          this.feedContent.push({});
+          this.feedContent.splice(-1,1) // isso aqi é pra n acumular objetos vazios no array por causa da gambiarra
+        });
+    },
 
     feed() {
       axios.get(`${this.BASE_URL}api/feed`).then(res => {
-        let contents = res.data;
-        let a = [];
-
-        contents.forEach(element => {
-          if (element.tipo == "upload") {
-            this.username = element.username
-            a.unshift({
-              tipo: "upload",
-              professor: element.professor,
-              dir: element.dir,
-              arquivo: element.arquivo,
-              comentario: element.comentario,
-              dataCriacao: element.dataCriacao,
-            },
-            )
-              
-          }
-
-          if (element.tipo == "recado") {
-            this.username = element.username
-            a.unshift({
-              tipo: "recado",
-              professor: element.professor,
-              titulo: element.titulo,
-              comentario: element.comentario,
-              dataCriacao: element.dataCriacao,
-              username: element.username
-            });
-          }
-          if (element.tipo == "link") {
-            this.username = element.username
-            a.unshift({
-              tipo: "link",
-              professor: element.professor,
-              titulo: element.titulo,
-              comentario: element.comentario,
-              link: element.link,
-              dataCriacao: element.dataCriacao,
-              username: element.username
-            });
-          }
+        this.feedContent = res.data;
+        this.feedContent.forEach(element => {
+        this.getphoto(element);
+        this.deleteFeed(element);
         });
-
-        this.feedContent = a;
+        this.feedContent.reverse();
       });
+      
     },
 
-    deleteFeed(){
-      alert('ok')
+    deleteFeed(feed) {
+      console.log(feed)
+      axios
+        .delete(`${this.BASE_URL}api/feed/${feed.id}`)
+        .then(res => {
+          this.feedContent.push({});
+          this.feedContent.splice(-1,1)   
+      })
     }
   }
-}
+};
 </script>
-
-
-<style>
-.icon-delete-feed
-{
-  width: .9em;
-}
-  .btn-delete-feed
-  {
-    right: .2em;
-    top: .1em;
-    position: absolute;
-  }
-
-.icon-delete-feed:hover
-{
-  fill: red;
-}
-
-</style>
-
 
