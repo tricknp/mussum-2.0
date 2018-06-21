@@ -163,7 +163,6 @@ export default {
         });
 
         this.feedContent = a;
-  
       });
     },
 
