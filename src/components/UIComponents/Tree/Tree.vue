@@ -1,7 +1,7 @@
 <template>
   <li class="tree-item">
 
-    
+
     <div @click="toggle(), isFolder ?  itemClicked(model.dir) : null" class="ss">
       <InteligentIcon class="inteligent-icon" :model="{extension: model.name}" ></InteligentIcon>
 
@@ -14,15 +14,15 @@
       {{ model.link ? null : model.name.substr(0, model.name.lastIndexOf('.')) || model.name  }}
 
       <div class="tree-buttons">
-        <button v-if="isVisible  && !isVisibleProc && this.$bus.isOwner" @click="toggleVisible"> 
-          <IconVisiblePublic />  
+        <button v-if="isVisible  && !isVisibleProc && this.$bus.isOwner" @click="toggleVisible">
+          <IconVisiblePublic />
         </button>
-        
+
         <button v-if="!isVisible && !isVisibleProc && this.$bus.isOwner" @click="toggleVisible">
-           <IconVisiblePrivate /> 
+           <IconVisiblePrivate />
         </button>
-        
-        <button v-if="isVisibleProc" @click="toggleVisible"> 
+
+        <button v-if="isVisibleProc" @click="toggleVisible">
           <img src="../../../../static/loading.gif" class="icon">
         </button>
 
@@ -35,7 +35,7 @@
     </div>
 
     <ul v-show="open" v-if="isFolder" :id="model.dir +'/'+ model.name" :ref="'li'" class="tree-ul"></ul>
-    
+
   </li>
 </template>
 
@@ -79,11 +79,11 @@ export default {
   },
   created() {
     this.$bus.$on("refresh", (dir, name) => {
-      console.log('refreshDir: '+dir);
-      console.log('refreshName: '+name);
-      console.log('refreshDir this: '+this.model.dir);
-      console.log('refreshName this: '+this.model.name);
-      console.log('-------------------------');
+      console.log("refreshDir: " + dir);
+      console.log("refreshName: " + name);
+      console.log("refreshDir this: " + this.model.dir);
+      console.log("refreshName this: " + this.model.name);
+      console.log("-------------------------");
 
       if (dir == this.model.dir + "/" && name == this.model.name) {
         console.log("REFRESH" + dir + name);
@@ -110,8 +110,7 @@ export default {
       if (this.isFolder) {
         if (!this.open) {
           this.refreshChild();
-          console.log('refresh toggle');
-          
+          console.log("refresh toggle");
         }
         this.open = !this.open;
       }
@@ -141,9 +140,21 @@ export default {
     },
     edit() {
       if (this.isFolder) {
-        this.$bus.$emit("editDir", this.model.dir, this.model.name);
+        this.$bus.$emit("editFolder", {
+          id: this.model.id,
+          name: this.model.name
+        });
       } else {
-        this.$bus.$emit("editArq", this.model.dir, this.model.name);
+        console.log('COMMENTTTTTTTTTTTTTTTTTTTT');
+        console.log(this.model.comment);
+
+
+        this.$bus.$emit("editFile", {
+          id: this.model.id,
+          name: this.model.name,
+          comment: this.model.comment,
+          link: this.model.link
+        });
       }
     },
     upload() {

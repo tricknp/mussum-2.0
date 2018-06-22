@@ -11,14 +11,14 @@
         <option :value="'novo'">nova pasta raiz</option>
       </select>
 
-      <button @click="addCourse()"> 
-        <IconAdd /> 
+      <button @click="addCourse()">
+        <IconAdd />
       </button>
     </div>
 
-    <modal v-if="showOtherCourse" @show="show"> 
+    <modal v-if="showOtherCourse" @show="show">
       <h1 slot="header">Novo Curso</h1>
-      <form slot="content"> 
+      <form slot="content">
         <input type="text" v-model="otherCourse">
       </form>
       <div slot="footer">
@@ -72,7 +72,21 @@
       </form>
       <div slot="footer">
            <button @click="showUpload=false">CANCELAR</button>
-           <button @click="submitFile()">UPLOAD!</button>
+           <button @click="submitFile()">SALVAR</button>
+      </div>
+    </modal>
+
+    <modal v-if="edit" @s="showUp()" >
+      <h1 slot="header">Editar arquivo</h1>
+      <form slot="content" class="form-admin-modal">
+        <input type="text" ref="editName" placeholder="Nome do arquivo/link">
+        <input v-if="edit.Link" type="text" ref="editLink" placeholder="URL">
+        <input v-if="edit.comment" type="text" ref="editComment" placeholder="Escreva um comentário (FEED)">
+      </form>
+      <div slot="footer">
+           <button @click="edit=null">CANCELAR</button>
+           <button v-if="edit.comment" @click="editFile">Update file</button>
+           <button v-if="edit.comment == undefined" @click="editFolder">Update folder name</button>
       </div>
     </modal>
 
@@ -112,6 +126,7 @@ export default {
       treeData: [],
       child: null,
       showUpload: false,
+      edit: null,
       file: "",
       comment: "",
       showOtherCourse: false,
@@ -123,9 +138,17 @@ export default {
   created() {
     this.getCourses();
     this.resetRepository();
-    this.$bus.$on("selectProfessor", username => {
-      this.resetRepository();
+    this.$bus.$on("editFile", data => {
+      this.edit = data;
+      console.log("EDIT FILE");
     }),
+      this.$bus.$on("editFolder", data => {
+        this.edit = data;
+        console.log("EDIT FOLDER");
+      }),
+      this.$bus.$on("selectProfessor", username => {
+        this.resetRepository();
+      }),
       this.$bus.$on("itemClicked", (div, dire) => {
         console.log(dire);
         //this.getRepositorys(div, dire);
@@ -202,9 +225,7 @@ export default {
           });
       }),
       this.$bus.$on("newChild", (div, ele, isFolder) => {
-        console.log("NEW CHILD");
         this.createTreeElement(div, ele, isFolder);
-        console.log("SUCCESS CHILD");
       });
   },
   methods: {
@@ -301,16 +322,17 @@ export default {
         });
     },
     createTreeElement(div, element, isFolder) {
-      console.log("Criando elemento tree > " + element.nome);
       let instance = new ComponentClass({
         propsData: {
           model: {
+            id: element.id,
             name: element.nome,
             dir: element.dir,
             isFolder: isFolder,
             isVisible: element.visivel,
             isLink: element.link ? true : false,
             link: element.link ? element.link : "",
+            comment: element.comentario ? element.comentario : "",
             username: this.$route.params.targetName,
             baseUrl: this.BASE_URL
           }
@@ -334,10 +356,13 @@ export default {
           let folders = res.data.pastas;
           folders.forEach(element => {
             this.treeData.push({
+              id: element.id,
               name: element.nome,
               dir: element.dir,
               isFolder: true,
               isVisible: element.visivel,
+              link: element.link ? element.link : "",
+              comment: element.comentario ? element.comentario : "",
               username: this.$route.params.targetName,
               baseUrl: this.BASE_URL
             });
@@ -366,20 +391,71 @@ export default {
     },
     getFatherFromChild(dir) {
       let fatherName = dir.split("/").pop();
-      console.log("fatherName" + fatherName);
-
       let fatherDir = dir.split("/");
       let indexOfName = fatherDir.length;
       fatherDir[indexOfName - 1] = "";
       fatherDir = fatherDir.join("/");
-      console.log("fatherDir" + fatherDir);
 
       return {
         dir: fatherDir,
         name: fatherName
       };
     },
+    editFile() {
+      console.log("EDIT:");
 
+      console.log(`${this.BASE_URL}api/upload/${this.edit.id}`);
+      console.log({
+        name: this.$refs.editName.value,
+        comment: this.$refs.editComment.value
+        //link: this.$refs.editLink.value
+      });
+      axios
+
+        .put(
+          `${this.BASE_URL}api/upload/${this.edit.id}`,
+
+          {
+            name: this.$refs.editName.value,
+            comment: this.$refs.editComment.value
+            //link: this.$refs.editLink.value
+          }
+        )
+        .then(res => {
+          console.log("Edit sucessful: " + res.data);
+
+          this.edit = null;
+          this.resetRepository();
+        });
+    },
+    editFolder() {
+      console.log("EDIT:");
+
+      console.log(`${this.BASE_URL}api/repository/${this.edit.id}`);
+      console.log({
+        name: this.$refs.editName.value
+        //link: this.$refs.editLink.value
+      });
+      axios
+
+        .put(
+          `${this.BASE_URL}api/repository/${this.edit.id}`,
+
+          {
+            name: this.$refs.editName.value
+            //link: this.$refs.editLink.value
+          }
+        )
+        .then(res => {
+          console.log("Edit folder sucessful: " + res.data);
+
+          this.edit = null;
+          this.resetRepository();
+        });
+    },
+    closeEditModal() {
+      this.edit = {};
+    }
   }
 };
 </script>
