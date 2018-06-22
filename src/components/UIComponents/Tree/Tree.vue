@@ -1,7 +1,7 @@
 <template>
   <li class="tree-item">
 
-    
+
     <div @click="toggle(), isFolder ?  itemClicked(model.dir) : null" class="ss">
       <InteligentIcon class="inteligent-icon" :model="{extension: model.name}" ></InteligentIcon>
 
@@ -14,15 +14,15 @@
       {{ model.link ? null : model.name.substr(0, model.name.lastIndexOf('.')) || model.name  }}
 
       <div class="tree-buttons">
-        <button v-if="isVisible  && !isVisibleProc && this.$bus.isOwner" @click="toggleVisible"> 
-          <IconVisiblePublic />  
+        <button v-if="isVisible  && !isVisibleProc && this.$bus.isOwner" @click="toggleVisible">
+          <IconVisiblePublic />
         </button>
-        
+
         <button v-if="!isVisible && !isVisibleProc && this.$bus.isOwner" @click="toggleVisible">
-           <IconVisiblePrivate /> 
+           <IconVisiblePrivate />
         </button>
-        
-        <button v-if="isVisibleProc" @click="toggleVisible"> 
+
+        <button v-if="isVisibleProc" @click="toggleVisible">
           <img src="../../../../static/loading.gif" class="icon">
         </button>
 
@@ -35,7 +35,7 @@
     </div>
 
     <ul v-show="open" v-if="isFolder" :id="model.dir +'/'+ model.name" :ref="'li'" class="tree-ul"></ul>
-    
+
   </li>
 </template>
 
@@ -145,6 +145,10 @@ export default {
           name: this.model.name
         });
       } else {
+        console.log('COMMENTTTTTTTTTTTTTTTTTTTT');
+        console.log(this.model.comment);
+
+
         this.$bus.$emit("editFile", {
           id: this.model.id,
           name: this.model.name,

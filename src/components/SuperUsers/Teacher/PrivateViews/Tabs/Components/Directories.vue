@@ -11,14 +11,14 @@
         <option :value="'novo'">nova pasta raiz</option>
       </select>
 
-      <button @click="addCourse()"> 
-        <IconAdd /> 
+      <button @click="addCourse()">
+        <IconAdd />
       </button>
     </div>
 
-    <modal v-if="showOtherCourse" @show="show"> 
+    <modal v-if="showOtherCourse" @show="show">
       <h1 slot="header">Novo Curso</h1>
-      <form slot="content"> 
+      <form slot="content">
         <input type="text" v-model="otherCourse">
       </form>
       <div slot="footer">
@@ -72,7 +72,7 @@
       </form>
       <div slot="footer">
            <button @click="showUpload=false">CANCELAR</button>
-           <button @click="submitFile()">UPLOAD!</button>
+           <button @click="submitFile()">SALVAR</button>
       </div>
     </modal>
 
@@ -81,11 +81,12 @@
       <form slot="content" class="form-admin-modal">
         <input type="text" ref="editName" placeholder="Nome do arquivo/link">
         <input v-if="edit.Link" type="text" ref="editLink" placeholder="URL">
-        <input type="text" ref="editComment" placeholder="Escreva um comentário (FEED)">
+        <input v-if="edit.comment" type="text" ref="editComment" placeholder="Escreva um comentário (FEED)">
       </form>
       <div slot="footer">
            <button @click="edit=null">CANCELAR</button>
-           <button @click="editFile">UPLOAD!</button>
+           <button v-if="edit.comment" @click="editFile">Update file</button>
+           <button v-if="edit.comment == undefined" @click="editFolder">Update folder name</button>
       </div>
     </modal>
 
@@ -134,8 +135,12 @@ export default {
     this.resetRepository();
     this.$bus.$on("editFile", data => {
       this.edit = data;
-      console.log("EDITTTTTT");
+      console.log("EDIT FILE");
     }),
+      this.$bus.$on("editFolder", data => {
+        this.edit = data;
+        console.log("EDIT FOLDER");
+      }),
       this.$bus.$on("selectProfessor", username => {
         this.resetRepository();
       }),
@@ -322,6 +327,7 @@ export default {
             isVisible: element.visivel,
             isLink: element.link ? true : false,
             link: element.link ? element.link : "",
+            comment: element.comentario ? element.comentario : "",
             username: this.$route.params.targetName,
             baseUrl: this.BASE_URL
           }
@@ -350,6 +356,8 @@ export default {
               dir: element.dir,
               isFolder: true,
               isVisible: element.visivel,
+              link: element.link ? element.link : "",
+              comment: element.comentario ? element.comentario : "",
               username: this.$route.params.targetName,
               baseUrl: this.BASE_URL
             });
@@ -394,7 +402,7 @@ export default {
       console.log(`${this.BASE_URL}api/upload/${this.edit.id}`);
       console.log({
         name: this.$refs.editName.value,
-        comment: this.$refs.editComment.value,
+        comment: this.$refs.editComment.value
         //link: this.$refs.editLink.value
       });
       axios
@@ -404,12 +412,37 @@ export default {
 
           {
             name: this.$refs.editName.value,
-            comment: this.$refs.editComment.value,
+            comment: this.$refs.editComment.value
             //link: this.$refs.editLink.value
           }
         )
         .then(res => {
           console.log("Edit sucessful: " + res.data);
+
+          this.edit = null;
+          this.resetRepository();
+        });
+    },
+    editFolder() {
+      console.log("EDIT:");
+
+      console.log(`${this.BASE_URL}api/repository/${this.edit.id}`);
+      console.log({
+        name: this.$refs.editName.value
+        //link: this.$refs.editLink.value
+      });
+      axios
+
+        .put(
+          `${this.BASE_URL}api/repository/${this.edit.id}`,
+
+          {
+            name: this.$refs.editName.value
+            //link: this.$refs.editLink.value
+          }
+        )
+        .then(res => {
+          console.log("Edit folder sucessful: " + res.data);
 
           this.edit = null;
           this.resetRepository();
