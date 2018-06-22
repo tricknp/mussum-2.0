@@ -181,8 +181,8 @@ export default {
           }
         })
         .then(res => {
-          var ele = this.$refs.li;
-          var child = ele.firstChild;
+          let ele = this.$refs.li;
+          let child = ele.firstChild;
           while (child) {
             this.$refs.li.removeChild(child);
             child = ele.firstChild;

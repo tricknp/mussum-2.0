@@ -9,7 +9,7 @@
                     
                   <div v-if="content.tipo == 'upload'" class="feed-upload">
 
-                      <button class="btn-delete-feed" @click="deleteFeed">
+                      <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed">
                         <IconDelete class="icon-delete-feed" />
                       </button>
 
@@ -29,7 +29,7 @@
 
                     <div v-if="content.tipo == 'recado'" class="feed-upload"  >
 
-                      <button class="btn-delete-feed" @click="deleteFeed">
+                      <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed">
                         <IconDelete class="icon-delete-feed" />
                       </button>
 
@@ -46,7 +46,7 @@
                 
                     <div v-if="content.tipo == 'link'" class="feed-upload">
                         
-                        <button class="btn-delete-feed" @click="deleteFeed">
+                        <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed">
                           <IconDelete class="icon-delete-feed" />
                         </button>
 
@@ -87,6 +87,7 @@ import IconDelete from "../../_utils/Svgs/IconDelete";
 export default {
   data() {
     return {
+      username: '',
       id: null,
       feedContent: "",
       textUpload: "adicionou um novo arquivo em",
@@ -103,8 +104,10 @@ export default {
     this.feed();
   },
 
+
   methods: {
     getphoto(feed) {
+      console.log(this.isTeacher)
       axios
         .get(`${this.BASE_URL}api/photo`, {
           headers: { professor: feed.username }
@@ -120,8 +123,11 @@ export default {
       axios.get(`${this.BASE_URL}api/feed`).then(res => {
         this.feedContent = res.data;
         this.feedContent.forEach(element => {
-        this.getphoto(element);
-        this.id = element.id
+          this.getphoto(element);
+          this.id = element.id
+          if (element.username == localStorage.username) {
+            this.username = element.username
+          }      
         });
         this.feedContent.reverse();
       });
@@ -132,8 +138,7 @@ export default {
       axios
         .delete(`${this.BASE_URL}api/feed/${this.id}`)
         .then(res => {
-          console.log('deleted')
-          console.log(res.data)
+          this.feed();
       })
     }
   }

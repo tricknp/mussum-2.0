@@ -1,10 +1,13 @@
 <template>
   <div>
-    <Create></Create>   
-    <div v-for="scrap in scraps" :key="scrap.titulo">
-      <h1>{{ scrap.titulo }}</h1>
-      <h3>{{ scrap.descricao }}</h3>
-      <h4>{{ scrap.data }}</h4>
+    <Create @create="init()"></Create>   
+
+    <div v-for="scrap in scraps" :key="scrap.titulo" class="scrap" >
+      <Edit />
+      <Delete />
+      <h1> {{ scrap.titulo }} </h1>
+      <h2> {{ scrap.descricao }} </h2>
+      <h4> {{ scrap.data }} </h4>
     </div>
   </div>
 </template>
@@ -13,19 +16,26 @@
 <script>
 import axios from 'axios'
 import Create from './Components/Create'
+import Edit from './Components/Edit'
+import Delete from './Components/Delete'
 import { showModal } from '../../../../../../_mixins/showModal'
 import { url } from '../../../../../../_mixins/url'
 
 export default {
-  
-  components: { Create },
+
+  components: { Create, Edit, Delete},
 
   mixins: [ showModal, url ],
 
   data(){
     return{
+      disabled: true,
       scraps: '',
     }
+  },
+
+  created(){
+    this.init();
   },
 
   methods:{
@@ -37,13 +47,23 @@ export default {
         .then( res => {
           this.scraps = res.data;
         })
-        
-    }
-  },
+    },
+ },
 
-  created(){
-    this.init();
-  }
-  
 }
 </script>
+
+
+<style>
+input, textarea
+{
+  border: none;
+  background: transparent;
+}
+
+.scrap
+{
+  display: flex;
+  flex-direction: column;
+}
+</style>

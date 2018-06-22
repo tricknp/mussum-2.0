@@ -89,11 +89,16 @@ import { showModal } from "../../../../../_mixins/showModal";
 import IconAdd from "../../../../../_utils/Svgs/IconAdd";
 import tree from "../../../../../UIComponents/Tree/Tree";
 import Modal from "../../../../../UIComponents/Modal";
+
 const ComponentClass = Vue.extend(tree);
+
 export default {
   name: "Directories",
+  
   components: { tree, IconAdd, Modal },
+  
   mixins: [url, showModal],
+  
   props: {
     selected: {
       default: "Adicionar curso"
@@ -146,11 +151,11 @@ export default {
           .then(res => {
             console.log("Fazendo download file: " + fileName);
             console.log("From directory... " + dir);
-            var blob = new Blob([res.data], {
+            let blob = new Blob([res.data], {
               type: "application/octet-stream"
             });
-            var url = window.URL.createObjectURL(blob);
-            var a = document.createElement("a");
+            let url = window.URL.createObjectURL(blob);
+            let a = document.createElement("a");
             document.body.appendChild(a);
             a.style = "display: none";
             a.href = url;
@@ -373,7 +378,8 @@ export default {
         dir: fatherDir,
         name: fatherName
       };
-    }
+    },
+
   }
 };
 </script>

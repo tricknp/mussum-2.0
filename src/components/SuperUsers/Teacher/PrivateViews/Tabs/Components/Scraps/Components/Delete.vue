@@ -2,7 +2,7 @@
      <div>
 
       <button @click="show" >
-        <IconDelete class="icon-delete" />
+        <IconDelete />
       </button>
 
       <modal v-if="showModal" @show="show()" id="admin-modal">

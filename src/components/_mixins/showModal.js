@@ -8,5 +8,6 @@ export const showModal = {
         show() {
             this.showModal = true;
         },
+
     }
 }
