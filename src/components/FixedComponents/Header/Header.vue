@@ -10,9 +10,12 @@
                 <Search  />
                 <NavList />
             </div>
-            
             <MenuBar />
         </div>
+
+        <router-link :to="{path: '/form'}"> 
+            <IconAlert />
+        </router-link>
 
     </header>
     
@@ -22,6 +25,7 @@
 import MenuBar from './MenuBar'
 import NavList from './NavList'
 import Search from './Search'
+import IconAlert from '../../_utils/Svgs/IconAlert'
 
 export default {
   name: 'Header',
@@ -31,6 +35,7 @@ export default {
       MenuBar,
       NavList,
       Search,
+      IconAlert
   },
 
   data(){
@@ -43,8 +48,20 @@ export default {
 }
 </script>
 
-<style lang="scss" >
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+<style>
+.icon-alert{
+    position: absolute;
+    right: .5%;
+    top: 2.2%;
+    width: 1.4em;
+    fill: #ddd;
+    border-radius: 50px;
+}
+
+.icon-alert:hover{
+    fill: rgba(190, 46, 46, 0.9);
+    transition: ease-in .25s;
+}
 </style>
 
 

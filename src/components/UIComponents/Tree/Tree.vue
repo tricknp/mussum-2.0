@@ -1,16 +1,14 @@
 <template>
   <li class="tree-item">
-     <vue-progress-bar></vue-progress-bar>
-
     <div @click="toggle(), isFolder ?  itemClicked(model.dir) : null" class="ss">
       <InteligentIcon class="inteligent-icon" :model="{extension: model.name}" ></InteligentIcon>
 
       <span v-if="isFolder">
-        <span v-if="open === false"><IconArrowRight /></span>
-        <span v-else><IconArrowDown /></span>
+        <span v-if="open === false"> <IconArrowRight /> </span>
+        <span v-else>                <IconArrowDown  /> </span>
       </span>
 
-      <a v-if="model.link" :href="model.link" target="_blank" >{{ model.name.substr(0, model.name.lastIndexOf('.')) || model.name}}</a>
+      <a v-if="model.link" :href="model.link" target="_blank" class="link" >{{ model.name.substr(0, model.name.lastIndexOf('.')) || model.name}}</a>
       {{ model.link ? null : model.name.substr(0, model.name.lastIndexOf('.')) || model.name  }}
 
       <div class="tree-buttons">
@@ -218,4 +216,3 @@ export default {
   }
 };
 </script>
-

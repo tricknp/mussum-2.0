@@ -150,13 +150,18 @@ export default {
     },
 
     deleteFeed() {
-      axios
-        .delete(`${this.BASE_URL}api/feed/${this.id}`)
-        .then(res => {
-          this.feed();
-      })
+      let decision = confirm('Tem certeza que deseja excluir esse feed?')
+      if (decision) {
+        axios
+          .delete(`${this.BASE_URL}api/feed/${this.id}`)
+          .then(res => {
+            this.feed();
+        }) 
+      }
     }
+
   }
+
 };
 </script>
 

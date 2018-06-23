@@ -22,9 +22,10 @@ Object.defineProperties(Vue.prototype, {
 })
 
 Vue.use(VueProgressBar, {
+  location: 'top',
   color: 'rgb(143, 255, 199)',
   failedColor: 'red',
-  height: '10px'
+  height: '2px',
 })  
 
 /* eslint-disable no-new */
