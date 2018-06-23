@@ -1,6 +1,6 @@
 <template>
   <div>  
-  
+    <vue-progress-bar></vue-progress-bar>
 
     <dropdown>
       <a v-if='isLoged'>
@@ -95,13 +95,17 @@ export default {
     },
 
     getPhoto() {
+      this.$Progress.start()
       axios
         .get(`${this.BASE_URL}api/photo`, {
           headers: { professor: localStorage.username }
         })
         .then((res) => {
           this.img = res.data;
-          
+          this.$Progress.finish()
+        })
+        .catch(err => {
+          this.$Progress.fail()
         })
     }
 

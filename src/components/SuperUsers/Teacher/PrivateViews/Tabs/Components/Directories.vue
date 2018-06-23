@@ -1,6 +1,8 @@
 
 <template>
   <div class="directories">
+    <vue-progress-bar></vue-progress-bar>
+    
     <div v-if="this.$bus.isOwner" class="div-select-course">
       <select v-model="dir" class="select-course">
         <option v-for="curso in cursos"
@@ -162,6 +164,7 @@ export default {
         this.showUpload = true;
       }),
       this.$bus.$on("download", (dir, fileName) => {
+        this.$Progress.start()
         axios
           .get(`${this.BASE_URL}api/download`, {
             headers: {
@@ -176,7 +179,7 @@ export default {
             console.log("From directory... " + dir);
             let blob = new Blob([res.data], {
               type: "application/octet-stream"
-            });
+            })
             let url = window.URL.createObjectURL(blob);
             let a = document.createElement("a");
             document.body.appendChild(a);
@@ -185,8 +188,12 @@ export default {
             a.download = fileName;
             a.click();
             a.remove();
+            this.$Progress.finish()
             console.log("download feito.");
-          });
+          })
+           .catch(err => {
+             this.$Progress.fail()
+           })
       }),
       this.$bus.$on("removeDir", (dir, name) => {
         axios
@@ -246,6 +253,7 @@ export default {
       //this.$refs.fileName.removeAttribute("disabled");
     },
     submitFile() {
+      this.$Progress.start()
       const formData = new FormData();
       if (this.file) {
         formData.append("files", this.file, this.file.name);
@@ -265,6 +273,7 @@ export default {
           console.log("brilhou");
           console.log(this.$refs.fileName.value);
           this.showUpload = false;
+          this.$Progress.finish()
         });
     },
     /*===================================================*

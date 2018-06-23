@@ -7,6 +7,7 @@ import 'vue-blu/dist/css/vue-blu.min.css'
 
 import axios from 'axios';
 import VueBlu from 'vue-blu'
+import VueProgressBar from 'vue-progressbar'
 
 Vue.use(VueBlu)
 Vue.config.productionTip = false
@@ -19,6 +20,12 @@ Object.defineProperties(Vue.prototype, {
     }
   }
 })
+
+Vue.use(VueProgressBar, {
+  color: 'rgb(143, 255, 199)',
+  failedColor: 'red',
+  height: '10px'
+})  
 
 /* eslint-disable no-new */
 new Vue({

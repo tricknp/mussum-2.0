@@ -1,5 +1,8 @@
 <template>
   <div>
+    
+    <vue-progress-bar></vue-progress-bar>
+
     <Home class="login" />
 
     <modal v-if="showModal" 
@@ -64,6 +67,7 @@ export default {
 
   methods: {
     onSubmit() {
+      this.$Progress.start()
       let data = JSON.stringify({
         username: this.username,
         password: this.password
@@ -96,10 +100,12 @@ export default {
           } else if (role === "admin") {
             return this.$router.push(`/admin`);
           }
+
+          this.$Progress.finish()
         })
         .catch( error => {
-          console.log(error)
           this.fail = true
+          this.$Progress.fail()
         });
     },
 

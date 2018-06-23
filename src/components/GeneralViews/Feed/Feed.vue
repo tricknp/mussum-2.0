@@ -1,5 +1,6 @@
 <template>
     <div class="feed">
+        <vue-progress-bar></vue-progress-bar>
 
         <h1 class="feed-title"> Atividades </h1>
 
@@ -17,7 +18,10 @@
                         <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
                         <div class="feed-text-content">
                             <p> 
-                                <b>{{ content.professor }}</b> {{textUpload}} 
+                              <router-link :to="{path: `professor/${content.username}`}">
+                                <b class="teacher-name-feed" >{{ content.professor }}</b> 
+                              </router-link> 
+                                {{textUpload}} 
                                 <b class="feed-link-place"> {{ content.dir }}</b>
                             </p>
                             <p> <b class="feed-archive-name">{{ content.arquivo }}</b> </p>
@@ -36,7 +40,11 @@
                       <div class="content-aligned">
                         <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
                         <div class="feed-text-content">
-                          <p> <b>{{ content.professor }}</b> {{ textRecado }} </p>
+                          <p> 
+                            <router-link :to="{path: `professor/${content.username}`}">
+                              <b class="teacher-name-feed">{{ content.professor }}</b> 
+                            </router-link>  
+                              {{ textRecado }} </p>
                           <b> <p class="feed-archive-name"> {{ `${content.titulo}` }} </p> </b>
                           <p> {{ `${content.comentario}` }} </p>
                         </div>  
@@ -56,8 +64,11 @@
                           </div>
 
                           <div class="feed-text-content">
-                            <p> 
-                              <b>{{ content.professor }}</b> {{ textLink }} 
+                            <p>
+                              <router-link :to="{path: `professor/${content.username}`}"> 
+                                <b class="teacher-name-feed">{{ content.professor }}</b> 
+                              </router-link>
+                              {{ textLink }}
                             </p>
                             
                             <b><p class="feed-archive-name"> 
@@ -107,7 +118,6 @@ export default {
 
   methods: {
     getphoto(feed) {
-      console.log(this.isTeacher)
       axios
         .get(`${this.BASE_URL}api/photo`, {
           headers: { professor: feed.username }
@@ -120,6 +130,7 @@ export default {
     },
 
     feed() {
+      this.$Progress.start()
       axios.get(`${this.BASE_URL}api/feed`).then(res => {
         this.feedContent = res.data;
         this.feedContent.forEach(element => {
@@ -128,9 +139,13 @@ export default {
           if (element.username == localStorage.username) {
             this.username = element.username
           }      
-        });
+        })
         this.feedContent.reverse();
-      });
+        this.$Progress.finish()
+      })
+      .catch(err => {
+        this.$Progress.fail()
+      })
       
     },
 

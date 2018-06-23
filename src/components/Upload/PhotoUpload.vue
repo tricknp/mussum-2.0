@@ -1,4 +1,8 @@
 <template>
+  <div>
+    
+    <vue-progress-bar></vue-progress-bar>
+    
     <div v-if="!image">
         <div class="dropzone-area" @dragenter="hovering = true" @dragleave="hovering = false" :class="{'dropzone-hover': hovering}">
             <div class="dropzone-text">
@@ -8,8 +12,8 @@
             <form>
                 <input type="file" @change="onFileChange" name="img">
             </form>
-        </div>
-    </div>
+          </div>
+      </div>
 
     <div class="dropzone-preview" v-else>
         <img class="photo-upload" :src="image" />
@@ -22,6 +26,7 @@
           <IconOk class="icon-ok" />
         </button>
     </div>
+  </div>
 </template>
 
 <script>
@@ -62,16 +67,22 @@ export default {
     },
 
     onUpload() {
+      this.$Progress.start()
       const formData = new FormData();
       formData.append("img", this.selectedFile, this.selectedFile.name);
-      axios.post(this.BASE_URL + "api/photo", formData, {
+      
+      axios
+        .post(this.BASE_URL + "api/photo", formData, {
         headers: {
           "Content-Type":
             "multipart/form-data; boundary=--------------------------703046025918186291990540"
         }
       }).then( res => {
-          console.log('imagem enviada com sucesso')
           this.$bus.$emit('onUpload')
+          this.$Progress.finish()
+      })
+        .catch(err => {
+        this.$Progress.fail()
       })
     },
 

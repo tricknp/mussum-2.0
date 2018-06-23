@@ -1,6 +1,6 @@
 <template>
   <li class="tree-item">
-
+     <vue-progress-bar></vue-progress-bar>
 
     <div @click="toggle(), isFolder ?  itemClicked(model.dir) : null" class="ss">
       <InteligentIcon class="inteligent-icon" :model="{extension: model.name}" ></InteligentIcon>

@@ -14,8 +14,8 @@
 <IconFla  v-if = "extension == 'fla'"  />
 <IconHtml v-if=  "extension == 'html'" />  
 <IconIso  v-if = "extension == 'iso'"  />
-<IconJava v-if = "extension == 'java'" />
-<IconJpg  v-if = "extension == 'jpg' || extension == 'jpeg'" />
+<IconJava v-if = "extension == 'java' || extension == 'jar'" />
+<IconJpg  v-if = "extension == 'jpg'  || extension == 'jpeg'" />
 <IconJs   v-if = "extension == 'js'"   />
 <IconJson v-if = "extension == 'json'" />
 <IconMp3  v-if = "extension == 'mp3'"  />

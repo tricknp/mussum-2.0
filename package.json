@@ -21,6 +21,7 @@
     "vue-blu": "^0.1.9",
     "vue-drag-sort-tree": "^1.2.7",
     "vue-drag-tree": "^1.0.11",
+    "vue-progressbar": "^0.7.5",
     "vue-router": "^3.0.1",
     "vuetify": "^1.0.11",
     "vuex": "^3.0.1"
