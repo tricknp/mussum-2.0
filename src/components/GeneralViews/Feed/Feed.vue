@@ -7,21 +7,21 @@
         <div class="feed-container">
             <div  v-for="content in feedContent" :key="content.id" >
                 <div class="feed-types">
-                    
-                  <div v-if="content.tipo == 'upload'" class="feed-upload">
 
-                      <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed">
+                  <div v-if="content.tipo == 'upload'" class="feed-upload">
+                    
+                      <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
                         <IconDelete class="icon-delete-feed" />
                       </button>
 
                       <div class="content-aligned">
                         <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
                         <div class="feed-text-content">
-                            <p> 
+                            <p>
                               <router-link :to="{path: `professor/${content.username}`}">
-                                <b class="teacher-name-feed" >{{ content.professor }}</b> 
-                              </router-link> 
-                                {{textUpload}} 
+                                <b class="teacher-name-feed" >{{ content.professor }}</b>
+                              </router-link>
+                                {{textUpload}}
                                 <b class="feed-link-place"> {{ content.dir }}</b>
                             </p>
                             <p> <b class="feed-archive-name">{{ content.arquivo }}</b> </p>
@@ -33,28 +33,28 @@
 
                     <div v-if="content.tipo == 'recado'" class="feed-upload"  >
 
-                      <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed">
+                      <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
                         <IconDelete class="icon-delete-feed" />
                       </button>
 
                       <div class="content-aligned">
                         <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
                         <div class="feed-text-content">
-                          <p> 
+                          <p>
                             <router-link :to="{path: `professor/${content.username}`}">
-                              <b class="teacher-name-feed">{{ content.professor }}</b> 
-                            </router-link>  
+                              <b class="teacher-name-feed">{{ content.professor }}</b>
+                            </router-link>
                               {{ textRecado }} </p>
                           <b> <p class="feed-archive-name"> {{ `${content.titulo}` }} </p> </b>
                           <p> {{ `${content.comentario}` }} </p>
-                        </div>  
+                        </div>
                         </div>
                           <p class="feed-date"> {{ content.dataCriacao }} </p>
                     </div>
-                
+
                     <div v-if="content.tipo == 'link'" class="feed-upload">
-                        
-                        <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed">
+
+                        <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
                           <IconDelete class="icon-delete-feed" />
                         </button>
 
@@ -65,16 +65,16 @@
 
                           <div class="feed-text-content">
                             <p>
-                              <router-link :to="{path: `professor/${content.username}`}"> 
-                                <b class="teacher-name-feed">{{ content.professor }}</b> 
+                              <router-link :to="{path: `professor/${content.username}`}">
+                                <b class="teacher-name-feed">{{ content.professor }}</b>
                               </router-link>
                               {{ textLink }}
                             </p>
-                            
-                            <b><p class="feed-archive-name"> 
+
+                            <b><p class="feed-archive-name">
                               <a :href="content.link" target="_blank">
                                 {{ `${content.titulo}` }}
-                              </a> 
+                              </a>
                             </p></b>
 
                             <p> {{ `${content.comentario}` }}  </p>
@@ -82,11 +82,11 @@
                         </div>
                             <p class="feed-date"> {{ content.dataCriacao }} </p>
                     </div>
-                
+
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
 </template>
 
 <script>
@@ -99,7 +99,6 @@ export default {
   data() {
     return {
       username: '',
-      id: null,
       feedContent: "",
       textUpload: "adicionou um novo arquivo em",
       textRecado: "adicionou um novo recado.",
@@ -135,10 +134,11 @@ export default {
         this.feedContent = res.data;
         this.feedContent.forEach(element => {
           this.getphoto(element);
-          this.id = element.id
+
           if (element.username == localStorage.username) {
             this.username = element.username
-          }      
+          }
+
         })
         this.feedContent.reverse();
         this.$Progress.finish()
@@ -146,22 +146,22 @@ export default {
       .catch(err => {
         this.$Progress.fail()
       })
-      
+
     },
 
-    deleteFeed() {
+    deleteFeed(id) {
       let decision = confirm('Tem certeza que deseja excluir esse feed?')
       if (decision) {
         axios
-          .delete(`${this.BASE_URL}api/feed/${this.id}`)
+          .delete(`${this.BASE_URL}api/feed/${id}`)
           .then(res => {
+            console.log(res.data)
             this.feed();
-        }) 
+        })
       }
-    }
 
-  }
+    } 
+     }
 
 };
 </script>
-
