@@ -1,10 +1,13 @@
 <template>
   <div>
-    <Create @create="init()"></Create>   
+
+    <Create v-if="isOwner" @create="init()"></Create>   
 
     <div v-for="scrap in scraps" :key="scrap.titulo" class="scrap" >
-      <Edit />
-      <Delete />
+      <div v-if="isOwner">
+        <Edit />
+        <Delete /> 
+      </div>
       <h1> {{ scrap.titulo }} </h1>
       <h2> {{ scrap.descricao }} </h2>
       <h4> {{ scrap.data }} </h4>
@@ -31,6 +34,14 @@ export default {
     return{
       disabled: true,
       scraps: '',
+    }
+  },
+
+  computed: { 
+    isOwner: function(){
+      if (this.$route.params.targetName == localStorage.username) {
+        return true
+      }
     }
   },
 

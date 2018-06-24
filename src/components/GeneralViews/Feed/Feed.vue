@@ -140,8 +140,10 @@ export default {
           }
 
         })
-        this.feedContent.reverse();
+
+        this.feedContent.reverse()
         this.$Progress.finish()
+
       })
       .catch(err => {
         this.$Progress.fail()

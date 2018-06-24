@@ -4,20 +4,20 @@
         <button id="btn-nav-list">{{ title.listProfessores }}</button>
         <div slot="content" id="dropdown-content">
           <menus>
-            <menu-item 
-                id="dropdown-content" 
-                v-for="professor in professores" 
+            <menu-item
+                id="dropdown-content"
+                v-for="professor in professores"
                 :key="professor.nome"
                 :targetName="professor.username" >
                 <router-link :to="{ path: '/professor/' + professor.username.toLowerCase() }" >
                   <a class="ass" @click="test(professor.username)">
                     {{ professor.nome }}
-                  </a>  
+                  </a>
                 </router-link>
-        
+
             </menu-item>
           </menus>
-        </div>  
+        </div>
       </dropdown>
 
       <dropdown trigger="hover">
@@ -25,12 +25,12 @@
         <div slot="content" id="dropdown-content">
           <menus>
             <menu-item>
-              
+
             </menu-item>
           </menus>
-        </div>  
+        </div>
       </dropdown>
-    
+
       <dropdown trigger="hover">
         <button id="btn-nav-list">{{ title.listHorarios }}</button>
         <div slot="content" id="dropdown-content">
@@ -39,9 +39,9 @@
               {{ horario.turma }}
             </menu-item>
           </menus>
-        </div>  
+        </div>
       </dropdown>
-      
+
   </div>
 </template>
 
@@ -94,10 +94,9 @@ export default {
       }
     }
   },
-
-  beforeMount() {
+  
+  created() {
     this.initHeader();
-    
       if (auth.getUsername() == this.$route.params.targetName) {
         this.$bus.isOwner = true;
       } else {

@@ -22,7 +22,7 @@ Object.defineProperties(Vue.prototype, {
 })
 
 Vue.use(VueProgressBar, {
-  location: 'top',
+  location: 'top',  
   color: 'rgb(143, 255, 199)',
   failedColor: 'red',
   height: '2px',
