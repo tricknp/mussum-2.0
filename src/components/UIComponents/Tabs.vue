@@ -86,17 +86,11 @@ export default {
 
       initRoutes(){
         if (this.$route.path == `${this.currentPath}diretorios`) {
-            this.tabDirectories = true
-            this.tabScraps = false
-            this.tabAbout = false
+            this.directories()
         }else if (this.$route.path == `${this.currentPath}recados`) {  
-            this.tabDirectories = false
-            this.tabScraps = true
-            this.tabAbout = false
+            this.scraps()
         }else if (this.$route.path == `${this.currentPath}sobre`) {  
-            this.tabDirectories = false
-            this.tabScraps = false
-            this.tabAbout = true
+            this.about()
         }
       }
       
