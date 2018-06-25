@@ -1,5 +1,5 @@
 <template>
-  <div>  
+  <div>
     <vue-progress-bar></vue-progress-bar>
 
     <dropdown>
@@ -9,38 +9,38 @@
           <img v-if="img" class="nav-teacher-photo" :src="`data:image/png;base64,${img}`">
         </span>
       </a>
-      
+
       <a v-else>
         <span>
           <IconNavbar />
         </span>
       </a>
-      <div slot="content" id="dropdown-content">  
+      <div slot="content" id="dropdown-content">
         <menus>
-          
+
           <menu-item v-for="item in items"  :key="item.name">
-            <a href="#" > 
-              {{ item.name }} 
+            <a href="#" >
+              {{ item.name }}
               <img v-if="img" class="teacher-photo" :src="`data:image/png;base64,${img}`">
             </a>
           </menu-item>
 
           <div class="divider"></div>
-          
+
           <menu-item v-if='isLoged'>
             <h1 v-on:click='signOut'> Sign Out </h1>
           </menu-item>
-          <menu-item v-else> 
+          <menu-item v-else>
             <router-link :to="{ name: 'login' }"> Login </router-link>
           </menu-item>
 
         </menus>
       </div>
-   
-    </dropdown> 
 
-  </div> 
-   
+    </dropdown>
+
+  </div>
+
 </template>
 
 
@@ -67,18 +67,16 @@ export default {
         { name: "Faculdade Senac" },
         { name: "Administrador"}
       ],
-      user: {
-        name: '',
-      },
+      username: '',
       img: '',
-     
+
     };
   },
 
   computed: {
     isLoged: function() {
       const localSize = localStorage.length;
-      this.user.name = localStorage.getItem('nome');
+      this.username = localStorage.getItem('username');
 
       return localSize > 1;
     }
@@ -87,7 +85,7 @@ export default {
   created(){
     this.getPhoto()
   },
-  
+
   methods: {
     signOut: function() {
       localStorage.clear();

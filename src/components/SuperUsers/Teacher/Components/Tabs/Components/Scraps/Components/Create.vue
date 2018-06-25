@@ -2,14 +2,14 @@
     <div>
         <button @click="show"> Novo Recado </button>
 
-        <Modal v-if="showModal" @show="show"> 
+        <Modal v-if="showModal" @show="show">
             <h1 slot="header">Novo Recado</h1>
 
-            <form slot="content"> 
+            <form slot="content">
                 <input type="text" placeholder="Titulo" v-model="titulo">
-                <input type="text" placeholder="Recado" v-model="descricao">
+                <textarea type="text" placeholder="Recado" v-model="descricao"> </textarea>
             </form>
-            
+
             <div slot="footer">
                 <button @click="onSubmit">Ok</button>
                 <button @click="cancel">Cancelar</button>
@@ -17,7 +17,7 @@
 
         </Modal>
     </div>
-    
+
 </template>
 
 <script>
@@ -28,14 +28,14 @@ import { create }    from  '../../../../../../../_mixins/create'
 
 
 export default {
-    
+
     components: { Modal },
 
     mixins: [ url, showModal, create ],
 
     data(){
         return{
-            titulo: '', 
+            titulo: '',
             descricao: '',
             datas: ''
         }
@@ -54,7 +54,7 @@ export default {
              descricao: this.descricao
          })
       }
-    }   
+    }
 
 
 

@@ -32,9 +32,9 @@ import Header from "../../FixedComponents/Header/Header";
 import Footer from "../../FixedComponents/Footer/Footer";
 import Aside  from '../../FixedComponents/Aside/Aside';
 
-import PrivatePhoto       from "./PrivateViews/Photo";
-import PrivateDescription from "./PrivateViews/Description";
-import PrivateTabs        from "./PrivateViews/Tabs/Tabs";
+import PrivatePhoto       from "./Components/Photo";
+import PrivateDescription from "./Components/Description";
+import PrivateTabs        from "./Components/Tabs/Tabs";
 
 
 export default {

@@ -7,6 +7,7 @@ import Admin from '@/components/SuperUsers/Admin/Admin'
 import Teacher from '@/components/SuperUsers/Teacher/Teacher'
 import NotFound from '@/components/GeneralViews/NotFoundPage'
 import Form from '@/components/GeneralViews/FormFeedback'
+import Tabs from '@/components/UIComponents/Tabs'
 
 import AuthMiddleware from '../services/middleware'
 import interceptors from '../services/interceptors'
@@ -39,6 +40,26 @@ const router = new Router({
       path: '/professor/:targetName',
       name: 'Professor',
       component: Teacher,
+      redirect: { name: 'Dir' },
+      children:[
+        {
+          name: 'Dir',
+          path: '/professor/:targetName/diretorios',
+          component: Tabs
+        },
+
+        {
+          name: 'Recados',
+          path: '/professor/:targetName/recados',
+          component: Tabs
+        },
+
+        {
+          name: 'Sobre',
+          path: '/professor/:targetName/sobre',
+          component: Tabs
+        }
+      ]
     },
 
     {
