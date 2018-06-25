@@ -56,7 +56,7 @@ import { url } from "../../../_mixins/url";
 import { edit } from "../../../_mixins/edit";
 
 export default {
-  
+
   components: {
     IconEdit,
     IconOk,

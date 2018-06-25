@@ -13,12 +13,12 @@ export const create = {
           this.showModal = true;
           this.reset();
         },
-    
+
         cancel(){
           this.showModal = false;
           this.reset();
         },
-        
+
        onSubmit() {
            this.postData();
 
@@ -30,9 +30,9 @@ export const create = {
                 console.log('sucess')
             })
             .catch(error => console.log(error))
-              
+
             this.$emit('create');
             this.showModal = false;
           }
         }
-      } 
+      }

@@ -94,7 +94,7 @@ export default {
       }
     }
   },
-  
+
   created() {
     this.initHeader();
       if (auth.getUsername() == this.$route.params.targetName) {

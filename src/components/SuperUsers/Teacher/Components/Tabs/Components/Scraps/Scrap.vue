@@ -1,15 +1,25 @@
 <template>
   <div>
 
-    <Create v-if="isOwner" @create="init()"></Create>   
+    <Create v-if="isOwner" @create="init()"></Create>
 
-    <div v-for="scrap in scraps" :key="scrap.titulo" class="scrap" >
-      <div v-if="isOwner">
-        <Edit />
-        <Delete /> 
+    <div v-for="(scrap, index) in scraps" :key="scrap.titulo" class="scrap" >
+
+      <div class="desc-scrap">
+        <input type="text" v-model="scrap.titulo" :disabled="disabled" ref="title" >
+
+        <div v-if="isOwner">
+          <button v-if="!titleFocused" type="button" @click="titleFocus(index)">
+             <IconEdit />
+         </button>
+
+          <button v-if="titleFocused" type="button">
+             <IconOk   />
+          </button>
+        </div>
       </div>
-      <h1> {{ scrap.titulo }} </h1>
-      <h2> {{ scrap.descricao }} </h2>
+
+      <input type="text" v-model="scrap.descricao" :disabled="disabled" ref="desc" class="desc">
       <h4> {{ scrap.data }} </h4>
     </div>
   </div>
@@ -19,14 +29,14 @@
 <script>
 import axios from 'axios'
 import Create from './Components/Create'
-import Edit from './Components/Edit'
-import Delete from './Components/Delete'
 import { showModal } from '../../../../../../_mixins/showModal'
 import { url } from '../../../../../../_mixins/url'
+import IconEdit from '../../../../../../_utils/Svgs/IconEdit'
+import IconOk from '../../../../../../_utils/Svgs/IconOk'
 
 export default {
 
-  components: { Create, Edit, Delete},
+  components: { Create, IconEdit, IconOk},
 
   mixins: [ showModal, url ],
 
@@ -34,10 +44,12 @@ export default {
     return{
       disabled: true,
       scraps: '',
+      titleFocused: false,
+      descFocused: false,
     }
   },
 
-  computed: { 
+  computed: {
     isOwner: function(){
       if (this.$route.params.targetName == localStorage.username) {
         return true
@@ -57,7 +69,21 @@ export default {
         })
         .then( res => {
           this.scraps = res.data;
+          this.scraps.reverse()
         })
+    },
+
+    titleFocus(index){
+      this.$refs.title[index].disabled = false
+      this.$refs.title[index].focus()
+      this.titleFocused = true
+    },
+
+    descFocus(index){
+      this.$refs.title[index].disabled = false
+      this.$refs.title[index].focus()
+      this.titleFocused = true
+      console.log(this.titleFocused)
     },
  },
 
@@ -68,13 +94,18 @@ export default {
 <style>
 input, textarea
 {
-  border: none;
-  background: transparent;
+  border: none;;
 }
 
 .scrap
 {
   display: flex;
   flex-direction: column;
+}
+
+.desc-scrap
+{
+  display: flex;
+  flex-direction: row;
 }
 </style>
