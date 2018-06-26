@@ -1,6 +1,6 @@
 <template>
-  <section class="teacher-page" >      
-       
+  <section class="teacher-page" >
+
       <Header />
 
       <div class="teacher-page-content">
@@ -9,16 +9,16 @@
 
             <div class="info-teacher">
                <div class="container">
-                   <PrivatePhoto />
-                   <PrivateDescription /> 
+                   <Photo />
+                   <Description />
                </div>
 
                <div class="info-content">
-                  <PrivateTabs />
+                  <Tabs />
                </div>
             </div>
         </div>
-          
+
           <Aside />
       </div>
 
@@ -32,23 +32,23 @@ import Header from "../../FixedComponents/Header/Header";
 import Footer from "../../FixedComponents/Footer/Footer";
 import Aside  from '../../FixedComponents/Aside/Aside';
 
-import PrivatePhoto       from "./Components/Photo";
-import PrivateDescription from "./Components/Description";
-import PrivateTabs        from "./Components/Tabs/Tabs";
+import Photo       from "./Components/Photo";
+import Description from "./Components/Description";
+import Tabs        from "./Components/Tabs/Tabs";
 
 
 export default {
   name: "Teacher",
 
-  components: 
+  components:
   {
-     Header, 
+     Header,
      Footer,
      Aside,
-     PrivatePhoto,
-     PrivateDescription,
-     PrivateTabs,
-  },  
+     Photo,
+     Description,
+     Tabs,
+  },
 
   data(){
     return{

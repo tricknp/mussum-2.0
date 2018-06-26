@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="show"> Novo Recado </button>
+        <button @click="show" class="create-scrap"> <IconAdd class="icon-create-scrap" /> </button>
 
         <Modal v-if="showModal" @show="show">
             <h1 slot="header">Novo Recado</h1>
@@ -21,15 +21,16 @@
 </template>
 
 <script>
-import Modal         from  '../../../../../../../UIComponents/Modal'
-import { showModal } from  '../../../../../../../_mixins/showModal'
-import { url }       from  '../../../../../../../_mixins/url'
-import { create }    from  '../../../../../../../_mixins/create'
+import Modal         from  '../../../../../../UIComponents/Modal'
+import IconAdd    from  '../../../../../../_utils/Svgs/IconAdd'
+import { showModal } from  '../../../../../../_mixins/showModal'
+import { url }       from  '../../../../../../_mixins/url'
+import { create }    from  '../../../../../../_mixins/create'
 
 
 export default {
 
-    components: { Modal },
+    components: { Modal, IconAdd },
 
     mixins: [ url, showModal, create ],
 
