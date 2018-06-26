@@ -5,40 +5,51 @@
 
       <div class="admin-container">
         <aside class="admin-dashboard">
-          <h1 class="header-aside">Admin</h1>
-          <span :class="{'active': tabActivities}"  @click="activities()"  > Atividadis  </span>
-          <span :class="{'active': tabCourses}"     @click="courses()"     > Cursis      </span>
-          <span :class="{'active': tabDirectories}" @click="directories()" > Diretóris   </span>
-          <span :class="{'active': tabWikis}"       @click="wikis()"       > Wikis       </span>
-          <span :class="{'active': tabHours}"       @click="hours()"       > Horaris     </span>
-          <span :class="{'active': tabTeachers}"    @click="teachers()"    > Professoris </span>
+          <div class="inside-dashboard-tabs">
+            <h1 class="header-aside">Admin</h1>
+            <div class="dashboard-tabs">
+              <span :class="{'active': tabActivities}"  @click="activities()"  > Atividadis  </span>
+              <span :class="{'active': tabCourses}"     @click="courses()"     > Cursis      </span>
+              <span :class="{'active': tabDirectories}" @click="directories()" > Diretóris   </span>
+              <span :class="{'active': tabWikis}"       @click="wikis()"       > Wikis       </span>
+              <span :class="{'active': tabHours}"       @click="hours()"       > Horaris     </span>
+              <span :class="{'active': tabLinks}"       @click="links()"       > Links       </span>
+              <span :class="{'active': tabTeachers}"    @click="teachers()"    > Professoris </span>
+            </div>
+        </div>
         </aside>
 
         <div class="dashboard-container">
-          <h1>{{ title }}</h1>
+          <div class="inside-dashboard-container">
 
-          <div v-if="tabActivities">
-            <ActivitiesBox />
-          </div>
+            <div v-if="tabActivities">
+              <ActivitiesBox />
+            </div>
 
-          <div v-if="tabCourses">
-            <CoursesBox />
-          </div>
+            <div v-if="tabCourses">
+              <CoursesBox />
+            </div>
 
-          <div v-if="tabDirectories">
-            <DirectoriesBox />
-          </div>
+            <div v-if="tabDirectories">
+              <DirectoriesBox />
+            </div>
 
-          <div v-if="tabWikis">
-            <WikisBox />
-          </div>
+            <div v-if="tabWikis">
+              <WikisBox />
+            </div>
 
-          <div v-if="tabHours">
-            <h2>kkk otario</h2>
-          </div>
+            <div v-if="tabHours">
+              <h2>horarios</h2>
+            </div>
 
-          <div v-if="tabTeachers">
-            <TeacherBox />
+            <div v-if="tabLinks">
+              <h2>links</h2>
+            </div>
+
+            <div v-if="tabTeachers">
+              <TeacherBox />
+            </div>
+
           </div>
 
         </div>
@@ -82,13 +93,14 @@ export default {
 
   data(){
     return{
-      title: 'ok',
+      title: '',
       tabActivities: true,
       tabCourses: false,
       tabDirectories: false,
       tabWikis: false,
       tabHours: false,
       tabTeachers: false,
+      tabLinks: false,
     }
   },
 
@@ -110,6 +122,7 @@ export default {
       this.tabWikis       = false
       this.tabHours       = false
       this.tabTeachers    = false
+      this.tabLinks       = false
     },
 
     courses(){
@@ -119,6 +132,7 @@ export default {
       this.tabWikis       = false
       this.tabHours       = false
       this.tabTeachers    = false
+      this.tabLinks       = false
     },
 
     directories(){
@@ -128,6 +142,7 @@ export default {
       this.tabWikis       = false
       this.tabHours       = false
       this.tabTeachers    = false
+      this.tabLinks       = false
     },
 
     wikis(){
@@ -137,6 +152,7 @@ export default {
       this.tabWikis       = true
       this.tabHours       = false
       this.tabTeachers    = false
+      this.tabLinks       = false
     },
 
     hours(){
@@ -146,6 +162,7 @@ export default {
       this.tabWikis       = false
       this.tabHours       = true
       this.tabTeachers    = false
+      this.tabLinks       = false
     },
 
     teachers(){
@@ -155,35 +172,20 @@ export default {
       this.tabWikis       = false
       this.tabHours       = false
       this.tabTeachers    = true
+      this.tabLinks       = false
     },
+
+    links(){
+      this.tabActivities  = false
+      this.tabCourses     = false
+      this.tabDirectories = false
+      this.tabWikis       = false
+      this.tabHours       = false
+      this.tabTeachers    = false
+      this.tabLinks       = true
+    },
+
   },
 
 };
 </script>
-
-<style>
-
-  .admin-container
-  {
-    display: flex;
-    flex-direction: row;
-    height: 100%;
-    overflow: auto;
-    background: black;
-  }
-
-  .admin-dashboard
-  {
-    background: red;
-    height: 100%;
-    width: 20em;
-    display: flex;
-    flex-direction: column;;
-  }
-
-  .header-aside
-  {
-    border-bottom: 2px solid rgba(0, 0, 0, 1);
-  }
-
-</style>

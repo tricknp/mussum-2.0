@@ -22,11 +22,5 @@ export default {
       About
   },
 
-  props:{
-    tab: {
-      type: Object
-    }
-  },
-
 };
 </script>
