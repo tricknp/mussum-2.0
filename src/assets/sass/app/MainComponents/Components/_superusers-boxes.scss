@@ -61,7 +61,7 @@
         color: $light-grey;
         border: $light-border $medium-grey;
         border-radius: 3px;
-        
+
         &:hover
         {
             color: #fff;
@@ -192,3 +192,133 @@
 
 
 
+.admin-container
+{
+  display: flex;
+  flex-direction: row;
+  //overflow: auto;
+  height: 100vh;
+}
+
+.admin-dashboard
+{
+  background: #121e30;
+  color: #ddd;
+  height: 100%;
+  width: 18em;
+}
+
+.inside-dashboard-tabs
+{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: auto;
+  text-indent: .5em;
+  .dashboard-tabs
+  {
+    margin-top: 1.2em;
+    font-size: 1.2em;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    line-height: 2.1;
+  }
+
+  span
+  {
+    &.active
+    {
+        color: #121e30;
+        font-weight: 600;
+        background: #fff;
+        border-radius: 3px;
+    }
+
+    &:hover
+    {
+        @extend .active;
+    }
+}
+}
+
+.header-aside
+{
+    margin-top: 1.2em;
+    font-size: 1.5em;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(0, 0, 0, .3);
+}
+
+.dashboard-container
+{
+    width: 100%;
+}
+
+.inside-dashboard-container
+{
+  width: 97%;
+  height: 100%;
+  margin: auto;
+}
+
+
+.dashboard-actions
+{
+  margin: 2em .2em;
+  height: 100%;
+
+  .header-dashboard-actions
+  {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: solid 2px $medium-grey;
+    font-weight: 500;
+
+    .dashboard-actions-title
+    {
+      font-size: 1.3em;
+      margin-left: 1em;
+      font-weight: 600; 
+    }
+
+    .dashboard-actions-buttons
+    {
+      margin-right: 1em;
+      display: flex;
+      flex-direction: row;
+
+    }
+  }
+
+  .dashboard-actions-container
+  {
+      display: flex;
+      flex-direction: column;
+      margin-top: .2em;
+      
+      .inside-container-dashboard
+      {
+        text-indent: .1em;
+        margin-right: 1.9em;
+        width: 100%;
+      }
+
+      .item-container-dashboard
+      {
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          font-size: $default-size;
+          padding: .7em;
+          &:hover
+          {
+              background: $hover-blue;
+          }
+      }
+  }
+
+  
+
+}

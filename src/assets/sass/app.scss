@@ -8,6 +8,7 @@
 @import 'app/MainComponents/Components/footer';
 @import 'app/MainComponents/Components/superusers-boxes';
 @import 'app/MainComponents/Components/feed';
+@import 'app/MainComponents/Components/scraps';
 
 //Pages
 @import 'app/MainComponents/Pages/teachers';
@@ -17,11 +18,12 @@
 //UI icons
 @import 'app/UI/icons';
 
-//UI 
+//UI
 @import 'app/UI/dropdown';
 @import 'app/UI/modal';
 @import 'app/UI/dropzone';
 @import 'app/UI/tree';
+@import 'app/UI/tabs';
 
 //responsive and reset
 @import 'app/Responsive/responsive';

@@ -1,21 +1,23 @@
 <template>
-  <div class="div-activities">
+  <div class="dashboard-actions">
 
-      <div class="activities-head">
-        <h1>{{title}}</h1>
-        <div class="div-adm-button">
-          <Create @create="initialize"></Create>
-          <Delete></Delete>
-          <Edit></Edit>
+      <div class="header-dashboard-actions">
+        <h1 class="dashboard-actions-title">{{title}}</h1>
+        <div class="dashboard-actions-buttons">
+          <Create @create="initialize()" class="dashboard-action-create" />
+          <Delete />
         </div>
       </div>
 
-      <div class="activities-container">
-          <div v-for="aviso in avisos" :key="aviso.titulo" class="box-admin-content">
-            <label>
-              <input type="radio" name="name" @change="select(aviso)">
-              <span for="name"> {{ aviso.titulo }} </span>
-            </label>
+      <div class="dashboard-actions-container">
+          <div v-for="aviso in avisos" :key="aviso.titulo" class="inside-container-dashboard">
+            <div class="item-container-dashboard">
+              <label>
+                <input type="checkbox" name="name" @change="select(aviso)">
+                <span for="name"> {{ aviso.titulo }} </span>
+              </label>
+              <Edit />
+          </div>
           </div>
       </div>
 
@@ -43,7 +45,7 @@ export default {
       avisos: null,
     }
   },
-  
+
   methods:{
     postData(){
       this.route = 'api/avisos';

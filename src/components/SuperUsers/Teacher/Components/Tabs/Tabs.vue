@@ -9,7 +9,7 @@
 <script>
 import Tabs from '../../../../UIComponents/Tabs'
 import Directories from './Components/Directories'
-import Scraps from './Components/Scraps/Scrap'
+import Scraps from './Components/Scrap'
 import About from './Components/About'
 
 export default {
@@ -20,12 +20,6 @@ export default {
       Directories,
       Scraps,
       About
-  },
-
-  props:{
-    tab: {
-      type: Object
-    }
   },
 
 };

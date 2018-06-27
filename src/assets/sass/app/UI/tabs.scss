@@ -1,0 +1,37 @@
+.tabs-header
+{
+    background: $absolute-white;
+    border-radius: 0px 0px 0px 4px;
+    //  margin-top: -1.2%;
+    span:nth-child(1){
+        margin-left: 25%;
+    }
+    span {
+        a
+        {
+          color: $font-color;
+        }
+        display: inline-block;
+        color: $font-color;
+        padding-bottom: 0.3rem;
+        margin-right: 2rem;
+        transition: .10s ease-in;
+        border-bottom: 2px solid transparent;
+        &.active
+        {
+            color: $font-color;
+            border-bottom: 2px solid $nice-blue;
+        }
+        &:hover
+        {
+            cursor: pointer;
+            color: $font-color;
+            transition: none;
+            border-bottom: 2px solid $medium-grey;
+        }
+    }
+}
+
+.tabs-content div {
+    padding: 1rem 0;
+}

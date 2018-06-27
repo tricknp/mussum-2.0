@@ -1,0 +1,77 @@
+.scrap-content
+{
+  background: $absolute-white;
+  position: relative;
+}
+
+.scrap
+{
+  position: relative;
+  //background-color: $absolute-white;
+  width: 95%;
+  margin: 1% auto;
+  height: 100%;
+  border: $light-border $light-grey;
+  border-radius: 4px;
+  input, textarea
+  {
+    border: none;
+    background: transparent;
+  }
+}
+
+.create-scrap
+{
+  position: absolute;
+  top: .5%;
+  right: .5%;
+  .icon-create-scrap
+  {
+    fill: $clear-blue;
+    &:hover{
+      fill: $dark-blue;
+    }
+  }
+}
+
+.actions-scrap
+{
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  right: .4%;
+  top: -5%;
+  .icon-scrap
+  {
+    width: 1em;
+  }
+}
+
+.scrap-container
+{
+  display: flex;
+  flex-direction: column;
+  margin: 0% 1.5em;
+}
+
+.scrap-title
+{
+  font-size: 1.2em;
+  font-weight: 600;
+}
+
+.scrap-desc
+{
+  margin-top: .4%;
+  font-size: 1em;
+}
+
+.scrap-date
+{
+  position: absolute;
+  right: 1%;
+  bottom: .3%;
+  color: $medium-grey;
+  font-size: .8em;
+  font-weight: 600;
+}

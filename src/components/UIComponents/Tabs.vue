@@ -53,7 +53,7 @@ export default {
     computed:{
         changeTeacher: function(){
            if (this.$route.params.targetName) {
-               
+
            }
             return true;
         }
@@ -70,30 +70,30 @@ export default {
         this.tabAbout = false
       },
 
-      scraps() {        
+      scraps() {
         this.tabDirectories = false
         this.tabScraps = true
         this.tabAbout = false
-        
+
       },
 
-      about() { 
+      about() {
         this.tabDirectories = false
         this.tabScraps = false
         this.tabAbout = true
-        
+
       },
 
       initRoutes(){
         if (this.$route.path == `${this.currentPath}diretorios`) {
             this.directories()
-        }else if (this.$route.path == `${this.currentPath}recados`) {  
+        }else if (this.$route.path == `${this.currentPath}recados`) {
             this.scraps()
-        }else if (this.$route.path == `${this.currentPath}sobre`) {  
+        }else if (this.$route.path == `${this.currentPath}sobre`) {
             this.about()
         }
       }
-      
+
     }
 };
 </script>
