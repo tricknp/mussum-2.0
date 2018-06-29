@@ -12,7 +12,7 @@
         <div v-for="wiki in wikis" :key="wiki.titulo" >
             <label>
               <input type="radio" name="name" @change="select(wiki)">
-              <span for="name"> {{ wiki.titulo }} </span>
+              <span for="name">{{ wiki.titulo }}</span>
             </label>
           </div>
       </div>

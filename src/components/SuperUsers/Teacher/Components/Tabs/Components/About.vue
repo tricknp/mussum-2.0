@@ -53,6 +53,8 @@ export default {
     this.init();
 
     this.$bus.$on("selectProfessor", username => {
+      console.log('ABOUT ON SELECT PROFESSOR');
+      
       this.refresh(username);
     });
   },
