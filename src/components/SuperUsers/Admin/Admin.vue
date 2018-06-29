@@ -39,7 +39,7 @@
             </div>
 
             <div v-if="tabHours">
-              <h2>horarios</h2>
+              <HoursBox />
             </div>
 
             <div v-if="tabLinks">
@@ -55,19 +55,6 @@
         </div>
       </div>
 
-
-      <!--<div class="div-admin">
-        <div class="left-boxes">
-          <TeacherBox />
-          <ActivitiesBox />
-        </div>
-        <div class="right-boxes">
-          <WikisBox />
-          <DirectoriesBox />
-          <CoursesBox />
-        </div>
-      </div> -->
-
   </section>
 </template>
 
@@ -79,6 +66,7 @@ import WikisBox from "./Boxes/Wikis/WikisBox";
 import DirectoriesBox from "./Boxes/Directories/DirectoriesBox";
 import CoursesBox from "./Boxes/Courses/CoursesBox";
 import LinksBox from "./Boxes/Links/LinksBox";
+import HoursBox from "./Boxes/Hours/HoursBox";
 
 export default {
   name: "Admin",
@@ -90,7 +78,8 @@ export default {
     WikisBox,
     DirectoriesBox,
     CoursesBox,
-    LinksBox
+    LinksBox,
+    HoursBox,
   },
 
   data(){

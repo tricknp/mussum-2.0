@@ -35,8 +35,8 @@
         <button id="btn-nav-list">Horaris</button>
         <div slot="content" id="dropdown-content">
           <menus>
-            <menu-item >
-
+            <menu-item v-for="horario in horarios" :key="horario.id">
+                <a :href="horario.url" target="_blank"> {{ horario.titulo }} </a>
             </menu-item>
           </menus>
         </div>
@@ -69,6 +69,18 @@ export default {
     };
   },
 
+  created() {
+    this.getTeachers();
+    this.getLinks();
+    this.getHours();
+
+    if (auth.getUsername() == this.$route.params.targetName) {
+      this.$bus.isOwner = true;
+    } else {
+      this.$bus.isOwner = false;
+    }
+  },
+
   methods: {
     getTeachers() {
       axios.get(this.BASE_URL + "api/professores").then(res => {
@@ -80,7 +92,12 @@ export default {
       axios.get(this.BASE_URL + "api/admlinks").then(res => {
         this.links = res.data
       })
+    },
 
+    getHours(){
+      axios.get(this.BASE_URL + "api/horarios").then(res => {
+        this.horarios = res.data
+      })
     },
 
     select(obj) {
@@ -99,19 +116,5 @@ export default {
     }
   },
 
-  created() {
-    this.getTeachers()
-    this.getLinks()
-
-    if (auth.getUsername() == this.$route.params.targetName) {
-      this.$bus.isOwner = true;
-    } else {
-      this.$bus.isOwner = false;
-    }
-  },
-
-  updated() {
-    //this.initialize();
-  }
 };
 </script>
