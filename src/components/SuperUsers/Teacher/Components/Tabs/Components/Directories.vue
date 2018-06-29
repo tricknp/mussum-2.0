@@ -2,7 +2,7 @@
 <template>
   <div class="directories">
     <vue-progress-bar></vue-progress-bar>
-    
+
     <div v-if="this.$bus.isOwner" class="div-select-course">
       <select v-model="dir" class="select-course">
         <option v-for="curso in cursos"
@@ -10,7 +10,7 @@
                 :value="$route.params.targetName+'/'+curso.titulo">
                 {{ curso.titulo }}
         </option>
-        <option :value="'novo'">nova pasta raiz</option>
+        <option :value="'novo'"> Outro </option>
       </select>
 
       <button @click="addCourse()">
@@ -18,14 +18,14 @@
       </button>
     </div>
 
-    <modal v-if="showOtherCourse" @show="show">
+    <modal v-if="showOtherCourse" @show="show" id="modal-container">
       <h1 slot="header">Novo Curso</h1>
-      <form slot="content">
+      <form slot="content" class="form-modal">
         <input type="text" v-model="otherCourse">
       </form>
-      <div slot="footer">
-        <button @click="addNewCourse">Ok</button>
-        <button @click="showModal == false">CANCELAR</button>
+      <div slot="footer" class="div-btn-modal">
+        <button @click="addNewCourse" class="modal-buttons">Novo</button>
+        <button @click="showModal == false" class="modal-buttons">CANCELAR</button>
       </div>
     </modal>
 
@@ -37,58 +37,60 @@
        ></tree>
      </div>
 
-    <modal v-if="showModal" @show="show()" id="admin-modal">
-      <h1 slot="header">Adicionar</h1>
-      <form slot="content" class="form-admin-modal">
+    <modal v-if="showModal" @show="show()" id="modal-container">
+      <h1 slot="header">Novo Pasta</h1>
+      <form slot="content" class="form-modal">
         <input type="text" placeholder="Nova Pasta" v-model="child" required>
         <div>
             <p><input type="radio" v-model="visibility" :value="true"  name="visibility"> Publico </p>
             <p><input type="radio" v-model="visibility" :value="false" name="visibility"> Oculto</p>
         </div>
       </form>
-      <div slot="footer">
-          <button type="submit" @click.prevent="addChild" >
+      <div slot="footer" class="div-btn-modal">
+          <button type="submit" @click.prevent="addChild"  class="modal-buttons">
             Confirmar
           </button>
-          <button @click="showModal = false" class="adm-modal-buttons">
+          <button @click="showModal = false" class="modal-buttons">
               Cancelar
           </button>
       </div>
     </modal>
 
-    <modal v-if="showUpload" @s="showUp()" id="admin-modal">
+    <modal v-if="showUpload" @s="showUp()" id="modal-container">
       <h1 slot="header">Adicionar arquivo</h1>
-      <form slot="content" class="form-admin-modal">
-        <div>
-            <p><input type="radio" v-model="isLink" :value="true"  name="isLink"> Link </p>
-            <p><input type="radio" v-model="isLink" :value="false" name="isLink"> Arquivo</p>
-        </div>
+
+      <form slot="content" class="form-modal">
         <input type="text" ref="fileName" placeholder="Nome do arquivo/link">
-        <input v-if="isLink" type="text" ref="link" placeholder="URL">
-        <input v-if="!isLink" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
         <input type="text" ref="comment" placeholder="Escreva um comentário (FEED)">
+        <input v-if="!isLink" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
+        <input v-if="isLink" type="text" ref="link" placeholder="URL">
+        <div>
+          <p><input type="radio" v-model="isLink" :value="true"  name="isLink"> Link </p>
+          <p><input type="radio" v-model="isLink" :value="false" name="isLink"> Arquivo</p>
+        </div>
         <div>
             <p><input type="radio" v-model="visibility" :value="true"  name="visibility"> Publico </p>
             <p><input type="radio" v-model="visibility" :value="false" name="visibility"> Oculto</p>
         </div>
       </form>
-      <div slot="footer">
-           <button @click="showUpload=false">CANCELAR</button>
-           <button @click="submitFile()">SALVAR</button>
+
+      <div slot="footer" class="div-btn-modal">
+           <button @click="showUpload=false" class="modal-buttons">CANCELAR</button>
+           <button @click="submitFile()" class="modal-buttons">SALVAR</button>
       </div>
     </modal>
 
-    <modal v-if="edit" @s="showUp()" >
+    <modal v-if="edit" @s="showUp()" id="modal-container">
       <h1 slot="header">Editar arquivo</h1>
-      <form slot="content" class="form-admin-modal">
+      <form slot="content" class="form-modal">
         <input type="text" ref="editName" placeholder="Nome do arquivo/link">
         <input v-if="edit.Link" type="text" ref="editLink" placeholder="URL">
         <input v-if="edit.comment" type="text" ref="editComment" placeholder="Escreva um comentário (FEED)">
       </form>
-      <div slot="footer">
-           <button @click="edit=null">CANCELAR</button>
-           <button v-if="edit.comment" @click="editFile">Update file</button>
-           <button v-if="edit.comment == undefined" @click="editFolder">Update folder name</button>
+      <div slot="footer" class="div-btn-modal">
+           <button @click="edit=null" class="modal-buttons">CANCELAR</button>
+           <button v-if="edit.comment" @click="editFile" class="modal-buttons">Salvar</button>
+           <button v-if="edit.comment == undefined" @click="editFolder" class="modal-buttons">Salvar</button>
       </div>
     </modal>
 
@@ -110,11 +112,11 @@ const ComponentClass = Vue.extend(tree);
 
 export default {
   name: "Directories",
-  
+
   components: { tree, IconAdd, Modal },
-  
+
   mixins: [url, showModal],
-  
+
   props: {
     selected: {
       default: "Adicionar curso"
