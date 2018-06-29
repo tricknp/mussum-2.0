@@ -15,32 +15,29 @@
  
 ***
 
-## Build Setup
+## Setup de instalação
 
 ``` bash
-# install dependencies
+# Para instalar as dependencias
 npm install
 
-# serve with hot reload at localhost:8080
+# Para iniciar o servidor
 npm run dev
 
-# build for production with minification
+# buid para produção
 npm run build
 
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
+# Para executar testes unitarios
 npm run unit
 
-# run e2e tests
+# Para testes e2e
 npm run e2e
 
-# run all tests
+# Para executar todos os testes
 npm test
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+Para informações mais detalhadas de como isso funciona, veja o [guia](http://vuejs-templates.github.io/webpack/) e a [documentação do vue-loader](http://vuejs.github.io/vue-loader).
 
 ***
 ## Licença
