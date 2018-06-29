@@ -11,7 +11,7 @@
                 <slot name="content">    
                     <div class="home-aside-container">
                         <h1 v-for="wiki in wikis" :key="wiki.titulo"> 
-                            {{ wiki.titulo }} 
+                           <a :href=wiki.url>{{ wiki.titulo }}</a>  
                         </h1>
                     </div>
                 </slot>    
@@ -33,7 +33,7 @@ export default {
   data(){
       return{
           wikis: '',
-          title: 'Wikis'
+          title: 'Wikis',
       };
   },
 

@@ -11,7 +11,7 @@
         <slot name="content">
           <div class="home-aside-container">
             <h1 v-for="diretorio in diretorios" :key="diretorio.titulo">
-              {{ diretorio.titulo }}
+                <a :href=diretorio.url>{{ diretorio.titulo }}</a>  
             </h1>
           </div>
         </slot>  
@@ -23,34 +23,31 @@
 
 
 <script>
-import axios from 'axios'
-import { url } from '../../../_mixins/url.js'
+import axios from "axios";
+import { url } from "../../../_mixins/url.js";
 
 export default {
-  name: 'Directories',
+  name: "Directories",
 
-  mixins: [ url ],
-  
-  data(){
-      return{
-        diretorios: '',
-        title: 'Diretórios',  
-      };
+  mixins: [url],
+
+  data() {
+    return {
+      diretorios: "",
+      title: "Diretórios"
+    };
   },
 
   methods: {
-    initDirectories(){
-      axios
-        .get(this.BASE_URL + 'api/diretorios')
-        .then( (res) => {
-          this.diretorios = res.data
-        });
+    initDirectories() {
+      axios.get(this.BASE_URL + "api/diretorios").then(res => {
+        this.diretorios = res.data;
+      });
     }
   },
 
-  created(){
+  created() {
     this.initDirectories();
   }
-  
-}
+};
 </script>
