@@ -1,21 +1,28 @@
 <template>
-  <div class="div-directories">
+  <div class="dashboard-actions">
 
-      <div class="directories-head">
-        <h1>{{title}}</h1>
-        <div class="div-adm-button">
-          <Create @create="initialize"></Create>
-          <Delete></Delete>
-          <Edit></Edit>
+      <div class="header-dashboard-actions">
+        <h1 class="dashboard-actions-title">{{title}}</h1>
+        <div class="dashboard-actions-buttons">
+          <Create @create="initialize()" class="dashboard-action-create" />
+          <Delete />
         </div>
       </div>
 
-      <div class="directories-container">
-          <div v-for="diretorio in diretorios" :key="diretorio.titulo" class="box-admin-content">
-            <label>
-              <input type="radio" name="name" @change="select(diretorio)">
-              <span for="name"> {{ diretorio.titulo }} </span>
-            </label>
+      <div class="dashboard-actions-container">
+          <div v-for="diretorio in diretorios" :key="diretorio.titulo" class="inside-container-dashboard">
+            <div class="item-container-dashboard">
+
+              <div class="styled-input--square">
+                 <div class="styled-input-single">
+                   <input type="checkbox" @change="select(diretorio)" :id="diretorio.id" />
+                   <label :for="diretorio.id"> {{ diretorio.titulo }} </label>
+                 </div>
+             </div>
+
+              <Edit />
+
+            </div>
           </div>
       </div>
 
@@ -43,7 +50,7 @@ export default {
       diretorios: null,
     }
   },
-  
+
   methods:{
     postData(){
       this.route = 'api/diretorios';

@@ -12,12 +12,17 @@
       <div class="dashboard-actions-container">
           <div v-for="aviso in avisos" :key="aviso.titulo" class="inside-container-dashboard">
             <div class="item-container-dashboard">
-              <label>
-                <input type="checkbox" name="name" @change="select(aviso)">
-                <span for="name"> {{ aviso.titulo }} </span>
-              </label>
+
+               <div class="styled-input--square">
+                  <div class="styled-input-single">
+                    <input type="checkbox" @change="select(aviso)" :id="aviso.id" />
+                    <label :for="aviso.id"> {{ aviso.titulo }} </label>
+                  </div>
+              </div>
+
               <Edit />
-          </div>
+              
+            </div>
           </div>
       </div>
 

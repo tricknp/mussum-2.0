@@ -1,21 +1,28 @@
 <template>
-  <div class="div-wikis tp">
+  <div class="dashboard-actions">
 
-      <div class="wikis-head">
-        <h1>{{title}}</h1>
-        <div class="div-adm-button">
-          <Create @create="initialize"></Create>
-          <Delete></Delete>
-          <Edit></Edit>
+      <div class="header-dashboard-actions">
+        <h1 class="dashboard-actions-title">{{title}}</h1>
+        <div class="dashboard-actions-buttons">
+          <Create @create="refresh()" class="dashboard-action-create" />
+          <Delete @delete="refresh()"/>
         </div>
       </div>
 
-      <div class="wikis-container">
-          <div v-for="wiki in wikis" :key="wiki.titulo" class="box-admin-content">
-            <label>
-              <input type="radio" name="name" @change="select(wiki)">
-              <span for="name"> {{ wiki.titulo }} </span>
-            </label>
+      <div class="dashboard-actions-container">
+          <div v-for="wiki in wikis" :key="wiki.titulo" class="inside-container-dashboard">
+            <div class="item-container-dashboard">
+
+              <div class="styled-input--square">
+                 <div class="styled-input-single">
+                   <input type="checkbox" @change="select(wiki)" :id="wiki.id" />
+                   <label :for="wiki.id"> {{ wiki.titulo }} </label>
+                 </div>
+             </div>
+
+              <Edit />
+
+            </div>
           </div>
       </div>
 
@@ -29,7 +36,6 @@ import Delete from "./Components/Delete";
 import Edit from "./Components/Edit";
 import { url } from '../../../../_mixins/url.js'
 import { initialize } from '../../../../_mixins/boxInitialize.js'
-
 export default {
   name: "WikisBox",
 
@@ -43,12 +49,17 @@ export default {
       wikis: null,
     }
   },
-  
+
+
   methods:{
+    refresh(){
+        this.initialize()
+    },
+
     postData(){
       this.route = 'api/wikis';
     }
   }
-
 }
+
 </script>
