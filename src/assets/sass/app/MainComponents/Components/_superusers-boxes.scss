@@ -1,6 +1,11 @@
 
 /*============== ADMIN FORM - MODALS ==============*/
-#admin-modal
+.page-blurred
+{
+  filter: blur(5px);
+}
+
+#modal-container
 {
     h1
     {
@@ -10,7 +15,7 @@
         margin-bottom: -1em;
     }
 
-    .form-admin-modal > input
+    .form-modal > input
     {
         font-size: $default-size;
         border: $light-grey $medium-border;
@@ -23,21 +28,23 @@
 
     .div-btn-modal
     {
-        display: inline-block;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         margin-top: -.5em;
         width: 100%;
     }
 
-    .adm-modal-buttons
+    .modal-buttons
     {
         cursor: pointer;
         font-size: 1.3em;
         width: 49.3%;
         padding: .3em;
         font-weight: 550;
-        background-color: $dark-grey;
+        background-color: $dark-blue;
         color: $light-grey;
-        border: $light-border $medium-grey;
+        border: $light-border $clear-blue;
         border-radius: 3px;
 
         &:hover

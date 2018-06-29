@@ -5,20 +5,20 @@
         <IconDelete class="icon-delete" />
       </button>
 
-      <modal v-if="showModal" @show="show()" id="admin-modal">
+      <modal v-if="showModal" @show="show()" id="modal-container">
 
       <h1 slot="header">Remover Diretório</h1>
 
-      <form slot="content" class="form-admin-modal">
+      <form slot="content" class="form-modal">
           <input type="text" :value="titulo"  readonly>
           <input type="text" :value="url"  readonly>
       </form>
 
       <div slot="footer">
-          <button type="submit" @click.prevent="onSubmit" class="adm-modal-buttons">
+          <button type="submit" @click.prevent="onSubmit" class="modal-buttons">
               Remover
           </button>
-          <button @click="showModal = false" class="adm-modal-buttons">
+          <button @click="showModal = false" class="modal-buttons">
               Cancelar
           </button>
       </div>

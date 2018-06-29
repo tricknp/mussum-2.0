@@ -1,30 +1,29 @@
 <template>
   <div>
-    
+
     <button @click="show">
       <IconAdd class="icon-add" />
-    </button> 
+    </button>
 
-    <modal v-if="showModal" @show="show()" id="admin-modal">
+    <modal v-if="showModal" @show="show()" id="modal-container">
 
       <h1 slot="header">Adicionar Aviso</h1>
 
-      <form slot="content" class="form-admin-modal">
-          <input type="text" placeholder="Nome" name="nome" v-model="titulo" required>
-          <input type="text" placeholder="Data" name="data" v-model="data">
+      <form slot="content" class="form-modal">
+          <input type="text" placeholder="Titulo" name="nome" v-model="titulo" required>
           <input type="text" placeholder="Descrição" name="descricao" v-model="descricao">
       </form>
 
       <div slot="footer" class="div-btn-modal">
-          <button 
-            type="submit" 
-            @click.stop.prevent="onSubmit" 
-            class="adm-modal-buttons">
+          <button
+            type="submit"
+            @click.stop.prevent="onSubmit"
+            class="modal-buttons">
                 Adicionar
           </button>
-          <button 
-            @click="cancel" 
-            class="adm-modal-buttons">
+          <button
+            @click="cancel"
+            class="modal-buttons">
                 Cancelar
           </button>
       </div>
@@ -46,22 +45,20 @@ export default {
   components: { Modal, IconAdd },
 
   mixins: [ create, url ],
-  
+
   data(){
       return{
           titulo: '',
           descricao: '',
-          data: '',
           msg       : null,
           datas: ''
       };
   },
 
-  methods:{   
+  methods:{
     reset(){
       this.titulo      =  ''
       this.descricao   =  ''
-      this.data        =  ''
     },
 
     postData(){
@@ -69,12 +66,11 @@ export default {
         this.datas = JSON.stringify({
         titulo     :  this.titulo,
         descricao  :  this.descricao,
-        data       :  this.data,
       })
     }
   },
 
 
-}   
-    
+}
+
 </script>

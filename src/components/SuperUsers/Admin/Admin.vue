@@ -43,7 +43,7 @@
             </div>
 
             <div v-if="tabLinks">
-              <h2>links</h2>
+              <LinksBox />
             </div>
 
             <div v-if="tabTeachers">
@@ -78,6 +78,7 @@ import ActivitiesBox from "./Boxes/Activities/ActivitiesBox";
 import WikisBox from "./Boxes/Wikis/WikisBox";
 import DirectoriesBox from "./Boxes/Directories/DirectoriesBox";
 import CoursesBox from "./Boxes/Courses/CoursesBox";
+import LinksBox from "./Boxes/Links/LinksBox";
 
 export default {
   name: "Admin",
@@ -88,7 +89,8 @@ export default {
     ActivitiesBox,
     WikisBox,
     DirectoriesBox,
-    CoursesBox
+    CoursesBox,
+    LinksBox
   },
 
   data(){

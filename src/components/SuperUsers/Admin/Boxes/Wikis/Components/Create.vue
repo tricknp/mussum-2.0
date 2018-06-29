@@ -1,30 +1,30 @@
 <template>
-  <div>
-    
-    <button @click="show" class="adm-button">
-      <IconAdd class="icon-add" />
-    </button> 
 
-    <modal v-if="showModal" @show="show()" id="admin-modal">
+  <div>
+
+    <button @click="show">
+      <IconAdd class="icon-add" />
+    </button>
+
+    <modal v-if="showModal" @show="show()" id="modal-container">
 
       <h1 slot="header">Adicionar Wiki</h1>
 
-      <form slot="content" class="form-admin-modal">
+      <form slot="content" class="form-modal">
           <input type="text" placeholder="Nome" name="titulo" v-model="titulo" required>
           <input type="text" placeholder="Link" name="link" v-model="url">
-
       </form>
 
       <div slot="footer" class="div-btn-modal">
-          <button 
-            type="submit" 
-            @click.stop.prevent="onSubmit" 
-            class="adm-modal-buttons">
+          <button
+            type="submit"
+            @click.stop.prevent="onSubmit"
+            class="modal-buttons">
                 Adicionar
           </button>
-          <button 
-            @click="cancel" 
-            class="adm-modal-buttons">
+          <button
+            @click="cancel"
+            class="modal-buttons">
                 Cancelar
           </button>
       </div>
@@ -41,11 +41,11 @@ import  { url }     from  '../../../../../_mixins/url.js'
 import  IconAdd     from  '../../../../../_utils/Svgs/IconAdd'
 
 export default {
-  
+
   components: { Modal, IconAdd },
 
   mixins: [ create, url ],
-  
+
   data(){
       return{
           titulo  : null,
@@ -55,7 +55,7 @@ export default {
       };
   },
 
-  methods:{   
+  methods:{
     reset(){
       this.titulo =  '';
       this.url    =  '';
@@ -71,6 +71,6 @@ export default {
   },
 
 
-}   
-    
+}
+
 </script>

@@ -7,11 +7,11 @@
 
     <modal v-if="showModal" @show="show()" id="modal-container">
 
-      <h1 slot="header">Editar Wiki</h1>
+      <h1 slot="header">Editar Link</h1>
 
       <form slot="content" class="form-modal">
-          <input type="text"   v-model="wiki.titulo" placeholder="Titulo" required>
-          <input type="text"   v-model="wiki.url" placeholder="Url">
+          <input type="text"   v-model="link.titulo" placeholder="Titulo" required>
+          <input type="text"   v-model="link.url" placeholder="Url">
         </form>
 
         <div slot="footer">
@@ -48,24 +48,24 @@ export default {
   data() {
     return {
       id   : '',
-      wiki : null,
+      link : null,
     };
   },
 
   created() {
-    this.$bus.$on("objectEmited", (wiki) => {
-      this.wiki = wiki;
-      this.id = this.wiki.id;
+    this.$bus.$on("objectEmited", (link) => {
+      this.link = link;
+      this.id = this.link.id;
     });
   },
 
   methods: {
     postData(){
-      this.route = 'api/wikis/',
+      this.route = 'api/links/',
       this.datas = JSON.stringify({
         id: this.id,
-        titulo: this.wiki.titulo,
-        url: this.wiki.url
+        titulo: this.link.titulo,
+        url: this.link.url
       })
     },
 

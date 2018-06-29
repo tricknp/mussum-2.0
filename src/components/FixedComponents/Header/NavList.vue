@@ -21,11 +21,11 @@
       </dropdown>
 
       <dropdown trigger="hover">
-        <button id="btn-nav-list">{{ title.link3 }}</button>
+        <button id="btn-nav-list">{{ title.link }}</button>
         <div slot="content" id="dropdown-content">
           <menus>
-            <menu-item>
-
+            <menu-item v-for="link in links" :key="link.id">
+                <a :href="link.url"> {{ link.titulo }} </a>
             </menu-item>
           </menus>
         </div>
@@ -35,8 +35,8 @@
         <button id="btn-nav-list">{{ title.listHorarios }}</button>
         <div slot="content" id="dropdown-content">
           <menus>
-            <menu-item v-for="horario in horarios" :key="horario.turma" >
-              {{ horario.turma }}
+            <menu-item >
+
             </menu-item>
           </menus>
         </div>
@@ -66,23 +66,32 @@ export default {
       title: {
         listProfessores: "Professoris",
         listHorarios: "Horaris",
-        link3: "Cursis"
+        link: "Links"
       },
       professores: "",
-      horarios: ""
+      horarios: "",
+      links
     };
   },
 
   methods: {
-    initHeader() {
+    getTeachers() {
       axios.get(this.BASE_URL + "api/professores").then(res => {
-        this.professores = res.data;
-      });
+        this.professores = res.data
+      })
+    },
+
+    getLinks(){
+      axios.get(this.BASE_URL + "api/admlinks").then(res => {
+        this.links = res.data
+      })
+
     },
 
     select(obj) {
       this.targetName = obj;
     },
+
     test(username) {
       this.$route.params.targetName = username;
       this.$bus.$emit("selectProfessor", username);
@@ -96,12 +105,14 @@ export default {
   },
 
   created() {
-    this.initHeader();
-      if (auth.getUsername() == this.$route.params.targetName) {
-        this.$bus.isOwner = true;
-      } else {
-        this.$bus.isOwner = false;
-      }
+    this.getTeachers()
+    this.getLinks()
+
+    if (auth.getUsername() == this.$route.params.targetName) {
+      this.$bus.isOwner = true;
+    } else {
+      this.$bus.isOwner = false;
+    }
   },
 
   updated() {

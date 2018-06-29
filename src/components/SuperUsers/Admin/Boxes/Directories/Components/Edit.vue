@@ -5,22 +5,25 @@
       <IconEdit class="icon-edit" />
     </button>
 
-    <modal v-if="showModal" @show="show()" id="admin-modal">
+    <modal v-if="showModal" @show="show()" id="modal-container">
 
       <h1 slot="header">Editar Diretório</h1>
 
-      <form slot="content" class="form-admin-modal">
+      <form slot="content" class="form-modal">
           <input type="text" v-model="diretorio.titulo" placeholder="titulo" required>
           <input type="text"   v-model="diretorio.url" placeholder="link" required>
         </form>
 
         <div slot="footer">
-            <button type="submit" @click.prevent="onSubmit" class="adm-modal-buttons">
+          <div class="div-btn-modal">
+
+            <button type="submit" @click.prevent="onSubmit" class="modal-buttons">
               Confirmar
             </button>
-            <button @click="showModal = false" class="adm-modal-buttons">
+            <button @click="showModal = false" class="modal-buttons">
               Cancelar
            </button>
+         </div>
         </div>
 
     </modal>
