@@ -1,4 +1,5 @@
 <template>
+
   <div>
 
     <button @click="show">
@@ -7,11 +8,11 @@
 
     <modal v-if="showModal" @show="show()" id="modal-container">
 
-      <h1 slot="header">Adicionar Diretório</h1>
+      <h1 slot="header">Adicionar Link</h1>
 
       <form slot="content" class="form-modal">
           <input type="text" placeholder="Nome" name="titulo" v-model="titulo" required>
-          <input type="text" placeholder="Descrição" name="url" v-model="url">
+          <input type="text" placeholder="Link" name="link" v-model="url" required>
       </form>
 
       <div slot="footer" class="div-btn-modal">
@@ -34,11 +35,10 @@
 </template>
 
 <script>
-import  Modal         from   '../../../../../UIComponents/Modal'
-import  { create }    from   '../../../../../_mixins/create.js'
-import  { url }       from   '../../../../../_mixins/url.js'
-import  { showModal } from   '../../../../../_mixins/showModal.js'
-import  IconAdd       from   '../../../../../_utils/Svgs/IconAdd'
+import  Modal       from  '../../../../../UIComponents/Modal'
+import  { create }  from  '../../../../../_mixins/create.js'
+import  { url }     from  '../../../../../_mixins/url.js'
+import  IconAdd     from  '../../../../../_utils/Svgs/IconAdd'
 
 export default {
 
@@ -48,24 +48,24 @@ export default {
 
   data(){
       return{
-          titulo    : null,
-          url       : null,
-          msg       : null,
+          titulo  : null,
+          url     : null,
+          msg     : null,
           datas: ''
       };
   },
 
   methods:{
     reset(){
-      this.titulo  =  ''
-      this.url     =  ''
+      this.titulo =  '';
+      this.url    =  '';
     },
 
     postData(){
-        this.route = 'api/diretorios';
+        this.route = 'api/links';
         this.datas = JSON.stringify({
-        titulo  :  this.titulo,
-        url     :  this.url,
+        titulo :  this.titulo,
+        url    :  this.url,
       })
     }
   },

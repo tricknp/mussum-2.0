@@ -50,6 +50,11 @@
         font-size: 1.65em;
         margin: .5em 1.2em;
 
+        .teacher-name
+        {
+          color: $dark-background;
+        }
+
         .div-desc-teacher{
             @extend %equal-flex-direction;
             width: 28.5em;

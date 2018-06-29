@@ -11,6 +11,7 @@ export const del = {
               console.log(response.data);
             })
             .catch(error => console.log(error));
+              this.$emit('delete');
               this.showModal = false;
         }
       },

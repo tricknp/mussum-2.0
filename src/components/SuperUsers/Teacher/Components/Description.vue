@@ -1,8 +1,8 @@
 <template>
   <div class="teacher-description">
-    <h1> {{ `${this.name} ${this.lastname}` }} </h1>
+    <h1 class="teacher-name"> {{ `${this.name} ${this.lastname}` }} </h1>
     <div class="div-desc-teacher">
-          <IconResume />
+          <IconResume class="teacher-icon-resume" />
           <input type="text"
                 :disabled="disabled"
                 placeholder="Sem descrição"
@@ -10,7 +10,7 @@
                 ref="desc"
                 v-model="description">
 
-            <div v-if="isTeacher">
+            <div v-if="isTeacher" class="edit-desc-teacher">
                 <button @click="actionDesc" v-if="!editFocused">
                   <IconEdit />
                 </button>

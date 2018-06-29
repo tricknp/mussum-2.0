@@ -1,7 +1,7 @@
 <template>
   <div class="nav-list">
       <dropdown trigger="hover">
-        <button id="btn-nav-list">{{ title.listProfessores }}</button>
+        <button id="btn-nav-list"> Professoris </button>
         <div slot="content" id="dropdown-content">
           <menus>
             <menu-item
@@ -21,22 +21,22 @@
       </dropdown>
 
       <dropdown trigger="hover">
-        <button id="btn-nav-list">{{ title.link3 }}</button>
+        <button id="btn-nav-list">Links</button>
         <div slot="content" id="dropdown-content">
           <menus>
-            <menu-item>
-
+            <menu-item v-for="link in links" :key="link.id">
+                <a :href="link.url" target="_blank"> {{ link.titulo }} </a>
             </menu-item>
           </menus>
         </div>
       </dropdown>
 
       <dropdown trigger="hover">
-        <button id="btn-nav-list">{{ title.listHorarios }}</button>
+        <button id="btn-nav-list">Horaris</button>
         <div slot="content" id="dropdown-content">
           <menus>
-            <menu-item v-for="horario in horarios" :key="horario.turma" >
-              {{ horario.turma }}
+            <menu-item v-for="horario in horarios" :key="horario.id">
+                <a :href="horario.url" target="_blank"> {{ horario.titulo }} </a>
             </menu-item>
           </menus>
         </div>
@@ -63,26 +63,47 @@ export default {
 
   data() {
     return {
-      title: {
-        listProfessores: "Professoris",
-        listHorarios: "Horaris",
-        link3: "Cursis"
-      },
-      professores: "",
-      horarios: ""
+      professores: '',
+      horarios: '',
+      links: ''
     };
   },
 
+  created() {
+    this.getTeachers();
+    this.getLinks();
+    this.getHours();
+
+    if (auth.getUsername() == this.$route.params.targetName) {
+      this.$bus.isOwner = true;
+    } else {
+      this.$bus.isOwner = false;
+    }
+  },
+
   methods: {
-    initHeader() {
+    getTeachers() {
       axios.get(this.BASE_URL + "api/professores").then(res => {
-        this.professores = res.data;
-      });
+        this.professores = res.data
+      })
+    },
+
+    getLinks(){
+      axios.get(this.BASE_URL + "api/admlinks").then(res => {
+        this.links = res.data
+      })
+    },
+
+    getHours(){
+      axios.get(this.BASE_URL + "api/horarios").then(res => {
+        this.horarios = res.data
+      })
     },
 
     select(obj) {
       this.targetName = obj;
     },
+
     test(username) {
       this.$route.params.targetName = username;
       this.$bus.$emit("selectProfessor", username);
@@ -95,17 +116,5 @@ export default {
     }
   },
 
-  created() {
-    this.initHeader();
-      if (auth.getUsername() == this.$route.params.targetName) {
-        this.$bus.isOwner = true;
-      } else {
-        this.$bus.isOwner = false;
-      }
-  },
-
-  updated() {
-    //this.initialize();
-  }
 };
 </script>

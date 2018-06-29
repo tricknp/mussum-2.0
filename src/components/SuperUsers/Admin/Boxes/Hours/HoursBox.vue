@@ -4,19 +4,19 @@
       <div class="header-dashboard-actions">
         <h1 class="dashboard-actions-title">{{title}}</h1>
         <div class="dashboard-actions-buttons">
-          <Create @create="initialize()" class="dashboard-action-create" />
-          <Delete />
+          <Create @create="refresh()" class="dashboard-action-create" />
+          <Delete @delete="refresh()"/>
         </div>
       </div>
 
       <div class="dashboard-actions-container">
-          <div v-for="diretorio in diretorios" :key="diretorio.titulo" class="inside-container-dashboard">
+          <div v-for="horario in horarios" :key="horario.titulo" class="inside-container-dashboard">
             <div class="item-container-dashboard">
 
               <div class="styled-input--square">
                  <div class="styled-input-single">
-                   <input type="checkbox" @change="select(diretorio)" :id="diretorio.id" />
-                   <label :for="diretorio.id"> {{ diretorio.titulo }} </label>
+                   <input type="checkbox" @change="select(horario)" :id="horario.id" />
+                   <label :for="horario.id"> {{ horario.titulo }} </label>
                  </div>
              </div>
 
@@ -36,9 +36,8 @@ import Delete from "./Components/Delete";
 import Edit from "./Components/Edit";
 import { url } from '../../../../_mixins/url.js'
 import { initialize } from '../../../../_mixins/boxInitialize.js'
-
 export default {
-  name: "DirectoriesBox",
+  name: "horariosBox",
 
   components: { Create, Delete, Edit },
 
@@ -46,16 +45,21 @@ export default {
 
   data() {
     return {
-      title: "Diretóris",
-      diretorios: null,
+      title: "Horaris",
+      horarios: null,
     }
   },
 
+
   methods:{
+    refresh(){
+        this.initialize()
+    },
+
     postData(){
-      this.route = 'api/diretorios';
+      this.route = 'api/horarios';
     }
   }
-
 }
+
 </script>

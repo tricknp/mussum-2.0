@@ -1,28 +1,11 @@
-/*============== ADMIN SECTION ==============*/
-.div-admin
-{
-    @extend %equal-flex-display;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 1%;
-}
-
-.left-boxes
-{
-    @extend %equal-flex-display;
-    flex-direction: column;
-    margin-right: .35em;
-}
-
-.right-boxes
-{
-    @extend %equal-flex-display;
-    flex-direction: column;
-}
 
 /*============== ADMIN FORM - MODALS ==============*/
-#admin-modal
+.page-blurred
+{
+  filter: blur(5px);
+}
+
+#modal-container
 {
     h1
     {
@@ -32,7 +15,7 @@
         margin-bottom: -1em;
     }
 
-    .form-admin-modal > input
+    .form-modal > input
     {
         font-size: $default-size;
         border: $light-grey $medium-border;
@@ -45,21 +28,23 @@
 
     .div-btn-modal
     {
-        display: inline-block;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         margin-top: -.5em;
         width: 100%;
     }
 
-    .adm-modal-buttons
+    .modal-buttons
     {
         cursor: pointer;
         font-size: 1.3em;
         width: 49.3%;
         padding: .3em;
         font-weight: 550;
-        background-color: $dark-grey;
+        background-color: $dark-blue;
         color: $light-grey;
-        border: $light-border $medium-grey;
+        border: $light-border $clear-blue;
         border-radius: 3px;
 
         &:hover
@@ -69,125 +54,6 @@
         }
     }
 
-}
-    .box-admin-content
-    {
-        font-size: $default-size;
-        margin: .2em .4em;
-        font-weight: 600;
-    }
-
-
-/*============== TEACHER ==============*/
-.div-teacher
-{
-    @extend %equal-width;
-}
-
-.teacher-head
-{
-    @extend %default-header;
-    @extend %default-box;
-}
-
-
-.teacher-container
-{
-    @extend %equal-border;
-    @extend %equal-left-box-content;
-
-    .teacher-content:nth-child(1)
-    {
-        margin-top: .9em;
-    }
-
-}
-
-.div-checkbox-teacher
-{
-    @extend %equal-flex-display;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-/*============== Activities ==============*/
-.div-activities
-{
-    @extend %equal-width;
-    margin-top: .3em;
-}
-
-.activities-head
-{
-    @extend %default-header;
-    @extend %default-box;
-}
-
-
-.activities-container
-{
-    @extend %equal-border;
-    @extend %equal-left-box-content;
-}
-
-/*============== Wikis ==============*/
-.div-wikis
-{
-    @extend %equal-width;
-}
-
-.wikis-head
-{
-    @extend %default-header;
-    @extend %default-box;
-}
-
-
-.wikis-container
-{
-    @extend %equal-border;
-    @extend %equal-right-box-content;
-}
-
-
-/*============== Directories ==============*/
-.div-directories
-{
-    @extend %equal-width;
-    margin-top: $boxes-margin-top;
-}
-
-.directories-head
-{
-    @extend %default-header;
-    @extend %default-box;
-}
-
-
-.directories-container
-{
-    @extend %equal-border;
-    @extend %equal-right-box-content;
-}
-
-/*============== Courses ==============*/
-.div-courses
-{
-    @extend %equal-width;
-    margin-top: $boxes-margin-top;
-}
-
-.courses-head
-{
-    @extend %default-header;
-    @extend %default-box;
-}
-
-
-.courses-container
-{
-    @extend %equal-border;
-    @extend %equal-right-box-content;
 }
 
 
@@ -204,7 +70,6 @@
 {
   background: #121e30;
   color: #ddd;
-  height: 100%;
   width: 18em;
 }
 
@@ -280,7 +145,7 @@
     {
       font-size: 1.3em;
       margin-left: 1em;
-      font-weight: 600; 
+      font-weight: 600;
     }
 
     .dashboard-actions-buttons
@@ -294,10 +159,12 @@
 
   .dashboard-actions-container
   {
-      display: flex;
+      //display: flex;
       flex-direction: column;
       margin-top: .2em;
-      
+      height: 10%;
+
+
       .inside-container-dashboard
       {
         text-indent: .1em;
@@ -310,7 +177,7 @@
           display: flex;
           flex-direction: row;
           justify-content: space-between;
-          font-size: $default-size;
+          font-size: $default-size + .005em;
           padding: .7em;
           &:hover
           {
@@ -319,6 +186,77 @@
       }
   }
 
-  
-
 }
+
+
+.styled-input-single {
+  position: relative;
+  padding: 1px 0 1px 40px;
+  text-align: left;
+
+    label {
+    cursor: pointer;
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      border-radius: 50%;
+      height: 10px;
+    }
+    &:before {
+      left: 0;
+      width: 30px;
+      height: 30px;
+      margin: -15px 0 0;
+      border: solid $medium-blue 1px;
+      background: transparent;
+      box-shadow: 0 0 1px grey;
+    }
+    &:after {
+      left: 5px;
+      width: 1.3em;
+      height: 1.3em;
+      margin: -10px 0 0;
+      opacity: 0;
+      background: $medium-blue;
+      transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+      transform: translate3d(-40px, 0, 0) scale(0.5);
+    }
+  }
+
+  input[type="checkbox"] {
+    position: absolute;
+    top: 0;
+    left: -9999px;
+    visibility: hidden;
+
+    &:checked + label {
+      &:before {
+      }
+      &:after {
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.styled-input--square {
+  label {
+    &:before,
+    &:after {
+      border-radius: 0;
+    }
+  }
+}
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    &:checked + label {
+      &:after {
+        transform: rotate(45deg);
+        opacity: 1;
+      }
+    }
+  }

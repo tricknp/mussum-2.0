@@ -1,7 +1,7 @@
 <template>
   <div class="scrap-content">
 
-    <Create v-if="isOwner" @create="init()"></Create>
+    <Create v-if="isOwner" @create="init()" />
 
     <div v-for="(scrap, index) in scraps" :key="scrap.id" class="scrap" >
 

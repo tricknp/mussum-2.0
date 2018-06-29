@@ -18,18 +18,18 @@
       <div slot="content" id="dropdown-content">
         <menus>
 
-          <menu-item v-for="item in items"  :key="item.name">
-            <a href="#" >
-              {{ item.name }}
-              <img v-if="img" class="teacher-photo" :src="`data:image/png;base64,${img}`">
-            </a>
+          <menu-item v-if="isAdmin">
+            <router-link :to="{ path: '/admin' }">
+              <a> Admin </a>
+            </router-link>
           </menu-item>
 
-          <div class="divider"></div>
+          <!-- <div class="divider"></div> -->
 
           <menu-item v-if='isLoged'>
-            <h1 v-on:click='signOut'> Sign Out </h1>
+            <a v-on:click='signOut'> Sign Out </a>
           </menu-item>
+
           <menu-item v-else>
             <router-link :to="{ name: 'login' }"> Login </router-link>
           </menu-item>
@@ -60,13 +60,6 @@ export default {
 
   data() {
     return {
-      showModal: false,
-      items: [
-        { name: "BlackBoard" },
-        { name: "Portal do Aluno" },
-        { name: "Faculdade Senac" },
-        { name: "Administrador"}
-      ],
       username: '',
       img: '',
 
@@ -79,6 +72,14 @@ export default {
       this.username = localStorage.getItem('username');
 
       return localSize > 1;
+    },
+
+    isAdmin: function(){
+      if (localStorage.role == 'admin') {
+        return true
+      }else{
+        return false
+      }
     }
   },
 

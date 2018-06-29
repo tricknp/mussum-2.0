@@ -5,23 +5,26 @@
       <IconEdit class="icon-edit" />
     </button>
 
-    <modal v-if="showModal" @show="show()" id="admin-modal">
+    <modal v-if="showModal" @show="show()" id="modal-container">
 
       <h1 slot="header">Editar Aviso</h1>
 
-      <form slot="content" class="form-admin-modal">
+      <form slot="content" class="form-modal">
           <input type="text"   v-model="aviso.titulo" placeholder="Titulo" required>
           <input type="text"   v-model="aviso.descricao" placeholder="Descrição" required>
           <input type="text "  v-model="aviso.data" placeholder="Data">
         </form>
 
         <div slot="footer">
-            <button type="submit" @click.prevent="onSubmit" class="adm-modal-buttons">
+          <div class="div-btn-modal">
+
+            <button type="submit" @click.prevent="onSubmit" class="modal-buttons">
               Confirmar
             </button>
-            <button @click="showModal = false" class="adm-modal-buttons">
+            <button @click="showModal = false" class="modal-buttons">
               Cancelar
            </button>
+         </div>
         </div>
 
     </modal>
@@ -36,7 +39,7 @@ import  Modal         from  "../../../../../UIComponents/Modal"
 import  { url }       from  '../../../../../_mixins/url.js'
 import  { showModal } from  '../../../../../_mixins/showModal.js'
 import  { edit }      from  '../../../../../_mixins/edit.js'
- 
+
 export default {
   name: "Edit",
 

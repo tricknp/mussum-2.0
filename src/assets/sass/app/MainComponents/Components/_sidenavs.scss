@@ -35,22 +35,22 @@
 {
     width: 95%;
     height: $full-size;
-    
+
 
     .aside-head
     {
         margin-top: 1em;
         width: $full-size;
         text-indent: 1em;
-        font-size: 1.3em; 
+        font-size: 1.3em;
         border-bottom: solid 2px $clear-blue;
-        
+
         .title-home-aside
         {
             margin-top: 2.5%;
         }
-        
-        
+
+
     }
 }
 
@@ -58,11 +58,14 @@
 {
     overflow: auto;
     max-height: 85%;
-    margin-top: 1.6%; 
+    margin-top: 1.6%;
+    line-height: 1.65;
+    color: $dark-grey;
+    text-indent: 1.2em;
 }
 
 .div-aside-container::-webkit-scrollbar
-{   
+{
     width: 7px;
     background-color: $absolute-white;
 }

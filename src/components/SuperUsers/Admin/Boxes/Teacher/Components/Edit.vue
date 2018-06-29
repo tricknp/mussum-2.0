@@ -1,29 +1,31 @@
 <template>
   <div>
 
-    <button @click="show" class="adm-button">
+    <button @click="show">
       <IconEdit class="icon-edit" />
     </button>
 
-    <modal v-if="showModal" @show="show()" id="admin-modal">
+    <modal v-if="showModal" @show="show()" id="modal-container">
 
       <h1 slot="header">Editar Professor</h1>
 
-      <form slot="content" class="form-admin-modal">
+      <form slot="content" class="form-modal">
           <input type="text"  v-model="professor.nome"  placeholder="nome" required>
           <input type="text"  v-model="professor.sobrenome"  placeholder="sobrenome" required>
-          <input type="email" v-model="professor.email" placeholder="email" > 
+          <input type="email" v-model="professor.email" placeholder="email" >
           <input type="text"  v-model="professor.username" placeholder="username" required>
           <input type="text"  v-model="professor.password" placeholder="password" required >
         </form>
 
         <div slot="footer">
-            <button type="submit" @click.prevent="onSubmit" class="adm-modal-buttons">
-              Confirmar 
+          <div class="div-btn-modal">
+            <button type="submit" @click.prevent="onSubmit" class="modal-buttons">
+              Confirmar
             </button>
-            <button @click="showModal = false" class="adm-modal-buttons">
+            <button @click="showModal = false" class="modal-buttons">
               Cancelar
            </button>
+         </div>
         </div>
 
     </modal>
