@@ -83,6 +83,35 @@
                             <p class="feed-date"> {{ content.dataCriacao }} </p>
                     </div>
 
+                    <div v-if="content.tipo == 'wiki'" class="feed-upload">
+
+                        <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
+                          <IconDelete class="icon-delete-feed" />
+                        </button>
+
+                        <div class="content-aligned">
+                          <!-- <div>
+                            <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
+                          </div> -->
+
+                          <div class="feed-text-content">
+                            <p>
+                              <router-link :to="{path: `professor/${content.username}`}">
+                                <!-- <b class="teacher-name-feed">Mussum </b> -->
+                              </router-link>
+                              {{ textWiki }}
+                            </p>
+
+                            <b><p class="feed-archive-name">
+                              <a :href="content.link" target="_blank">
+                                {{ `${content.titulo}` }}
+                              </a>
+                            </p></b>
+                          </div>
+                        </div>
+                            <p class="feed-date"> {{ content.dataCriacao }} </p>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -102,7 +131,9 @@ export default {
       feedContent: "",
       textUpload: "adicionou um novo arquivo em",
       textRecado: "adicionou um novo recado.",
-      textLink: "adicionou um novo link."
+      textLink: "adicionou um novo link.",
+      textWiki: "Foi adicionado uma nova WIKI.",
+      textAviso: "adicionou um novo Aviso."
     };
   },
 
