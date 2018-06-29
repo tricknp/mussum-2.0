@@ -10,8 +10,7 @@
       <h1 slot="header">Adicionar Aviso</h1>
 
       <form slot="content" class="form-admin-modal">
-          <input type="text" placeholder="Nome" name="nome" v-model="titulo" required>
-          <input type="text" placeholder="Data" name="data" v-model="data">
+          <input type="text" placeholder="Titulo" name="nome" v-model="titulo" required>
           <input type="text" placeholder="Descrição" name="descricao" v-model="descricao">
       </form>
 
@@ -51,7 +50,6 @@ export default {
       return{
           titulo: '',
           descricao: '',
-          data: '',
           msg       : null,
           datas: ''
       };
@@ -61,7 +59,6 @@ export default {
     reset(){
       this.titulo      =  ''
       this.descricao   =  ''
-      this.data        =  ''
     },
 
     postData(){
@@ -69,7 +66,6 @@ export default {
         this.datas = JSON.stringify({
         titulo     :  this.titulo,
         descricao  :  this.descricao,
-        data       :  this.data,
       })
     }
   },
