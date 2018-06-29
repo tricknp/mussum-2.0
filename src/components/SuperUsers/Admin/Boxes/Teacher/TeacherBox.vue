@@ -1,21 +1,23 @@
 <template>
-  <div class="div-teacher">
+  <div class="dashboard-actions">
 
-      <div class="teacher-head">
-        <h1>{{title}}</h1>
-        <div class="div-adm-button">
-          <Create @create="initialize"></Create>
-          <Delete></Delete>
-          <Edit></Edit>
+      <div class="header-dashboard-actions">
+        <h1 class="dashboard-actions-title">{{title}}</h1>
+        <div class="dashboard-actions-buttons">
+          <Create @create="refresh()" class="dashboard-action-create" />
+          <Delete @delete="refresh()"/>
         </div>
       </div>
 
-      <div class="teacher-container">
-          <div v-for="professor in professores" :key="professor.nome" class="box-admin-content">
-            <label>
-              <input type="radio" name="name" @change="select(professor)">
-              <span for="name"> {{ `${professor.nome} ${professor.sobrenome}` }} </span>
-            </label>
+      <div class="dashboard-actions-container">
+          <div v-for="professor in professores" :key="professor.nome" class="inside-container-dashboard">
+            <div class="item-container-dashboard">
+              <label>
+                <input type="checkbox" name="name" @change="select(professor)">
+                <span for="name"> {{ `${professor.nome} ${professor.sobrenome}` }} </span>
+              </label>
+              <Edit />
+            </div>
           </div>
       </div>
 
@@ -43,8 +45,21 @@ export default {
       professores: null,
     }
   },
-  
+
+  computed:{
+    isTrue: function(){
+      this.initialize()
+      alert("puta que pariu")
+      return true
+    }
+  },
+
   methods:{
+    refresh(){
+      alert('taoso')
+        this.initialize()
+    },
+
     postData(){
       this.route = 'api/professores';
     }

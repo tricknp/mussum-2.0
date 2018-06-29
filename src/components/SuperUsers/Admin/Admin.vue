@@ -8,13 +8,13 @@
           <div class="inside-dashboard-tabs">
             <h1 class="header-aside">Admin</h1>
             <div class="dashboard-tabs">
-              <span :class="{'active': tabActivities}"  @click="activities()"  > Atividadis  </span>
+              <span :class="{'active': tabActivities}"  @click="activities()"  > Avisis      </span>
               <span :class="{'active': tabCourses}"     @click="courses()"     > Cursis      </span>
               <span :class="{'active': tabDirectories}" @click="directories()" > Diretóris   </span>
               <span :class="{'active': tabWikis}"       @click="wikis()"       > Wikis       </span>
               <span :class="{'active': tabHours}"       @click="hours()"       > Horaris     </span>
               <span :class="{'active': tabLinks}"       @click="links()"       > Links       </span>
-              <span :class="{'active': tabTeachers}"    @click="teachers()"    > Professoris </span>
+              <span :class="{'active': tabTeachers}"    @click="teachers()"    > Professsoris </span>
             </div>
         </div>
         </aside>

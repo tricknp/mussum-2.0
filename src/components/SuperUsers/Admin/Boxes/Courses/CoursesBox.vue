@@ -1,21 +1,23 @@
 <template>
-  <div class="div-courses">
+<div class="dashboard-actions">
 
-      <div class="courses-head">
-        <h1>{{title}}</h1>
-        <div class="div-adm-button">
-          <Create prop-name="cursos" @create="initialize"></Create>
-          <Delete></Delete>
-          <Edit></Edit>
+      <div class="header-dashboard-actions">
+        <h1 class="dashboard-actions-title">{{title}}</h1>
+        <div class="dashboard-actions-buttons">
+          <Create @create="refresh()" class="dashboard-action-create" />
+          <Delete @delete="initialize()" />
         </div>
       </div>
 
-      <div class="courses-container">
-          <div v-for="curso in cursos" :key="curso.titulo" class="box-admin-content">
-            <label>
-              <input type="radio" name="name" @change="select(curso)">
-              <span for="name"> {{ curso.titulo }} </span>
-            </label>
+      <div class="dashboard-actions-container">
+          <div v-for="curso in cursos" :key="curso.titulo" class="inside-container-dashboard">
+            <div class="item-container-dashboard">
+              <label>
+                <input type="checkbox" name="name" @change="select(curso)">
+                <span for="name"> {{ curso.titulo }} </span>
+              </label>
+              <Edit />
+            </div>
           </div>
       </div>
 
@@ -43,10 +45,14 @@ export default {
       cursos: null,
     }
   },
-  
+
   methods:{
     postData(){
       this.route = 'api/cursos';
+    },
+
+    refresh(){
+     this.initialize()
     }
   }
 

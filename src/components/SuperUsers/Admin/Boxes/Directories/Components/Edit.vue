@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <button @click="show" class="adm-button">
+    <button @click="show" >
       <IconEdit class="icon-edit" />
     </button>
 

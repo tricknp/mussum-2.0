@@ -1,18 +1,18 @@
 import axios from 'axios'
 
 export const initialize = {
-    
+
     data() {
         return {
           selected: null,
           object: '',
         }
       },
-      
-    methods: { 
+
+    methods: {
       initialize() {
           this.postData();
-          
+
           axios
             .get(this.BASE_URL + this.route)
             .then(res => {
@@ -23,18 +23,18 @@ export const initialize = {
                 this.avisos = res.data;
             });
         },
-        
+
         select(obj) {
             this.selected = obj;
             console.log('selected    ' + this.selected.id)
             this.$bus.$emit("objectEmited", this.selected);
         },
     },
-    
+
     created() {
         this.initialize();
     },
-    
+
     updated() {
         this.$bus.$emit("getTeachers", this.professores);
         //this.initialize();
