@@ -2,7 +2,7 @@
 {
     position: absolute;
     bottom: 0%;
-    padding: 1em 0;
+    padding: .8em 0;
     width: $full-size;
     background-color: $black-background;
 }
@@ -13,11 +13,11 @@
     //border: .5px solid $medium-grey;
 }
 
-h4  
+h4
 {
-    color: $medium-grey;   
+    color: $medium-grey;
     font-weight: $default-weight;
-    font-size: .9em;     
+    font-size: .9em;
 }
 
 #name
