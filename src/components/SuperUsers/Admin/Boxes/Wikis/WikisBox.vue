@@ -12,11 +12,16 @@
       <div class="dashboard-actions-container">
           <div v-for="wiki in wikis" :key="wiki.titulo" class="inside-container-dashboard">
             <div class="item-container-dashboard">
-              <label>
-                <input type="checkbox" name="name" @change="select(wiki)">
-                <span for="name"> {{ wiki.titulo}} </span>
-              </label>
+
+              <div class="styled-input--square">
+                 <div class="styled-input-single">
+                   <input type="checkbox" @change="select(wiki)" :id="wiki.id" />
+                   <label :for="wiki.id"> {{ wiki.titulo }} </label>
+                 </div>
+             </div>
+
               <Edit />
+
             </div>
           </div>
       </div>

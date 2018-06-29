@@ -12,12 +12,17 @@
       <div class="dashboard-actions-container">
           <div v-for="diretorio in diretorios" :key="diretorio.titulo" class="inside-container-dashboard">
             <div class="item-container-dashboard">
-              <label>
-                <input type="checkbox" name="name" @change="select(diretorio)">
-                <span for="name"> {{ diretorio.titulo }} </span>
-              </label>
+
+              <div class="styled-input--square">
+                 <div class="styled-input-single">
+                   <input type="checkbox" @change="select(diretorio)" :id="diretorio.id" />
+                   <label :for="diretorio.id"> {{ diretorio.titulo }} </label>
+                 </div>
+             </div>
+
               <Edit />
-            </div>  
+
+            </div>
           </div>
       </div>
 
@@ -45,7 +50,7 @@ export default {
       diretorios: null,
     }
   },
-  
+
   methods:{
     postData(){
       this.route = 'api/diretorios';

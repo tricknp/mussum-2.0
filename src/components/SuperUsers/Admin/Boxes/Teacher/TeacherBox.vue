@@ -12,11 +12,16 @@
       <div class="dashboard-actions-container">
           <div v-for="professor in professores" :key="professor.nome" class="inside-container-dashboard">
             <div class="item-container-dashboard">
-              <label>
-                <input type="checkbox" name="name" @change="select(professor)">
-                <span for="name"> {{ `${professor.nome} ${professor.sobrenome}` }} </span>
-              </label>
+
+              <div class="styled-input--square">
+                 <div class="styled-input-single">
+                   <input type="checkbox" @change="select(professor)" :id="professor.id" />
+                   <label :for="professor.id"> {{ professor.nome }} </label>
+                 </div>
+             </div>
+
               <Edit />
+
             </div>
           </div>
       </div>
@@ -56,7 +61,6 @@ export default {
 
   methods:{
     refresh(){
-      alert('taoso')
         this.initialize()
     },
 

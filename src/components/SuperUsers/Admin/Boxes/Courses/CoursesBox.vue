@@ -12,11 +12,16 @@
       <div class="dashboard-actions-container">
           <div v-for="curso in cursos" :key="curso.titulo" class="inside-container-dashboard">
             <div class="item-container-dashboard">
-              <label>
-                <input type="checkbox" name="name" @change="select(curso)">
-                <span for="name"> {{ curso.titulo }} </span>
-              </label>
+
+              <div class="styled-input--square">
+                 <div class="styled-input-single">
+                   <input type="checkbox" @change="select(curso)" :id="curso.id" />
+                   <label :for="curso.id"> {{ curso.titulo }} </label>
+                 </div>
+             </div>
+
               <Edit />
+
             </div>
           </div>
       </div>

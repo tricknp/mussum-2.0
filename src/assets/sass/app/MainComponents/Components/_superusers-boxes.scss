@@ -1,25 +1,3 @@
-/*============== ADMIN SECTION ==============*/
-.div-admin
-{
-    @extend %equal-flex-display;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    margin: 1%;
-}
-
-.left-boxes
-{
-    @extend %equal-flex-display;
-    flex-direction: column;
-    margin-right: .35em;
-}
-
-.right-boxes
-{
-    @extend %equal-flex-display;
-    flex-direction: column;
-}
 
 /*============== ADMIN FORM - MODALS ==============*/
 #admin-modal
@@ -70,125 +48,6 @@
     }
 
 }
-    .box-admin-content
-    {
-        font-size: $default-size;
-        margin: .2em .4em;
-        font-weight: 600;
-    }
-
-
-/*============== TEACHER ==============*/
-.div-teacher
-{
-    @extend %equal-width;
-}
-
-.teacher-head
-{
-    @extend %default-header;
-    @extend %default-box;
-}
-
-
-.teacher-container
-{
-    @extend %equal-border;
-    @extend %equal-left-box-content;
-
-    .teacher-content:nth-child(1)
-    {
-        margin-top: .9em;
-    }
-
-}
-
-.div-checkbox-teacher
-{
-    @extend %equal-flex-display;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-/*============== Activities ==============*/
-.div-activities
-{
-    @extend %equal-width;
-    margin-top: .3em;
-}
-
-.activities-head
-{
-    @extend %default-header;
-    @extend %default-box;
-}
-
-
-.activities-container
-{
-    @extend %equal-border;
-    @extend %equal-left-box-content;
-}
-
-/*============== Wikis ==============*/
-.div-wikis
-{
-    @extend %equal-width;
-}
-
-.wikis-head
-{
-    @extend %default-header;
-    @extend %default-box;
-}
-
-
-.wikis-container
-{
-    @extend %equal-border;
-    @extend %equal-right-box-content;
-}
-
-
-/*============== Directories ==============*/
-.div-directories
-{
-    @extend %equal-width;
-    margin-top: $boxes-margin-top;
-}
-
-.directories-head
-{
-    @extend %default-header;
-    @extend %default-box;
-}
-
-
-.directories-container
-{
-    @extend %equal-border;
-    @extend %equal-right-box-content;
-}
-
-/*============== Courses ==============*/
-.div-courses
-{
-    @extend %equal-width;
-    margin-top: $boxes-margin-top;
-}
-
-.courses-head
-{
-    @extend %default-header;
-    @extend %default-box;
-}
-
-
-.courses-container
-{
-    @extend %equal-border;
-    @extend %equal-right-box-content;
-}
 
 
 
@@ -204,7 +63,6 @@
 {
   background: #121e30;
   color: #ddd;
-  height: 100%;
   width: 18em;
 }
 
@@ -294,9 +152,11 @@
 
   .dashboard-actions-container
   {
-      display: flex;
+      //display: flex;
       flex-direction: column;
       margin-top: .2em;
+      height: 10%;
+
 
       .inside-container-dashboard
       {
@@ -335,6 +195,7 @@
       position: absolute;
       top: 50%;
       border-radius: 50%;
+      height: 10px;
     }
     &:before {
       left: 0;
@@ -342,7 +203,7 @@
       height: 30px;
       margin: -15px 0 0;
       border: solid $medium-blue 1px;
-      //background: transparent;
+      background: transparent;
       box-shadow: 0 0 1px grey;
     }
     &:after {
@@ -353,7 +214,7 @@
       opacity: 0;
       background: $medium-blue;
       transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
-      //transform: translate3d(-40px, 0, 0) scale(0.5);
+      transform: translate3d(-40px, 0, 0) scale(0.5);
     }
   }
 
@@ -367,7 +228,7 @@
       &:before {
       }
       &:after {
-        //transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
         opacity: 1;
       }
     }
@@ -383,13 +244,12 @@
   }
 }
 
-  // input[type="radio"],
-  // input[type="checkbox"] {
-  //
-  //   &:checked + label {
-  //     &:after {
-  //       transform: rotate(45deg);
-  //       opacity: 1;
-  //     }
-  //   }
-  // }
+  input[type="radio"],
+  input[type="checkbox"] {
+    &:checked + label {
+      &:after {
+        transform: rotate(45deg);
+        opacity: 1;
+      }
+    }
+  }
