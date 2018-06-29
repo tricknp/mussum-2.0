@@ -1,7 +1,7 @@
 <template>
   <div class="nav-list">
       <dropdown trigger="hover">
-        <button id="btn-nav-list">{{ title.listProfessores }}</button>
+        <button id="btn-nav-list"> Professoris </button>
         <div slot="content" id="dropdown-content">
           <menus>
             <menu-item
@@ -21,18 +21,18 @@
       </dropdown>
 
       <dropdown trigger="hover">
-        <button id="btn-nav-list">{{ title.link }}</button>
+        <button id="btn-nav-list">Links</button>
         <div slot="content" id="dropdown-content">
           <menus>
             <menu-item v-for="link in links" :key="link.id">
-                <a :href="link.url"> {{ link.titulo }} </a>
+                <a :href="link.url" target="_blank"> {{ link.titulo }} </a>
             </menu-item>
           </menus>
         </div>
       </dropdown>
 
       <dropdown trigger="hover">
-        <button id="btn-nav-list">{{ title.listHorarios }}</button>
+        <button id="btn-nav-list">Horaris</button>
         <div slot="content" id="dropdown-content">
           <menus>
             <menu-item >
@@ -63,14 +63,9 @@ export default {
 
   data() {
     return {
-      title: {
-        listProfessores: "Professoris",
-        listHorarios: "Horaris",
-        link: "Links"
-      },
-      professores: "",
-      horarios: "",
-      links
+      professores: '',
+      horarios: '',
+      links: ''
     };
   },
 
