@@ -1,12 +1,12 @@
 [![Build Status](https://travis-ci.org/tricknp/mussum-2.0-Client.svg?branch=master)](https://travis-ci.org/tricknp/mussum-2.0-Client)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/tricknp/mussum-2.0/graphs/commit-activity)
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/tricknp/mussum-2.0/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/pypi/l/ansicolortags.svg)](https://github.com/tricknp/mussum-2.0/blob/master/LICENSE)
 
 
 ## Mussum 2.0 Client
 
 
-#### Setup de instalação
+### Setup de instalação
 
 ``` bash
 # Para instalar as dependencias
@@ -29,9 +29,15 @@ npm test
 ```
 
 Para informações mais detalhadas de como isso funciona, veja o [guia](http://vuejs-templates.github.io/webpack/) e a [documentação do vue-loader](http://vuejs.github.io/vue-loader).
-***
 
-<h2 align="center">Mantenedores</h2>
+***
+### API
+* [Mussum 2.0-API](https://github.com/yurinb/Mussum_2.0-API)
+
+* [Documentação e rotas](https://documenter.getpostman.com/view/3654195/mussum-20-server-api/RW8FEm7Z)
+
+***
+<h4>Mantenedores</h4>
 
 <table>
   <tbody>
@@ -44,7 +50,7 @@ Para informações mais detalhadas de como isso funciona, veja o [guia](http://v
         <!--<br>
         <p></p>-->
       </td>
-      <td align="center" width="25%" valign="top">
+      <td align="center" width="35%" valign="top">
         <img width="150" height="150" src="https://avatars0.githubusercontent.com/u/28490444?s=400&v=4">
         <br>
         <a href="https://github.com/yurinb">Yuri Bento</a>
@@ -65,8 +71,6 @@ Para informações mais detalhadas de como isso funciona, veja o [guia](http://v
 </table>
 
 ***
-#### Licença
+### Licença
 
 Este projeto está licenciado sob a [licença MIT](https://github.com/tricknp/mussum-2.0/blob/master/LICENSE) - veja o arquivo LICENSE.md para obter detalhes.
-
-Conheça o [Mussum 2.0-API](https://github.com/yurinb/Mussum_2.0-API)
