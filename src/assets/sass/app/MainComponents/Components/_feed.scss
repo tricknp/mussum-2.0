@@ -8,7 +8,7 @@
     height: 100%;
     border: $light-border $light-grey;
     border-radius: 4px;
-    
+
     .feed-title
     {
         font-size: 1.3em;
@@ -16,7 +16,7 @@
         text-indent: 1em;
         width: 97%;
         margin: 2.75% auto;
-    
+
     }
     .feed-container
     {
@@ -36,7 +36,7 @@
             .feed-upload
             {
                 border: $light-border $light-grey;
-                
+
                 .feed-text-content
                 {
                     margin: 2% 5.2em;
@@ -56,15 +56,15 @@
                     color: $medium-blue;
                     cursor: pointer;
 
-                }  
-                
+                }
+
                 .feed-archive-name
                 {
                     @extend .feed-link-place;
                     font-size: $default-size - .22em;
                     margin-top: 1.5%;
                 }
-                
+
                 .feed-photo
                 {
                   position: absolute;
@@ -73,7 +73,7 @@
                   border-radius: 2px;
                   width: 4em;
                 }
-                
+
                 .teacher-name-feed
                 {
                     color: rgba(0, 0, 0, 0.747);
@@ -99,7 +99,7 @@
                 }
             }
         }
-        
+
     }
 
     .content-aligned
@@ -110,7 +110,7 @@
 
     .feed-container::-webkit-scrollbar
     {
-        
+
         width: 7px;
         background-color: $absolute-white;
     }
@@ -121,4 +121,3 @@
         background-color: rgba(202, 200, 200, 0.904);
     }
 }
-
