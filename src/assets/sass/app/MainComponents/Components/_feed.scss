@@ -20,10 +20,10 @@
     }
     .feed-container
     {
-        height: 100%;
-        max-height: 100%;
+        height: $full-size;
+        max-height: $full-size;
         overflow: auto;
-        width: 98%;
+        width: $full-size - 2%;
         margin: auto;
 
 
@@ -33,74 +33,122 @@
             margin: 1% auto;
             font-size: $default-size - .1em;
             position: relative;
+            
             .feed-upload
             {
-                border: $light-border $light-grey;
+                border: $light-border $medium-grey;
+                border-radius: $medium-radius;
+            }
 
-                .feed-text-content
+            .feed-recado
+            {
+                border: $light-border $default-green;
+                border-radius: $medium-radius;
+                .feed-title-recado
                 {
-                    margin: 2% 5.2em;
-                }
-
-                .feed-date
-                {
-                    margin-right: 1%;
-                    text-align: right;
                     color: $dark-background;
-                    font-size: .8em;
-                    font-weight: 600;
-                }
-
-                .feed-link-place
-                {
-                    color: $medium-blue;
-                    cursor: pointer;
-
-                }
-
-                .feed-archive-name
-                {
-                    @extend .feed-link-place;
-                    font-size: $default-size - .22em;
-                    margin-top: 1.5%;
-                }
-
-                .feed-photo
-                {
-                  position: absolute;
-                  left: 1%;
-                  top: 7%;
-                  border-radius: 2px;
-                  width: 4em;
-                }
-
-                .teacher-name-feed
-                {
-                    color: rgba(0, 0, 0, 0.747);
-                }
-
-                .icon-delete-feed
-                {
-                    width: .9em;
-                }
-
-                .btn-delete-feed
-                {
-                    right: .2em;
-                    top: .1em;
-                    position: absolute;
-                }
-
-                .icon-delete-feed
-                {
-                    &:hover{
-                        fill: $hover-red;
-                    }
+                    margin-top: 1%;
                 }
             }
+
+            .feed-aviso
+            {
+                border: $light-border $clear-red;
+                border-radius: $medium-radius;
+                .title-aviso
+                {
+                    color: $default-red;
+                    font-weight: 700;
+                }
+                .feed-text-aviso
+                {
+                    margin-top: 1%;
+                    color: $dark-background;
+                }
+            }
+
+            .feed-aside
+            {
+                border: $light-border $medium-blue;
+                border-radius: $medium-radius;
+                .special-feed-photo
+                {
+                    position: absolute;
+                    left: 1%;
+                    top: 7%;
+                    border-radius: 2px;
+                    width: 4em;
+                    max-height: 4.5em;
+                }
+            }
+
         }
+    }
+
+    .feed-text-content
+    {
+        margin: 2% 5.2em;
+    }
+
+    .feed-date
+    {
+        margin-right: 1%;
+        text-align: right;
+        color: $dark-background;
+        font-size: .8em;
+        font-weight: 600;
+    }
+    
+    .feed-link-place
+    {
+        color: $medium-blue;
+        cursor: pointer;
 
     }
+
+    .feed-archive-name
+    {
+        @extend .feed-link-place;
+        font-size: $default-size - .22em;
+        margin-top: 1.5%;
+    }
+
+    .feed-photo
+    {
+      position: absolute;
+      left: 1%;
+      top: 7%;
+      border-radius: 2px;
+      width: 4em;
+    }
+
+    .teacher-name-feed
+    {
+        color: rgba(0, 0, 0, 0.747);
+    }
+
+    .icon-delete-feed
+    {
+        width: .9em;
+    }
+
+    .btn-delete-feed
+    {
+        right: .2em;
+        top: .1em;
+        position: absolute;
+    }
+
+    .icon-delete-feed
+    {
+        &:hover{
+            fill: $hover-red;
+        }
+    }
+
+
+
+    //===================
 
     .content-aligned
     {
