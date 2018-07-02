@@ -31,7 +31,7 @@
                         <p class="feed-date"> {{ content.dataCriacao }} </p>
                     </div>
 
-                    <div v-if="content.tipo == 'recado'" class="feed-upload"  >
+                    <div v-if="content.tipo == 'recado'" class="feed-recado"  >
 
                       <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
                         <IconDelete class="icon-delete-feed" />
@@ -45,14 +45,14 @@
                               <b class="teacher-name-feed">{{ content.professor }}</b>
                             </router-link>
                               {{ textRecado }} </p>
-                          <b> <p class="feed-archive-name"> {{ `${content.titulo}` }} </p> </b>
+                          <b> <p class="feed-title-recado"> {{ `${content.titulo}` }} </p> </b>
                           <p> {{ `${content.comentario}` }} </p>
                         </div>
                         </div>
                           <p class="feed-date"> {{ content.dataCriacao }} </p>
                     </div>
 
-                    <div v-if="content.tipo == 'aviso'" class="feed-upload"  >
+                    <div v-if="content.tipo == 'aviso'" class="feed-aviso"  >
 
                       <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
                         <IconDelete class="icon-delete-feed" />
@@ -65,8 +65,9 @@
                             <router-link :to="{path: `professor/${content.username}`}">
                               <!-- <b class="teacher-name-feed">{{ content.professor }}</b> -->
                             </router-link>
-                              {{ textAviso }} </p>
-                          <b> <p class="feed-archive-name"> {{ `${content.titulo}` }} </p> </b>
+                          <span class="title-aviso"> {{ textAviso }} </span> 
+                          </p>
+                            <b> <p class="feed-text-aviso"> {{ `${content.titulo}` }} </p> </b>
                           <p> {{ `${content.comentario}` }} </p>
                         </div>
                         </div>
@@ -104,7 +105,7 @@
                             <p class="feed-date"> {{ content.dataCriacao }} </p>
                     </div>
 
-                    <div v-if="content.tipo == 'wiki'" class="feed-upload">
+                    <div v-if="content.tipo == 'wiki'" class="feed-aside">
 
                         <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
                           <IconDelete class="icon-delete-feed" />
@@ -112,7 +113,7 @@
 
                         <div class="content-aligned">
                           <div>
-                            <img v-if="content.img" class="feed-photo" :src="`${content.img}`">
+                            <img v-if="content.img" class="special-feed-photo" :src="`${content.img}`">
                           </div>
 
                           <div class="feed-text-content">
@@ -154,7 +155,7 @@ export default {
       textRecado: "adicionou um novo recado.",
       textLink: "adicionou um novo link.",
       textWiki: "Foi adicionado uma nova Wiki.",
-      textAviso: "A V I S O."
+      textAviso: "Aviso!"
     };
   },
 
