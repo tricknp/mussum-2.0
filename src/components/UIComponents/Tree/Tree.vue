@@ -84,7 +84,7 @@ export default {
       console.log("-------------------------");
 
       if (dir == this.model.dir + "/" && name == this.model.name) {
-        console.log("REFRESH" + dir + name);
+        console.log("REFRESH called at $on refresh" + dir + name);
         this.refreshChild();
       }
     });
@@ -143,9 +143,8 @@ export default {
           name: this.model.name
         });
       } else {
-        console.log('COMMENTTTTTTTTTTTTTTTTTTTT');
+        console.log("COMMENTTTTTTTTTTTTTTTTTTTT");
         console.log(this.model.comment);
-
 
         this.$bus.$emit("editFile", {
           id: this.model.id,
@@ -200,12 +199,20 @@ export default {
           console.log(res.data);
 
           let folders = res.data.pastas;
+          console.log("refreshChild folders");
+          console.log(folders);
+
           let files = res.data.arquivos;
+          console.log("refreshChild files");
+          console.log(files);
+
           folders.forEach(element => {
+            console.log("EMIT newChild");
             this.$bus.$emit("newChild", ele, element, true);
             //this.createTreeElement(ele, element, true);
           });
           files.forEach(element => {
+            console.log("EMIT newChild");
             this.$bus.$emit("newChild", ele, element, false);
             //this.createTreeElement(ele, element, false);
           });

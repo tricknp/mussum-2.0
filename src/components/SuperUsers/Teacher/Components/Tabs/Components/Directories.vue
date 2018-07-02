@@ -138,7 +138,9 @@ export default {
       isLink: false
     };
   },
-
+  beforeDestroy() {
+    this.$bus.$off("newChild");
+  },
   created() {
     this.getCourses();
     this.resetRepository();
@@ -166,7 +168,7 @@ export default {
         this.showUpload = true;
       }),
       this.$bus.$on("download", (dir, fileName) => {
-        this.$Progress.start()
+        this.$Progress.start();
         axios
           .get(`${this.BASE_URL}api/download`, {
             headers: {
@@ -181,7 +183,7 @@ export default {
             console.log("From directory... " + dir);
             let blob = new Blob([res.data], {
               type: "application/octet-stream"
-            })
+            });
             let url = window.URL.createObjectURL(blob);
             let a = document.createElement("a");
             document.body.appendChild(a);
@@ -190,12 +192,12 @@ export default {
             a.download = fileName;
             a.click();
             a.remove();
-            this.$Progress.finish()
+            this.$Progress.finish();
             console.log("download feito.");
           })
-           .catch(err => {
-             this.$Progress.fail()
-           })
+          .catch(err => {
+            this.$Progress.fail();
+          });
       }),
       this.$bus.$on("removeDir", (dir, name) => {
         axios
@@ -234,6 +236,8 @@ export default {
           });
       }),
       this.$bus.$on("newChild", (div, ele, isFolder) => {
+        console.log("ON newChild");
+
         this.createTreeElement(div, ele, isFolder);
       });
   },
@@ -255,7 +259,7 @@ export default {
       //this.$refs.fileName.removeAttribute("disabled");
     },
     submitFile() {
-      this.$Progress.start()
+      this.$Progress.start();
       const formData = new FormData();
       if (this.file) {
         formData.append("files", this.file, this.file.name);
@@ -275,7 +279,7 @@ export default {
           console.log("brilhou");
           console.log(this.$refs.fileName.value);
           this.showUpload = false;
-          this.$Progress.finish()
+          this.$Progress.finish();
         });
     },
     /*===================================================*
@@ -333,6 +337,8 @@ export default {
         });
     },
     createTreeElement(div, element, isFolder) {
+      console.log("element CREATED");
+
       let instance = new ComponentClass({
         propsData: {
           model: {
