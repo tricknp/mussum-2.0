@@ -1,5 +1,5 @@
 
-.modal-mask 
+.modal-mask
 {
     position: fixed;
     z-index: 9998;
@@ -12,13 +12,13 @@
     transition: opacity .3s ease;
 }
 
-.modal-wrapper 
+.modal-wrapper
 {
     display: table-cell;
     vertical-align: middle;
 }
 
-.modal-container 
+.modal-container
 {
     width: 25em;
     margin: 0px auto;
@@ -29,21 +29,21 @@
     transition: all .12s ease;
 }
 
-.modal-header h3 
+.modal-header h3
 {
     margin-top: 0;
     color: #42b983;
 }
 
-.modal-body 
+.modal-body
 {
     margin: 1.5em 0;
 }
-  
+
 .modal-default-button {
     float: right;
 }
-  
+
     /*
     * The following styles are auto-applied to elements with
     * transition="modal" when their visibility is toggled
@@ -52,22 +52,27 @@
    * You can easily play with the modal transition by editing
    * these styles.
    */
-  
+
 .modal-enter
 {
     opacity: 0;
 }
 
-.modal-leave-active 
+.modal-leave-active
 {
     opacity: 0;
 }
 
 .modal-enter .modal-container,
-.modal-leave-active .modal-container 
+.modal-leave-active .modal-container
 {
     -webkit-transform: scale(1.1);
     transform: scale(1.1);
     opacity: 0;
 
-} 
+}
+
+.space
+{
+  margin: 0 2%;
+}

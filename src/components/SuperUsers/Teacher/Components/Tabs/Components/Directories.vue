@@ -76,12 +76,12 @@
       </form>
 
       <div slot="footer" class="div-btn-modal">
-           <button @click="showUpload=false" class="modal-buttons">CANCELAR</button>
-           <button @click="submitFile()" class="modal-buttons">SALVAR</button>
+        <button @click="submitFile()" class="modal-buttons">SALVAR</button>
+           <button @click="showUpload = false" class="modal-buttons">CANCELAR</button>
       </div>
     </modal>
 
-    <modal v-if="edit" id="modal-container">
+    <modal v-if="showEdit" @showEd="showEd()" id="modal-container">
       <h1 slot="header">Editar arquivo</h1>
       <form slot="content" class="form-modal">
         <input type="text" ref="editName" placeholder="Nome do arquivo/link">
@@ -89,9 +89,9 @@
         <input v-if="edit.comment" type="text" ref="editComment" placeholder="Escreva um comentário (FEED)">
       </form>
       <div slot="footer" class="div-btn-modal">
-           <button @click="edit=false" class="modal-buttons">CANCELAR</button>
            <button v-if="edit.comment" @click="editFile" class="modal-buttons">Salvar</button>
            <button v-if="edit.comment == undefined" @click="editFolder" class="modal-buttons">Salvar</button>
+           <button @click="showEdit = false" class="modal-buttons">CANCELAR</button>
       </div>
     </modal>
 
@@ -144,7 +144,8 @@ export default {
       showUpload: false,
       notifyModal: false,
       notifyData: {},
-      edit: false,
+      showEdit: false,
+      edit: null,
       file: "",
       comment: "",
       showOtherCourse: false,
@@ -169,6 +170,7 @@ export default {
       }),
       this.$bus.$on("editFolder", data => {
         this.edit = data;
+        this.showEdit = true
         console.log("EDIT FOLDER");
       }),
       this.$bus.$on("selectProfessor", username => {
@@ -269,6 +271,11 @@ export default {
     showUp() {
       showUpload = true;
     },
+
+    showEd(){
+      showEdit = true
+    },
+
     getdata() {
       this.formated = this.$refs.tree.reformatData();
     },
