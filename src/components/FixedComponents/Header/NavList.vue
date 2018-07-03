@@ -10,7 +10,7 @@
                 :key="professor.nome"
                 :targetName="professor.username" >
                 <router-link :to="{ path: '/professor/' + professor.username.toLowerCase() }" >
-                  <a class="ass" @click="test(professor.username)">
+                  <a class="ass" @click="select(professor.username)">
                     {{ professor.nome }}
                   </a>
                 </router-link>
@@ -104,7 +104,7 @@ export default {
       this.targetName = obj;
     },
 
-    test(username) {
+    select(username) {
       this.$route.params.targetName = username;
       this.$bus.$emit("selectProfessor", username);
 

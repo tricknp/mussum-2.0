@@ -62,14 +62,18 @@ export default {
   },
 
   created(){
-    this.init();
+    this.init(this.$route.params.targetName);
+    this.$bus.$on("selectProfessor", username => {
+      this.init(username);
+    });
   },
 
   methods:{
-    init(){
+    init(username){
+      this.scraps = {};
       axios
         .get(`${this.BASE_URL}api/recados`, {
-          headers: { 'username': this.$route.params.targetName }
+          headers: { 'username': username }
         })
         .then( res => {
           this.scraps = res.data;

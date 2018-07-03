@@ -3,12 +3,14 @@
 
     <h1> {{ `${nome} ${sobrenome}` }} </h1>
 
-    <input type="text" ref="sobre" :disabled="disabled" v-model="sobre" placeholder="sobre...">
+    <input v-if="focused" type="text" ref="sobre" v-model="sobre" placeholder="sobre...">
+
+    <p>{{ sobre }}</p>
 
     <div v-if="isOwner">
-      <button v-if="!focused" @click="focus"> <IconEdit /> </button>
+      <button v-if="!focused" @click="focus()"> <IconEdit /> </button>
 
-      <button v-if="focused" @click="onSubmit"> <IconOk /> </button>
+      <button v-if="focused" @click="postData(), focused = false"> <IconOk /> </button>
     </div>
 
   </div>
@@ -16,51 +18,51 @@
 
 
 <script>
-import axios from 'axios'
-import { url } from '../../../../../_mixins/url'
-import { edit } from '../../../../../_mixins/edit'
-import IconEdit from '../../../../../_utils/Svgs/IconEdit'
-import IconOk from '../../../../../_utils/Svgs/IconOk'
+import axios from "axios";
+import { url } from "../../../../../_mixins/url";
+import { edit } from "../../../../../_mixins/edit";
+import IconEdit from "../../../../../_utils/Svgs/IconEdit";
+import IconOk from "../../../../../_utils/Svgs/IconOk";
 
 export default {
-
   components: { IconEdit, IconOk },
 
-  mixins: [ url, edit ],
+  mixins: [url, edit],
 
-  data(){
-    return{
+  data() {
+    return {
       professor: [],
       username: this.$route.params.targetName,
-      nome: '',
-      sobrenome: '',
-      sobre: '',
+      nome: "",
+      sobrenome: "",
+      sobre: "",
       focused: false,
       disabled: true,
-      id: '',
-    }
+      edit: false,
+      id: ""
+    };
   },
 
   computed: {
-    isOwner: function(){
+    isOwner: function() {
       if (this.username == localStorage.username) {
-        return true
+        return true;
       }
     }
   },
 
-  created(){
+  created() {
     this.init();
 
     this.$bus.$on("selectProfessor", username => {
-      console.log('ABOUT ON SELECT PROFESSOR');
-      
+      console.log("ABOUT ON SELECT PROFESSOR");
+
       this.refresh(username);
     });
   },
 
   methods: {
-    refresh(username){
+    refresh(username) {
       this.username = username;
       let t = this.professor.find(x => x.username === username);
       this.id = t.id;
@@ -69,31 +71,38 @@ export default {
       this.sobre = t.sobre;
     },
 
-    init(){
+    init() {
       axios.get(`${this.BASE_URL}api/professores`).then(res => {
-        this.professor = res.data
+        this.professor = res.data;
         this.refresh(this.username);
-      })
+      });
     },
 
-
-    focus(){
-      this.disabled = false
-      this.focused = true
-      this.$refs.sobre.focus()
+    focus() {
+      //this.disabled = false;
+      this.focused = true;
+      //this.$refs.sobre.focus();
     },
 
-    postData(){
+    postData() {
+      this.disabled = true;
 
-      this.disabled = true
-
-      this.route = 'api/professores/',
-      this.datas = JSON.stringify({
+      this.route = "api/professores/";
+      this.datas = {
         id: this.id,
-        sobre: this.sobre,
-      })
-    },
+        sobre: this.sobre
+      };
 
+      axios
+        .put(`${this.BASE_URL}api/professores/${this.id}`, {}, this.datas)
+        .then(res => {
+          console.log('PUT SOBREE');
+          console.log(res);
+          
+          this.professor = res.data;
+          this.refresh(this.username);
+        });
+    }
   }
-}
+};
 </script>
