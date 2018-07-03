@@ -56,6 +56,15 @@
 
 .div-aside-container
 {
+    a
+    {
+        font-weight: 600;
+        color: $medium-blue;
+        &:hover{
+            color: $medium-blue;
+            text-decoration: underline;
+        }
+    }
     overflow: auto;
     max-height: 85%;
     margin-top: 1.6%;

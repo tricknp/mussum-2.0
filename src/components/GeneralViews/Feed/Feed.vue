@@ -59,7 +59,7 @@
                       </button>
 
                       <div class="content-aligned">
-                        <img v-if="content.img" class="feed-photo" :src="`${content.img}`">
+                        <img v-if="content.img" class="special-feed-photo" :src="`${content.img}`">
                         <div class="feed-text-content">
                           <p>
                             <router-link :to="{path: `professor/${content.username}`}">

@@ -19,7 +19,20 @@
     background: $absolute-white;
     overflow: auto;
     min-height: 100%;
-    max-height: 100%
+    max-height: 100%;
+    
+    .select-course
+    {
+        background: transparent;
+        margin-left: 1%;
+        border: $medium-border $medium-grey;
+        font-size: 1em;
+        font-weight: 500;
+        option{
+            font-weight: 500;
+        }
+    }
+
 }
 
 .teacher-profile

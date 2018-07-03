@@ -1,6 +1,5 @@
 <template>
   <section class="teacher-page" >
-
       <Header />
 
       <div class="teacher-page-content">

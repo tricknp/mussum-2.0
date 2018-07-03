@@ -5,8 +5,10 @@
 
     <div v-if="this.$bus.isOwner" class="div-select-course">
       <select v-model="dir" class="select-course">
+        <option>Novo Curso</option>
         <option v-for="curso in cursos"
                 :key="curso.id"
+                selected="option == 'tes'"
                 :value="$route.params.targetName+'/'+curso.titulo">
                 {{ curso.titulo }}
         </option>
@@ -125,7 +127,7 @@ export default {
 
   data() {
     return {
-      dir: null,
+      dir: 'Novo Curso',
       cursos: null,
       treeData: [],
       child: null,
