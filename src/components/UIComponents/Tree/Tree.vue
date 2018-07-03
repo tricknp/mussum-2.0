@@ -4,8 +4,9 @@
       <InteligentIcon class="inteligent-icon" :model="{extension: model.name}" ></InteligentIcon>
 
       <span v-if="isFolder">
-        <span v-if="open === false"> <IconArrowRight /> </span>
-        <span v-else>                <IconArrowDown  /> </span>
+        <span   v-if="open === false"> <IconArrowRight /> </span>
+        <span   v-else>                <IconArrowDown  /> </span>
+
       </span>
 
       <a v-if="model.link" :href="model.link" target="_blank" class="link" >{{ model.name.substr(0, model.name.lastIndexOf('.')) || model.name}}</a>
@@ -33,6 +34,7 @@
     </div>
 
     <ul v-show="open" v-if="isFolder" :id="model.dir +'/'+ model.name" :ref="'li'" class="tree-ul"></ul>
+    <button v-if="isFolder" @click="notifyMe">    **   </button>
 
   </li>
 </template>
@@ -218,6 +220,12 @@ export default {
           });
 
           //this.isVisibleProc = false;
+        });
+    },
+    notifyMe() {
+      this.$bus.$emit("notify", {
+          username: this.model.username,
+          dir: this.model.dir+'/'+this.model.name
         });
     }
   }

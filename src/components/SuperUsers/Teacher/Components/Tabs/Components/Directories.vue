@@ -5,14 +5,13 @@
 
     <div v-if="this.$bus.isOwner" class="div-select-course">
       <select v-model="dir" class="select-course">
-        <option>Novo Curso</option>
         <option v-for="curso in cursos"
                 :key="curso.id"
                 selected="option == 'tes'"
                 :value="$route.params.targetName+'/'+curso.titulo">
                 {{ curso.titulo }}
         </option>
-        <option :value="'novo'"> Outro </option>
+        <option :value="'novo'">Novo Curso</option>
       </select>
 
       <button @click="addCourse()">
@@ -82,7 +81,7 @@
       </div>
     </modal>
 
-    <modal v-if="edit" @s="showUp()" id="modal-container">
+    <modal v-if="edit" id="modal-container">
       <h1 slot="header">Editar arquivo</h1>
       <form slot="content" class="form-modal">
         <input type="text" ref="editName" placeholder="Nome do arquivo/link">
@@ -90,9 +89,20 @@
         <input v-if="edit.comment" type="text" ref="editComment" placeholder="Escreva um comentário (FEED)">
       </form>
       <div slot="footer" class="div-btn-modal">
-           <button @click="edit=null" class="modal-buttons">CANCELAR</button>
+           <button @click="edit=false" class="modal-buttons">CANCELAR</button>
            <button v-if="edit.comment" @click="editFile" class="modal-buttons">Salvar</button>
            <button v-if="edit.comment == undefined" @click="editFolder" class="modal-buttons">Salvar</button>
+      </div>
+    </modal>
+
+    <modal v-if="notifyModal" id="modal-container">
+      <h1 slot="header">Coloque seu email para receber notificações quando for adicionado arquivos a esta pasta</h1>
+      <form slot="content" class="form-modal">
+        <input type="email" ref="email" placeholder="example@example.com">
+      </form>
+      <div slot="footer" class="div-btn-modal">
+           <button @click="notifyModal=false" class="modal-buttons">CANCELAR</button>
+           <button @click="notify" class="modal-buttons">Salvar</button>
       </div>
     </modal>
 
@@ -127,12 +137,14 @@ export default {
 
   data() {
     return {
-      dir: 'Novo Curso',
+      dir: "Novo Curso",
       cursos: null,
       treeData: [],
       child: null,
       showUpload: false,
-      edit: null,
+      notifyModal: false,
+      notifyData: {},
+      edit: false,
       file: "",
       comment: "",
       showOtherCourse: false,
@@ -146,10 +158,15 @@ export default {
   created() {
     this.getCourses();
     this.resetRepository();
-    this.$bus.$on("editFile", data => {
-      this.edit = data;
-      console.log("EDIT FILE");
+    this.$bus.$on("notify", data => {
+      this.notifyData = data;
+      this.notifyModal = true;
+      console.log("___NOTIFY EMAIL___");
     }),
+      this.$bus.$on("editFile", data => {
+        this.edit = data;
+        console.log("EDIT FILE");
+      }),
       this.$bus.$on("editFolder", data => {
         this.edit = data;
         console.log("EDIT FOLDER");
@@ -263,7 +280,7 @@ export default {
     submitFile() {
       this.$Progress.start();
       const formData = new FormData();
-      if (this.file) {
+      if (!this.isLink) {
         formData.append("files", this.file, this.file.name);
       }
       axios
@@ -474,6 +491,23 @@ export default {
     },
     closeEditModal() {
       this.edit = {};
+    },
+    notify() {
+      axios
+        .post(
+          `${this.BASE_URL}api/followers`,
+          {
+            username: this.notifyData.username,
+            dir: this.notifyData.dir,
+            email: this.$refs.email.value
+          },
+          {}
+        )
+        .then(res => {
+          console.log("______NEW FOLLOWER ADDED");
+          console.log(res.data);
+          this.notifyModal = false;
+        });
     }
   }
 };
