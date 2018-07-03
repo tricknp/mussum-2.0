@@ -2,17 +2,17 @@
     <div>
         <button @click="show" class="create-scrap"> <IconAdd class="icon-create-scrap" /> </button>
 
-        <Modal v-if="showModal" @show="show">
+        <Modal v-if="showModal" @show="show" id="modal-container">
             <h1 slot="header">Novo Recado</h1>
 
-            <form slot="content">
+            <form slot="content" class="form-modal">
                 <input type="text" placeholder="Titulo" v-model="titulo">
                 <textarea type="text" placeholder="Recado" v-model="descricao"> </textarea>
             </form>
 
-            <div slot="footer">
-                <button @click="onSubmit">Ok</button>
-                <button @click="cancel">Cancelar</button>
+            <div slot="footer" class="div-btn-modal">
+                <button @click="onSubmit" class="modal-buttons">Ok</button>
+                <button @click="cancel" class="modal-buttons">Cancelar</button>
             </div>
 
         </Modal>

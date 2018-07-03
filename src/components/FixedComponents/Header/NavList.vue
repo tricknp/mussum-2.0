@@ -14,7 +14,6 @@
                     {{ professor.nome }}
                   </a>
                 </router-link>
-
             </span>
           </menus>
         </div>
