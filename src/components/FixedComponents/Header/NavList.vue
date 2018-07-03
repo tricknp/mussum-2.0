@@ -4,7 +4,7 @@
         <button id="btn-nav-list"> Professoris </button>
         <div slot="content" id="dropdown-content">
           <menus>
-            <menu-item
+            <span
                 id="dropdown-content"
                 v-for="professor in professores"
                 :key="professor.nome"
@@ -15,7 +15,7 @@
                   </a>
                 </router-link>
 
-            </menu-item>
+            </span>
           </menus>
         </div>
       </dropdown>
@@ -24,9 +24,9 @@
         <button id="btn-nav-list">Links</button>
         <div slot="content" id="dropdown-content">
           <menus>
-            <menu-item v-for="link in links" :key="link.id">
-                <a :href="link.url" target="_blank"> {{ link.titulo }} </a>
-            </menu-item>
+            <span v-for="link in links" :key="link.id">
+                <a class="ass" :href="link.url" target="_blank"> {{ link.titulo }} </a>
+            </span>
           </menus>
         </div>
       </dropdown>
@@ -35,9 +35,9 @@
         <button id="btn-nav-list">Horaris</button>
         <div slot="content" id="dropdown-content">
           <menus>
-            <menu-item v-for="horario in horarios" :key="horario.id">
+            <span v-for="horario in horarios" :key="horario.id">
                 <a :href="horario.url" target="_blank"> {{ horario.titulo }} </a>
-            </menu-item>
+            </span>
           </menus>
         </div>
       </dropdown>
