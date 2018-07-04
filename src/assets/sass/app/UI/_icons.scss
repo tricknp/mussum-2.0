@@ -1,10 +1,10 @@
-.icon 
-{   
+.icon
+{
     padding: .22em;
     fill: $medium-grey;
     cursor: pointer;
     &:hover
-    {   
+    {
         @extend %hover-transition;
         transition: .11s ease-in;
         fill: $dark-background;
@@ -24,7 +24,7 @@
     {
         @extend %hover-transition;
         fill: $hover-green;
-    } 
+    }
 }
 
 .icon-cancel
@@ -56,5 +56,3 @@
 {
     fill: $light-grey;
 }
-
-

@@ -1,4 +1,4 @@
-.tree-item 
+.tree-item
 {
   list-style: none;
   font-size: 1em;
@@ -6,12 +6,12 @@
   position: relative;
 }
 
-.ss:hover 
+.ss:hover
 {
   background: #eee;
 }
 
-.tree-buttons 
+.tree-buttons
 {
   position: absolute;
   display: flex;
@@ -21,7 +21,7 @@
   cursor: pointer;
 }
 
-.item 
+.item
 {
   cursor: pointer;
   padding: 5px;

@@ -30,11 +30,11 @@
         <button v-if="isFolder && this.$bus.isOwner"  @click="add">      <IconAdd/>      </button>
         <button v-if="isFolder && this.$bus.isOwner"  @click="upload">   <IconUpload/>   </button>
         <button v-if="!isFolder && !isLink"           @click="download"> <IconDownload/> </button>
+        <button v-if="isFolder" @click="notifyMe"> <IconNotifyOff /> </button>
       </div>
     </div>
 
     <ul v-show="open" v-if="isFolder" :id="model.dir +'/'+ model.name" :ref="'li'" class="tree-ul"></ul>
-    <button v-if="isFolder" @click="notifyMe">    **   </button>
 
   </li>
 </template>
@@ -52,6 +52,7 @@ import IconAdd from "../../_utils/Svgs/IconAdd";
 import IconDownload from "../../_utils/Svgs/IconDownload";
 import IconVisiblePublic from "../../_utils/Svgs/IconVisiblePublic";
 import IconVisiblePrivate from "../../_utils/Svgs/IconVisiblePrivate";
+import IconNotifyOff from "../../_utils/Svgs/IconNotifyOff"
 import InteligentIcon from "../../_utils/InteligentIcon";
 
 export default {
@@ -65,6 +66,7 @@ export default {
     IconDownload,
     IconVisiblePublic,
     IconVisiblePrivate,
+    IconNotifyOff,
     InteligentIcon
   },
   props: {

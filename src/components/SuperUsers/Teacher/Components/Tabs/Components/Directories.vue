@@ -89,9 +89,9 @@
         <input v-if="edit.comment" type="text" ref="editComment" placeholder="Escreva um comentário (FEED)">
       </form>
       <div slot="footer" class="div-btn-modal">
-           <button v-if="edit.comment" @click="editFile" class="modal-buttons">Salvar</button>
+           <button v-if="edit.comment" @click="editFile" class="modal-buttons">Seguir</button>
            <button v-if="edit.comment == undefined" @click="editFolder" class="modal-buttons">Salvar</button>
-           <button @click="showEdit = false" class="modal-buttons">CANCELAR</button>
+           <button @click="showEdit = false" class="modal-buttons">Cancelar</button>
       </div>
     </modal>
 
@@ -101,7 +101,7 @@
         <input type="email" ref="email" placeholder="example@example.com">
       </form>
       <div slot="footer" class="div-btn-modal">
-           <button @click="notifyModal=false" class="modal-buttons">CANCELAR</button>
+           <button @click="notifyModal=false" class="modal-buttons">Cancelar</button>
            <button @click="notify" class="modal-buttons">Salvar</button>
       </div>
     </modal>
