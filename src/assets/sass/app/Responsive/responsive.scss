@@ -1,26 +1,36 @@
 //============================== max width 1680 ==============================//
 
 
-@media screen and (max-width: 1680px) { 
+@media screen and (max-width: 1680px) {
     // ---> home <---
     .home-container
     {
-        width: 71%;
+        width: 70.5%;
     }
-    
+
     #aside
     {
         width: 40%
     }
+
+    .teacher-page-content
+    {
+        width: 70.1%;
+    }
 }
 
-@media screen and (max-width: 1600px) { 
+@media screen and (max-width: 1600px) {
     // ---> home <---
     .home-container
     {
-        width: 72%;
+        width: 71.5%;
         height: 87vh;
         margin: .5% auto;
+    }
+
+    .teacher-page-content
+    {
+        width: 72%;
     }
 }
 
@@ -28,12 +38,26 @@
     // ---> home <---
     .home-container
     {
-        width: 75.5%;
+        width: 77%;
     }
 
     .div-aside-container
     {
         max-height: 84%;
+    }
+
+    .teacher-page-content
+    {
+        width: 80%;
+        margin-left: 11.5%;
+    }
+
+    .head
+    {
+      .center-header
+      {
+        margin-left: -50%;
+      }
     }
 }
 
@@ -41,7 +65,7 @@
     // ---> home <---
     .home-container
     {
-        width: 77%;
+        width: 74%;
         height: 83.2vh;
         margin: .4% auto;
     }
@@ -51,13 +75,27 @@
         max-height: 76.6%;
     }
 
+    .head
+    {
+      .center-header
+      {
+        margin-left: -45%;
+      }
+    }
+
+    .teacher-page-content
+    {
+        width: 85%;
+        margin: .4% auto;
+    }
+
 }
 
 @media screen and (max-width: 1280px){
     // ---> home <---
     .home-container
     {
-        width: 80%;
+        width: 74%;
         height: 82.5vh;
         margin: .3% auto;
     }
@@ -66,16 +104,41 @@
     {
         max-height: 79%;
     }
+
+    .teacher-page-content
+    {
+        width: 90%;
+        margin: .6% auto;
+    }
+
+    .head
+    {
+      .center-header
+      {
+        margin-left: -43%;
+      }
+    }
 }
 
 @media screen and (max-width: 1024px){
     // ---> home <---
-
 
     .home-container
     {
         width: 80%;
         height: 83.5vh;
         margin: .3% auto;
+    }
+
+    .head
+    {
+      .center-header
+      {
+        margin-left: -55%;
+        .search
+        {
+          display: none;
+        }
+      }
     }
 }

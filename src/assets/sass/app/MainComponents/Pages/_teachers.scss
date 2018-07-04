@@ -8,7 +8,7 @@
     @extend %equal-flex-items;
     justify-content: space-around;
     margin: .5% auto;
-    width: 90%;
+    width: 67%;
     height: 83vh;
 
 }
@@ -89,6 +89,12 @@
         .div-email-teacher
         {
           @extend .div-desc-teacher;
+        }
+
+        .edit-desc-teacher
+        {
+          position: absolute;
+          right: 1%;
         }
 
     }

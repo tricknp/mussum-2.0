@@ -29,7 +29,7 @@
              class="input-teacher-profile"
              ref="mail"
              v-model="email">
-      <div v-if="isTeacher">
+      <div v-if="isTeacher" class="edit-desc-teacher">
             <button  @click="actionMail" v-if="!mailFocused">
               <IconEdit />
             </button>
