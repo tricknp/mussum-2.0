@@ -3,7 +3,7 @@
     <dropdown>
       <a v-if='isLoged'>
         <span class="span-nav-photo">
-          <Arrow class="arrow" />
+          <Arrow class="arrow-header" />
           <img v-if="img" class="nav-teacher-photo" :src="`data:image/png;base64,${img}`">
         </span>
       </a>
@@ -86,20 +86,22 @@ export default {
   },
 
   methods: {
-    signOut: function() {
+    signOut() {
       localStorage.clear();
       this.$router.push("/");
     },
 
     getPhoto() {
-      axios
-        .get(`${this.BASE_URL}api/photo`, {
-          headers: { professor: localStorage.username }
-        })
-        .then((res) => {
-          this.img = res.data;
-        })
-    }
+      if (this.isLoged) {
+        axios
+          .get(`${this.BASE_URL}api/photo`, {
+            headers: { professor: localStorage.username }
+          })
+          .then((res) => {
+            this.img = res.data;
+          })
+        }  
+      }
 
   },
 

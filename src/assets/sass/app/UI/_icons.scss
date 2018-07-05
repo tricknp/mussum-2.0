@@ -56,3 +56,14 @@
 {
     fill: $light-grey;
 }
+
+
+.arrow-header
+{
+    fill: $light-grey;
+    &:hover
+    {
+        fill: $absolute-white;
+    }
+
+}

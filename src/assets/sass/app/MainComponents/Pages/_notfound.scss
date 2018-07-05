@@ -1,0 +1,28 @@
+.notfound-container
+{
+  width: $full-size;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3%;
+  
+  h1
+  {
+    font-size: 3em;
+    font-weight: 600;
+  }
+  h2
+  {
+    margin-top: 1.5%;
+    font-size: 2.2em;
+  }
+
+  .notfound-image
+  {
+    width: 25em;
+    margin-top: 2%;
+  }
+
+
+
+}
