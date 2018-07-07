@@ -18,19 +18,19 @@
         <div class="tabs-content">
             <div v-if="tabDirectories">
                 <slot name="directories">
-                    <h1>Diretorios</h1>
+                    <h1>~</h1>
                 </slot>
             </div>
 
             <div v-if="tabScraps">
                 <slot name="scraps">
-                    <h1>Recados</h1>
+                    <h1>~</h1>
                 </slot>
             </div>
 
             <div v-if="tabAbout">
                 <slot name="about">
-                    <h1>Sobre</h1>
+                    <h1>~</h1>
                 </slot>
             </div>
 

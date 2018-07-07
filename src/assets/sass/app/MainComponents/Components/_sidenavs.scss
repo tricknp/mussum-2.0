@@ -58,10 +58,10 @@
 {
     a
     {
-        font-weight: 600;
-        color: $medium-blue;
+        font-weight: 500;
+        color: #444;
         &:hover{
-            color: $medium-blue;
+            color: $dark-background;
             text-decoration: underline;
         }
     }
