@@ -115,11 +115,3 @@ export default {
   }
 };
 </script>
-
-<style>
-  .forgotPass
-  {
-    cursor: pointer;
-  }
-</style>
-

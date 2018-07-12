@@ -9,7 +9,8 @@ import VueBlu from 'vue-blu'
 import VueProgressBar from 'vue-progressbar'
 
 Vue.use(VueBlu)
-Vue.config.productionTip = false
+
+Vue.config.productionTip = true
 
 const EventBus = new Vue()
 Object.defineProperties(Vue.prototype, {
@@ -23,11 +24,11 @@ Object.defineProperties(Vue.prototype, {
 Vue.use(VueProgressBar, {
   //location: 'top',
   //position: 'relative',
-  //thickness: '3px',  
+  //thickness: '3px',
   color: 'rgb(143, 255, 199)',
   failedColor: 'red',
   //height: '2px',
-})  
+})
 
 /* eslint-disable no-new */
 new Vue({
