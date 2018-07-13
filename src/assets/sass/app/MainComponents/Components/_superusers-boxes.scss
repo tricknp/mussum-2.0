@@ -27,6 +27,18 @@
         text-indent: $input-indent;
     }
 
+    .form-modal > textarea
+    {
+        font-size: $default-size;
+        border: $light-grey $medium-border;
+        border-radius: 3px;
+        padding: .3em;
+        display: flex;
+        width: $full-size - 5%;
+        margin: 2% auto;
+        text-indent: $input-indent;
+    }
+
     .div-btn-modal
     {
         display: flex;

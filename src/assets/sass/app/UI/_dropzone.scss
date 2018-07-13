@@ -5,14 +5,14 @@
     position: relative;
     border: 2px dashed $light-grey;
     transition: .10s ease-in;
-    &:hover, &.dropzone-hover {       
+    &:hover, &.dropzone-hover {
         border: 2px dashed $nice-blue;
         .dropzone-title {
             transition: .15s ease-in;
             color: $nice-blue;
         }
     }
-}   
+}
 
 .dropzone-area input {
     position: absolute;
@@ -62,19 +62,19 @@
     position: relative;
     &:hover .dropzone-close.modal-close {
         visibility: visible;
-    }    
+    }
 }
 
 .photo-upload
-{   
+{
     max-width: 9em;
     max-height: 8em;
 }
 
 .square-photo
 {
-    width: 145px;
-    height: 145px;
+    width: 9em;
+    height: 9em;
     margin-top: 10%;
     position: relative;
     &:hover
@@ -83,20 +83,20 @@
         transition: ease-in-out .25s;
         .edit-photo-profile
         {
-            fill: #000;          
+            fill: #000;
             &:hover
             {
                 transition: ease-in-out .25s;
                 border-radius: 20px;
                 background: #000;
                 fill: #fff;
-            }   
+            }
         }
     }
 }
 
 .teacher-photo
-{   
+{
     position: absolute;
     border-radius: 5px;
     min-width: $full-size;

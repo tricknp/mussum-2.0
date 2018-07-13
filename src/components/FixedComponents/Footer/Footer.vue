@@ -1,31 +1,25 @@
 
 <template>
   <footer id="footer">
-      <div class="divider"></div>
+    <div class="footer-content">
 
       <h4 class="college"> {{ college_name }} </h4>
-      
-      <h4 class="developed-by"> 
+
+      <h4 class="developed-by">
           {{ by }}
-          <a 
-             href="https://github.com/tricknp" 
-             target="_blank" 
-             id="name"> 
-             Patrick Porto, 
+          <a href="https://github.com/tricknp" target="_blank" id="name">
+             Patrick Porto,
           </a>
-          <a 
-             href="https://github.com/yurinb" 
-             target="_blank" 
-             id="name"> 
-             Yuri Bento, 
-           </a>
-          <a 
-             href="https://github.com/marcosmtt" 
-             target="_blank" 
-             id="name"> 
-             Marcos Motta 
-          </a>  
+
+          <a href="https://github.com/yurinb" target="_blank" id="name">
+             Yuri Bento,
+          </a>
+
+          <a href="https://github.com/marcosmtt" target="_blank" id="name">
+             Marcos Motta
+          </a>
       </h4>
+    </div>
   </footer>
 </template>
 
@@ -42,4 +36,3 @@ export default {
 
 }
 </script>
-

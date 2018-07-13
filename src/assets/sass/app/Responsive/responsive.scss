@@ -17,6 +17,7 @@
     {
         width: 70.1%;
     }
+
 }
 
 @media screen and (max-width: 1600px) {
@@ -130,6 +131,16 @@
         margin: .3% auto;
     }
 
+    #aside
+    {
+      display: none;
+    }
+
+    .teacher-description
+    {
+        margin: .5em 0;
+    }
+
     .head
     {
       .center-header
@@ -141,4 +152,30 @@
         }
       }
     }
+}
+
+@media screen and (max-width: 800px){
+  .teacher-description
+  {
+      margin: .5em 1em;
+  }
+
+  .head
+  {
+    .center-header
+    {
+      margin-left: -10%;
+    }
+  }
+
+  .square-photo
+  {
+      width: 7em;
+      height: 7em;
+  }
+
+  #footer
+  {
+    display: none;  
+  }
 }

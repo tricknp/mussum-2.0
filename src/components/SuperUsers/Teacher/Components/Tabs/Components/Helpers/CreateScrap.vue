@@ -7,7 +7,7 @@
 
             <form slot="content" class="form-modal">
                 <input type="text" placeholder="Titulo" v-model="titulo">
-                <textarea type="text" placeholder="Recado" v-model="descricao"> </textarea>
+                <textarea type="text" placeholder="Recado"  v-model="descricao"> </textarea>
             </form>
 
             <div slot="footer" class="div-btn-modal">

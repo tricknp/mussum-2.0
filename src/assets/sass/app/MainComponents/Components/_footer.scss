@@ -7,12 +7,6 @@
     background-color: $black-background;
 }
 
-.divider
-{
-    //margin: 0 10em 1em 8.9em;
-    //border: .5px solid $medium-grey;
-}
-
 h4
 {
     color: $medium-grey;
@@ -26,14 +20,12 @@ h4
     font-weight: 700;
 }
 
-.college
+.footer-content
 {
-    position: absolute;
-    left: 10em;
-}
-
-.developed-by
-{
-    text-align: right;
-    margin-right: 11em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  width: 90%;
 }

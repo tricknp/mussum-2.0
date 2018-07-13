@@ -42,9 +42,9 @@
       <h1 slot="header">Novo Pasta</h1>
       <form slot="content" class="form-modal">
         <input type="text" placeholder="Nova Pasta" v-model="child" required>
-        <div>
-            <p><input type="radio" v-model="visibility" :value="true"  name="visibility"> Publico </p>
-            <p><input type="radio" v-model="visibility" :value="false" name="visibility"> Oculto</p>
+        <div class="radios-modal">
+            <input type="radio" v-model="visibility" :value="true"  name="visibility"> Publico
+            <input type="radio" v-model="visibility" :value="false" name="visibility"> Oculto
         </div>
       </form>
       <div slot="footer" class="div-btn-modal">
@@ -65,19 +65,19 @@
         <input type="text" ref="comment" placeholder="Escreva um comentário (FEED)">
         <input v-if="!isLink" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
         <input v-if="isLink" type="text" ref="link" placeholder="URL">
-        <div>
-          <p><input type="radio" v-model="isLink" :value="true"  name="isLink"> Link </p>
-          <p><input type="radio" v-model="isLink" :value="false" name="isLink"> Arquivo</p>
+        <div class="radios-modal">
+          <input type="radio" v-model="isLink" :value="true"  name="isLink"> Link
+          <input type="radio" v-model="isLink" :value="false" name="isLink"> Arquivo
         </div>
-        <div>
-            <p><input type="radio" v-model="visibility" :value="true"  name="visibility"> Publico </p>
-            <p><input type="radio" v-model="visibility" :value="false" name="visibility"> Oculto</p>
+        <div class="radios-modal">
+            <input type="radio" v-model="visibility" :value="true"  name="visibility"> Publico
+            <input type="radio" v-model="visibility" :value="false" name="visibility"> Oculto
         </div>
       </form>
 
-      <div slot="footer" class="div-btn-modal">
-        <button @click="submitFile()" class="modal-buttons">SALVAR</button>
-           <button @click="showUpload = false" class="modal-buttons">CANCELAR</button>
+      <div slot="footer" class="div-btn-modal d">
+        <button @click="submitFile()" class="modal-buttons">Salvar</button>
+           <button @click="showUpload = false" class="modal-buttons">Cancelar</button>
       </div>
     </modal>
 
