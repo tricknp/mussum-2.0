@@ -9,5 +9,9 @@ export const showModal = {
             this.showModal = true;
         },
 
+        cancel(){
+          this.showModal = false
+        }
+
     }
 }
