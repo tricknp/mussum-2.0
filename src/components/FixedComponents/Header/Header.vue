@@ -1,11 +1,11 @@
 <template>
-    
+
     <header class="head">
         <div class="header-container">
-            <router-link :to="{path:'/'}"> 
+            <router-link :to="{path:'/'}">
                 <img :src="logo" id="logo">
             </router-link>
-            
+
             <div class="center-header">
                 <Search  />
                 <NavList />
@@ -13,12 +13,12 @@
             <MenuBar />
         </div>
 
-        <router-link :to="{path: '/form'}"> 
+        <router-link :to="{path: '/form'}">
             <IconAlert />
         </router-link>
 
     </header>
-    
+
 </template>
 
 <script>
@@ -29,7 +29,7 @@ import IconAlert from '../../_utils/Svgs/IconAlert'
 
 export default {
   name: 'Header',
-  
+
   components:
   {
       MenuBar,
@@ -43,25 +43,24 @@ export default {
           logo: '../../../../static/images/mussum2.0.png'
       };
   }
-  
+
 
 }
 </script>
 
 <style>
+
 .icon-alert{
     position: absolute;
     right: .5%;
-    top: 2.2%;
-    width: 1.4em;
+    top: 1em;
+    width: 1.2em;
+    height: 1.5em;
     fill: #ddd;
-    border-radius: 50px;
 }
 
 .icon-alert:hover{
-    fill: rgba(190, 46, 46, 0.9);
-    transition: ease-in .25s;
+    fill: #fff;
+    transition: ease-in .15s;
 }
 </style>
-
-
