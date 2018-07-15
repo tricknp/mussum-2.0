@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/tricknp/mussum-2.0-Client.svg?branch=master)](https://travis-ci.org/tricknp/mussum-2.0-Client)
+[![Build Status](https://travis-ci.org/tricknp/mussum-2.0-Client.svg?branch=master)](https://travis-ci.org/tricknp/mussum-2.0)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/tricknp/mussum-2.0/graphs/commit-activity)
 [![GitHub license](https://img.shields.io/pypi/l/ansicolortags.svg)](https://github.com/tricknp/mussum-2.0/blob/master/LICENSE)
 
@@ -37,7 +37,7 @@ Para informações mais detalhadas de como isso funciona, veja o [guia](http://v
 * [Documentação e rotas](https://documenter.getpostman.com/view/3654195/mussum-20-server-api/RW8FEm7Z)
 
 ***
-<h4>Mantenedores</h4>
+<h3>Mantenedores</h3>
 
 <table>
   <tbody>
