@@ -22,8 +22,6 @@
             </router-link>
           </menu-item>
 
-          <!-- <div class="divider"></div> -->
-
           <menu-item v-if='isLoged'>
             <a v-on:click='signOut'> Sign Out </a>
           </menu-item>
@@ -100,7 +98,7 @@ export default {
           .then((res) => {
             this.img = res.data;
           })
-        }  
+        }
       }
 
   },

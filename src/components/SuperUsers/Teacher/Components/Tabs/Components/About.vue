@@ -172,7 +172,6 @@ export default {
         this.refresh(this.username);
 
         axios.get(`${this.BASE_URL}api/social/${this.username}`).then( res => {
-          console.log(res.data)
           this.facebook = res.data.facebook
           this.youtube  = res.data.youtube
           this.github   = res.data.github
@@ -199,7 +198,7 @@ export default {
         })
         .then(res => {
           this.showModal = false
-          console.log(res.data)
+          this.refresh(this.username);
         })
     },
 

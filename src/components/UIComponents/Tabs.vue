@@ -39,7 +39,12 @@
 </template>
 
 <script>
+import axios from 'axios'
+import { url } from '../_mixins/url'
+
 export default {
+
+    mixins: [ url ],
 
     data() {
       return {
@@ -47,20 +52,25 @@ export default {
         tabScraps: false,
         tabAbout: false,
         currentPath: `/professor/${this.$route.params.targetName}/`,
+        professor: '',
+        username: this.$route.params.targetName,
       }
     },
 
     computed:{
         changeTeacher: function(){
-           if (this.$route.params.targetName) {
-
+           if (this.username) {
+             this.directories()
            }
-            return true;
+           return true;
         }
     },
 
     created(){
         this.initRoutes()
+        this.$bus.$on("selectProfessor", username => {
+          this.refresh(username);
+        })
     },
 
     methods: {
@@ -84,6 +94,11 @@ export default {
 
       },
 
+      refresh(username) {
+        this.username = username;
+        let t = this.professor.find(x => x.username === username);
+      },
+
       initRoutes(){
         if (this.$route.path == `${this.currentPath}diretorios`) {
             this.directories()
@@ -92,8 +107,13 @@ export default {
         }else if (this.$route.path == `${this.currentPath}sobre`) {
             this.about()
         }
-      }
+
+        axios.get(`${this.BASE_URL}api/professores`).then(res => {
+          this.professor = res.data;
+          this.refresh(this.username);
+      })
 
     }
+  }
 };
 </script>
