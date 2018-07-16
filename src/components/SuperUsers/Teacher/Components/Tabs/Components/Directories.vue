@@ -176,12 +176,12 @@ export default {
     }),
       this.$bus.$on("editFile", data => {
         this.edit = data;
-        this.showEdit = true
+        this.showEdit = true;
         console.log("EDIT FILE");
       }),
       this.$bus.$on("editFolder", data => {
         this.edit = data;
-        this.showEdit = true
+        this.showEdit = true;
         console.log("EDIT FOLDER");
       }),
       this.$bus.$on("selectProfessor", username => {
@@ -283,8 +283,8 @@ export default {
       showUpload = true;
     },
 
-    showEd(){
-      showEdit = true
+    showEd() {
+      showEdit = true;
     },
 
     getdata() {
@@ -459,22 +459,16 @@ export default {
       console.log("EDIT FILE:");
 
       console.log(`${this.BASE_URL}api/upload/${this.edit.id}`);
-      console.log({
+      var data = {
         name: this.$refs.editName.value,
         comment: this.$refs.editComment.value
-        //link: this.$refs.editLink.value
-      });
+      };
+      if (this.edit.link) {
+        data.link = this.$refs.editLink.value;
+      }
+      console.log(data);
       axios
-
-        .put(
-          `${this.BASE_URL}api/upload/${this.edit.id}`,
-
-          {
-            name: this.$refs.editName.value,
-            comment: this.$refs.editComment.value
-            //link: this.$refs.editLink.value
-          }
-        )
+        .put(`${this.BASE_URL}api/upload/${this.edit.id}`, data)
         .then(res => {
           console.log("Edit file sucessful: " + res.data);
 
