@@ -85,9 +85,9 @@
       <h1 v-if="edit.comment != undefined" slot="header">Editar info do arquivo</h1>
       <h1 v-if="edit.comment == undefined" slot="header">Renomear pasta</h1>
       <form slot="content" class="form-modal">
-        <input type="text" ref="editName" placeholder="Nome">
-        <input v-if="edit.link != undefined" type="text" ref="editLink" placeholder="URL">
-        <input v-if="edit.comment != undefined" type="text" ref="editComment" placeholder="Novo comentário (FEED)">
+        <input type="text" v-model="edit.name" ref="editName" placeholder="Nome">
+        <input v-if="edit.link != undefined" v-model="edit.link" type="text" ref="editLink" placeholder="URL">
+        <input v-if="edit.comment != undefined" v-model="edit.comment" type="text" ref="editComment" placeholder="Novo comentário (FEED)">
       </form>
       <div slot="footer" class="div-btn-modal">
            <button v-if="edit.comment != undefined" @click="editFile" class="modal-buttons">Salvar</button>
