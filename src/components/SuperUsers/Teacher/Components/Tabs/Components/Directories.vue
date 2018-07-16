@@ -82,14 +82,15 @@
     </modal>
 
     <modal v-if="showEdit" @showEd="showEd()" id="modal-container">
-      <h1 slot="header">Editar arquivo</h1>
+      <h1 v-if="edit.comment != undefined" slot="header">Editar info do arquivo</h1>
+      <h1 v-if="edit.comment == undefined" slot="header">Renomear pasta</h1>
       <form slot="content" class="form-modal">
-        <input type="text" ref="editName" placeholder="Nome do arquivo/link">
-        <input v-if="edit.Link" type="text" ref="editLink" placeholder="URL">
-        <input v-if="edit.comment" type="text" ref="editComment" placeholder="Escreva um comentário (FEED)">
+        <input type="text" ref="editName" placeholder="Nome">
+        <input v-if="edit.link != undefined" type="text" ref="editLink" placeholder="URL">
+        <input v-if="edit.comment != undefined" type="text" ref="editComment" placeholder="Novo comentário (FEED)">
       </form>
       <div slot="footer" class="div-btn-modal">
-           <button v-if="edit.comment" @click="editFile" class="modal-buttons">Seguir</button>
+           <button v-if="edit.comment != undefined" @click="editFile" class="modal-buttons">Salvar</button>
            <button v-if="edit.comment == undefined" @click="editFolder" class="modal-buttons">Salvar</button>
            <button @click="showEdit = false" class="modal-buttons">Cancelar</button>
       </div>
@@ -154,6 +155,15 @@ export default {
     };
   },
   beforeDestroy() {
+    this.$bus.$off("notify");
+    this.$bus.$off("editFile");
+    this.$bus.$off("editFolder");
+    this.$bus.$off("selectProfessor");
+    this.$bus.$off("itemClicked");
+    this.$bus.$off("handleUpload");
+    this.$bus.$off("download");
+    this.$bus.$off("removeDir");
+    this.$bus.$off("removeArq");
     this.$bus.$off("newChild");
   },
   created() {
@@ -166,6 +176,7 @@ export default {
     }),
       this.$bus.$on("editFile", data => {
         this.edit = data;
+        this.showEdit = true
         console.log("EDIT FILE");
       }),
       this.$bus.$on("editFolder", data => {
@@ -445,7 +456,7 @@ export default {
       };
     },
     editFile() {
-      console.log("EDIT:");
+      console.log("EDIT FILE:");
 
       console.log(`${this.BASE_URL}api/upload/${this.edit.id}`);
       console.log({
@@ -465,14 +476,15 @@ export default {
           }
         )
         .then(res => {
-          console.log("Edit sucessful: " + res.data);
+          console.log("Edit file sucessful: " + res.data);
 
-          this.edit = null;
+          this.showEdit = false;
+          this.edit = {};
           this.resetRepository();
         });
     },
     editFolder() {
-      console.log("EDIT:");
+      console.log("EDIT FOLDER:");
 
       console.log(`${this.BASE_URL}api/repository/${this.edit.id}`);
       console.log({
@@ -491,8 +503,8 @@ export default {
         )
         .then(res => {
           console.log("Edit folder sucessful: " + res.data);
-
-          this.edit = null;
+          this.showEdit = false;
+          this.edit = {};
           this.resetRepository();
         });
     },

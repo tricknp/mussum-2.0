@@ -52,7 +52,7 @@ import IconAdd from "../../_utils/Svgs/IconAdd";
 import IconDownload from "../../_utils/Svgs/IconDownload";
 import IconVisiblePublic from "../../_utils/Svgs/IconVisiblePublic";
 import IconVisiblePrivate from "../../_utils/Svgs/IconVisiblePrivate";
-import IconNotifyOff from "../../_utils/Svgs/IconNotifyOff"
+import IconNotifyOff from "../../_utils/Svgs/IconNotifyOff";
 import InteligentIcon from "../../_utils/InteligentIcon";
 
 export default {
@@ -78,6 +78,9 @@ export default {
       open: false,
       isVisibleProc: false
     };
+  },
+  beforeDestroy() {
+    this.$bus.$off("refresh");
   },
   created() {
     this.$bus.$on("refresh", (dir, name) => {
@@ -146,15 +149,18 @@ export default {
           id: this.model.id,
           name: this.model.name
         });
-      } else {
-        console.log("COMMENTTTTTTTTTTTTTTTTTTTT");
-        console.log(this.model.comment);
-
+      } else if (this.isLink) {
         this.$bus.$emit("editFile", {
           id: this.model.id,
           name: this.model.name,
           comment: this.model.comment,
           link: this.model.link
+        });
+      } else {
+        this.$bus.$emit("editFile", {
+          id: this.model.id,
+          name: this.model.name,
+          comment: this.model.comment
         });
       }
     },
@@ -226,9 +232,9 @@ export default {
     },
     notifyMe() {
       this.$bus.$emit("notify", {
-          username: this.model.username,
-          dir: this.model.dir+'/'+this.model.name
-        });
+        username: this.model.username,
+        dir: this.model.dir + "/" + this.model.name
+      });
     }
   }
 };
