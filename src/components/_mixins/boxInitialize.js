@@ -28,7 +28,7 @@ export const initialize = {
 
         select(obj) {
             this.selected = obj;
-            console.log('selected    ' + this.selected.id)
+            //console.log('selected    ' + this.selected.id)
             this.$bus.$emit("objectEmited", this.selected);
         },
     },
@@ -36,9 +36,4 @@ export const initialize = {
     created() {
         this.initialize();
     },
-
-    updated() {
-        this.$bus.$emit("getTeachers", this.professores);
-        //this.initialize();
-    }
 }

@@ -8,11 +8,11 @@ export const del = {
           axios
             .delete(this.BASE_URL + this.route + this.id)
             .then(response => {
-              console.log(response.data);
-            })
-            .catch(error => console.log(error));
+              //console.log(response.data);
               this.$emit('delete');
               this.showModal = false;
+            })
+            .catch(error => console.log(error));
         }
       },
 

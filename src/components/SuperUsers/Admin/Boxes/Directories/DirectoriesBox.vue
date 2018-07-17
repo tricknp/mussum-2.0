@@ -5,12 +5,12 @@
         <h1 class="dashboard-actions-title">{{title}}</h1>
         <div class="dashboard-actions-buttons">
           <Create @create="initialize()" class="dashboard-action-create" />
-          <Delete />
+          <Delete @delete="initialize()"/>
         </div>
       </div>
 
       <div class="dashboard-actions-container">
-          <div v-for="diretorio in diretorios" :key="diretorio.titulo" class="inside-container-dashboard">
+          <div v-for="(diretorio, index) in diretorios" :key="index" class="inside-container-dashboard">
             <div class="item-container-dashboard">
 
               <div class="styled-input--square">

@@ -4,13 +4,13 @@
       <div class="header-dashboard-actions">
         <h1 class="dashboard-actions-title">{{title}}</h1>
         <div class="dashboard-actions-buttons">
-          <Create @create="refresh()" class="dashboard-action-create" />
-          <Delete @delete="refresh()"/>
+          <Create @create="initialize()" class="dashboard-action-create" />
+          <Delete @delete="initialize()"/>
         </div>
       </div>
 
       <div class="dashboard-actions-container">
-          <div v-for="horario in horarios" :key="horario.titulo" class="inside-container-dashboard">
+          <div v-for="(horario, index) in horarios" :key="index" class="inside-container-dashboard">
             <div class="item-container-dashboard">
 
               <div class="styled-input--square">
@@ -52,10 +52,6 @@ export default {
 
 
   methods:{
-    refresh(){
-        this.initialize()
-    },
-
     postData(){
       this.route = 'api/horarios';
     }

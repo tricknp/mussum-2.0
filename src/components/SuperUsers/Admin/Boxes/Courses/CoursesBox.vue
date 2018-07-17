@@ -4,13 +4,13 @@
       <div class="header-dashboard-actions">
         <h1 class="dashboard-actions-title">{{title}}</h1>
         <div class="dashboard-actions-buttons">
-          <Create @create="refresh()" class="dashboard-action-create" />
+          <Create @create="initialize()" class="dashboard-action-create" />
           <Delete @delete="initialize()" />
         </div>
       </div>
 
       <div class="dashboard-actions-container">
-          <div v-for="curso in cursos" :key="curso.titulo" class="inside-container-dashboard">
+          <div v-for="(curso, index) in cursos" :key="index" class="inside-container-dashboard">
             <div class="item-container-dashboard">
 
               <div class="styled-input--square">
@@ -55,10 +55,6 @@ export default {
     postData(){
       this.route = 'api/cursos';
     },
-
-    refresh(){
-     this.initialize()
-    }
   }
 
 }

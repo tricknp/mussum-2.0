@@ -62,7 +62,7 @@ export default {
     },
 
     postData(){
-        this.route = 'api/links';
+        this.route = 'api/admlinks';
         this.datas = JSON.stringify({
         titulo :  this.titulo,
         url    :  this.url,

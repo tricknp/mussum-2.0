@@ -4,19 +4,19 @@
       <div class="header-dashboard-actions">
         <h1 class="dashboard-actions-title">{{title}}</h1>
         <div class="dashboard-actions-buttons">
-          <Create @create="refresh()" class="dashboard-action-create" />
-          <Delete @delete="refresh()"/>
+          <Create @create="initialize()" class="dashboard-action-create" />
+          <Delete @delete="initialize()"/>
         </div>
       </div>
 
       <div class="dashboard-actions-container">
-          <div v-for="professor in professores" :key="professor.nome" class="inside-container-dashboard">
+          <div v-for="(professor, index) in professores" :key="index" class="inside-container-dashboard">
             <div class="item-container-dashboard">
 
               <div class="styled-input--square">
                  <div class="styled-input-single">
                    <input type="checkbox" @change="select(professor)" :id="professor.id" />
-                   <label :for="professor.id"> {{ professor.nome }} </label>
+                   <label :for="professor.id"> {{`${professor.nome} ${professor.sobrenome}` }} </label>
                  </div>
              </div>
 
@@ -51,22 +51,14 @@ export default {
     }
   },
 
-  computed:{
-    isTrue: function(){
-      this.initialize()
-      alert("puta que pariu")
-      return true
-    }
-  },
-
   methods:{
-    refresh(){
-        this.initialize()
-    },
-
     postData(){
       this.route = 'api/professores';
     }
+  },
+
+  del(){
+    alert('to emitiindo')
   }
 
 }

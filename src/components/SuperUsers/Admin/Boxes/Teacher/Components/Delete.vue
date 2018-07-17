@@ -16,7 +16,7 @@
       </form>
 
       <div slot="footer">
-          <button type="submit" @click.prevent="onSubmit" class="modal-buttons">
+          <button type="submit" @click="onSubmit()" class="modal-buttons">
               Remover
           </button>
           <button @click="showModal = false" class="modal-buttons">
@@ -52,6 +52,16 @@ export default {
     };
   },
 
+  created(){
+    this.showModal = false;
+    this.$bus.$on("objectEmited", (professor) => {
+      this.nome = professor.nome;
+      this.email = professor.email;
+      this.username = professor.username
+      this.id = professor.id;
+    });
+  },
+
   methods:{
     postData(){
       this.route = 'api/professores/';
@@ -61,15 +71,7 @@ export default {
     }
   },
 
-  created(){
-    this.showModal = false;
-    this.$bus.$on("objectEmited", (professor) => {
-        this.nome = professor.nome;
-        this.email = professor.email;
-        this.username = professor.username
-        this.id = professor.id;
-      });
-  },
+
 
 }
 </script>

@@ -16,8 +16,8 @@
             <label for="admin">Admin</label>
           </div>
           <input type="text" placeholder="Nome" name="nome" v-model="nome" required>
-          <input type="text" placeholder="Sobrenome" name="sobrenome" v-model="sobrenome" required>
-          <input type="text" placeholder="Descrição" name="sobre" v-model="sobre">
+          <input type="text" placeholder="sobrenome" name="sobrenome" v-model="sobrenome" required>
+          <input type="text" placeholder="Descrição" name="descricao" v-model="descricao">
           <input type="email" placeholder="E-mail" name="email" v-model="email">
           <input type="text" placeholder="Username" name="username" v-model="username">
           <input type="password" placeholder="Senha" name="password" v-model="password">
@@ -59,7 +59,7 @@ export default {
       return{
           nome      : null,
           sobrenome : null,
-          sobre     : null,
+          descricao : null,
           email     : null,
           username  : null,
           password  : null,
@@ -72,7 +72,7 @@ export default {
     reset(){
       this.nome      =  ''
       this.sobrenome =  ''
-      this.sobre     =  ''
+      this.descricao =  ''
       this.email     =  ''
       this.username  =  ''
       this.password  =  ''
@@ -83,7 +83,7 @@ export default {
         this.datas = JSON.stringify({
         nome      :  this.nome,
         sobrenome :  this.sobrenome,
-        sobre     :  this.sobre,
+        descricao :  this.descricao,
         email     :  this.email,
         username  :  this.username,
         password  :  this.password

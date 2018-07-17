@@ -27,12 +27,12 @@ export const create = {
                 headers: { 'Content-Type': 'application/json'},
             })
             .then( (response) => {
-                console.log('sucess')
+                //console.log('sucess')
+                this.$emit('create');
+                this.showModal = false;
             })
             .catch(error => console.log(error))
 
-            this.$emit('create');
-            this.showModal = false;
           }
         }
       }

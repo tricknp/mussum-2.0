@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <button @click="show">
+    <button @click="show()">
       <IconEdit class="icon-edit" />
     </button>
 
@@ -19,7 +19,7 @@
 
         <div slot="footer">
           <div class="div-btn-modal">
-            <button type="submit" @click.prevent="onSubmit" class="modal-buttons">
+            <button type="submit" @click.prevent="onSubmit()" class="modal-buttons">
               Confirmar
             </button>
             <button @click="showModal = false" class="modal-buttons">
@@ -66,7 +66,7 @@ export default {
   methods: {
     postData(){
       this.route = 'api/professores/',
-      this.datas = JSON.stringify({
+      this.datas = {
         id: this.id,
         nome: this.professor.nome,
         sobrenome: this.professor.sobrenome,
@@ -75,7 +75,7 @@ export default {
         password: this.professor.password,
         descricao: this.professor.descricao,
         sobre: this.professor.sobre,
-      })
+      }
     },
 
   }

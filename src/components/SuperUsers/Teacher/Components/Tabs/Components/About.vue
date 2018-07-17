@@ -198,7 +198,6 @@ export default {
         })
         .then(res => {
           this.showModal = false
-          this.refresh(this.username);
         })
     },
 
