@@ -209,9 +209,7 @@ export default {
           .then(res => {
             console.log("Fazendo download file: " + fileName);
             console.log("From directory... " + dir);
-            let blob = new Blob([res.data], {
-              type: "application/octet-stream"
-            });
+            let blob = new Blob([res.data]);
             let url = window.URL.createObjectURL(blob);
             let a = document.createElement("a");
             document.body.appendChild(a);
@@ -221,6 +219,12 @@ export default {
             if (fileName.endsWith(".pdf")) {
               let pdf = new Blob([res.data], {
                 type: "application/pdf"
+              });
+              let pdfURL = window.URL.createObjectURL(pdf);
+              window.open(pdfURL);
+            } else if (fileName.endsWith(".txt") || fileName.endsWith(".sql")) {
+              let pdf = new Blob([res.data], {
+                type: "text/plain"
               });
               let pdfURL = window.URL.createObjectURL(pdf);
               window.open(pdfURL);
