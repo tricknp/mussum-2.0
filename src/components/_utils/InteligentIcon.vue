@@ -8,11 +8,11 @@
 <IconDbf  v-if = "extension == 'dbf'"  />
 <IconDoc  v-if = "extension == 'doc' || extension == 'docx' || extension == 'odf'" />
 <IconDwg  v-if = "extension == 'dwg'"  />
-<Iconmp4  v-if = "extension == 'mp4'"  />  
+<Iconmp4  v-if = "extension == 'mp4'"  />
 <IconExe  v-if = "extension == 'exe'"  />
 <IconFile v-if = "extension == 'link'" />
 <IconFla  v-if = "extension == 'fla'"  />
-<IconHtml v-if=  "extension == 'html'" />  
+<IconHtml v-if=  "extension == 'html'" />
 <IconIso  v-if = "extension == 'iso'"  />
 <IconJava v-if = "extension == 'java' || extension == 'jar'" />
 <IconJpg  v-if = "extension == 'jpg'  || extension == 'jpeg'" />
@@ -29,9 +29,9 @@
 <IconTxt  v-if = "extension == 'txt'"  />
 <IconXls  v-if = "extension == 'xls'"  />
 <IconXml  v-if = "extension == 'xml'"  />
-<IconZip  v-if = "extension == 'zip'"  />
+<IconZip  v-if = "extension == 'zip'  || extension == 'rar' || extension == '7zip'"  />
 <!-- <IconFolder  v-if = "extension=='folder'"  /> -->
-    
+
 </div>
 </template>
 
@@ -82,7 +82,7 @@ export default {
     IconHtml,
     IconIso,
     IconJava,
-    IconJpg, 
+    IconJpg,
     IconJs,
     IconJson,
     IconMp3,
