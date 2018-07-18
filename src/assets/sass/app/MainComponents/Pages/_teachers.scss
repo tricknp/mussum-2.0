@@ -51,7 +51,7 @@
 
     .container
     {
-
+        position: static;
         display: flex;
         background: $absolute-white;
         border-radius: 4px 0 0 0px;
@@ -93,8 +93,9 @@
 
         .edit-desc-teacher
         {
-          position: absolute;
-          right: 1%;
+          float: right;
+          //position: absolute;
+          //right: 1%;
         }
 
     }
@@ -111,6 +112,26 @@
         padding: 1rem 0;
     }
 }
+
+
+.teacher-photo
+{
+    position: absolute;
+    border-radius: 5px;
+    min-width: $full-size;
+    max-width: $full-size;
+    min-height: $full-size;
+    max-height: $full-size;
+
+}
+
+.edit-photo-profile
+{
+     position: absolute;
+     top: -2% ;
+     right: 1%;
+}
+
 
 .teacher-profile::-webkit-scrollbar
 {

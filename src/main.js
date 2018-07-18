@@ -7,7 +7,9 @@ import 'vue-blu/dist/css/vue-blu.min.css'
 
 import VueBlu from 'vue-blu'
 import VueProgressBar from 'vue-progressbar'
+import VTooltip from 'v-tooltip'
 
+Vue.use(VTooltip)
 Vue.use(VueBlu)
 
 Vue.config.productionTip = true

@@ -13,11 +13,11 @@
       {{ model.link ? null : model.name.substr(0, model.name.lastIndexOf('.')) || model.name  }}
 
       <div class="tree-buttons">
-        <button v-if="isVisible  && !isVisibleProc && this.$bus.isOwner" @click="toggleVisible">
+        <button v-if="isVisible  && !isVisibleProc && this.$bus.isOwner" @click="toggleVisible" v-tooltip="'Ocultar'">
           <IconVisiblePublic />
         </button>
 
-        <button v-if="!isVisible && !isVisibleProc && this.$bus.isOwner" @click="toggleVisible">
+        <button v-if="!isVisible && !isVisibleProc && this.$bus.isOwner" @click="toggleVisible" v-tooltip="'Publicar'">
            <IconVisiblePrivate />
         </button>
 
@@ -25,12 +25,28 @@
           <img src="../../../../static/loading.gif" class="icon">
         </button>
 
-        <button v-if="this.$bus.isOwner"              @click="edit">     <IconEdit   />  </button>
-        <button v-if="this.$bus.isOwner"              @click="remove">   <IconDelete />  </button>
-        <button v-if="isFolder && this.$bus.isOwner"  @click="add">      <IconAdd/>      </button>
-        <button v-if="isFolder && this.$bus.isOwner"  @click="upload">   <IconUpload/>   </button>
-        <button v-if="!isFolder && !isLink"           @click="download"> <IconDownload/> </button>
-        <button v-if="isFolder" @click="notifyMe"> <IconNotifyOff /> </button>
+        <button v-if="this.$bus.isOwner" @click="edit" v-tooltip="'Editar'" >
+          <IconEdit   />
+        </button>
+
+        <button v-if="this.$bus.isOwner" @click="remove" v-tooltip="'Remover'">
+          <IconDelete />
+        </button>
+
+        <button v-if="isFolder && this.$bus.isOwner" @click="add" v-tooltip="'Nova Pasta'">
+          <IconAdd/>
+        </button>
+
+        <button v-if="isFolder && this.$bus.isOwner" @click="upload" v-tooltip="'Upload'">
+          <IconUpload/>
+        </button>
+        <button v-if="!isFolder && !isLink" @click="download" v-tooltip="'Download'">
+          <IconDownload/>
+        </button>
+
+        <button v-if="isFolder" @click="notifyMe" v-tooltip="'Mantenha-me atualizado'">
+          <IconNotifyOff />
+        </button>
       </div>
     </div>
 

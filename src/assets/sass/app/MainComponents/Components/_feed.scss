@@ -32,7 +32,7 @@
             width: 97%;
             margin: 1% auto;
             font-size: $default-size - .1em;
-            position: relative;
+            //position: relative;
 
             .feed-upload
             {
@@ -125,9 +125,10 @@
 
     .btn-delete-feed
     {
-        right: .2em;
-        top: .1em;
-        position: absolute;
+        float: right;
+        margin-right: .2em;
+        // top: .1em;
+        //position: absolute;
     }
 
     .icon-delete-feed
