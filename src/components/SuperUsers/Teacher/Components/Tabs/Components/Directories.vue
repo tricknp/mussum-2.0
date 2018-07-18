@@ -172,23 +172,19 @@ export default {
     this.$bus.$on("notify", data => {
       this.notifyData = data;
       this.notifyModal = true;
-      console.log("___NOTIFY EMAIL___");
     }),
       this.$bus.$on("editFile", data => {
         this.edit = data;
         this.showEdit = true;
-        console.log("EDIT FILE");
       }),
       this.$bus.$on("editFolder", data => {
         this.edit = data;
         this.showEdit = true;
-        console.log("EDIT FOLDER");
       }),
       this.$bus.$on("selectProfessor", username => {
         this.resetRepository();
       }),
       this.$bus.$on("itemClicked", (div, dire) => {
-        console.log(dire);
         //this.getRepositorys(div, dire);
       }),
       this.$bus.$on("addChild", (dir, name) => {
@@ -222,7 +218,15 @@ export default {
             a.style = "display: none";
             a.href = url;
             a.download = fileName;
-            a.click();
+            if (fileName.endsWith(".pdf")) {
+              let pdf = new Blob([res.data], {
+                type: "application/pdf"
+              });
+              let pdfURL = window.URL.createObjectURL(pdf);
+              window.open(pdfURL);
+            } else {
+              a.click();
+            }
             a.remove();
             this.$Progress.finish();
             console.log("download feito.");
@@ -268,15 +272,12 @@ export default {
           });
       }),
       this.$bus.$on("newChild", (div, ele, isFolder) => {
-        console.log("ON newChild");
-
         this.createTreeElement(div, ele, isFolder);
       });
   },
   methods: {
     addNewCourse() {
       this.dir = this.otherCourse;
-      console.log(this.dir);
     },
 
     showUp() {
@@ -313,8 +314,6 @@ export default {
           }
         })
         .then(res => {
-          console.log("brilhou");
-          console.log(this.$refs.fileName.value);
           this.showUpload = false;
           this.$Progress.finish();
         });
@@ -374,8 +373,6 @@ export default {
         });
     },
     createTreeElement(div, element, isFolder) {
-      console.log("element CREATED");
-
       let instance = new ComponentClass({
         propsData: {
           model: {
@@ -399,6 +396,9 @@ export default {
     //RUNS ONE TIME TO GET CURSES FOLDERS
     resetRepository() {
       this.treeData = [];
+
+      this.$bus.dirs = this.$route.params.dir;
+
       axios
         .get(`${this.BASE_URL}api/repository`, {
           headers: {
@@ -423,7 +423,6 @@ export default {
           });
         });
     },
-
     addChild() {
       axios
         .post(`${this.BASE_URL}api/repository`, this.dir, {
@@ -456,9 +455,6 @@ export default {
       };
     },
     editFile() {
-      console.log("EDIT FILE:");
-
-      console.log(`${this.BASE_URL}api/upload/${this.edit.id}`);
       var data = {
         name: this.$refs.editName.value,
         comment: this.$refs.editComment.value
@@ -466,25 +462,15 @@ export default {
       if (this.edit.link) {
         data.link = this.$refs.editLink.value;
       }
-      console.log(data);
       axios
         .put(`${this.BASE_URL}api/upload/${this.edit.id}`, data)
         .then(res => {
-          console.log("Edit file sucessful: " + res.data);
-
           this.showEdit = false;
           this.edit = {};
           this.resetRepository();
         });
     },
     editFolder() {
-      console.log("EDIT FOLDER:");
-
-      console.log(`${this.BASE_URL}api/repository/${this.edit.id}`);
-      console.log({
-        name: this.$refs.editName.value
-        //link: this.$refs.editLink.value
-      });
       axios
 
         .put(
@@ -496,7 +482,6 @@ export default {
           }
         )
         .then(res => {
-          console.log("Edit folder sucessful: " + res.data);
           this.showEdit = false;
           this.edit = {};
           this.resetRepository();
@@ -517,8 +502,6 @@ export default {
           {}
         )
         .then(res => {
-          console.log("______NEW FOLLOWER ADDED");
-          console.log(res.data);
           this.notifyModal = false;
         });
     }

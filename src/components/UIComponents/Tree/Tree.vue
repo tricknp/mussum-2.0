@@ -83,15 +83,26 @@ export default {
     this.$bus.$off("refresh");
   },
   created() {
-    this.$bus.$on("refresh", (dir, name) => {
-      console.log("refreshDir: " + dir);
-      console.log("refreshName: " + name);
-      console.log("refreshDir this: " + this.model.dir);
-      console.log("refreshName this: " + this.model.name);
-      console.log("-------------------------");
+    let removeUsernameIndex = this.model.username.length;
+    console.log("/" + this.$bus.dirs);
+    console.log(
+      this.model.dir.substring(removeUsernameIndex) + "/" + this.model.name
+    );
 
+    if (this.$bus.dirs) {
+      if (
+        ("/" + this.$bus.dirs).startsWith(
+            this.model.dir.substring(removeUsernameIndex) +
+            "/" +
+            this.model.name
+        )
+      ) {
+        this.refreshChild();
+        this.toggle();
+      }
+    }
+    this.$bus.$on("refresh", (dir, name) => {
       if (dir == this.model.dir + "/" && name == this.model.name) {
-        console.log("REFRESH called at $on refresh" + dir + name);
         this.refreshChild();
       }
     });
@@ -115,15 +126,12 @@ export default {
       if (this.isFolder) {
         if (!this.open) {
           this.refreshChild();
-          console.log("refresh toggle");
         }
         this.open = !this.open;
       }
     },
     itemClicked(dir) {
       if (!this.clicked) {
-        console.log("clicked");
-        console.log(this.$refs.li);
         this.$bus.$emit(
           "itemClicked",
           this.$refs.li,
@@ -139,7 +147,6 @@ export default {
       if (this.isFolder) {
         this.$bus.$emit("removeDir", this.model.dir, this.model.name);
       } else {
-        console.log("emit");
         this.$bus.$emit("removeArq", this.model.dir, this.model.name);
       }
     },
@@ -184,7 +191,6 @@ export default {
           }
         )
         .then(res => {
-          console.log("TOGGLE");
           this.model.isVisible = res.data;
           this.isVisibleProc = false;
         });
@@ -205,24 +211,14 @@ export default {
             this.$refs.li.removeChild(child);
             child = ele.firstChild;
           }
-          console.log("REFRESHHHHH");
-          console.log(res.data);
-
           let folders = res.data.pastas;
-          console.log("refreshChild folders");
-          console.log(folders);
-
           let files = res.data.arquivos;
-          console.log("refreshChild files");
-          console.log(files);
 
           folders.forEach(element => {
-            console.log("EMIT newChild");
             this.$bus.$emit("newChild", ele, element, true);
             //this.createTreeElement(ele, element, true);
           });
           files.forEach(element => {
-            console.log("EMIT newChild");
             this.$bus.$emit("newChild", ele, element, false);
             //this.createTreeElement(ele, element, false);
           });

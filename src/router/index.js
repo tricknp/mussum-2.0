@@ -44,7 +44,7 @@ const router = new Router({
       children:[
         {
           name: 'Dir',
-          path: '/professor/:targetName/diretorios',
+          path: '/professor/:targetName/diretorios/:dir*',
           component: Tabs
         },
 
