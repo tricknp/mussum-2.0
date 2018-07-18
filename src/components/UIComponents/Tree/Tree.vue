@@ -87,8 +87,8 @@ export default {
 
     if (this.$bus.dirs) {
       if (
-        ("/" + this.$bus.dirs).startsWith(
-          this.model.dir.substring(removeUsernameIndex) + "/" + this.model.name
+        ("/" + this.$bus.dirs+'/').startsWith(
+          this.model.dir.substring(removeUsernameIndex) + "/" + this.model.name + '/'
         )
       ) {
         this.refreshChild();
@@ -120,8 +120,6 @@ export default {
       if (this.isFolder) {
         if (!this.open) {
           this.refreshChild();
-          console.log("path " + this.$bus.path);
-          console.log("dir " + this.$bus.dirs);
           let removeUsernameIndex = this.model.username.length;
           let newURL =
             this.$bus.path +
