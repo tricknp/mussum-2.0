@@ -12,7 +12,7 @@
       <form slot="content" class="form-modal">
 
           <div class="div-checkbox-admin">
-            <input type="checkbox" name="admin">
+            <input type="checkbox" v-model="checkRole" @change="getRole()">
             <label for="admin">Admin</label>
           </div>
           <input type="text" placeholder="Nome" name="nome" v-model="nome" required>
@@ -62,10 +62,16 @@ export default {
           descricao : null,
           email     : null,
           username  : null,
+          checkRole : false,
+          role      : null,
           password  : null,
           msg       : null,
-          datas: ''
+          datas     : '',
       };
+  },
+
+  created(){
+    this.getRole()
   },
 
   methods:{
@@ -78,6 +84,14 @@ export default {
       this.password  =  ''
     },
 
+    getRole(){
+      if (!this.checkRole) {
+        this.role = 'professor'
+      }else{
+        this.role = 'admin'
+      }
+    },
+
     postData(){
         this.route = 'api/professores';
         this.datas = JSON.stringify({
@@ -86,7 +100,8 @@ export default {
         descricao :  this.descricao,
         email     :  this.email,
         username  :  this.username,
-        password  :  this.password
+        password  :  this.password,
+        role      :  this.role
       })
     }
   },

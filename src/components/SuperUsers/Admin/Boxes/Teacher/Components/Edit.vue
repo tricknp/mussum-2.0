@@ -10,6 +10,12 @@
       <h1 slot="header">Editar Professor</h1>
 
       <form slot="content" class="form-modal">
+
+        <div class="div-checkbox-admin">
+          <input type="checkbox" v-model="checkRole" @change="getRole()">
+          <label for="admin">Admin</label>
+        </div>
+
           <input type="text"  v-model="professor.nome"  placeholder="nome" required>
           <input type="text"  v-model="professor.sobrenome"  placeholder="sobrenome" required>
           <input type="email" v-model="professor.email" placeholder="email" >
@@ -53,6 +59,8 @@ export default {
       datas: '',
       professor: '',
       id: '',
+      checkRole: '',
+      role: '',
     };
   },
 
@@ -60,14 +68,28 @@ export default {
     this.$bus.$on("objectEmited", (professor) => {
       this.professor = professor;
       this.id = professor.id;
+      if (this.professor.role == 'professor') {
+        this.checkRole = false
+      }else {
+        this.checkRole = true
+      }
     });
   },
 
   methods: {
+    getRole(){
+      if (!this.checkRole) {
+        this.role = 'professor'
+      }else{
+        this.role = 'admin'
+      }
+    },
+
     postData(){
       this.route = 'api/professores/',
       this.datas = {
         id: this.id,
+        role: this.role,
         nome: this.professor.nome,
         sobrenome: this.professor.sobrenome,
         email: this.professor.email,

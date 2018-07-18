@@ -13,7 +13,7 @@
 
           <div v-else v-for="(res, index) in response" :key="index">
             <div v-if="res.type == 'folder'" class="search-type">
-              <router-link :to="{ path: 'folder' }" class="search-type-link">
+              <router-link :to="{ path: `professor/${res.username}/diretorios/${res.dir}` }" class="search-type-link">
                 <IconFolder />
                 <div class="text-search-box">
                   <h1 class="search-box-title"> {{ res.name }} </h1>
@@ -23,7 +23,7 @@
             </div>
 
             <div v-if="res.type == 'file'" class="search-type">
-              <router-link :to="{ path: '/file'}" class="search-type-link">
+              <router-link :to="{ path: `professor/${res.username}/diretorios/${res.dir}`}" class="search-type-link">
                 <IconFile />
                 <div class="text-search-box">
                   <h1 class="search-box-title"> {{ res.name }} </h1>
@@ -56,12 +56,9 @@ export default {
     return{
       response: '',
       data: '',
-      empty: true
+      empty: true,
+      teacher: ''
     }
-  },
-
-  created(){
-    this.search()
   },
 
   updated(){
@@ -79,15 +76,17 @@ export default {
         axios.get(`${this.BASE_URL}api/search`, {
           headers: { 'txt': this.data  }
         }).then( res => {
+
+          this.response = ''
+
           if (res.data != null && res.data != '') {
             this.empty = false;
-            this.response = res.data
+            this.response = res.data;
           }else{
             this.empty = true;
-            this.response = ''
           }
         })
-      }
+      },
   },
 
 }
