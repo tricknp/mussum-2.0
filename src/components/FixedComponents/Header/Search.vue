@@ -1,30 +1,94 @@
 <template>
-    <div class="search">
-        <input type="text" class="input-search" ref="search" placeholder="Pesquisar...">
-        <button @click="search" class="btn-header-search">
-            <IconSearch class="icon-search" />
-        </button>   
+    <div class="search-container">
+      <div class="search">
+          <input type="text" class="input-search" ref="search" v-model="data" placeholder="Pesquisar...">
+          <button @click="focus" class="btn-header-search">
+              <IconSearch class="icon-search" />
+          </button>
+      </div>
+      <div class="search-response" v-if="data.length > 0">
+        <div class="search-content">
+
+          <span class="search-type" v-if="empty"> Sem resultadis... </span>
+
+          <div v-else v-for="(res, index) in response" :key="index">
+            <div v-if="res.type == 'folder'" class="search-type">
+              <router-link :to="{ path: 'folder' }" class="search-type-link">
+                <IconFolder />
+                <div class="text-search-box">
+                  <h1 class="search-box-title"> {{ res.name }} </h1>
+                  <h4 class="search-box-dir"> {{ res.dir }} </h4>
+                </div>
+              </router-link>
+            </div>
+
+            <div v-if="res.type == 'file'" class="search-type">
+              <router-link :to="{ path: '/file'}" class="search-type-link">
+                <IconFile />
+                <div class="text-search-box">
+                  <h1 class="search-box-title"> {{ res.name }} </h1>
+                  <h4 class="search-box-dir"> {{ res.dir }} </h4>
+                </div>
+              </router-link>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
+import { url } from '../../_mixins/url'
 import IconSearch from '../../_utils/Svgs/IconSearch'
+import IconFile from '../../_utils/Svgs/IconFile'
+import IconFolder from '../../_utils/Svgs/IconFolder'
 
 export default {
 
-    components: { IconSearch },
+  components: { IconSearch, IconFile, IconFolder },
 
-    methods:{
-        search(){
-            if (this.$refs.search.value.length <= 0) {
-                this.$refs.search.focus(); 
-            }else{
-                alert('need a get')
-                
-            }
-        },
-        
+  mixins: [ url ],
+
+  data(){
+    return{
+      response: '',
+      data: '',
+      empty: true
     }
+  },
+
+  created(){
+    this.search()
+  },
+
+  updated(){
+    this.search()
+  },
+
+  methods:{
+    focus(){
+        if (this.$refs.search.value.length <= 0) {
+          this.$refs.search.focus();
+        }
+      },
+
+      search(){
+        axios.get(`${this.BASE_URL}api/search`, {
+          headers: { 'txt': this.data  }
+        }).then( res => {
+          if (res.data != null && res.data != '') {
+            this.empty = false;
+            this.response = res.data
+          }else{
+            this.empty = true;
+            this.response = ''
+          }
+        })
+      }
+  },
 
 }
 </script>

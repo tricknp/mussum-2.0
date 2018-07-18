@@ -32,7 +32,7 @@
             width: 97%;
             margin: 1% auto;
             font-size: $default-size - .1em;
-            position: relative;
+            position: static;
 
             .feed-upload
             {
@@ -78,7 +78,7 @@
 
     .feed-text-content
     {
-        margin: 2% 5.2em;
+        margin: .6em 1em;
     }
 
     .feed-date
@@ -106,9 +106,8 @@
 
     .feed-photo
     {
-      position: absolute;
-      left: 1%;
-      top: 7%;
+      margin-left: 1%;
+      margin-top: .6em;
       border-radius: 2px;
       width: 4em;
       height: 4em;

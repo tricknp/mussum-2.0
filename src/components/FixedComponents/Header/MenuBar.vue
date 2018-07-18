@@ -66,7 +66,6 @@ export default {
     isLoged: function() {
       const localSize = localStorage.length;
       this.username = localStorage.getItem('username');
-
       return localSize > 1;
     },
 
