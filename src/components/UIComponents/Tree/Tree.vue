@@ -84,17 +84,11 @@ export default {
   },
   created() {
     let removeUsernameIndex = this.model.username.length;
-    console.log("/" + this.$bus.dirs);
-    console.log(
-      this.model.dir.substring(removeUsernameIndex) + "/" + this.model.name
-    );
 
     if (this.$bus.dirs) {
       if (
         ("/" + this.$bus.dirs).startsWith(
-            this.model.dir.substring(removeUsernameIndex) +
-            "/" +
-            this.model.name
+          this.model.dir.substring(removeUsernameIndex) + "/" + this.model.name
         )
       ) {
         this.refreshChild();
@@ -126,6 +120,15 @@ export default {
       if (this.isFolder) {
         if (!this.open) {
           this.refreshChild();
+          console.log("path " + this.$bus.path);
+          console.log("dir " + this.$bus.dirs);
+          let removeUsernameIndex = this.model.username.length;
+          let newURL =
+            this.$bus.path +
+            this.model.dir.substring(removeUsernameIndex) +
+            "/" +
+            this.model.name;
+          window.history.pushState("test", "test", newURL);
         }
         this.open = !this.open;
       }

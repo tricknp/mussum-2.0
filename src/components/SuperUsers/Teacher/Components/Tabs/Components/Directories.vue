@@ -397,6 +397,7 @@ export default {
     resetRepository() {
       this.treeData = [];
 
+      this.$bus.path = `/professor/${this.$route.params.targetName}/diretorios`;
       this.$bus.dirs = this.$route.params.dir;
 
       axios
