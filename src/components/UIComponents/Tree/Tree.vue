@@ -17,7 +17,7 @@
           <IconVisiblePublic />
         </button>
 
-        <button v-if="!isVisible && !isVisibleProc && this.$bus.isOwner" @click="toggleVisible" v-tooltip="'Publicar'">
+        <button v-if="!isVisible && !isVisibleProc && this.$bus.isOwner" @click="toggleVisible" v-tooltip="'Tornar Visivel'">
            <IconVisiblePrivate />
         </button>
 

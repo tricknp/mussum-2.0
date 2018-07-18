@@ -51,7 +51,7 @@
 
     .container
     {
-        position: static;
+        position: relative;
         display: flex;
         background: $absolute-white;
         border-radius: 4px 0 0 0px;
@@ -93,9 +93,8 @@
 
         .edit-desc-teacher
         {
-          float: right;
-          //position: absolute;
-          //right: 1%;
+          position: absolute;
+          right: 1%;
         }
 
     }
@@ -128,7 +127,7 @@
 .edit-photo-profile
 {
      position: absolute;
-     top: -2% ;
+     top: 0% ;
      right: 1%;
 }
 
