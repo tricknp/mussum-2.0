@@ -13,17 +13,17 @@
 
           <div v-else v-for="(res, index) in response" :key="index">
             <div v-if="res.type == 'folder'" class="search-type">
-              <router-link :to="{ path: `professor/${res.username}/diretorios/${res.dir}` }" class="search-type-link">
+              <router-link :to="{ path: `professor/${res.username}/diretorios${res.dir}` }" class="search-type-link">
                 <IconFolder />
                 <div class="text-search-box">
                   <h1 class="search-box-title"> {{ res.name }} </h1>
-                  <h4 class="search-box-dir"> {{ res.dir }} </h4>
+                  <h4 class="search-box-dir"> {{ `${res.username}${res.dir}` }} </h4>
                 </div>
               </router-link>
             </div>
 
             <div v-if="res.type == 'file'" class="search-type">
-              <router-link :to="{ path: `professor/${res.username}/diretorios/${res.dir}`}" class="search-type-link">
+              <router-link :to="{ path: `professor/${res.username}/diretorios${res.dir}`}" class="search-type-link">
                 <IconFile />
                 <div class="text-search-box">
                   <h1 class="search-box-title"> {{ res.name }} </h1>
