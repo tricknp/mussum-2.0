@@ -3,17 +3,19 @@
     <div  class="ss">
       <InteligentIcon class="inteligent-icon" :model="{extension: model.name}" ></InteligentIcon>
 
-      <span v-if="isFolder">
-        <span   v-if="open === false"> <IconArrowRight /> </span>
-        <span   v-else>                <IconArrowDown  /> </span>
 
-      </span>
-      <div @click="toggle(), isFolder ?  itemClicked(model.dir) : null">
-        <a v-if="model.link" :href="model.link" target="_blank" class="link" >{{ model.name.substr(0, model.name.lastIndexOf('.')) || model.name}}</a>
+      <div @click="toggle(), isFolder ?  itemClicked(model.dir) : null" class="tree-name">
+         <span v-if="isFolder">
+           <span   v-if="open === false"> <IconArrowRight /> </span>
+           <span   v-else>                <IconArrowDown  /> </span>
+         </span>
+
+         <a v-if="model.link" :href="model.link" target="_blank" class="link" >
+           {{ model.name.substr(0, model.name.lastIndexOf('.')) || model.name}}
+         </a>
         {{ model.link ? null : model.name.substr(0, model.name.lastIndexOf('.')) || model.name  }}
       </div>
 
-      <button v-if="isOpenable" @click="openFile">abrir no navegador</button>
 
       <div class="tree-buttons">
         <button v-if="isVisible  && !isVisibleProc && this.$bus.isOwner" @click="toggleVisible" v-tooltip="'Ocultar'">
@@ -43,6 +45,11 @@
         <button v-if="isFolder && this.$bus.isOwner" @click="upload" v-tooltip="'Upload'">
           <IconUpload/>
         </button>
+
+        <button v-if="isOpenable" @click="openFile" v-tooltip="'Abrir no navegador'">
+          <IconOpenFile />
+        </button>
+
         <button v-if="!isFolder && !isLink" @click="download" v-tooltip="'Download'">
           <IconDownload/>
         </button>
@@ -50,6 +57,8 @@
         <button v-if="isFolder" @click="notifyMe" v-tooltip="'Mantenha-me atualizado'">
           <IconNotifyOff />
         </button>
+
+
       </div>
     </div>
 
@@ -71,6 +80,7 @@ import IconAdd from "../../_utils/Svgs/IconAdd";
 import IconDownload from "../../_utils/Svgs/IconDownload";
 import IconVisiblePublic from "../../_utils/Svgs/IconVisiblePublic";
 import IconVisiblePrivate from "../../_utils/Svgs/IconVisiblePrivate";
+import IconOpenFile from "../../_utils/Svgs/IconOpenFile";
 import IconNotifyOff from "../../_utils/Svgs/IconNotifyOff";
 import InteligentIcon from "../../_utils/InteligentIcon";
 
@@ -86,6 +96,7 @@ export default {
     IconVisiblePublic,
     IconVisiblePrivate,
     IconNotifyOff,
+    IconOpenFile,
     InteligentIcon
   },
   props: {

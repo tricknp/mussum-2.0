@@ -33,14 +33,14 @@
         </div>
 
         <div>
-          <a :href="facebook" target="_blank" v-if="!emptyFB" > Fb </a>
-          <a @click="showWpp == true" target="_blank" v-if="!emptyWPP"> Wpp </a>
-          <a :href="twitter" target="_blank" v-if="!emptyTT"> Tt   </a>
-          <a :href="linkedin" target="_blank" v-if="!emptyLKD"> Lkd </a>
-          <a :href="google" target="_blank" v-if="!emptyGPlus"> G+ </a>
-          <a :href="youtube" target="_blank" v-if="!emptyYT"> YT   </a>
-          <a :href="site" target="_blank" v-if="!emptySite"> Site    </a>
-          <a :href="github" target="_blank" v-if="!emptyGH"> GH  </a>
+          <a @click="showWpp == true" target="_blank" v-if="!emptyWPP"> <IconWhatsapp /> </a>
+          <a :href="facebook" target="_blank" v-if="!emptyFB" >   <IconFacebook     /> </a>
+          <a :href="twitter"  target="_blank" v-if="!emptyTT">    <IconTwitter      /> </a>
+          <a :href="linkedin" target="_blank" v-if="!emptyLKD">   <IconLinkedin     /> </a>
+          <a :href="google"   target="_blank" v-if="!emptyGPlus"> <IconGooglePlus   /> </a>
+          <a :href="youtube"  target="_blank" v-if="!emptyYT">    <IconYoutube      /> </a>
+          <a :href="github"   target="_blank" v-if="!emptyGH">    <IconGithub       /> </a>
+          <a :href="site"     target="_blank" v-if="!emptySite">  <IconPersonalSite /> </a>
         </div>
         <h2 v-if="showWpp">{{ whatsapp }}</h2>
       </div>
@@ -77,11 +77,34 @@ import Modal from  '../../../../../UIComponents/Modal'
 import { showModal } from  '../../../../../_mixins/showModal'
 import { url } from "../../../../../_mixins/url";
 import { edit } from "../../../../../_mixins/edit";
+
 import IconEdit from "../../../../../_utils/Svgs/IconEdit";
 import IconOk from "../../../../../_utils/Svgs/IconOk";
 
+import IconFacebook     from "../../../../../_utils/Svgs/_social/IconFacebook";
+import IconTwitter      from "../../../../../_utils/Svgs/_social/IconTwitter";
+import IconLinkedin     from "../../../../../_utils/Svgs/_social/IconLinkedin";
+import IconGithub       from "../../../../../_utils/Svgs/_social/IconGithub";
+import IconWhatsapp     from "../../../../../_utils/Svgs/_social/IconWhatsapp";
+import IconGooglePlus   from "../../../../../_utils/Svgs/_social/IconGooglePlus";
+import IconPersonalSite from "../../../../../_utils/Svgs/_social/IconPersonalSite";
+import IconYoutube      from "../../../../../_utils/Svgs/_social/IconYoutube"
+
 export default {
-  components: { IconEdit, IconOk, Modal },
+  components:
+  {
+     IconEdit,
+     IconOk,
+     Modal,
+     IconFacebook,
+     IconTwitter,
+     IconLinkedin,
+     IconGithub,
+     IconWhatsapp,
+     IconYoutube,
+     IconGooglePlus,
+     IconPersonalSite,
+   },
 
   mixins: [url, edit, showModal],
 
@@ -236,67 +259,3 @@ export default {
   }
 };
 </script>
-
-
-<style>
-.about-container
-{
-  background: white;
-  min-height: 25em;
-  max-width: 100%;
-}
-
-.about-content
-{
-  margin: 0 2%;
-}
-
-.about-title
-{
-  font-size: 1.3em;
-}
-
-.textarea-about
-{
-  min-width: 100%;
-  max-width: 100%;
-  background: transparent;
-  border: none;
-  font-size: 1em;
-}
-
-.about-content-item
-{
-  border-bottom: 1px #ddd solid;
-}
-
-.about-content-item:nth-child(3)
-{
-  border-bottom: none;
-}
-
-.social-icons:nth-child(1)
-{
-  margin-left: 0;
-}
-
-.social-icons
-{
-  cursor: pointer;
-  width: 3em;
-  margin-left: 1.5%;
-}
-
-.social-icons:hover
-{
-    opacity: .8;
-}
-
-.div-edit-item
-{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-</style>

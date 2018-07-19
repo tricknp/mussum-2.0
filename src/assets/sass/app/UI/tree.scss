@@ -6,35 +6,51 @@
   position: relative;
 }
 
-.ss:hover
+.ss
 {
-  background: #eee;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 4.2em;
 }
+
+.tree-name
+{
+
+  width: 100%;
+  text-indent: 10px;
+  margin: 0 .3%;
+  &:hover
+  {
+    background: #eee;
+  }
+  .link
+  {
+    display: flex;
+    align-items: center;
+    height: 2.2em;
+    width: $full-size;
+    color: $dark-grey;
+  }
+}
+
 
 .tree-buttons
 {
   position: absolute;
   display: flex;
   flex-direction: row;
-  right: 2em;
-  top: 0.5em;
+  right: 1em;
   cursor: pointer;
 }
 
 .item
 {
   cursor: pointer;
-  padding: 5px;
 }
+
 
 .tree-ul {
   padding-left: 3em;
   line-height: 1.5em;
-}
-
-.inteligent-icon
-{
-  position: absolute;
-  left: -3em;
-  top: -.5em;
 }

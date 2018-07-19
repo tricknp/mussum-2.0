@@ -1,0 +1,49 @@
+.about-container
+{
+  background: white;
+  min-height: 25em;
+  max-width: $full-size;
+}
+
+.about-content
+{
+  margin: 0 2%;
+}
+
+.about-title
+{
+  font-size: 1.3em;
+}
+
+.textarea-about
+{
+  min-width: 100%;
+  max-width: 100%;
+  background: transparent;
+  border: none;
+  font-size: 1em;
+}
+
+.about-content-item
+{
+  border-bottom: 1px #ddd solid;
+}
+
+.about-content-item:nth-child(3)
+{
+  border-bottom: none;
+}
+
+// .social-icons:nth-child(1)
+// {
+//   margin-left: 0;
+// }
+
+
+.div-edit-item
+{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

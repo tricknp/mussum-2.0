@@ -79,3 +79,19 @@
   fill: $medium-grey;
   margin-right: .15em;
 }
+
+.social-icon
+{
+  cursor: pointer;
+  width: 3em;
+  margin-left: 1.5%;
+  &:nth-child(1) { margin-left: 0; }
+  &:hover { opacity: .8; }
+}
+
+.inteligent-icon
+{
+  position: absolute;
+  left: -2.1em;
+  top: 0;
+}
