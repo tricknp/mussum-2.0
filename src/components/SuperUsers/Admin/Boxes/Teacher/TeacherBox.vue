@@ -20,7 +20,10 @@
                  </div>
              </div>
 
-              <Edit />
+              <div class="div-action-edit">
+                <IconAdmin v-if="professor.role == 'admin'" v-tooltip="'Este usuário é um admin'" />
+                <Edit />
+              </div>
 
             </div>
           </div>
@@ -31,16 +34,17 @@
 
 
 <script>
-import Create from "./Components/Create";
-import Delete from "./Components/Delete";
-import Edit from "./Components/Edit";
+import Create from "./Components/Create"
+import Delete from "./Components/Delete"
+import Edit from "./Components/Edit"
 import { url } from '../../../../_mixins/url.js'
+import IconAdmin from '../../../../_utils/Svgs/IconAdmin'
 import { initialize } from '../../../../_mixins/boxInitialize.js'
 
 export default {
   name: "TeacherBox",
 
-  components: { Create, Delete, Edit },
+  components: { Create, Delete, Edit, IconAdmin },
 
   mixins: [ url, initialize ],
 

@@ -197,6 +197,12 @@
               background: $hover-blue;
           }
       }
+      .div-action-edit
+      {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
   }
 
 }
