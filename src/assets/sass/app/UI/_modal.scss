@@ -82,3 +82,73 @@
   font-size: 1.1em;
   margin: 0 4%;
 }
+
+//==============================================================================
+
+.page-blurred
+{
+  filter: blur(5px);
+}
+
+#modal-container
+{
+    h1
+    {
+        color: $dark-grey;
+        text-align: center;
+        font-size: 1.5em;
+        margin-bottom: -1em;
+    }
+
+    .form-modal > input
+    {
+        font-size: $default-size;
+        border: $light-grey $medium-border;
+        border-radius: 3px;
+        padding: .3em;
+        display: flex;
+        width: $full-size - 5%;
+        margin: 2% auto;
+        text-indent: $input-indent;
+    }
+
+    .form-modal > textarea
+    {
+        font-size: $default-size;
+        border: $light-grey $medium-border;
+        border-radius: 3px;
+        padding: .3em;
+        display: flex;
+        width: $full-size - 5%;
+        margin: 2% auto;
+        text-indent: $input-indent;
+    }
+
+    .div-btn-modal
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: auto;
+        width: $full-size - 5%;
+    }
+
+    .modal-buttons
+    {
+        cursor: pointer;
+        font-size: 1.3em;
+        width: 49.3%;
+        padding: .3em;
+        font-weight: 550;
+        background-color: $dark-blue;
+        color: $light-grey;
+        border: $light-border $clear-blue;
+        border-radius: 3px;
+
+        &:hover
+        {
+            color: #fff;
+            transition: .25s ease-in;
+        }
+    }
+}
