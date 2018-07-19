@@ -67,10 +67,12 @@ export default {
     },
 
     created(){
-        this.initRoutes()
+        this.initRoutes();
         this.$bus.$on("selectProfessor", username => {
+          console.log('SELECT PROFESSOR AND REFRESH');
+
           this.refresh(username);
-        })
+        });
     },
 
     methods: {
@@ -96,7 +98,6 @@ export default {
 
       refresh(username) {
         this.username = username;
-        let t = this.professor.find(x => x.username === username);
       },
 
       initRoutes(){

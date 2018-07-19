@@ -158,7 +158,7 @@ export default {
     this.$bus.$off("notify");
     this.$bus.$off("editFile");
     this.$bus.$off("editFolder");
-    this.$bus.$off("selectProfessor");
+    //this.$bus.$off("selectProfessor");
     this.$bus.$off("itemClicked");
     this.$bus.$off("handleUpload");
     this.$bus.$off("download");

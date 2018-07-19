@@ -99,9 +99,9 @@ export default {
       })
     },
 
-    select(obj) {
-      this.targetName = obj;
-    },
+    // select(obj) {
+    //   this.targetName = obj;
+    // },
 
     select(username) {
       this.$route.params.targetName = username;
@@ -112,6 +112,7 @@ export default {
       } else {
         this.$bus.isOwner = false;
       }
+      console.log('EMIT SELECT PROFESSOR... DONE');
     }
   },
 
