@@ -1,20 +1,20 @@
 <template>
     <div class="div-wikis-home">
-        
+
         <div class="div-aside-home">
-            <div class="aside-head"> 
+            <div class="aside-head">
                 <slot name="header">
                     <h1 class="title-home-aside"> {{ title }} </h1>
-                </slot>    
+                </slot>
             </div>
             <div class="div-aside-container">
-                <slot name="content">    
+                <slot name="content">
                     <div class="home-aside-container">
-                        <h1 v-for="wiki in wikis" :key="wiki.titulo"> 
-                           <a :href=wiki.url>{{ wiki.titulo }}</a>  
+                        <h1 v-for="wiki in wikis" :key="wiki.titulo">
+                           <a :href="wiki.url" target="_blank">{{ wiki.titulo }}</a>  
                         </h1>
                     </div>
-                </slot>    
+                </slot>
             </div>
         </div>
 
@@ -29,7 +29,7 @@ export default {
   name: 'Wikis',
 
   mixins: [ url ],
-  
+
   data(){
       return{
           wikis: '',
@@ -37,7 +37,7 @@ export default {
       };
   },
 
-  methods: { 
+  methods: {
       initWikis() {
           axios
             .get(this.BASE_URL + 'api/wikis')
@@ -51,6 +51,5 @@ export default {
         this.initWikis();
     }
 
-}   
+}
 </script>
-

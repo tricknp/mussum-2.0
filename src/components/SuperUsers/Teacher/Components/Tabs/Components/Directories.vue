@@ -120,13 +120,14 @@ import { showModal } from "../../../../../_mixins/showModal";
 import IconAdd from "../../../../../_utils/Svgs/IconAdd";
 import tree from "../../../../../UIComponents/Tree/Tree";
 import Modal from "../../../../../UIComponents/Modal";
+import Empty from "../../../../../UIComponents/EmptyCacildis";
 
 const ComponentClass = Vue.extend(tree);
 
 export default {
   name: "Directories",
 
-  components: { tree, IconAdd, Modal },
+  components: { tree, IconAdd, Modal, Empty },
 
   mixins: [url, showModal],
 

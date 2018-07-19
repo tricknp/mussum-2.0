@@ -1,7 +1,5 @@
 <template>
-  <div class="">
-    <h1>personal-site</h1>
-  </div>
+  <span>site</span>
 </template>
 
 <script>

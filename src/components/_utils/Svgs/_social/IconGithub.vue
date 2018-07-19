@@ -1,7 +1,5 @@
 <template lang="html">
-  <div class="">
-    <h1>github</h1>
-  </div>
+  <span>github</span>
 </template>
 
 <script>

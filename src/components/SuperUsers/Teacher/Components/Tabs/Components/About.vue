@@ -1,8 +1,11 @@
 <template>
   <div class="about-container">
-    <div class="about-content">
 
-      <div class="about-content-item">
+    <Empty v-if="allEmpty && !isOwner" />
+
+    <div v-else class="about-content">
+
+      <div v-if="!emptyResume && !isOwner || isOwner" class="about-content-item">
         <div class="div-edit-item">
           <h1 class="about-title"> Resumo </h1>
           <div v-if="isOwner">
@@ -13,7 +16,7 @@
           <textarea v-model="resumo" :disabled="disabled" ref="resumo"  class="textarea-about"></textarea>
       </div>
 
-      <div class="about-content-item">
+      <div v-if="!emptyFormation && !isOwner || isOwner" class="about-content-item">
         <div class="div-edit-item">
           <h1 class="about-title"> Formação Academica </h1>
           <div v-if="isOwner">
@@ -24,7 +27,7 @@
         <textarea v-model="formacao" :disabled="disabled" ref="formacao"  class="textarea-about"></textarea>
       </div>
 
-      <div class="about-content-item">
+      <div v-if="!emptySocial && !isOwner || isOwner" class="about-content-item">
         <div class="div-edit-item">
           <h1 class="about-title"> Contato </h1>
           <div v-if="isOwner">
@@ -32,17 +35,19 @@
           </div>
         </div>
 
-        <div>
-          <a @click="showWpp == true" target="_blank" v-if="!emptyWPP"> <IconWhatsapp /> </a>
-          <a :href="facebook" target="_blank" v-if="!emptyFB" >   <IconFacebook     /> </a>
-          <a :href="twitter"  target="_blank" v-if="!emptyTT">    <IconTwitter      /> </a>
-          <a :href="linkedin" target="_blank" v-if="!emptyLKD">   <IconLinkedin     /> </a>
-          <a :href="google"   target="_blank" v-if="!emptyGPlus"> <IconGooglePlus   /> </a>
-          <a :href="youtube"  target="_blank" v-if="!emptyYT">    <IconYoutube      /> </a>
-          <a :href="github"   target="_blank" v-if="!emptyGH">    <IconGithub       /> </a>
-          <a :href="site"     target="_blank" v-if="!emptySite">  <IconPersonalSite /> </a>
+        <div class="about-content-social">
+          <div class="about-social-icons">
+            <a @click="WppText = true"          v-if="!emptyWPP">   <IconWhatsapp     /> </a>
+            <a :href="facebook" target="_blank" v-if="!emptyFB" >   <IconFacebook     /> </a>
+            <a :href="twitter"  target="_blank" v-if="!emptyTT">    <IconTwitter      /> </a>
+            <a :href="linkedin" target="_blank" v-if="!emptyLKD">   <IconLinkedin     /> </a>
+            <a :href="google"   target="_blank" v-if="!emptyGPlus"> <IconGooglePlus   /> </a>
+            <a :href="youtube"  target="_blank" v-if="!emptyYT">    <IconYoutube      /> </a>
+            <a :href="github"   target="_blank" v-if="!emptyGH">    <IconGithub       /> </a>
+            <a :href="site"     target="_blank" v-if="!emptySite">  <IconPersonalSite /> </a>
+          </div>
+          <div v-if="WppText">{{ whatsapp }}</div>
         </div>
-        <h2 v-if="showWpp">{{ whatsapp }}</h2>
       </div>
     </div>
 
@@ -64,9 +69,7 @@
             <button @click="cancel()" class="modal-buttons">Cancelar</button>
             <button @click="editSocial()" class="modal-buttons">Salvar</button>
         </div>
-
     </Modal>
-
   </div>
 </template>
 
@@ -74,6 +77,7 @@
 <script>
 import axios from "axios";
 import Modal from  '../../../../../UIComponents/Modal'
+import Empty from  '../../../../../UIComponents/EmptyCacildis'
 import { showModal } from  '../../../../../_mixins/showModal'
 import { url } from "../../../../../_mixins/url";
 import { edit } from "../../../../../_mixins/edit";
@@ -96,6 +100,7 @@ export default {
      IconEdit,
      IconOk,
      Modal,
+     Empty,
      IconFacebook,
      IconTwitter,
      IconLinkedin,
@@ -119,7 +124,7 @@ export default {
       disabled: true,
       social: '',
       id: "",
-      showWpp: false,
+      WppText: false,
 
       facebook :  '',
       youtube  :  '',
@@ -130,13 +135,18 @@ export default {
       site     :  '',
       google   :  '',
 
+      emptyResume: true,
+      emptyFormation: true,
+      //emptySocial: true,
     };
   },
 
   computed: {
     isOwner: function() {
       if (this.username == localStorage.username) {
-        return true;
+        return true
+      }else{
+        return false
       }
     },
     emptyFB: function(){
@@ -170,7 +180,40 @@ export default {
     emptyGPlus: function(){
       if(this.google == null || this.google == '') return true
       else return false
-    }
+    },
+
+    emptySocial: function(){
+      if (this.emptyFB && this.emptyYT && this.emptyGH && this.emptyWPP &&
+          this.emptyTT && this.emptyLKD && this.emptySite && this.emptyGPlus
+         ){
+        console.log('social false');
+        return true
+      }else{
+        console.log('social false')
+        return false
+      }
+    },
+
+    allEmpty: function(){
+      if ((this.resumo == '' || this.resumo == null)
+      && (this.formacao == '' || this.formacao == null)
+      && this.emptyFB
+      && this.emptyYT
+      && this.emptyGH
+      && this.emptyWPP
+      && this.emptyTT
+      && this.emptyLKD
+      && this.emptySite
+      && this.emptyGPlus )
+      {
+        console.log('all true')
+        return true
+      }else{
+        console.log('all false')
+        return false
+      }
+    },
+
   },
 
   created() {
@@ -194,17 +237,29 @@ export default {
         this.professor = res.data;
         this.refresh(this.username);
 
-        axios.get(`${this.BASE_URL}api/social/${this.username}`).then( res => {
-          this.facebook = res.data.facebook
-          this.youtube  = res.data.youtube
-          this.github   = res.data.github
-          this.twitter  = res.data.twitter
-          this.whatsapp = res.data.whatsapp
-          this.linkedin = res.data.linkedin
-          this.site     = res.data.site
-          this.google   = res.data.google
-        })
-      });
+        if (this.resumo == '' || this.resumo == null) {
+          this.emptyResume = true
+        }else {
+          this.emptyResume = false
+        }
+
+        if (this.formacao == '' || this.formacao == null) {
+          this.emptyFormation = true
+        }else {
+          this.emptyFormation = false
+        }
+      })
+      
+      axios.get(`${this.BASE_URL}api/social/${this.username}`).then( res => {
+        this.facebook = res.data.facebook
+        this.youtube  = res.data.youtube
+        this.github   = res.data.github
+        this.twitter  = res.data.twitter
+        this.whatsapp = res.data.whatsapp
+        this.linkedin = res.data.linkedin
+        this.site     = res.data.site
+        this.google   = res.data.google
+      })
     },
 
     editSocial(){
@@ -255,7 +310,7 @@ export default {
         .then(res => {
           console.log(res.data)
         })
-    }
+    },
   }
 };
 </script>

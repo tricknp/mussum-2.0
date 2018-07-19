@@ -4,20 +4,20 @@
       <div class="aside-head">
           <slot name="header">
             <h1 class="title-home-aside"> {{ title }} </h1>
-          </slot>  
+          </slot>
       </div>
-    
+
       <div class="div-aside-container">
         <slot name="content">
           <div class="home-aside-container">
             <h1 v-for="diretorio in diretorios" :key="diretorio.titulo">
-                <a :href=diretorio.url>{{ diretorio.titulo }}</a>  
+                <a :href="diretorio.url" target="_blank">{{ diretorio.titulo }}</a>  
             </h1>
           </div>
-        </slot>  
+        </slot>
       </div>
-    
-    </div> 
+
+    </div>
   </div>
 </template>
 

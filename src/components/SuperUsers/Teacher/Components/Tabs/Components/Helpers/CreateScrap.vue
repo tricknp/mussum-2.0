@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="show" class="create-scrap"> <IconAdd class="icon-create-scrap" /> </button>
+        <button @click="show" class="create-scrap"> Novo Recado </button>
 
         <Modal v-if="showModal" @show="show" id="modal-container">
             <h1 slot="header">Novo Recado</h1>
@@ -56,8 +56,5 @@ export default {
          })
       }
     }
-
-
-
 }
 </script>

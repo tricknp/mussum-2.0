@@ -2,9 +2,7 @@
   <div class="scrap-content">
 
     <Create v-if="isOwner" @create="init()" />
-
     <div v-for="(scrap, index) in scraps" :key="scrap.id" class="scrap" >
-
       <div v-if="isOwner" class="actions-scrap">
         <button @click="handleDelete(scrap.id)" class="btn-scrap">
           <IconDelete class="icon-scrap" />
@@ -24,8 +22,12 @@
         <textarea v-model="scrap.descricao" :disabled="disabled" ref="desc"  class="scrap-desc"></textarea>
       </div>
       <h4 class="scrap-date"> {{ scrap.data }} </h4>
-
     </div>
+
+    <div v-if="empty">
+      <Empty v-if="empty" />
+     </div>
+
   </div>
 </template>
 
@@ -38,10 +40,11 @@ import { url }        from  '../../../../../_mixins/url'
 import IconEdit       from  '../../../../../_utils/Svgs/IconEdit'
 import IconOk         from  '../../../../../_utils/Svgs/IconOk'
 import IconDelete     from  '../../../../../_utils/Svgs/IconDelete'
+import Empty          from  '../../../../../UIComponents/EmptyCacildis'
 
 export default {
 
-  components: { Create, IconEdit, IconOk, IconDelete},
+  components: { Create, IconEdit, IconOk, IconDelete, Empty},
 
   mixins: [ showModal, url ],
 
@@ -50,6 +53,7 @@ export default {
       disabled: true,
       scraps: '',
       titleFocused: false,
+      empty: true
     }
   },
 
@@ -78,6 +82,13 @@ export default {
         .then( res => {
           this.scraps = res.data;
           this.scraps.reverse()
+
+          if (this.scraps.length > 0) {
+            this.empty = false
+          }else {
+            this.empty = true
+          }
+
         })
     },
 

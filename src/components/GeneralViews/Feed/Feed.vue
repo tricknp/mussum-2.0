@@ -16,7 +16,7 @@
 
                       <div class="content-aligned">
                         <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
-                        <div class="feed-text-content">
+                      <div class="feed-text-content">
                             <p>
                               <router-link :to="{path: `professor/${content.username}`}">
                                 <b class="teacher-name-feed" >{{ content.professor }}</b>
@@ -30,6 +30,37 @@
                       </div>
                         <p class="feed-date"> {{ content.dataCriacao }} </p>
                     </div>
+
+                    <div v-if="content.tipo == 'link'" class="feed-upload">
+
+                        <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
+                          <IconDelete class="icon-delete-feed" />
+                        </button>
+
+                        <div class="content-aligned">
+
+                            <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
+
+                          <div class="feed-text-content">
+                            <p>
+                              <router-link :to="{path: `professor/${content.username}`}">
+                                <b class="teacher-name-feed">{{ content.professor }}</b>
+                              </router-link>
+                              {{ textLink }}
+                            </p>
+
+                            <b><p class="feed-archive-name">
+                              <a :href="content.link" target="_blank">
+                                {{ `${content.titulo}` }}
+                              </a>
+                            </p></b>
+
+                            <p> {{ `${content.comentario}` }}  </p>
+                          </div>
+                        </div>
+                            <p class="feed-date"> {{ content.dataCriacao }} </p>
+                    </div>
+
 
                     <div v-if="content.tipo == 'recado'" class="feed-recado"  >
 
@@ -65,7 +96,7 @@
                             <router-link :to="{path: `professor/${content.username}`}">
                               <!-- <b class="teacher-name-feed">{{ content.professor }}</b> -->
                             </router-link>
-                          <span class="title-aviso"> {{ textAviso }} </span> 
+                          <span class="title-aviso"> {{ textAviso }} </span>
                           </p>
                             <b> <p class="feed-text-aviso"> {{ `${content.titulo}` }} </p> </b>
                           <p> {{ `${content.comentario}` }} </p>
@@ -74,36 +105,6 @@
                           <p class="feed-date"> {{ content.dataCriacao }} </p>
                     </div>
 
-                    <div v-if="content.tipo == 'link'" class="feed-upload">
-
-                        <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
-                          <IconDelete class="icon-delete-feed" />
-                        </button>
-
-                        <div class="content-aligned">
-                          <div>
-                            <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
-                          </div>
-
-                          <div class="feed-text-content">
-                            <p>
-                              <router-link :to="{path: `professor/${content.username}`}">
-                                <b class="teacher-name-feed">{{ content.professor }}</b>
-                              </router-link>
-                              {{ textLink }}
-                            </p>
-
-                            <b><p class="feed-archive-name">
-                              <a :href="content.link" target="_blank">
-                                {{ `${content.titulo}` }}
-                              </a>
-                            </p></b>
-
-                            <p> {{ `${content.comentario}` }}  </p>
-                          </div>
-                        </div>
-                            <p class="feed-date"> {{ content.dataCriacao }} </p>
-                    </div>
 
                     <div v-if="content.tipo == 'wiki'" class="feed-aside">
 

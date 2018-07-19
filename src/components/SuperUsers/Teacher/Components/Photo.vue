@@ -1,15 +1,15 @@
 <template>
   <div class="div-teacher-img">
-      
+
       <div v-show="upload">
         <PhotoUpload v-if="this.$bus.isOwner" />
       </div>
-    
+
       <div class="square-photo" v-show="photo">
-        
+
         <img v-if="img" class="teacher-photo" :src="`data:image/png;base64,${img}`">
         <img v-if="!img" class="teacher-photo" :src="defaultImg">
-        
+
         <button @click="showUpload">
           <IconEdit v-if="this.$bus.isOwner" class="edit-photo-profile" />
         </button>
@@ -17,7 +17,7 @@
       </div>
 
   </div>
- 
+
 </template>
 
 
@@ -68,11 +68,11 @@ export default {
 
   created() {
     this.getPhoto();
-    
+
     this.$bus.$on("selectProfessor", username => {
       this.getPhoto();
     });
-    
+
     this.$bus.$on('onUpload', () => {
       this.upload = false;
       this.photo = true;

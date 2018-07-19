@@ -5,6 +5,7 @@
         <span class="span-nav-photo">
           <Arrow class="arrow-header" />
           <img v-if="img" class="nav-teacher-photo" :src="`data:image/png;base64,${img}`">
+          <img v-else     class="nav-teacher-photo" :src="defaultImg">
         </span>
       </a>
 
@@ -16,15 +17,18 @@
       <div slot="content" id="dropdown-content">
         <menus>
 
-          <menu-item v-if="isAdmin">
+          <span v-if="isAdmin">
             <router-link :to="{ path: '/admin' }">
               <a> Admin </a>
             </router-link>
-          </menu-item>
+          </span>
 
-          <menu-item v-if='isLoged'>
-            <a v-on:click='signOut'> Sign Out </a>
-          </menu-item>
+          <span v-if='isLoged'>
+            <router-link :to="{ path: '/' }">
+              <a @click='signOut'> Sair </a>
+            </router-link>
+          </span>
+
 
           <menu-item v-else>
             <router-link :to="{ name: 'login' }"> Login </router-link>
@@ -58,7 +62,7 @@ export default {
     return {
       username: '',
       img: '',
-
+      defaultImg: '../../../static/images/blackNwhite.jpeg',
     };
   },
 
@@ -84,8 +88,8 @@ export default {
 
   methods: {
     signOut() {
-      localStorage.clear();
-      this.$router.push("/");
+      localStorage.clear()
+      this.$router.push('/')
     },
 
     getPhoto() {
