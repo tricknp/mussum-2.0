@@ -216,24 +216,63 @@ export default {
             a.style = "display: none";
             a.href = url;
             a.download = fileName;
-            if (fileName.endsWith(".pdf")) {
-              let pdf = new Blob([res.data], {
-                type: "application/pdf"
-              });
-              let pdfURL = window.URL.createObjectURL(pdf);
-              window.open(pdfURL);
-            } else if (fileName.endsWith(".txt") || fileName.endsWith(".sql")) {
-              let pdf = new Blob([res.data], {
-                type: "text/plain"
-              });
-              let pdfURL = window.URL.createObjectURL(pdf);
-              window.open(pdfURL);
-            } else {
-              a.click();
-            }
+            a.click();
             a.remove();
             this.$Progress.finish();
             console.log("download feito.");
+          })
+          .catch(err => {
+            this.$Progress.fail();
+          });
+      }),
+      this.$bus.$on("openFile", (dir, fileName) => {
+        if (
+          fileName.endsWith(".pdf") ||
+          fileName.endsWith(".txt") ||
+          fileName.endsWith(".sql") ||
+          fileName.endsWith(".odt")
+        ) {
+          this.$Progress.start();
+        }
+        axios
+          .get(`${this.BASE_URL}api/download`, {
+            headers: {
+              dir: dir,
+              professor: this.$route.params.targetName,
+              fileName: fileName
+            },
+            responseType: "blob"
+          })
+          .then(res => {
+            console.log("Tentando abrir arquivo: " + fileName);
+            console.log("From directory... " + dir);
+            let blob = new Blob([res.data]);
+            let url = window.URL.createObjectURL(blob);
+            let a = document.createElement("a");
+            document.body.appendChild(a);
+            a.style = "display: none";
+            a.href = url;
+            a.download = fileName;
+            let blobs;
+            if (fileName.endsWith(".pdf")) {
+              blobs = new Blob([res.data], {
+                type: "application/pdf"
+              });
+            }
+            if (
+              fileName.endsWith(".txt") ||
+              fileName.endsWith(".sql") ||
+              fileName.endsWith(".odt")
+            ) {
+              blobs = new Blob([res.data], {
+                type: "text/plain"
+              });
+            }
+            let pdfURL = window.URL.createObjectURL(blobs);
+            window.open(pdfURL);
+            a.remove();
+            this.$Progress.finish();
+            console.log("arquivo aberto. (ou nao)");
           })
           .catch(err => {
             this.$Progress.fail();

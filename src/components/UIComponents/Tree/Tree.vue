@@ -1,6 +1,6 @@
 <template>
   <li class="tree-item">
-    <div @click="toggle(), isFolder ?  itemClicked(model.dir) : null" class="ss">
+    <div  class="ss">
       <InteligentIcon class="inteligent-icon" :model="{extension: model.name}" ></InteligentIcon>
 
       <span v-if="isFolder">
@@ -8,9 +8,12 @@
         <span   v-else>                <IconArrowDown  /> </span>
 
       </span>
+      <div @click="toggle(), isFolder ?  itemClicked(model.dir) : null">
+        <a v-if="model.link" :href="model.link" target="_blank" class="link" >{{ model.name.substr(0, model.name.lastIndexOf('.')) || model.name}}</a>
+        {{ model.link ? null : model.name.substr(0, model.name.lastIndexOf('.')) || model.name  }}
+      </div>
 
-      <a v-if="model.link" :href="model.link" target="_blank" class="link" >{{ model.name.substr(0, model.name.lastIndexOf('.')) || model.name}}</a>
-      {{ model.link ? null : model.name.substr(0, model.name.lastIndexOf('.')) || model.name  }}
+      <button v-if="isOpenable" @click="openFile">abrir no navegador</button>
 
       <div class="tree-buttons">
         <button v-if="isVisible  && !isVisibleProc && this.$bus.isOwner" @click="toggleVisible" v-tooltip="'Ocultar'">
@@ -103,8 +106,11 @@ export default {
 
     if (this.$bus.dirs) {
       if (
-        ("/" + this.$bus.dirs+'/').startsWith(
-          this.model.dir.substring(removeUsernameIndex) + "/" + this.model.name + '/'
+        ("/" + this.$bus.dirs + "/").startsWith(
+          this.model.dir.substring(removeUsernameIndex) +
+            "/" +
+            this.model.name +
+            "/"
         )
       ) {
         this.refreshChild();
@@ -129,6 +135,21 @@ export default {
     isVisible: function() {
       //return this.model.children && this.model.children.length;
       return this.model.isVisible;
+    },
+    isOpenable: function() {
+      if (this.model.name.endsWith(".pdf")) {
+        return true;
+      }
+      if (this.model.name.endsWith(".txt")) {
+        return true;
+      }
+      if (this.model.name.endsWith(".sql")) {
+        return true;
+      }
+      if (this.model.name.endsWith(".odt")) {
+        return true;
+      }
+      return false;
     }
   },
   methods: {
@@ -248,6 +269,9 @@ export default {
         username: this.model.username,
         dir: this.model.dir + "/" + this.model.name
       });
+    },
+    openFile() {
+      this.$bus.$emit("openFile", this.model.dir, this.model.name);
     }
   }
 };
