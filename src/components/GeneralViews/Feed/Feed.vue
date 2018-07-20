@@ -23,7 +23,7 @@
                               </router-link>
                                 {{textUpload}}
                                 <b class="feed-link-place">
-                                  <router-link :to="{ path: `professor/${userPath}/diretorios${dirPath}` }">
+                                  <router-link :to="{ path: `professor/${content.username}/diretorios${getPath(content.dir)}` }">
                                     {{ content.dir }}
                                   </router-link>
                                 </b>
@@ -213,7 +213,7 @@ export default {
       let initialSize = path[0].length
       let totalSize = el.length
       this.userPath = path[0]
-      this.dirPath = el.substring(initialSize, totalSize)
+      return el.substring(initialSize, totalSize)
     },
 
     feed() {
