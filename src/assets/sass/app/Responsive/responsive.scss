@@ -192,6 +192,9 @@
 }
 
 @media screen and (max-width: 800px){
+  #logo { display: none;}
+  .short-logo { display: block; }
+
   .teacher-description
   {
       margin: .5em 1em;
@@ -215,4 +218,68 @@
   {
     display: none;
   }
+}
+
+@media screen and (max-width: 360px){
+  .home-container
+  {
+      width: 100%;
+      height: 100%;
+  }
+
+  .feed
+  {
+    width: 100%;
+    height: 100vh;
+  }
+
+  .square-photo
+  {
+      width: 4em;
+      height: 4em;
+  }
+
+
+  .teacher-page-content
+  {
+    width: $full-size;
+    height: $full-size;
+  }
+
+  .teacher-profile
+  {
+      .div-teacher-img
+      {
+          width: 15%;
+          margin-left: 1%;
+      }
+
+      .container
+      {
+          height: 7.2em;
+      }
+
+      .teacher-description
+      {
+          font-size: 1.65em;
+          margin: .3em;
+          .teacher-name
+          {
+            font-size: .8em;
+          }
+
+          .div-desc-teacher{
+              width: 13em;
+          }
+      }
+  }
+
+  .tabs-header
+  {
+    span:nth-child(1)
+    {
+        margin-left: 20%;
+    }
+  }
+
 }
