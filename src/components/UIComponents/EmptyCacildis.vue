@@ -9,23 +9,3 @@
 export default {
 }
 </script>
-
-<style>
-.cacildis-container
-{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.cacildis-text
-{
-  font-size: 1.7em;
-  color: #000;
-}
-
-.cacildis-image
-{
-  width: 12em;
-}
-</style>

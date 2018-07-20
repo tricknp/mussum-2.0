@@ -33,6 +33,15 @@
     {
         width: 72%;
     }
+    .cacildis-container
+    {
+      margin-top: 9em;
+    }
+
+    .about-container, .scrap-content, .directories
+    {
+      min-height: 42em;
+    }
 }
 
 @media screen and (max-width: 1440px){
@@ -90,6 +99,24 @@
         margin: .4% auto;
     }
 
+    .about-container, .scrap-content, .directories
+    {
+      min-height: 32.5em;
+    }
+
+    .cacildis-container
+    {
+      margin-top: 2em;
+    }
+
+    .textarea-about
+    {
+      min-height: 3.6em;
+    }
+
+    .teacher-page-content{
+      height: 84vh;
+    }
 }
 
 @media screen and (max-width: 1280px){
@@ -118,6 +145,16 @@
       {
         margin-left: -43%;
       }
+    }
+
+    .about-container, .scrap-content, .directories
+    {
+      min-height: 32em;
+    }
+
+    .cacildis-container
+    {
+      margin-top: 3em;
     }
 }
 

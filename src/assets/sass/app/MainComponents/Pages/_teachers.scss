@@ -7,9 +7,9 @@
 {
     @extend %equal-flex-items;
     justify-content: space-around;
-    margin: .5% auto;
+    margin: 1% auto;
     width: 67%;
-    height: 83vh;
+    height: 86vh;
 
 }
 
@@ -18,7 +18,7 @@
     border-radius: 3px;
     background: $absolute-white;
     overflow: auto;
-    min-height: 25em;
+    min-height: 53em;
     max-height: 100%;
     .select-course
     {
