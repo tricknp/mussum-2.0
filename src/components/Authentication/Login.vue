@@ -98,7 +98,8 @@ export default {
           if (role === "professor") {
             return this.$router.push(`professor/${this.username.toLowerCase()}`);
           } else if (role === "admin") {
-            return this.$router.push(`/admin`);
+            //return this.$router.push(`/admin`);
+            return this.$router.push(`professor/${this.username.toLowerCase()}`);
           }
 
           this.$Progress.finish()
