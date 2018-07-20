@@ -13,7 +13,7 @@
 
           <div v-else v-for="(res, index) in response" :key="index">
             <div v-if="res.type == 'folder'" class="search-type">
-              <router-link :to="{ path: `professor/${res.username}/diretorios${res.dir}` }" class="search-type-link">
+              <router-link exact :to="`/professor/${res.username}/diretorios${res.dir+'/'+res.name}`" class="search-type-link">
                 <IconFolder />
                 <div class="text-search-box">
                   <h1 class="search-box-title"> {{ res.name }} </h1>
