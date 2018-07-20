@@ -38,6 +38,8 @@
        ></tree>
      </div>
 
+     <Empty v-if="this.emptyRepo"></Empty>
+
     <modal v-if="showModal" @show="show()" id="modal-container">
       <h1 slot="header">Novo Pasta</h1>
       <form slot="content" class="form-modal">
@@ -152,7 +154,8 @@ export default {
       comment: "",
       showOtherCourse: false,
       visibility: true,
-      isLink: false
+      isLink: false,
+      emptyRepo: false
     };
   },
   beforeDestroy() {
@@ -453,6 +456,11 @@ export default {
         })
         .then(res => {
           let folders = res.data.pastas;
+          if (folders.length === 0) {
+            this.emptyRepo = true;
+          } else {
+            this.emptyRepo = false;
+          }
           folders.forEach(element => {
             this.treeData.push({
               id: element.id,
