@@ -4,6 +4,7 @@
         <div class="header-container">
             <router-link :to="{path:'/'}">
                 <img :src="logo" id="logo">
+                <img :src="shortLogo" class="short-logo">
             </router-link>
 
             <div class="center-header">
@@ -40,7 +41,8 @@ export default {
 
   data(){
       return{
-          logo: '../../../../static/images/mussum2.0.png'
+          logo: '../../../../static/images/mussum2.0.png',
+          shortLogo: '../../../../static/images/logo.svg'
       };
   }
 
@@ -62,5 +64,11 @@ export default {
 .icon-alert:hover{
     fill: #fff;
     transition: ease-in .15s;
+}
+
+@media screen and (max-width: 600px){
+  .icon-alert{
+    display: none;
+  }
 }
 </style>

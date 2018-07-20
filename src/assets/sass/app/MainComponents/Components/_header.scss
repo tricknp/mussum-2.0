@@ -69,20 +69,15 @@
 
         .nav-list
         {
-            #btn-nav-list
-            {
-                margin-left: 1em;
-            }
+            #btn-nav-list { margin-left: 1em; }
         }
 
     }
 
-    #logo
-    {
-        width: 7em;
-    }
 }
 
+#logo { width: 7em; }
+.short-logo { display: none; width: 2.8em;}
 
 .span-nav-photo
 {
