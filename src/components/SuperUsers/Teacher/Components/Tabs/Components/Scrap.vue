@@ -24,9 +24,7 @@
       <h4 class="scrap-date"> {{ scrap.data }} </h4>
     </div>
 
-    <div v-if="empty">
-      <Empty v-if="empty" />
-     </div>
+    <Empty v-if="empty" />
 
   </div>
 </template>

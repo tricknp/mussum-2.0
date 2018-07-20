@@ -249,7 +249,7 @@ export default {
           this.emptyFormation = false
         }
       })
-      
+
       axios.get(`${this.BASE_URL}api/social/${this.username}`).then( res => {
         this.facebook = res.data.facebook
         this.youtube  = res.data.youtube

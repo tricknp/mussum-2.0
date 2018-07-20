@@ -11,7 +11,7 @@
                 :targetName="professor.username" >
                 <router-link :to="{ path: '/professor/' + professor.username.toLowerCase() }" >
                   <a class="ass" @click="select(professor.username)">
-                    {{ professor.nome }}
+                    {{ `${professor.nome} ${professor.sobrenome}` }}
                   </a>
                 </router-link>
             </span>

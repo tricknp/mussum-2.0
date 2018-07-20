@@ -92,9 +92,8 @@
 
     .feed-link-place
     {
-        color: $medium-blue;
+        a { color: $medium-blue; }
         cursor: pointer;
-
     }
 
     .feed-archive-name

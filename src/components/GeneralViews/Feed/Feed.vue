@@ -22,7 +22,11 @@
                                 <b class="teacher-name-feed" >{{ content.professor }}</b>
                               </router-link>
                                 {{textUpload}}
-                                <b class="feed-link-place"> {{ content.dir }}</b>
+                                <b class="feed-link-place">
+                                  <router-link :to="{ path: `professor/${userPath}/diretorios${dirPath}` }">
+                                    {{ content.dir }}
+                                  </router-link>
+                                </b>
                             </p>
                             <p> <b class="feed-archive-name">{{ content.arquivo }}</b> </p>
                             <p> {{ content.comentario }} </p>
@@ -113,9 +117,7 @@
                         </button>
 
                         <div class="content-aligned">
-                          <div>
                             <img v-if="content.img" class="feed-photo" :src="`${content.img}`">
-                          </div>
 
                           <div class="feed-text-content">
                             <p>
@@ -148,6 +150,17 @@ import LoginVue from "../../Authentication/Login.vue";
 import IconDelete from "../../_utils/Svgs/IconDelete";
 
 export default {
+
+  components: { IconDelete },
+
+  mixins: [url],
+
+  props: {
+    path:{
+      type: Object
+    }
+  },
+
   data() {
     return {
       username: "",
@@ -156,24 +169,32 @@ export default {
       textRecado: "adicionou um novo recado.",
       textLink: "adicionou um novo link.",
       textWiki: "Foi adicionado uma nova Wiki.",
-      textAviso: "Aviso!"
+      textAviso: "Aviso!",
+      userPath: "",
+      dirPath: "",
     };
   },
 
-  components: { IconDelete },
 
-  mixins: [url],
 
   created() {
     this.feed();
   },
 
   methods: {
-    getphoto(feed) {
-      if (feed.tipo == "wiki" || feed.tipo == "aviso") {
-            feed.img = "../../../../static/images/blackNwhite.jpeg";
+    getPhoto(feed) {
+      if (feed.tipo == "aviso") {
+            feed.img = "../../../../static/images/megaphone.svg";
             this.feedContent.push({});
             this.feedContent.splice(-1, 1); // isso aqi é pra n acumular objetos vazios no array por causa da gambiarra
+      }else if (feed.tipo == "wiki") {
+            feed.img = "../../../../static/images/wikipedia.svg";
+            this.feedContent.push({});
+            this.feedContent.splice(-1, 1); // isso aqi é pra n acumular objetos vazios no array por causa da gambiarra
+      }else if (feed.tipo == "horario") {
+            feed.img = "../../../../static/images/wall-clock.svg";
+            this.feedContent.push({});
+            this.feedContent.splice(-1, 1);
       } else {
         axios
           .get(`${this.BASE_URL}api/photo`, {
@@ -187,6 +208,14 @@ export default {
       }
     },
 
+    getPath(el){
+      let path = el.split('/')
+      let initialSize = path[0].length
+      let totalSize = el.length
+      this.userPath = path[0]
+      this.dirPath = el.substring(initialSize, totalSize)
+    },
+
     feed() {
       this.$Progress.start();
       axios
@@ -194,8 +223,8 @@ export default {
         .then(res => {
           this.feedContent = res.data;
           this.feedContent.forEach(element => {
-            this.getphoto(element);
-
+            this.getPhoto(element);
+            this.getPath(element.dir);
             if (element.username == localStorage.username) {
               this.username = element.username;
             }
