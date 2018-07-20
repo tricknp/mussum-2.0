@@ -20,7 +20,7 @@
           <input type="text"  v-model="professor.sobrenome"  placeholder="sobrenome" required>
           <input type="email" v-model="professor.email" placeholder="email" >
           <input type="text"  v-model="professor.username" placeholder="username" required>
-          <input type="text"  v-model="professor.password" placeholder="password" required >
+          <input type="password"  v-model="professor.password" placeholder="password" required >
         </form>
 
         <div slot="footer">
