@@ -1,25 +1,25 @@
 <template>
   <div>
-    
+
     <vue-progress-bar></vue-progress-bar>
 
     <Home class="login" />
 
-    <modal v-if="showModal" 
+    <modal v-if="showModal"
         @close="showModal = false">
 
         <div slot="header">
-         <router-link :to="{ path: '/' }"> 
+         <router-link :to="{ path: '/' }">
             <button class="btn-close-log">
               <IconDelete class="icon-log" />
             </button>
-          </router-link> 
+          </router-link>
           <img :src="senacLogo" id="senac-logo">
         </div>
         <form slot="content" class="form-login">
           <input type="text" v-model="username" name="username" placeholder="Username">
           <input type="password" v-model="password" name="password" placeholder="Password">
-        </form>  
+        </form>
 
         <div slot="subContent">
             <button type="submit" class="btn-login" @click.prevent="onSubmit">ENTRAR</button>
@@ -45,11 +45,11 @@ import IconDelete from '../_utils/Svgs/IconDelete'
 export default {
   name: "Login",
 
-  components: 
-  { 
+  components:
+  {
     Home,
-    Modal,  
-    IconDelete 
+    Modal,
+    IconDelete
   },
 
   mixins: [url],
@@ -93,12 +93,13 @@ export default {
           localStorage.setItem("role", role);
           localStorage.setItem("nome", nome);
           localStorage.setItem("username", this.username)
-          
+
 
           if (role === "professor") {
             return this.$router.push(`professor/${this.username.toLowerCase()}`);
           } else if (role === "admin") {
-            return this.$router.push(`/admin`);
+            //return this.$router.push(`/admin`);
+            return this.$router.push(`professor/${this.username.toLowerCase()}`);
           }
 
           this.$Progress.finish()
