@@ -1,7 +1,7 @@
 <template>
     <div class="search-container">
       <div class="search">
-          <input type="text" class="input-search" ref="search" v-model="data" placeholder="Pesquisar...">
+          <input type="text" class="input-search" ref="search" @keyup="search" v-model="data" placeholder="Pesquisar...">
           <button @click="focus" class="btn-header-search">
               <IconSearch class="icon-search" />
           </button>
@@ -61,10 +61,6 @@ export default {
     }
   },
 
-  updated(){
-    this.search()
-  },
-
   methods:{
     focus(){
         if (this.$refs.search.value.length <= 0) {
@@ -76,7 +72,7 @@ export default {
         axios.get(`${this.BASE_URL}api/search`, {
           headers: { 'txt': this.data  }
         }).then( res => {
-
+          console.log(this.data)
           this.response = ''
 
           if (res.data != null && res.data != '') {
