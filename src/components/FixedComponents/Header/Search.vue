@@ -23,7 +23,7 @@
             </div>
 
             <div v-if="res.type == 'file'" class="search-type">
-              <router-link exact :to="`/professor/${res.username}/diretorios${res.dir}`" class="search-type-link">
+              <router-link :to="{ path: `professor/${res.username}/diretorios${res.dir}`}" class="search-type-link">
                 <IconFile />
                 <div class="text-search-box">
                   <h1 class="search-box-title"> {{ res.name }} </h1>
@@ -55,7 +55,7 @@ export default {
   data(){
     return{
       response: '',
-      data: '',
+      data: '', 
       empty: true,
       teacher: ''
     }
