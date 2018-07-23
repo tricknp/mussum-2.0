@@ -74,6 +74,7 @@
 
                       <div class="content-aligned">
                         <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
+                        <img v-if="content.imgNotFound" class="feed-photo" :src="`${content.imgNotFound}`">
                         <div class="feed-text-content">
                           <p>
                             <router-link :to="{path: `professor/${content.username}`}">
@@ -150,13 +151,12 @@ import LoginVue from "../../Authentication/Login.vue";
 import IconDelete from "../../_utils/Svgs/IconDelete";
 
 export default {
-
   components: { IconDelete },
 
   mixins: [url],
 
   props: {
-    path:{
+    path: {
       type: Object
     }
   },
@@ -164,18 +164,16 @@ export default {
   data() {
     return {
       username: "",
-      feedContent: "",
+      feedContent: [],
       textUpload: "adicionou um novo arquivo em",
       textRecado: "adicionou um novo recado.",
       textLink: "adicionou um novo link.",
       textWiki: "Foi adicionado uma nova Wiki.",
       textAviso: "Aviso!",
       userPath: "",
-      dirPath: "",
+      dirPath: ""
     };
   },
-
-
 
   created() {
     this.feed();
@@ -184,36 +182,42 @@ export default {
   methods: {
     getPhoto(feed) {
       if (feed.tipo == "aviso") {
-            feed.img = "../../../../static/images/megaphone.svg";
-            this.feedContent.push({});
-            this.feedContent.splice(-1, 1); // isso aqi é pra n acumular objetos vazios no array por causa da gambiarra
-      }else if (feed.tipo == "wiki") {
-            feed.img = "../../../../static/images/wikipedia.svg";
-            this.feedContent.push({});
-            this.feedContent.splice(-1, 1); // isso aqi é pra n acumular objetos vazios no array por causa da gambiarra
-      }else if (feed.tipo == "horario") {
-            feed.img = "../../../../static/images/wall-clock.svg";
-            this.feedContent.push({});
-            this.feedContent.splice(-1, 1);
+        feed.img = "../../../../static/images/megaphone.svg";
+        this.feedContent.push({});
+        this.feedContent.splice(-1, 1); // isso aqi é pra n acumular objetos vazios no array por causa da gambiarra
+      } else if (feed.tipo == "wiki") {
+        feed.img = "../../../../static/images/wikipedia.svg";
+        this.feedContent.push({});
+        this.feedContent.splice(-1, 1); // isso aqi é pra n acumular objetos vazios no array por causa da gambiarra
+      } else if (feed.tipo == "horario") {
+        feed.img = "../../../../static/images/wall-clock.svg";
+        this.feedContent.push({});
+        this.feedContent.splice(-1, 1);
       } else {
         axios
           .get(`${this.BASE_URL}api/photo`, {
             headers: { professor: feed.username }
           })
-          .then((res, err) => {
+          .then(res => {
             feed.img = res.data;
             this.feedContent.push({});
             this.feedContent.splice(-1, 1); // isso aqi é pra n acumular objetos vazios no array por causa da gambiarra
+          })
+          .catch(function(error) {
+            feed.imgNotFound = "../../../../static/images/blackNwhite.jpeg";
+            console.log(this.feedContent);
+            this.feedContent.push({});
+            this.feedContent.splice(-1, 1);
           });
       }
     },
 
-    getPath(el){
-      let path = el.split('/')
-      let initialSize = path[0].length
-      let totalSize = el.length
-      this.userPath = path[0]
-      return el.substring(initialSize, totalSize)
+    getPath(el) {
+      let path = el.split("/");
+      let initialSize = path[0].length;
+      let totalSize = el.length;
+      this.userPath = path[0];
+      return el.substring(initialSize, totalSize);
     },
 
     feed() {
@@ -222,6 +226,7 @@ export default {
         .get(`${this.BASE_URL}api/feed`)
         .then(res => {
           this.feedContent = res.data;
+
           this.feedContent.forEach(element => {
             this.getPhoto(element);
             this.getPath(element.dir);
