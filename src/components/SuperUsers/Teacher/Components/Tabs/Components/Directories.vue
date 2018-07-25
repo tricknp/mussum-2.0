@@ -1,7 +1,7 @@
 
 <template>
   <div class="directories">
-    <vue-progress-bar></vue-progress-bar>
+    
 
     <div v-if="this.$bus.isOwner" class="div-select-course">
       <select v-model="dir" class="select-course">

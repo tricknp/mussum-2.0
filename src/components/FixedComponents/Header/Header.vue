@@ -1,6 +1,7 @@
 <template>
 
     <header class="head">
+      <vue-progress-bar></vue-progress-bar>
         <div class="header-container">
             <router-link :to="{path:'/'}">
                 <img :src="logo" id="logo">

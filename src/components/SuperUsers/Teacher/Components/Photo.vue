@@ -44,17 +44,20 @@ export default {
 
   methods: {
     getPhoto() {
+      this.$Progress.start();
       axios
         .get(`${this.BASE_URL}api/photo`, {
           headers: { professor: this.$route.params.targetName }
         })
         .then((res, err) => {
+          this.$Progress.finish();
           //let f = res.data
           //this.$refs.photo.src = `data:image/png;base64,${f}`;
           //this.img = this.$refs.photo
           this.img = res.data;
         })
         .catch(error => {
+          this.$Progress.finish();
           this.img = 0;
         });
     },
