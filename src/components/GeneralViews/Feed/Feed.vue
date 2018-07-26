@@ -10,9 +10,11 @@
 
                   <div v-if="content.tipo == 'upload'" class="feed-upload">
 
-                      <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
+                    <div class="container-action-feed" v-if="content.username == username">
+                      <button @click="deleteFeed(content.id)" v-tooltip="'Excluir'" >
                         <IconDelete class="icon-delete-feed" />
                       </button>
+                    </div>
 
                       <div class="content-aligned">
                         <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
@@ -37,9 +39,11 @@
 
                     <div v-if="content.tipo == 'link'" class="feed-upload">
 
-                        <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
+                      <div class="container-action-feed" v-if="content.username == username">
+                        <button @click="deleteFeed(content.id)" v-tooltip="'Excluir'">
                           <IconDelete class="icon-delete-feed" />
                         </button>
+                      </div>
 
                         <div class="content-aligned">
 
@@ -68,9 +72,17 @@
 
                     <div v-if="content.tipo == 'recado'" class="feed-recado"  >
 
-                      <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
-                        <IconDelete class="icon-delete-feed" />
-                      </button>
+                      <div class="container-action-feed" v-if="content.username == username">
+                        <button @click="toggleFixed(content.id)" v-if="content.priority == 0" v-tooltip="'Fixar'">
+                          <IconFix class="icon-fix-feed no-pinned" />
+                        </button>
+                        <button @click="toggleFixed(content.id)" v-if="content.priority > 0" v-tooltip="'Desfixar'">
+                          <IconFix class="icon-fix-feed pinned" />
+                        </button>
+                        <button @click="deleteFeed(content.id)" v-tooltip="'Excluir'">
+                          <IconDelete class="icon-delete-feed" />
+                        </button>
+                      </div>
 
                       <div class="content-aligned">
                         <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
@@ -90,9 +102,17 @@
 
                     <div v-if="content.tipo == 'aviso'" class="feed-aviso"  >
 
-                      <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
-                        <IconDelete class="icon-delete-feed" />
-                      </button>
+                      <div class="container-action-feed" v-if="content.username == username">
+                        <button @click="toggleFixed(content.id)" v-if="content.priority == 0" v-tooltip="'Fixar'">
+                          <IconFix class="icon-fix-feed no-pinned" />
+                        </button>
+                        <button @click="toggleFixed(content.id)" v-if="content.priority > 0" v-tooltip="'Desfixar'">
+                          <IconFix class="icon-fix-feed pinned" />
+                        </button>
+                        <button @click="deleteFeed(content.id)" v-tooltip="'Excluir'">
+                          <IconDelete class="icon-delete-feed" />
+                        </button>
+                      </div>
 
                       <div class="content-aligned">
                         <img v-if="content.img" class="feed-photo" :src="`${content.img}`">
@@ -113,9 +133,9 @@
 
                     <div v-if="content.tipo == 'wiki'" class="feed-aside">
 
-                        <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
-                          <IconDelete class="icon-delete-feed" />
-                        </button>
+                      <div class="container-action-feed" v-if="content.username == username">
+                        <button @click="deleteFeed(content.id)"> <IconDelete class="icon-delete-feed" /> </button>
+                      </div>
 
                         <div class="content-aligned">
                             <img v-if="content.img" class="feed-photo" :src="`${content.img}`">
@@ -149,9 +169,10 @@ import axios from "axios";
 import { url } from "../../_mixins/url";
 import LoginVue from "../../Authentication/Login.vue";
 import IconDelete from "../../_utils/Svgs/IconDelete";
+import IconFix from "../../_utils/Svgs/IconFix";
 
 export default {
-  components: { IconDelete },
+  components: { IconDelete, IconFix },
 
   mixins: [url],
 
@@ -171,7 +192,7 @@ export default {
       textWiki: "Foi adicionado uma nova Wiki.",
       textAviso: "Aviso!",
       userPath: "",
-      dirPath: ""
+      dirPath: "",
     };
   },
 
@@ -226,7 +247,7 @@ export default {
         .get(`${this.BASE_URL}api/feed`)
         .then(res => {
           this.feedContent = res.data;
-
+          console.log(this.feedContent)
           this.feedContent.forEach(element => {
             this.getPhoto(element);
             this.getPath(element.dir);
@@ -235,7 +256,6 @@ export default {
             }
           });
 
-          this.feedContent.reverse();
           this.$Progress.finish();
         })
         .catch(err => {
@@ -251,7 +271,12 @@ export default {
           this.feed();
         });
       }
-    }
+    },
+    toggleFixed(id){
+      axios.put(`${this.BASE_URL}api/feed/togglefixed/${id}`).then(res => {
+        this.feed();
+      })
+    },
   }
 };
 </script>

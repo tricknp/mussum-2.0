@@ -99,8 +99,9 @@
     .feed-archive-name
     {
         @extend .feed-link-place;
-        font-size: $default-size - .22em;
+        font-size: $default-size - .14em;
         margin-top: 1.5%;
+        cursor: auto;
     }
 
     .feed-photo
@@ -117,17 +118,39 @@
         color: rgba(0, 0, 0, 0.747);
     }
 
-    .icon-delete-feed
-    {
-        width: .9em;
-    }
 
-    .btn-delete-feed
+    .container-action-feed
     {
-        float: right;
-        margin-right: .2em;
-        // top: .1em;
-        //position: absolute;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      float: right;
+      margin-right: .2em;
+
+      .icon-delete-feed,
+      {
+        width: .92em;
+      }
+
+      %icon-fix-feed
+      {
+        width: 1em;
+        margin-right: -2px;
+      }
+
+      .no-pinned
+      {
+        @extend %icon-fix-feed;
+      }
+
+      .pinned
+      {
+        @extend %icon-fix-feed;
+        fill: $nice-blue;
+      }
+
+
+
     }
 
     .icon-delete-feed

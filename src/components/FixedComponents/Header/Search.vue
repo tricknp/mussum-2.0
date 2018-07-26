@@ -55,7 +55,7 @@ export default {
   data(){
     return{
       response: '',
-      data: '', 
+      data: '',
       empty: true,
       teacher: ''
     }
@@ -72,7 +72,6 @@ export default {
         axios.get(`${this.BASE_URL}api/search`, {
           headers: { 'txt': this.data  }
         }).then( res => {
-          console.log(this.data)
           this.response = ''
 
           if (res.data != null && res.data != '') {

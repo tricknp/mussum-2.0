@@ -3,7 +3,7 @@
 
     <vue-progress-bar></vue-progress-bar>
 
-    <Home class="login" />
+    <!-- <Home class="login"> </Home> -->
 
     <modal v-if="showModal"
         @close="showModal = false">

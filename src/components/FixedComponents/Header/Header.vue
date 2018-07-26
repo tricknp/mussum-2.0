@@ -42,8 +42,8 @@ export default {
 
   data(){
       return{
-          logo: '../../../../static/images/mussum2.0.png',
-          shortLogo: '../../../../static/images/logo.svg'
+          logo: '/../../../../static/images/mussum2.0.png',
+          shortLogo: '/../../../../static/images/logo.svg'
       };
   }
 
