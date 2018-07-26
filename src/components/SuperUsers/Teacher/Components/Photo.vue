@@ -44,17 +44,24 @@ export default {
 
   methods: {
     getPhoto() {
+
+      let professor = this.$route.params.targetName;
       this.$Progress.start();
+
       axios
         .get(`${this.BASE_URL}api/photo`, {
-          headers: { professor: this.$route.params.targetName }
+          headers: { professor: professor }
         })
         .then((res, err) => {
+
+          if (professor == this.$route.params.targetName) {
+            console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP')
+            console.log(this.$route.params.targetName);
+            console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP')
+            this.img = res.data;
+          }
+
           this.$Progress.finish();
-          //let f = res.data
-          //this.$refs.photo.src = `data:image/png;base64,${f}`;
-          //this.img = this.$refs.photo
-          this.img = res.data;
         })
         .catch(error => {
           this.$Progress.finish();
