@@ -1,7 +1,7 @@
 
 <template>
   <div class="directories">
-    
+
 
     <div v-if="this.$bus.isOwner" class="div-select-course">
       <select v-model="dir" class="select-course">
@@ -443,37 +443,39 @@ export default {
     //RUNS ONE TIME TO GET CURSES FOLDERS
     resetRepository() {
       this.treeData = [];
-
-      this.$bus.path = `/professor/${this.$route.params.targetName}/diretorios`;
+      let professor = this.$route.params.targetName;
+      this.$bus.path = `/professor/${professor}/diretorios`;
       this.$bus.dirs = this.$route.params.dir;
 
       axios
         .get(`${this.BASE_URL}api/repository`, {
           headers: {
             dir: this.$route.params.targetName,
-            username: this.$route.params.targetName
+            username: professor
           }
         })
         .then(res => {
-          let folders = res.data.pastas;
-          if (folders.length === 0) {
-            this.emptyRepo = true;
-          } else {
-            this.emptyRepo = false;
-          }
-          folders.forEach(element => {
-            this.treeData.push({
-              id: element.id,
-              name: element.nome,
-              dir: element.dir,
-              isFolder: true,
-              isVisible: element.visivel,
-              link: element.link ? element.link : "",
-              comment: element.comentario ? element.comentario : "",
-              username: this.$route.params.targetName,
-              baseUrl: this.BASE_URL
+          if ((professor = this.$route.params.targetName)) {
+            let folders = res.data.pastas;
+            if (folders.length === 0) {
+              this.emptyRepo = true;
+            } else {
+              this.emptyRepo = false;
+            }
+            folders.forEach(element => {
+              this.treeData.push({
+                id: element.id,
+                name: element.nome,
+                dir: element.dir,
+                isFolder: true,
+                isVisible: element.visivel,
+                link: element.link ? element.link : "",
+                comment: element.comentario ? element.comentario : "",
+                username: this.$route.params.targetName,
+                baseUrl: this.BASE_URL
+              });
             });
-          });
+          }
         });
     },
     addChild() {
