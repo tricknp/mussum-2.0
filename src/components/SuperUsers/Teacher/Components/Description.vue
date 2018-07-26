@@ -102,7 +102,6 @@ export default {
 
   methods: {
     refresh(username) {
-      console.log('REFRESH DESCRIPTION...');
       this.username = username;
       let teacher = this.teachers.find(x => x.username === username);
       this.id = teacher.id;
@@ -110,13 +109,14 @@ export default {
       this.lastname = teacher.sobrenome;
       this.email = teacher.email;
       this.description = teacher.descricao;
-      console.log('REFRESH DESCRIPTION... OK');
     },
 
     getTeacher() {
       axios.get(`${this.BASE_URL}api/professores`).then(res => {
-        this.teachers = res.data;
-        this.refresh(this.username);
+        if (this.username == this.$route.params.targetName) {
+          this.teachers = res.data;
+          this.refresh(this.username);
+        }
       });
     },
 

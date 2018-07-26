@@ -55,9 +55,6 @@ export default {
         .then((res, err) => {
 
           if (professor == this.$route.params.targetName) {
-            console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP')
-            console.log(this.$route.params.targetName);
-            console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP')
             this.img = res.data;
           }
 
