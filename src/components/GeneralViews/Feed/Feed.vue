@@ -271,7 +271,6 @@ export default {
     },
 
     feed() {
-
       this.pageCount++;
       this.$Progress.start();
 
@@ -283,9 +282,9 @@ export default {
           }
 
           if (this.pageCount * 15 > this.feedContent.length) {
-            this.loadMore = false
-          }else {
-            this.loadMore = true
+            this.loadMore = false;
+          } else {
+            this.loadMore = true;
           }
 
           this.feedContent.forEach(element => {
@@ -307,14 +306,22 @@ export default {
       if (decision) {
         axios.delete(`${this.BASE_URL}api/feed/${id}`).then(res => {
           console.log(res.data);
-          this.feed();
+          this.refresh();
         });
       }
     },
     toggleFixed(id) {
       axios.put(`${this.BASE_URL}api/feed/togglefixed/${id}`).then(res => {
-        this.feed();
+        this.refresh();
       });
+    },
+    refresh() {
+      this.feedContent = [];
+      let count = this.pageCount;
+      this.pageCount = 0;
+      for (let i = 0; i < count; i++) {
+        this.feed();
+      }
     }
   }
 };
