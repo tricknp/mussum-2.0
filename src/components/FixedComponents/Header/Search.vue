@@ -12,24 +12,24 @@
           <span class="search-type" v-if="empty"> Sem resultadis... </span>
 
           <div v-else v-for="(res, index) in response" :key="index">
-            <div v-if="res.type == 'folder'" class="search-type">
-              <router-link exact :to="`/professor/${res.username}/diretorios${res.dir+'/'+res.name}`" class="search-type-link">
+            <div v-if="res.type == 'folder'" class="search-type" >
+            <a class="search-type-link" @click="goTo(`/professor/${res.username}/diretorios${res.dir+'/'+res.name}`)">
                 <IconFolder />
                 <div class="text-search-box">
                   <h1 class="search-box-title"> {{ res.name }} </h1>
                   <h4 class="search-box-dir"> {{ `${res.username}${res.dir}` }} </h4>
                 </div>
-              </router-link>
+                </a>
             </div>
 
-            <div v-if="res.type == 'file'" class="search-type">
-              <router-link :to="{ path: `professor/${res.username}/diretorios${res.dir}`}" class="search-type-link">
+            <div v-if="res.type == 'file'" class="search-type" >
+            <a class="search-type-link" @click="goTo(`/professor/${res.username}/diretorios${res.dir}`)">
                 <IconFile />
                 <div class="text-search-box">
                   <h1 class="search-box-title"> {{ res.name }} </h1>
-                  <h4 class="search-box-dir"> {{ res.dir }} </h4>
+                  <h4 class="search-box-dir"> {{ `${res.username}${res.dir}` }} </h4>
                 </div>
-              </router-link>
+                </a>
             </div>
 
           </div>
@@ -40,49 +40,54 @@
 </template>
 
 <script>
-import axios from 'axios'
-import { url } from '../../_mixins/url'
-import IconSearch from '../../_utils/Svgs/IconSearch'
-import IconFile from '../../_utils/Svgs/IconFile'
-import IconFolder from '../../_utils/Svgs/IconFolder'
+import axios from "axios";
+import { url } from "../../_mixins/url";
+import IconSearch from "../../_utils/Svgs/IconSearch";
+import IconFile from "../../_utils/Svgs/IconFile";
+import IconFolder from "../../_utils/Svgs/IconFolder";
 
 export default {
-
   components: { IconSearch, IconFile, IconFolder },
 
-  mixins: [ url ],
+  mixins: [url],
 
-  data(){
-    return{
-      response: '',
-      data: '',
+  data() {
+    return {
+      response: "",
+      data: "",
       empty: true,
-      teacher: ''
-    }
+      teacher: ""
+    };
   },
 
-  methods:{
-    focus(){
-        if (this.$refs.search.value.length <= 0) {
-          this.$refs.search.focus();
-        }
-      },
+  methods: {
+    focus() {
+      if (this.$refs.search.value.length <= 0) {
+        this.$refs.search.focus();
+      }
+    },
 
-      search(){
-        axios.get(`${this.BASE_URL}api/search`, {
-          headers: { 'txt': this.data  }
-        }).then( res => {
-          this.response = ''
+    search() {
+      axios
+        .get(`${this.BASE_URL}api/search`, {
+          headers: { txt: this.data }
+        })
+        .then(res => {
+          this.response = "";
 
-          if (res.data != null && res.data != '') {
+          if (res.data != null && res.data != "") {
             this.empty = false;
             this.response = res.data;
-          }else{
+          } else {
             this.empty = true;
           }
-        })
-      },
-  },
+        });
+    },
 
-}
+    goTo(dir) {
+      this.$router.replace(dir);
+      this.$router.go();
+    }
+  }
+};
 </script>
