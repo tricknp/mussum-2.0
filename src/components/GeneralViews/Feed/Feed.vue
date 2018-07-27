@@ -5,6 +5,7 @@
         <h1 class="feed-title"> Atividades </h1>
 
         <div class="feed-container">
+
             <div  v-for="content in feedContent" :key="content.id" >
                 <div class="feed-types">
 
@@ -160,6 +161,13 @@
 
                 </div>
             </div>
+
+            <div v-if="feedContent.length > 14 && loadMore == true" class="div-load-more">
+              <button @click="feed()" class="btn-load-more">
+                Carregar Mais...
+              </button>
+            </div>
+
         </div>
     </div>
 </template>
@@ -193,6 +201,8 @@ export default {
       textAviso: "Aviso!",
       userPath: "",
       dirPath: "",
+      pageCount: 1,
+      loadMore: false
     };
   },
 
@@ -205,11 +215,11 @@ export default {
       if (feed.tipo == "aviso") {
         feed.img = "../../../../static/images/megaphone.svg";
         this.feedContent.push({});
-        this.feedContent.splice(-1, 1); // isso aqi é pra n acumular objetos vazios no array por causa da gambiarra
+        this.feedContent.splice(-1, 1); // isso aqi \E9 pra n acumular objetos vazios no array por causa da gambiarra
       } else if (feed.tipo == "wiki") {
         feed.img = "../../../../static/images/wikipedia.svg";
         this.feedContent.push({});
-        this.feedContent.splice(-1, 1); // isso aqi é pra n acumular objetos vazios no array por causa da gambiarra
+        this.feedContent.splice(-1, 1); // isso aqi \E9 pra n acumular objetos vazios no array por causa da gambiarra
       } else if (feed.tipo == "horario") {
         feed.img = "../../../../static/images/wall-clock.svg";
         this.feedContent.push({});
@@ -222,7 +232,7 @@ export default {
           .then(res => {
             feed.img = res.data;
             this.feedContent.push({});
-            this.feedContent.splice(-1, 1); // isso aqi é pra n acumular objetos vazios no array por causa da gambiarra
+            this.feedContent.splice(-1, 1); // isso aqi \E9 pra n acumular objetos vazios no array por causa da gambiarra
           })
           .catch(function(error) {
             feed.imgNotFound = "../../../../static/images/blackNwhite.jpeg";
@@ -242,12 +252,23 @@ export default {
     },
 
     feed() {
+
+      this.pageCount++;
       this.$Progress.start();
+
       axios
-        .get(`${this.BASE_URL}api/feed`)
+        .get(`${this.BASE_URL}api/feed/page/${this.pageCount}`)
         .then(res => {
-          this.feedContent = res.data;
-          console.log(this.feedContent)
+          for (let i = 0; i < res.data.length; i++) {
+            this.feedContent.push(res.data[i]);
+          }
+
+          if ((this.pageCount - 1) * 15 > this.feedContent.length) {
+            this.loadMore = false
+          }else {
+            this.loadMore = true
+          }
+
           this.feedContent.forEach(element => {
             this.getPhoto(element);
             this.getPath(element.dir);
@@ -255,7 +276,6 @@ export default {
               this.username = element.username;
             }
           });
-
           this.$Progress.finish();
         })
         .catch(err => {
@@ -272,11 +292,11 @@ export default {
         });
       }
     },
-    toggleFixed(id){
+    toggleFixed(id) {
       axios.put(`${this.BASE_URL}api/feed/togglefixed/${id}`).then(res => {
         this.feed();
-      })
-    },
+      });
+    }
   }
 };
 </script>

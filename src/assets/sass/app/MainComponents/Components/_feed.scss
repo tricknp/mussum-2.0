@@ -160,8 +160,6 @@
         }
     }
 
-
-
     //===================
 
     .content-aligned
@@ -182,4 +180,25 @@
         border-radius: 7px;
         background-color: rgba(202, 200, 200, 0.904);
     }
+}
+
+.div-load-more
+{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: .5em;
+
+  .btn-load-more
+  {
+    width: 97.1%;
+    border: dotted 1px $dark-grey;
+    font-size: 1em;
+    padding: .8em;
+    cursor: pointer;
+
+    &:hover{
+      background: $light-grey;
+    }
+  }
 }
