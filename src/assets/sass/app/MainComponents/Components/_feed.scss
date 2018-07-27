@@ -138,18 +138,24 @@
         margin-right: -2px;
       }
 
-      .no-pinned
+      .--no-pinned
       {
         @extend %icon-fix-feed;
       }
 
-      .pinned
+      .--pinned
       {
         @extend %icon-fix-feed;
-        fill: $nice-blue;
+        fill: $dark-blue;
       }
 
-
+      .--public-pin
+      {
+        @extend %icon-fix-feed;
+        &:hover{
+          fill: $medium-grey;
+        }
+      }
 
     }
 

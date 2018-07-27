@@ -75,14 +75,18 @@
 
                       <div class="container-action-feed" v-if="content.username == username">
                         <button @click="toggleFixed(content.id)" v-if="content.priority == 0" v-tooltip="'Fixar'">
-                          <IconFix class="icon-fix-feed no-pinned" />
+                          <IconFix class="icon-fix-feed --no-pinned" />
                         </button>
                         <button @click="toggleFixed(content.id)" v-if="content.priority > 0" v-tooltip="'Desfixar'">
-                          <IconFix class="icon-fix-feed pinned" />
+                          <IconFix class="icon-fix-feed --pinned" />
                         </button>
                         <button @click="deleteFeed(content.id)" v-tooltip="'Excluir'">
                           <IconDelete class="icon-delete-feed" />
                         </button>
+                      </div>
+
+                      <div v-if="content.username != username" class="container-action-feed">
+                        <IconFix v-if="content.priority > 0" class="icon-fix-feed --public-pin" v-tooltip="'Postagem Fixa'" />
                       </div>
 
                       <div class="content-aligned">
@@ -103,16 +107,20 @@
 
                     <div v-if="content.tipo == 'aviso'" class="feed-aviso"  >
 
-                      <div class="container-action-feed" v-if="content.username == username">
+                      <div v-if="content.username == username || isAdmin" class="container-action-feed">
                         <button @click="toggleFixed(content.id)" v-if="content.priority == 0" v-tooltip="'Fixar'">
-                          <IconFix class="icon-fix-feed no-pinned" />
+                          <IconFix class="icon-fix-feed --no-pinned" v-tooltip="'Fixar'" />
                         </button>
                         <button @click="toggleFixed(content.id)" v-if="content.priority > 0" v-tooltip="'Desfixar'">
-                          <IconFix class="icon-fix-feed pinned" />
+                          <IconFix class="icon-fix-feed --pinned" />
                         </button>
                         <button @click="deleteFeed(content.id)" v-tooltip="'Excluir'">
                           <IconDelete class="icon-delete-feed" />
                         </button>
+                      </div>
+
+                      <div v-if="content.username != username && !isAdmin" class="container-action-feed">
+                        <IconFix v-if="content.priority > 0" class="icon-fix-feed --public-pin" v-tooltip="'Postagem Fixa'" />
                       </div>
 
                       <div class="content-aligned">
@@ -190,6 +198,7 @@ export default {
     }
   },
 
+
   data() {
     return {
       username: "",
@@ -204,6 +213,16 @@ export default {
       pageCount: 0,
       loadMore: false
     };
+  },
+
+  computed: {
+    isAdmin: function(){
+      if (localStorage.role == 'admin') {
+        return true
+      }else {
+        return false
+      }
+    }
   },
 
   created() {
