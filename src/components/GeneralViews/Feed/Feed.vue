@@ -201,7 +201,7 @@ export default {
       textAviso: "Aviso!",
       userPath: "",
       dirPath: "",
-      pageCount: 1,
+      pageCount: 0,
       loadMore: false
     };
   },
@@ -263,7 +263,7 @@ export default {
             this.feedContent.push(res.data[i]);
           }
 
-          if ((this.pageCount - 1) * 15 > this.feedContent.length) {
+          if (this.pageCount * 15 > this.feedContent.length) {
             this.loadMore = false
           }else {
             this.loadMore = true
