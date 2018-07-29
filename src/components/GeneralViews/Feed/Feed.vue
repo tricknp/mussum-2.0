@@ -75,10 +75,10 @@
 
                       <div class="container-action-feed" v-if="content.username == username">
                         <button @click="toggleFixed(content.id)" v-if="content.priority == 0" v-tooltip="'Fixar'">
-                          <IconFix class="icon-fix-feed --no-pinned" />
+                          <IconNoPinned class="icon-fix-feed --no-pinned" />
                         </button>
                         <button @click="toggleFixed(content.id)" v-if="content.priority > 0" v-tooltip="'Desfixar'">
-                          <IconFix class="icon-fix-feed --pinned" />
+                          <IconPinned class="icon-fix-feed --pinned" />
                         </button>
                         <button @click="deleteFeed(content.id)" v-tooltip="'Excluir'">
                           <IconDelete class="icon-delete-feed" />
@@ -86,7 +86,7 @@
                       </div>
 
                       <div v-if="content.username != username" class="container-action-feed">
-                        <IconFix v-if="content.priority > 0" class="icon-fix-feed --public-pin" v-tooltip="'Postagem Fixa'" />
+                        <IconPinned v-if="content.priority > 0" class="icon-fix-feed --public-pin" v-tooltip="'Postagem Fixa'" />
                       </div>
 
                       <div class="content-aligned">
@@ -109,10 +109,10 @@
 
                       <div v-if="content.username == username || isAdmin" class="container-action-feed">
                         <button @click="toggleFixed(content.id)" v-if="content.priority == 0" v-tooltip="'Fixar'">
-                          <IconFix class="icon-fix-feed --no-pinned" v-tooltip="'Fixar'" />
+                          <IconNoPinned class="icon-fix-feed --no-pinned" v-tooltip="'Fixar'" />
                         </button>
                         <button @click="toggleFixed(content.id)" v-if="content.priority > 0" v-tooltip="'Desfixar'">
-                          <IconFix class="icon-fix-feed --pinned" />
+                          <IconPinned class="icon-fix-feed --pinned" />
                         </button>
                         <button @click="deleteFeed(content.id)" v-tooltip="'Excluir'">
                           <IconDelete class="icon-delete-feed" />
@@ -120,7 +120,7 @@
                       </div>
 
                       <div v-if="content.username != username && !isAdmin" class="container-action-feed">
-                        <IconFix v-if="content.priority > 0" class="icon-fix-feed --public-pin" v-tooltip="'Postagem Fixa'" />
+                        <IconPinned v-if="content.priority > 0" class="icon-fix-feed --public-pin" v-tooltip="'Postagem Fixa'" />
                       </div>
 
                       <div class="content-aligned">
@@ -167,6 +167,60 @@
                             <p class="feed-date"> {{ content.dataCriacao }} </p>
                     </div>
 
+                    <div v-if="content.tipo == 'diretorio'" class="feed-aside">
+
+                      <div class="container-action-feed" v-if="content.username == username">
+                        <button @click="deleteFeed(content.id)"> <IconDelete class="icon-delete-feed" /> </button>
+                      </div>
+
+                        <div class="content-aligned">
+                            <img v-if="content.img" class="feed-photo" :src="`${content.img}`">
+
+                          <div class="feed-text-content">
+                            <p>
+                              <router-link :to="{path: `professor/${content.username}`}">
+                                <!-- <b class="teacher-name-feed">Mussum </b> -->
+                              </router-link>
+                              {{ textDiretorio }}
+                            </p>
+
+                            <b><p class="feed-archive-name">
+                              <a :href="content.link" target="_blank">
+                                {{ `${content.titulo}` }}
+                              </a>
+                            </p></b>
+                          </div>
+                        </div>
+                            <p class="feed-date"> {{ content.dataCriacao }} </p>
+                    </div>
+
+                    <div v-if="content.tipo == 'horario'" class="feed-aside">
+
+                      <div class="container-action-feed" v-if="content.username == username">
+                        <button @click="deleteFeed(content.id)"> <IconDelete class="icon-delete-feed" /> </button>
+                      </div>
+
+                        <div class="content-aligned">
+                            <img v-if="content.img" class="feed-photo" :src="`${content.img}`">
+
+                          <div class="feed-text-content">
+                            <p>
+                              <router-link :to="{path: `professor/${content.username}`}">
+                                <!-- <b class="teacher-name-feed">Mussum </b> -->
+                              </router-link>
+                              {{ textHorario }}
+                            </p>
+
+                            <b><p class="feed-archive-name">
+                              <a :href="content.link" target="_blank">
+                                {{ `${content.titulo}` }}
+                              </a>
+                            </p></b>
+                          </div>
+                        </div>
+                            <p class="feed-date"> {{ content.dataCriacao }} </p>
+                    </div>
+
                 </div>
             </div>
 
@@ -185,10 +239,11 @@ import axios from "axios";
 import { url } from "../../_mixins/url";
 import LoginVue from "../../Authentication/Login.vue";
 import IconDelete from "../../_utils/Svgs/IconDelete";
-import IconFix from "../../_utils/Svgs/IconFix";
+import IconPinned from "../../_utils/Svgs/IconPinned";
+import IconNoPinned from "../../_utils/Svgs/IconNoPinned";
 
 export default {
-  components: { IconDelete, IconFix },
+  components: { IconDelete, IconPinned, IconNoPinned },
 
   mixins: [url],
 
@@ -207,6 +262,8 @@ export default {
       textRecado: "adicionou um novo recado.",
       textLink: "adicionou um novo link.",
       textWiki: "Foi adicionado uma nova Wiki.",
+      textHorario: "Foi adicionado uma nova lista de horarios.",
+      textDiretorio: "Foi adicionado uma novo Diretorio.",
       textAviso: "Aviso!",
       userPath: "",
       dirPath: "",
@@ -243,7 +300,11 @@ export default {
         feed.img = "../../../../static/images/wall-clock.svg";
         this.feedContent.push({});
         this.feedContent.splice(-1, 1);
-      } else {
+      } else if (feed.tipo == "diretorio") {
+        feed.img = "../../../../static/images/agenda.svg";
+        this.feedContent.push({});
+        this.feedContent.splice(-1, 1);
+      }else{
         axios
           .get(`${this.BASE_URL}api/photo`, {
             headers: { professor: feed.username }
