@@ -71,6 +71,10 @@ Para informações mais detalhadas de como isso funciona, veja o [guia](http://v
 </table>
 
 ***
+### Contribuição
+Veja o [CONTRIBUTING.md](https://github.com/tricknp/mussum-2.0/blob/master/CONTRIBUTING.md)
+
+***
 ### Licença
 
 Este projeto está licenciado sob a [licença MIT](https://github.com/tricknp/mussum-2.0/blob/master/LICENSE) - veja o arquivo LICENSE.md para obter detalhes.

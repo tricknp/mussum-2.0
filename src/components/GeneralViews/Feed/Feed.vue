@@ -5,14 +5,17 @@
         <h1 class="feed-title"> Atividades </h1>
 
         <div class="feed-container">
+
             <div  v-for="content in feedContent" :key="content.id" >
                 <div class="feed-types">
 
                   <div v-if="content.tipo == 'upload'" class="feed-upload">
 
-                      <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
+                    <div class="container-action-feed" v-if="content.username == username">
+                      <button @click="deleteFeed(content.id)" v-tooltip="'Excluir'" >
                         <IconDelete class="icon-delete-feed" />
                       </button>
+                    </div>
 
                       <div class="content-aligned">
                         <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
@@ -37,9 +40,11 @@
 
                     <div v-if="content.tipo == 'link'" class="feed-upload">
 
-                        <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
+                      <div class="container-action-feed" v-if="content.username == username">
+                        <button @click="deleteFeed(content.id)" v-tooltip="'Excluir'">
                           <IconDelete class="icon-delete-feed" />
                         </button>
+                      </div>
 
                         <div class="content-aligned">
 
@@ -68,12 +73,25 @@
 
                     <div v-if="content.tipo == 'recado'" class="feed-recado"  >
 
-                      <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
-                        <IconDelete class="icon-delete-feed" />
-                      </button>
+                      <div class="container-action-feed" v-if="content.username == username">
+                        <button @click="toggleFixed(content.id)" v-if="content.priority == 0" v-tooltip="'Fixar'">
+                          <IconNoPinned class="icon-fix-feed --no-pinned" />
+                        </button>
+                        <button @click="toggleFixed(content.id)" v-if="content.priority > 0" v-tooltip="'Desfixar'">
+                          <IconPinned class="icon-fix-feed --pinned" />
+                        </button>
+                        <button @click="deleteFeed(content.id)" v-tooltip="'Excluir'">
+                          <IconDelete class="icon-delete-feed" />
+                        </button>
+                      </div>
+
+                      <div v-if="content.username != username" class="container-action-feed">
+                        <IconPinned v-if="content.priority > 0" class="icon-fix-feed --public-pin" v-tooltip="'Postagem Fixa'" />
+                      </div>
 
                       <div class="content-aligned">
                         <img v-if="content.img" class="feed-photo" :src="`data:image/png;base64,${content.img}`">
+                        <img v-if="content.imgNotFound" class="feed-photo" :src="`${content.imgNotFound}`">
                         <div class="feed-text-content">
                           <p>
                             <router-link :to="{path: `professor/${content.username}`}">
@@ -89,9 +107,21 @@
 
                     <div v-if="content.tipo == 'aviso'" class="feed-aviso"  >
 
-                      <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
-                        <IconDelete class="icon-delete-feed" />
-                      </button>
+                      <div v-if="content.username == username || isAdmin" class="container-action-feed">
+                        <button @click="toggleFixed(content.id)" v-if="content.priority == 0" v-tooltip="'Fixar'">
+                          <IconNoPinned class="icon-fix-feed --no-pinned" v-tooltip="'Fixar'" />
+                        </button>
+                        <button @click="toggleFixed(content.id)" v-if="content.priority > 0" v-tooltip="'Desfixar'">
+                          <IconPinned class="icon-fix-feed --pinned" />
+                        </button>
+                        <button @click="deleteFeed(content.id)" v-tooltip="'Excluir'">
+                          <IconDelete class="icon-delete-feed" />
+                        </button>
+                      </div>
+
+                      <div v-if="content.username != username && !isAdmin" class="container-action-feed">
+                        <IconPinned v-if="content.priority > 0" class="icon-fix-feed --public-pin" v-tooltip="'Postagem Fixa'" />
+                      </div>
 
                       <div class="content-aligned">
                         <img v-if="content.img" class="feed-photo" :src="`${content.img}`">
@@ -112,9 +142,9 @@
 
                     <div v-if="content.tipo == 'wiki'" class="feed-aside">
 
-                        <button v-if="content.username == username" class="btn-delete-feed" @click="deleteFeed(content.id)">
-                          <IconDelete class="icon-delete-feed" />
-                        </button>
+                      <div class="container-action-feed" v-if="content.username == username">
+                        <button @click="deleteFeed(content.id)"> <IconDelete class="icon-delete-feed" /> </button>
+                      </div>
 
                         <div class="content-aligned">
                             <img v-if="content.img" class="feed-photo" :src="`${content.img}`">
@@ -137,8 +167,69 @@
                             <p class="feed-date"> {{ content.dataCriacao }} </p>
                     </div>
 
+                    <div v-if="content.tipo == 'diretorio'" class="feed-aside">
+
+                      <div class="container-action-feed" v-if="content.username == username">
+                        <button @click="deleteFeed(content.id)"> <IconDelete class="icon-delete-feed" /> </button>
+                      </div>
+
+                        <div class="content-aligned">
+                            <img v-if="content.img" class="feed-photo" :src="`${content.img}`">
+
+                          <div class="feed-text-content">
+                            <p>
+                              <router-link :to="{path: `professor/${content.username}`}">
+                                <!-- <b class="teacher-name-feed">Mussum </b> -->
+                              </router-link>
+                              {{ textDiretorio }}
+                            </p>
+
+                            <b><p class="feed-archive-name">
+                              <a :href="content.link" target="_blank">
+                                {{ `${content.titulo}` }}
+                              </a>
+                            </p></b>
+                          </div>
+                        </div>
+                            <p class="feed-date"> {{ content.dataCriacao }} </p>
+                    </div>
+
+                    <div v-if="content.tipo == 'horario'" class="feed-aside">
+
+                      <div class="container-action-feed" v-if="content.username == username">
+                        <button @click="deleteFeed(content.id)"> <IconDelete class="icon-delete-feed" /> </button>
+                      </div>
+
+                        <div class="content-aligned">
+                            <img v-if="content.img" class="feed-photo" :src="`${content.img}`">
+
+                          <div class="feed-text-content">
+                            <p>
+                              <router-link :to="{path: `professor/${content.username}`}">
+                                <!-- <b class="teacher-name-feed">Mussum </b> -->
+                              </router-link>
+                              {{ textHorario }}
+                            </p>
+
+                            <b><p class="feed-archive-name">
+                              <a :href="content.link" target="_blank">
+                                {{ `${content.titulo}` }}
+                              </a>
+                            </p></b>
+                          </div>
+                        </div>
+                            <p class="feed-date"> {{ content.dataCriacao }} </p>
+                    </div>
+
                 </div>
             </div>
+
+            <div v-if="feedContent.length > 14 && loadMore == true" class="div-load-more">
+              <button @click="feed()" class="btn-load-more">
+                Carregar Mais...
+              </button>
+            </div>
+
         </div>
     </div>
 </template>
@@ -148,34 +239,48 @@ import axios from "axios";
 import { url } from "../../_mixins/url";
 import LoginVue from "../../Authentication/Login.vue";
 import IconDelete from "../../_utils/Svgs/IconDelete";
+import IconPinned from "../../_utils/Svgs/IconPinned";
+import IconNoPinned from "../../_utils/Svgs/IconNoPinned";
 
 export default {
-
-  components: { IconDelete },
+  components: { IconDelete, IconPinned, IconNoPinned },
 
   mixins: [url],
 
   props: {
-    path:{
+    path: {
       type: Object
     }
   },
 
+
   data() {
     return {
       username: "",
-      feedContent: "",
+      feedContent: [],
       textUpload: "adicionou um novo arquivo em",
       textRecado: "adicionou um novo recado.",
       textLink: "adicionou um novo link.",
       textWiki: "Foi adicionado uma nova Wiki.",
+      textHorario: "Foi adicionado uma nova lista de horarios.",
+      textDiretorio: "Foi adicionado uma novo Diretorio.",
       textAviso: "Aviso!",
       userPath: "",
       dirPath: "",
+      pageCount: 0,
+      loadMore: false
     };
   },
 
-
+  computed: {
+    isAdmin: function(){
+      if (localStorage.role == 'admin') {
+        return true
+      }else {
+        return false
+      }
+    }
+  },
 
   created() {
     this.feed();
@@ -184,44 +289,65 @@ export default {
   methods: {
     getPhoto(feed) {
       if (feed.tipo == "aviso") {
-            feed.img = "../../../../static/images/megaphone.svg";
-            this.feedContent.push({});
-            this.feedContent.splice(-1, 1); // isso aqi é pra n acumular objetos vazios no array por causa da gambiarra
-      }else if (feed.tipo == "wiki") {
-            feed.img = "../../../../static/images/wikipedia.svg";
-            this.feedContent.push({});
-            this.feedContent.splice(-1, 1); // isso aqi é pra n acumular objetos vazios no array por causa da gambiarra
-      }else if (feed.tipo == "horario") {
-            feed.img = "../../../../static/images/wall-clock.svg";
-            this.feedContent.push({});
-            this.feedContent.splice(-1, 1);
-      } else {
+        feed.img = "../../../../static/images/megaphone.svg";
+        this.feedContent.push({});
+        this.feedContent.splice(-1, 1); // isso aqi \E9 pra n acumular objetos vazios no array por causa da gambiarra
+      } else if (feed.tipo == "wiki") {
+        feed.img = "../../../../static/images/wikipedia.svg";
+        this.feedContent.push({});
+        this.feedContent.splice(-1, 1); // isso aqi \E9 pra n acumular objetos vazios no array por causa da gambiarra
+      } else if (feed.tipo == "horario") {
+        feed.img = "../../../../static/images/wall-clock.svg";
+        this.feedContent.push({});
+        this.feedContent.splice(-1, 1);
+      } else if (feed.tipo == "diretorio") {
+        feed.img = "../../../../static/images/agenda.svg";
+        this.feedContent.push({});
+        this.feedContent.splice(-1, 1);
+      }else{
         axios
           .get(`${this.BASE_URL}api/photo`, {
             headers: { professor: feed.username }
           })
-          .then((res, err) => {
+          .then(res => {
             feed.img = res.data;
             this.feedContent.push({});
-            this.feedContent.splice(-1, 1); // isso aqi é pra n acumular objetos vazios no array por causa da gambiarra
+            this.feedContent.splice(-1, 1); // isso aqi \E9 pra n acumular objetos vazios no array por causa da gambiarra
+          })
+          .catch(function(error) {
+            feed.imgNotFound = "../../../../static/images/blackNwhite.jpeg";
+            console.log(this.feedContent);
+            this.feedContent.push({});
+            this.feedContent.splice(-1, 1);
           });
       }
     },
 
-    getPath(el){
-      let path = el.split('/')
-      let initialSize = path[0].length
-      let totalSize = el.length
-      this.userPath = path[0]
-      return el.substring(initialSize, totalSize)
+    getPath(el) {
+      let path = el.split("/");
+      let initialSize = path[0].length;
+      let totalSize = el.length;
+      this.userPath = path[0];
+      return el.substring(initialSize, totalSize);
     },
 
     feed() {
+      this.pageCount++;
       this.$Progress.start();
+
       axios
-        .get(`${this.BASE_URL}api/feed`)
+        .get(`${this.BASE_URL}api/feed/page/${this.pageCount}`)
         .then(res => {
-          this.feedContent = res.data;
+          for (let i = 0; i < res.data.length; i++) {
+            this.feedContent.push(res.data[i]);
+          }
+
+          if (this.pageCount * 15 > this.feedContent.length) {
+            this.loadMore = false;
+          } else {
+            this.loadMore = true;
+          }
+
           this.feedContent.forEach(element => {
             this.getPhoto(element);
             this.getPath(element.dir);
@@ -229,8 +355,6 @@ export default {
               this.username = element.username;
             }
           });
-
-          this.feedContent.reverse();
           this.$Progress.finish();
         })
         .catch(err => {
@@ -243,8 +367,21 @@ export default {
       if (decision) {
         axios.delete(`${this.BASE_URL}api/feed/${id}`).then(res => {
           console.log(res.data);
-          this.feed();
+          this.refresh();
         });
+      }
+    },
+    toggleFixed(id) {
+      axios.put(`${this.BASE_URL}api/feed/togglefixed/${id}`).then(res => {
+        this.refresh();
+      });
+    },
+    refresh() {
+      this.feedContent = [];
+      let count = this.pageCount;
+      this.pageCount = 0;
+      for (let i = 0; i < count; i++) {
+        this.feed();
       }
     }
   }

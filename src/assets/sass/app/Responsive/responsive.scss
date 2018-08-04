@@ -1,6 +1,3 @@
-//============================== max width 1680 ==============================//
-
-
 @media screen and (max-width: 1680px) {
     // ---> home <---
     .home-container
@@ -158,19 +155,48 @@
     }
 }
 
-@media screen and (max-width: 1024px){
-    // ---> home <---
+//-
+@media screen and (max-width: 1190px){
 
-    .home-container
+  .head
+  {
+    .center-header
     {
-        width: 80%;
-        height: 83.5vh;
-        margin: .3% auto;
+      margin-left: -45%;
+    }
+  }
+
+  #logo { display: none;}
+  .short-logo { display: block; }
+
+  .teacher-page-content, .home-container
+  {
+      width: 83%;
+      margin: .6% auto;
+  }
+
+  .square-photo
+  {
+      width: 6.2em;
+      height: 6.2em;
+  }
+
+}
+
+@media screen and (max-width: 1024px){
+    .head
+    {
+      .center-header
+      {
+        margin-left: -37%;
+      }
     }
 
-    #aside
+    .teacher-page-content, .home-container
     {
-      display: none;
+        width: $full-size;
+        margin: .3% auto;
+        height: 83.5vh;
     }
 
     .teacher-description
@@ -178,22 +204,41 @@
         margin: .5em 0;
     }
 
+}
+
+//-
+@media screen and (max-width: 960px){
     .head
     {
       .center-header
       {
-        margin-left: -55%;
-        .search
-        {
-          display: none;
-        }
+        margin-left: -32%;
+      }
+    }
+}
+
+//-
+@media screen and (max-width: 900px){
+    .head
+    {
+      .center-header
+      {
+        margin-left: -30%;
+      }
+    }
+}
+
+@media screen and (max-width: 840px){
+    .head
+    {
+      .center-header
+      {
+        margin-left: -25%;
       }
     }
 }
 
 @media screen and (max-width: 800px){
-  #logo { display: none;}
-  .short-logo { display: block; }
 
   .teacher-description
   {
@@ -204,14 +249,8 @@
   {
     .center-header
     {
-      margin-left: -10%;
+      margin-left: -15%;
     }
-  }
-
-  .square-photo
-  {
-      width: 7em;
-      height: 7em;
   }
 
   #footer
@@ -220,16 +259,49 @@
   }
 }
 
-@media screen and (max-width: 360px){
+@media screen and (max-width: 720px){
+
+  .head
+  {
+    .center-header
+    {
+      margin-left: -5%;
+    }
+  }
+
+  #aside{ display: none;}
+
   .home-container
   {
-      width: 100%;
-      height: 100%;
+      width: $full-size;
+      height: $full-size;
   }
 
   .feed
   {
-    width: 100%;
+    width: $full-size;
+  }
+
+  .teacher-page-content
+  {
+    height: 90vh;
+  }
+}
+
+@media screen and (max-width: 640px){
+  .head
+  {
+    .center-header
+    {
+      .search { display: none; }
+    }
+  }
+}
+
+@media screen and (max-width: 360px){
+
+  .feed
+  {
     height: 100vh;
   }
 

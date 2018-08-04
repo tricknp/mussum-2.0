@@ -99,8 +99,9 @@
     .feed-archive-name
     {
         @extend .feed-link-place;
-        font-size: $default-size - .22em;
+        font-size: $default-size - .14em;
         margin-top: 1.5%;
+        cursor: auto;
     }
 
     .feed-photo
@@ -117,17 +118,45 @@
         color: rgba(0, 0, 0, 0.747);
     }
 
-    .icon-delete-feed
-    {
-        width: .9em;
-    }
 
-    .btn-delete-feed
+    .container-action-feed
     {
-        float: right;
-        margin-right: .2em;
-        // top: .1em;
-        //position: absolute;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      float: right;
+      margin-right: .2em;
+
+      .icon-delete-feed,
+      {
+        width: .92em;
+      }
+
+      %icon-fix-feed
+      {
+        width: 1em;
+        margin-right: -2px;
+      }
+
+      .--no-pinned
+      {
+        @extend %icon-fix-feed;
+      }
+
+      .--pinned
+      {
+        @extend %icon-fix-feed;
+        fill: $medium-grey;
+      }
+
+      .--public-pin
+      {
+        @extend %icon-fix-feed;
+        &:hover{
+          fill: $medium-grey;
+        }
+      }
+
     }
 
     .icon-delete-feed
@@ -136,8 +165,6 @@
             fill: $hover-red;
         }
     }
-
-
 
     //===================
 
@@ -159,4 +186,25 @@
         border-radius: 7px;
         background-color: rgba(202, 200, 200, 0.904);
     }
+}
+
+.div-load-more
+{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: .5em;
+
+  .btn-load-more
+  {
+    width: 97.1%;
+    border: dotted 1px $dark-grey;
+    font-size: 1em;
+    padding: .8em;
+    cursor: pointer;
+
+    &:hover{
+      background: $light-grey;
+    }
+  }
 }

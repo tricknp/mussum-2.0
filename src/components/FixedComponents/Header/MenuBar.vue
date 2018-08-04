@@ -24,7 +24,7 @@
           </span>
 
           <span v-if='isLoged'>
-            <router-link :to="{ path: '/' }">
+            <router-link :to="{ path: '/login' }">
               <a @click='signOut'> Sair </a>
             </router-link>
           </span>

@@ -111,6 +111,17 @@
     .tree-ul {
       padding-left: 1.5em;
     }
+
+    .div-loading-upload
+    {
+      display: table;
+      margin: auto auto -10% auto;
+
+      .loading-upload
+      {
+        width: 4.5em;
+      }
+    }
 }
 
 
@@ -123,6 +134,30 @@
     min-height: $full-size;
     max-height: $full-size;
 
+}
+
+.square-photo
+{
+    width: 9em;
+    height: 9em;
+    margin-top: 10%;
+    position: relative;
+    &:hover
+    {
+        opacity: .4;
+        transition: ease-in-out .25s;
+        .edit-photo-profile
+        {
+            fill: #000;
+            &:hover
+            {
+                transition: ease-in-out .25s;
+                border-radius: 20px;
+                background: #000;
+                fill: #fff;
+            }
+        }
+    }
 }
 
 .edit-photo-profile

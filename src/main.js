@@ -24,12 +24,11 @@ Object.defineProperties(Vue.prototype, {
 })
 
 Vue.use(VueProgressBar, {
-  //location: 'top',
-  //position: 'relative',
-  //thickness: '3px',
+  position: 'absolute',
+  thickness: '3px',
   color: 'rgb(143, 255, 199)',
   failedColor: 'red',
-  //height: '2px',
+  //height: '3px',
 })
 
 /* eslint-disable no-new */

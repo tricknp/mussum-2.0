@@ -1,7 +1,7 @@
 
 <template>
   <div class="directories">
-    <vue-progress-bar></vue-progress-bar>
+
 
     <div v-if="this.$bus.isOwner" class="div-select-course">
       <select v-model="dir" class="select-course">
@@ -62,7 +62,7 @@
     <modal v-if="showUpload" @s="showUp()" id="modal-container">
       <h1 slot="header">Adicionar arquivo</h1>
 
-      <form slot="content" class="form-modal">
+      <form slot="content" class="form-modal" v-if="!loading">
         <input type="text" ref="fileName" placeholder="Nome do arquivo/link">
         <input type="text" ref="comment" placeholder="Escreva um comentário (FEED)">
         <input v-if="!isLink" type="file" id="file" ref="file" v-on:change="handleFileUpload()"/>
@@ -77,9 +77,13 @@
         </div>
       </form>
 
+      <div v-else slot="content" class="div-loading-upload">
+        <img src="../../../../../../../static/loading.gif" class="loading-upload">
+      </div>
+
       <div slot="footer" class="div-btn-modal d">
         <button @click="submitFile()" class="modal-buttons">Salvar</button>
-           <button @click="showUpload = false" class="modal-buttons">Cancelar</button>
+        <button @click="cancelUpload" class="modal-buttons">Cancelar</button>
       </div>
     </modal>
 
@@ -155,7 +159,8 @@ export default {
       showOtherCourse: false,
       visibility: true,
       isLink: false,
-      emptyRepo: false
+      emptyRepo: false,
+      loading: false,
     };
   },
   beforeDestroy() {
@@ -199,8 +204,8 @@ export default {
         this.dir = dirs;
         this.showUpload = true;
       }),
-      this.$bus.$on("download", (dir, fileName) => {
-        this.$Progress.start();
+      this.$bus.$on("download", (dir, fileName, loading) => {
+        // this.$Progress.start();
         axios
           .get(`${this.BASE_URL}api/download`, {
             headers: {
@@ -222,12 +227,14 @@ export default {
             a.download = fileName;
             a.click();
             a.remove();
-            this.$Progress.finish();
+            // this.$Progress.finish();
             console.log("download feito.");
+            loading = false
+            this.$bus.$emit('downloaded', loading)
           })
-          .catch(err => {
-            this.$Progress.fail();
-          });
+          // .catch(err => {
+          //   this.$Progress.fail();
+          // });
       }),
       this.$bus.$on("openFile", (dir, fileName) => {
         if (
@@ -344,11 +351,15 @@ export default {
       //this.$refs.fileName.removeAttribute("disabled");
     },
     submitFile() {
-      this.$Progress.start();
+      // this.$Progress.start();
+      this.loading = true
+
       const formData = new FormData();
+
       if (!this.isLink) {
         formData.append("files", this.file, this.file.name);
       }
+
       axios
         .post(this.BASE_URL + "api/upload", formData, {
           headers: {
@@ -361,8 +372,9 @@ export default {
           }
         })
         .then(res => {
+          this.loading = false
           this.showUpload = false;
-          this.$Progress.finish();
+          // this.$Progress.finish();
         });
     },
     /*===================================================*
@@ -443,37 +455,39 @@ export default {
     //RUNS ONE TIME TO GET CURSES FOLDERS
     resetRepository() {
       this.treeData = [];
-
-      this.$bus.path = `/professor/${this.$route.params.targetName}/diretorios`;
+      let professor = this.$route.params.targetName;
+      this.$bus.path = `/professor/${professor}/diretorios`;
       this.$bus.dirs = this.$route.params.dir;
 
       axios
         .get(`${this.BASE_URL}api/repository`, {
           headers: {
             dir: this.$route.params.targetName,
-            username: this.$route.params.targetName
+            username: professor
           }
         })
         .then(res => {
-          let folders = res.data.pastas;
-          if (folders.length === 0) {
-            this.emptyRepo = true;
-          } else {
-            this.emptyRepo = false;
-          }
-          folders.forEach(element => {
-            this.treeData.push({
-              id: element.id,
-              name: element.nome,
-              dir: element.dir,
-              isFolder: true,
-              isVisible: element.visivel,
-              link: element.link ? element.link : "",
-              comment: element.comentario ? element.comentario : "",
-              username: this.$route.params.targetName,
-              baseUrl: this.BASE_URL
+          if ((professor = this.$route.params.targetName)) {
+            let folders = res.data.pastas;
+            if (folders.length === 0) {
+              this.emptyRepo = true;
+            } else {
+              this.emptyRepo = false;
+            }
+            folders.forEach(element => {
+              this.treeData.push({
+                id: element.id,
+                name: element.nome,
+                dir: element.dir,
+                isFolder: true,
+                isVisible: element.visivel,
+                link: element.link ? element.link : "",
+                comment: element.comentario ? element.comentario : "",
+                username: this.$route.params.targetName,
+                baseUrl: this.BASE_URL
+              });
             });
-          });
+          }
         });
     },
     addChild() {
@@ -557,6 +571,11 @@ export default {
         .then(res => {
           this.notifyModal = false;
         });
+    },
+
+    cancelUpload(){
+      showUpload = false
+
     }
   }
 };

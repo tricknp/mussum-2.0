@@ -50,8 +50,12 @@
           <IconOpenFile />
         </button>
 
-        <button v-if="!isFolder && !isLink" @click="download" v-tooltip="'Download'">
+        <button v-if="!isFolder && !isLink && !isDownloading" @click="download" v-tooltip="'Download'">
           <IconDownload/>
+        </button>
+
+        <button v-if="isDownloading">
+          <img src="../../../../static/loading.gif" class="icon">
         </button>
 
         <button v-if="isFolder" @click="notifyMe" v-tooltip="'Mantenha-me atualizado'">
@@ -106,7 +110,8 @@ export default {
     return {
       clicked: false,
       open: false,
-      isVisibleProc: false
+      isVisibleProc: false,
+      isDownloading: false,
     };
   },
   beforeDestroy() {
@@ -128,11 +133,17 @@ export default {
         this.toggle();
       }
     }
+
+    this.$bus.$on('downloaded', status => {
+      this.isDownloading = status
+    })
+
+
     this.$bus.$on("refresh", (dir, name) => {
       if (dir == this.model.dir + "/" && name == this.model.name) {
         this.refreshChild();
       }
-    });
+    })
   },
   computed: {
     isFolder: function() {
@@ -221,10 +232,12 @@ export default {
       }
     },
     upload() {
-      this.$bus.$emit("handleUpload", this.model.dir + "/" + this.model.name);
+      this.isUploading = true
+      this.$bus.$emit("handleUpload", `${this.model.dir}/${this.model.name}`, this.isUploading);
     },
     download() {
-      this.$bus.$emit("download", this.model.dir, this.model.name);
+      this.isDownloading = true
+      this.$bus.$emit("download", this.model.dir, this.model.name, this.isDownloading);
     },
     toggleVisible() {
       this.isVisibleProc = true;

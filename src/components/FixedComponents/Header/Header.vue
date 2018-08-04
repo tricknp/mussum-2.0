@@ -1,6 +1,7 @@
 <template>
 
     <header class="head">
+      <vue-progress-bar></vue-progress-bar>
         <div class="header-container">
             <router-link :to="{path:'/'}">
                 <img :src="logo" id="logo">
@@ -41,8 +42,8 @@ export default {
 
   data(){
       return{
-          logo: '../../../../static/images/mussum2.0.png',
-          shortLogo: '../../../../static/images/logo.svg'
+          logo: '/../../../../static/images/mussum2.0.png',
+          shortLogo: '/../../../../static/images/logo.svg'
       };
   }
 

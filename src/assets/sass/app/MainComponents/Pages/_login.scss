@@ -1,4 +1,4 @@
-.login
+#login
 {
     filter: blur(3px);
 }
@@ -18,17 +18,17 @@
     margin: -.7em -.8em;
     background: transparent;
     border: 0;
-    font-size: 1.9em; 
-    
+    font-size: 1.9em;
+
     .icon-log
     {
         fill: #ddd;
-        width: 1em;    
+        width: 1em;
         &:hover
-        {   
+        {
             fill: $nice-blue;
             transition: .45s ease-out;
-        }   
+        }
     }
 }
 
