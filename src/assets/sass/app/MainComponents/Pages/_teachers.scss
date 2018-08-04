@@ -111,6 +111,17 @@
     .tree-ul {
       padding-left: 1.5em;
     }
+
+    .div-loading-upload
+    {
+      display: table;
+      margin: auto auto -10% auto;
+
+      .loading-upload
+      {
+        width: 4.5em;
+      }
+    }
 }
 
 
