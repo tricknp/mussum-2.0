@@ -160,14 +160,15 @@ export default {
       visibility: true,
       isLink: false,
       emptyRepo: false,
-      loading: false,
+      loading: false
     };
   },
   beforeDestroy() {
     this.$bus.$off("notify");
     this.$bus.$off("editFile");
+    this.$bus.$off("openFile");
     this.$bus.$off("editFolder");
-    //this.$bus.$off("selectProfessor");
+    //this.$bus.$off("selectProfessor"); -CAUSA BUG
     this.$bus.$off("itemClicked");
     this.$bus.$off("handleUpload");
     this.$bus.$off("download");
@@ -204,39 +205,23 @@ export default {
         this.dir = dirs;
         this.showUpload = true;
       }),
-      this.$bus.$on("download", (dir, fileName, loading) => {
-        // this.$Progress.start();
-        axios
-          .get(`${this.BASE_URL}api/download`, {
-            headers: {
-              dir: dir,
-              professor: this.$route.params.targetName,
-              fileName: fileName
-            },
-            responseType: "blob"
-          })
-          .then(res => {
-            console.log("Fazendo download file: " + fileName);
-            console.log("From directory... " + dir);
-            let blob = new Blob([res.data]);
-            let url = window.URL.createObjectURL(blob);
-            let a = document.createElement("a");
-            document.body.appendChild(a);
-            a.style = "display: none";
-            a.href = url;
-            a.download = fileName;
-            a.click();
-            a.remove();
-            // this.$Progress.finish();
-            console.log("download feito.");
-            loading = false
-            this.$bus.$emit('downloaded', loading)
-          })
-          // .catch(err => {
-          //   this.$Progress.fail();
-          // });
+      this.$bus.$on("download", (fileID, loading) => {
+        this.$Progress.start();
+        //console.log("Fazendo download file: " );
+        //console.log("From directory... " );
+        let a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+        a.href = `${this.BASE_URL}api/download/${fileID}`;
+        a.click();
+        //window.open(`${this.BASE_URL}api/download/${fileID}`);
+        a.remove();
+        this.$Progress.finish();
+        //console.log("download feito.");
+        loading = false;
+        this.$bus.$emit("downloaded", loading);
       }),
-      this.$bus.$on("openFile", (dir, fileName) => {
+      this.$bus.$on("openFile", (fileID, fileName) => {
         if (
           fileName.endsWith(".pdf") ||
           fileName.endsWith(".txt") ||
@@ -246,17 +231,14 @@ export default {
           this.$Progress.start();
         }
         axios
-          .get(`${this.BASE_URL}api/download`, {
+          .get(`${this.BASE_URL}api/download/${fileID}`, {
             headers: {
-              dir: dir,
               professor: this.$route.params.targetName,
-              fileName: fileName
             },
             responseType: "blob"
           })
           .then(res => {
-            console.log("Tentando abrir arquivo: " + fileName);
-            console.log("From directory... " + dir);
+            //console.log("Tentando abrir arquivo: " + fileName);
             let blob = new Blob([res.data]);
             let url = window.URL.createObjectURL(blob);
             let a = document.createElement("a");
@@ -283,7 +265,7 @@ export default {
             window.open(pdfURL);
             a.remove();
             this.$Progress.finish();
-            console.log("arquivo aberto. (ou nao)");
+            //console.log("arquivo aberto. (ou nao)");
           })
           .catch(err => {
             this.$Progress.fail();
@@ -352,7 +334,7 @@ export default {
     },
     submitFile() {
       // this.$Progress.start();
-      this.loading = true
+      this.loading = true;
 
       const formData = new FormData();
 
@@ -372,7 +354,7 @@ export default {
           }
         })
         .then(res => {
-          this.loading = false
+          this.loading = false;
           this.showUpload = false;
           // this.$Progress.finish();
         });
@@ -411,7 +393,7 @@ export default {
      * repositÃ³rios                                                                           *
      *========================================================================================*/
     getRepositorys(div, dire) {
-      console.log("get repositorys from " + dire);
+      //console.log("get repositorys from " + dire);
       axios
         .get(`${this.BASE_URL}api/repository`, {
           headers: { dir: dire, username: this.$route.params.targetName }
@@ -419,10 +401,10 @@ export default {
         .then(res => {
           let folders = res.data.pastas;
           let files = res.data.arquivos;
-          console.log("Pastas encontradas em " + dire);
-          console.log(folders);
-          console.log("Arquivos encontradas em " + dire);
-          console.log(files);
+          //console.log("Pastas encontradas em " + dire);
+          //console.log(folders);
+          //console.log("Arquivos encontradas em " + dire);
+          //console.log(files);
           folders.forEach(element => {
             this.createTreeElement(div, element, true);
           });
@@ -444,7 +426,7 @@ export default {
             link: element.link ? element.link : "",
             comment: element.comentario ? element.comentario : "",
             username: this.$route.params.targetName,
-            baseUrl: this.BASE_URL
+            baseUrl: this.BASE_URL,
           }
         }
       });
@@ -484,7 +466,7 @@ export default {
                 link: element.link ? element.link : "",
                 comment: element.comentario ? element.comentario : "",
                 username: this.$route.params.targetName,
-                baseUrl: this.BASE_URL
+                baseUrl: this.BASE_URL,
               });
             });
           }
@@ -501,9 +483,9 @@ export default {
         })
         .then(res => {
           //this.treeData.name = this.dir;
-          console.log(
-            "Curso adicionado com sucesso " + `${this.dir}/${this.child}`
-          );
+          //console.log(
+          //  "Curso adicionado com sucesso " + `${this.dir}/${this.child}`
+          //);
           this.resetRepository();
           this.child = "Nova Pasta";
           this.showModal = false;
@@ -573,9 +555,8 @@ export default {
         });
     },
 
-    cancelUpload(){
-      showUpload = false
-
+    cancelUpload() {
+      showUpload = false;
     }
   }
 };

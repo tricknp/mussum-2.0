@@ -13,7 +13,8 @@
          <a v-if="model.link" :href="model.link" target="_blank" class="link" >
            {{ model.name.substr(0, model.name.lastIndexOf('.')) || model.name}}
          </a>
-        {{ model.link ? null : model.name.substr(0, model.name.lastIndexOf('.')) || model.name  }}
+        <!-- SEM EXTENSAO NO NOME: {{ model.link ? null : model.name.substr(0, model.name.lastIndexOf('.')) || model.name  }} -->
+        {{ model.link ? null : model.name  }}
       </div>
 
 
@@ -111,7 +112,7 @@ export default {
       clicked: false,
       open: false,
       isVisibleProc: false,
-      isDownloading: false,
+      isDownloading: false
     };
   },
   beforeDestroy() {
@@ -134,16 +135,15 @@ export default {
       }
     }
 
-    this.$bus.$on('downloaded', status => {
-      this.isDownloading = status
-    })
-
+    this.$bus.$on("downloaded", status => {
+      this.isDownloading = status;
+    });
 
     this.$bus.$on("refresh", (dir, name) => {
       if (dir == this.model.dir + "/" && name == this.model.name) {
         this.refreshChild();
       }
-    })
+    });
   },
   computed: {
     isFolder: function() {
@@ -232,12 +232,20 @@ export default {
       }
     },
     upload() {
-      this.isUploading = true
-      this.$bus.$emit("handleUpload", `${this.model.dir}/${this.model.name}`, this.isUploading);
+      this.isUploading = true;
+      this.$bus.$emit(
+        "handleUpload",
+        `${this.model.dir}/${this.model.name}`,
+        this.isUploading
+      );
     },
     download() {
-      this.isDownloading = true
-      this.$bus.$emit("download", this.model.dir, this.model.name, this.isDownloading);
+      this.isDownloading = true;
+      this.$bus.$emit(
+        "download",
+        this.model.id,
+        this.isDownloading
+      );
     },
     toggleVisible() {
       this.isVisibleProc = true;
@@ -295,7 +303,7 @@ export default {
       });
     },
     openFile() {
-      this.$bus.$emit("openFile", this.model.dir, this.model.name);
+      this.$bus.$emit("openFile", this.model.id, this.model.name);
     }
   }
 };
