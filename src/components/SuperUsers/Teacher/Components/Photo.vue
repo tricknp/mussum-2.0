@@ -5,10 +5,13 @@
         <PhotoUpload v-if="this.$bus.isOwner" />
       </div>
 
-      <div class="square-photo" v-show="photo">
+      <div :class="square" v-show="photo">
 
-        <img v-if="img" class="teacher-photo" :src="`data:image/png;base64,${img}`">
-        <img v-if="!img" class="teacher-photo" :src="defaultImg">
+        <img  v-if="img && !isLoad" class="teacher-photo" :src="`data:image/png;base64,${img}`">
+        <img  v-if="!img && !isLoad" class="teacher-photo" :src="defaultImg">
+        <div v-if="isLoad" class="photo-load-container">
+          <img class="teacher-photo-loading" :src="loading" >
+        </div>
 
         <button @click="showUpload">
           <IconEdit v-if="this.$bus.isOwner" class="edit-photo-profile" />
@@ -36,18 +39,28 @@ export default {
   data(){
     return{
       defaultImg: '../../../../../static/images/blackNwhite.jpeg',
+      loading: '../../../../../static/loading.gif',
+      isLoad: false,
       img: '',
       upload: false,
       photo: true,
     }
   },
 
+  computed: {
+    square: function(){
+      if (localStorage.username == this.$route.params.targetName) {
+        return 'square-photo__ownner'
+      }else {
+        return 'square-photo'
+      }
+    }
+  },
+
   methods: {
     getPhoto() {
-
+      this.isLoad = true
       let professor = this.$route.params.targetName;
-      this.$Progress.start();
-
       axios
         .get(`${this.BASE_URL}api/photo`, {
           headers: { professor: professor }
@@ -56,12 +69,10 @@ export default {
 
           if (professor == this.$route.params.targetName) {
             this.img = res.data;
+            this.isLoad = false
           }
-
-          this.$Progress.finish();
         })
         .catch(error => {
-          this.$Progress.finish();
           this.img = 0;
         });
     },
